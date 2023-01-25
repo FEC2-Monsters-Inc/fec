@@ -1,8 +1,8 @@
 module.exports = {
   env: {
-    'es6': true
+    'es6': true /* need for es6 syntax */
   },
-  parserOptions: {
+  parserOptions: { /* necessary otherwise lints all react jsx */
     sourceType: 'module',
     ecmaVersion: 6,
     ecmaFeatures: {

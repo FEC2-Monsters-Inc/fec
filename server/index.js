@@ -7,6 +7,7 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+/* MIDDLEWARE */
 app.use(morgan('dev'));
 app.use(express.json());
 

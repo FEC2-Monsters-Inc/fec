@@ -8,7 +8,8 @@ import fetcher from '../fetchers';
 
 export default function App() {
 
-  const [featuredProduct, setFeaturedProduct] = useState({
+  ///// PRE-FETCH EMPTY INITIAL VALUE /////
+  let initProd = {
     id: 0,
     campus: '',
     name: '',
@@ -19,8 +20,14 @@ export default function App() {
     created_at: '',
     updated_at: '',
     features: []
-  });
+  };
 
+
+  ///// STATE DATA /////
+  const [featuredProduct, setFeaturedProduct] = useState(initProd);
+
+
+  ///// INITIALIZATION /////
   useEffect(() => {
     fetcher.getProductById(40344)
       .then(result => setFeaturedProduct(result.data))

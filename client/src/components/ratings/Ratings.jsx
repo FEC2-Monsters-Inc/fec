@@ -11,17 +11,7 @@ export default function Ratings({
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    let options = {
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews',
-      method: 'get',
-      headers: {
-        'Authorization': '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'
-      },
-      params: {
-        'product_id': 40348 //PLACEHOLDER***THIS WILL BE PASSED DOWN VIA PROP
-      }
-    };
-    axios(options)
+    fetcher.ratings.getReviews(40348)
       .then(({data}) => setReviews([...data.results]))
       .catch((error) => console.log(error));
   }, []);
@@ -44,3 +34,4 @@ export default function Ratings({
     </div>
   );
 }
+

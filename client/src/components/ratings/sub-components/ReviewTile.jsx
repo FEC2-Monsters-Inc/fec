@@ -14,8 +14,11 @@ export default function ReviewTile({review}) {
     <div>
       {console.log(review)}
       <div>
-        <h4>{review.summary}</h4>
-        <div>{starRater()}</div>
+        <div style={{display: 'flex'}}>
+          <div style={{fontWeight: 'bold'}}>{review.summary}</div>
+          <div style={{marginLeft: '20px'}}>{starRater()}</div>
+        </div>
+        <p>{review.body}</p>
         <h5>{review.reviewer_name}</h5>
         <h6>{review.date}</h6>
       </div>

@@ -1,20 +1,22 @@
 const axios = require('axios');
 
-const endpoint = process.env.BASEURL + '/reviews';
+const endpoint = process.env.BASEURL + '/reviews/';
 const authHeader = {
   'Authorization': process.env.TOKEN
 };
 
 module.exports = {
-  getAllReviews: (id) => {
+  getReviews: (id) => {
+    //console.log(id);
     let options = {
       url: endpoint,
       method: 'get',
       headers: authHeader,
       params: {
-        product_id: id,
+        product_id: id
       }
     };
-    return axios(options);
+    return axios(options)
+      .catch((error) => console.log('error: ', error));
   }
 };

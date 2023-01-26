@@ -9,6 +9,7 @@ router.get('/products/:product_id/styles', controllers.products.getProductStyle)
 /* REVIEWS */
 
 /* QUESTIONS */
+router.get('/questions/:product_id', controllers.questions.getQuestionsForProduct);
 
 /* CART */
 

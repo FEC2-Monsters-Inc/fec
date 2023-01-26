@@ -6,5 +6,15 @@ const authHeader = {
 };
 
 module.exports = {
-
+  getAllReviews: (id) => {
+    let options = {
+      url: endpoint,
+      method: 'get',
+      headers: authHeader,
+      params: {
+        product_id: id,
+      }
+    };
+    return axios(options);
+  }
 };

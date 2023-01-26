@@ -6,6 +6,7 @@ router.get('/products', controllers.products.getProducts);
 router.get('/products/:product_id', controllers.products.getProductById);
 
 /* REVIEWS */
+router.get('/reviews', controllers.reviews.getReviews);
 
 /* QUESTIONS */
 

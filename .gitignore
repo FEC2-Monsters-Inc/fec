@@ -1,3 +1,5 @@
-client/dist/bundle.js
+bundle.js
+bundle.js.map
 node_modules/
 .env
+.DS_store

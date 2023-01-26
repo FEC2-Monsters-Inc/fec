@@ -15,9 +15,9 @@ module.exports = {
     return axios(options);
   },
 
-  getProductById: (productId) => {
+  getProductById: (product_id) => {
     let options = {
-      url: endpoint + `/${productId}`,
+      url: endpoint + `/${product_id}`,
       method: 'get',
       headers: authHeader
     };

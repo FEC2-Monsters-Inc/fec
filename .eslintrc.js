@@ -14,7 +14,13 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
     /* Variable names */
-    'camelcase': 2,
+    'camelcase': [2, {
+      allow: [
+        'product_id',
+        'default_price',
+        'created_at',
+        'updated_at']
+    }],
     /* Language constructs */
     'curly': 2,
     'eqeqeq': [2, 'smart'],

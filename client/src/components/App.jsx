@@ -9,7 +9,7 @@ import fetcher from '../fetchers';
 export default function App() {
 
   const [featuredProduct, setFeaturedProduct] = useState({
-    id: 0,
+    product_id: 0,
     campus: '',
     name: '',
     slogan: '',

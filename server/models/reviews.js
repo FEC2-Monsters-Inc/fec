@@ -9,7 +9,7 @@ module.exports = {
   getReviews: (id) => {
     //console.log(id);
     let options = {
-      url: endpoint,
+      url: endpoint + '/'
       method: 'get',
       headers: authHeader,
       params: {

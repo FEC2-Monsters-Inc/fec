@@ -1,5 +1,5 @@
-module.exports.exampleModel = require('./exampleModel');
-// module.exports.exampleModel2 = require('./exampleModel2');
-// module.exports.exampleModel3 = require('./exampleModel3');
-// module.exports.exampleModel4 = require('./exampleModel4');
-// module.exports.exampleModel5 = require('./exampleModel5');
+module.exports.products = require('./products');
+module.exports.reviews = require('./reviews');
+module.exports.questions = require('./questions');
+module.exports.cart = require('./cart');
+module.exports.interactions = require('./interactions');

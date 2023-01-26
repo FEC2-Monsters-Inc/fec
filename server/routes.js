@@ -1,17 +1,16 @@
 const router = require('express').Router();
 const controllers = require('./controllers');
 
-/* OVERVIEW */
-//app.get('/blah', controllers.exampleController.blahBlah);
+/* PRODUCTS */
+router.get('/products', controllers.products.getProducts);
+router.get('/products/:product_id', controllers.products.getProductById);
 
-/* QANDA */
-//app.get('/blah', controllers.exampleController.blahBlah);
+/* REVIEWS */
 
-/* RANDR */
-//app.get('/blah', controllers.exampleController.blahBlah);
+/* QUESTIONS */
 
-/* RELATED */
-//app.get('/blah', controllers.exampleController.blahBlah);
+/* CART */
 
+/* INTERACTIONS */
 
 module.exports = router;

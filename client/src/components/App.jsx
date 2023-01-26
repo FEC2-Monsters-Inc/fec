@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import Overview from './overview/Overview.jsx';
-import QandA from './qanda/QandA.jsx';
-import RandR from './randr/RandR.jsx';
+import Questions from './questions/Questions.jsx';
+import Ratings from './ratings/Ratings.jsx';
 import Related from './related/Related.jsx';
 import fetcher from '../fetchers';
 
@@ -32,8 +32,8 @@ export default function App() {
       Hello World!
       <Overview feature={featuredProduct} />
       <Related feature={featuredProduct} />
-      <QandA feature={featuredProduct} />
-      <RandR feature={featuredProduct} />
+      <Questions feature={featuredProduct} />
+      <Ratings feature={featuredProduct} />
     </div>
   );
 }

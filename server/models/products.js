@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const endpoint = process.env.PRODUCT_BASEURL + '/products';
+const endpoint = process.env.BASEURL + '/products';
 const authHeader = {
   'Authorization': process.env.TOKEN
 };

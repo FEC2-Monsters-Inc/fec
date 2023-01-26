@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import fetcher from '../../fetchers';
 
-export default function RandR() {
+export default function Ratings({
+  feature
+}) {
 
   return (
     <div>

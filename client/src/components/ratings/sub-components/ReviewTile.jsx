@@ -10,6 +10,14 @@ export default function ReviewTile({review}) {
     return stars;
   };
 
+  const dateConverter = function(dateString) {
+    let date = new Date(dateString);
+    let mm = date.getMonth() + 1;
+    let dd = date.getDate();
+    let yyyy = date.getFullYear();
+    return `${mm}/${dd}/${yyyy}`;
+  };
+
   return (
     <div>
       {console.log(review)}
@@ -18,9 +26,11 @@ export default function ReviewTile({review}) {
           <div style={{fontWeight: 'bold'}}>{review.summary}</div>
           <div style={{marginLeft: '20px'}}>{starRater()}</div>
         </div>
-        <p>{review.body}</p>
-        <h5>{review.reviewer_name}</h5>
-        <h6>{review.date}</h6>
+        <p style={{fontStyle: 'italic'}}>{review.body}</p>
+        <div style={{display: 'flex'}}>
+          <div style={{fontSize: '12px', textDecoration: 'underline'}}>{review.reviewer_name}</div>
+          <div style={{marginLeft: '20px'}}>{dateConverter(review.date)}</div>
+        </div>
       </div>
       <div>
 

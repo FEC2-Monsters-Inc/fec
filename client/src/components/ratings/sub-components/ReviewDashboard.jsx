@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 export default function ReviewDashboard({reviews}) {
 
   const [avgRating, setAvgRating] = useState(0);
+  const [stars, setStars] = useState([]);
 
   const ratingSetter = function() {
     let total = 0;
@@ -12,15 +13,16 @@ export default function ReviewDashboard({reviews}) {
     }
     if (reviews.length > 0) {
       setAvgRating(total / reviews.length);
+      starRating(total / reviews.length);
     }
   };
 
-  const starRating = function() {
-    let rating = avgRating;
-    let stars = [];
-    while (stars.length < 5) {
+  const starRating = function(x) {
+    var tempStars = [];
+    let rating = x;
+    while (tempStars.length < 5) {
       if (rating > 1) {
-        stars.push(1);
+        tempStars.push(1);
       } else if (rating > 0) {
         let empty = Math.abs(0 - rating);
         let quart = Math.abs(0.25 - rating);
@@ -30,32 +32,40 @@ export default function ReviewDashboard({reviews}) {
         let closest = Math.min(empty, quart, half, three, full);
         switch (closest) {
         case (empty):
-          stars.push(0);
+          tempStars.push(0);
           break;
         case (quart):
-          stars.push(0.25);
+          tempStars.push(0.28);
           break;
         case (half):
-          stars.push(0.5);
+          tempStars.push(0.5);
           break;
         case (three):
-          stars.push(0.75);
+          tempStars.push(0.72);
           break;
         case (full):
-          stars.push(1.0);
+          tempStars.push(1.0);
           break;
         default:
-          stars.push(0);
+          tempStars.push(0);
           break;
         }
       } else {
-        stars.push(0);
+        tempStars.push(0);
       }
       rating = rating - 1;
     }
   };
 
-  // const starMapper = stars
+  const starMapper = stars.map((e, i) => {
+    return (
+      <div className="review-single-star-container" key={i}>
+        <div className="review-single-star-fill" style={{width: `${parseInt(i * 31)}px`}}>
+          <img className="review-single-star-outline" src="client/dist/star.png" alt="stars alt"></img>
+        </div>
+      </div>
+    );
+  });
 
 
   useEffect(() => {
@@ -66,7 +76,15 @@ export default function ReviewDashboard({reviews}) {
   return (
     <div>
       <div>
-
+        {stars.map((item, i) => {
+          return (
+            <div className="review-single-star-container" key={i}>
+              <div className="review-single-star-fill" style={{width: `${parseInt(item * 31)}px`}}>
+                <img className="review-single-star-outline" src="star.png" alt="stars alt"></img>
+              </div>
+            </div>
+          );
+        })}
       </div>
       Average Rating: {avgRating} Stars
     </div>

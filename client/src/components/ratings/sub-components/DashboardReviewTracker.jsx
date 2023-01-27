@@ -16,7 +16,6 @@ export default function ReviewTracker({reviews}) {
     for (let review of reviews) {
       ratingTotals[review.rating]++;
     }
-    //console.log(ratingTotals[4]);
     let total = reviews.length;
     setPercentages({
       1: ratingTotals[1] / total * 100,
@@ -25,7 +24,6 @@ export default function ReviewTracker({reviews}) {
       4: ratingTotals[4] / total * 100,
       5: ratingTotals[5] / total * 100
     });
-    console.log(percentages[4]);
   };
 
   useEffect(() => {
@@ -54,32 +52,3 @@ export default function ReviewTracker({reviews}) {
 }
 
 
-/*
-   <div>
-      <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={{width: oneStar}}>
-          <span className="review-tracker-bar-percent">test</span>
-        </div>
-      </div>
-      <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={{width: twoStar}}>
-          <span className="review-tracker-bar-percent">test</span>
-        </div>
-      </div>
-      <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={{width: threeStar}}>
-          <span className="review-tracker-bar-percent">test</span>
-        </div>
-      </div>
-      <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={{width: fourStar}}>
-          <span className="review-tracker-bar-percent">test</span>
-        </div>
-      </div>
-      <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={{width: fiveStar}}>
-          <span className="review-tracker-bar-percent">test</span>
-        </div>
-      </div>
-    </div>
-*/

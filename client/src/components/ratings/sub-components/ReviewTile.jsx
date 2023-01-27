@@ -19,7 +19,7 @@ export default function ReviewTile({review}) {
   };
 
   return (
-    <div>
+    <div className = "review-tile-main-container">
       <div>
         <div className="review-tile-container">
           <div className="review-tile-summary">{review.summary}</div>

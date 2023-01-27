@@ -9,6 +9,7 @@ export default function ReviewList({reviews}) {
 
   return (
     <div className="review-list-container">
+      <p>{reviews.length} reviews, sorted by relevance</p>
       {reviewMapper}
     </div>
   );

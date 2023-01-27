@@ -2,13 +2,6 @@ import React from 'react';
 
 export default function TrackerBar ({progress}) {
 
-  // const Parentdiv = {
-  //   width: '50%',
-  //   backgroundColor: 'whitesmoke',
-  //   borderRadius: 40,
-  //   margin: 25
-  // };
-
   const childDiv = {
     width: `${progress}%`,
   };

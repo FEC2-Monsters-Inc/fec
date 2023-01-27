@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-//import starImage from '/client/dist/assets/star.png';
-
 
 export default function ReviewDashboard({reviews}) {
 

@@ -6,5 +6,22 @@ const authHeader = {
 };
 
 module.exports = {
+  getCartItems: () => {
+    let options = {
+      url: endpoint,
+      method: 'get',
+      headers: authHeader
+    };
+    return axios(options);
+  },
 
+  addCartItem: (item) => {
+    let options = {
+      url: endpoint,
+      method: 'post',
+      headers: authHeader,
+      data: item
+    };
+    return axios(options);
+  }
 };

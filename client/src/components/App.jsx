@@ -36,7 +36,6 @@ export default function App() {
 
   return (
     <div>
-      Hello World!
       <Overview feature={featuredProduct} />
       <Related feature={featuredProduct} />
       <Questions feature={featuredProduct} />

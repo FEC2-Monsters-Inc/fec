@@ -1,0 +1,32 @@
+.carousel-outside {
+  display: flex;
+}
+
+.carousel-inside {
+  width: 70rem;
+  display: flex;
+  border: 1px solid red;
+  margin: 0 5px;
+  overflow-x: scroll;
+}
+
+/* .carousel-item {
+  list-style-type: none;
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  border: 1px solid blue;
+} */
+
+.related-item {
+  width: 15rem;
+  height: 25rem;
+  border: 1px solid green;
+  margin: 0 1rem;
+  flex-shrink: 0;
+}
+
+#related-img {
+  height: 15rem;
+  width: 15rem;
+}

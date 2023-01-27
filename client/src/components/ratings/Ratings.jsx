@@ -12,7 +12,7 @@ export default function Ratings({
 
   useEffect(() => {
     fetcher.ratings.getReviews(40344)
-      .then(({data}) => setReviews(data.results))
+      .then(({ data }) => setReviews(data.results))
       .catch((error) => console.log(error));
   }, [feature]);
 

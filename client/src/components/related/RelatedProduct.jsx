@@ -7,17 +7,23 @@ export default function RelatedProduct({ product }) {
 
   useEffect(() => {
     fetcher.related.getProductStyle(product.id)
-      .then(({ data }) => {
-        console.log(data.results);
-      })
+      .then(({ data }) => setImage(data.results[0]))
       .catch(err => console.log(err));
   }, []);
 
-  console.log(image);
+  // TODO: FIX NO IMAGE LATER
+  if (!image || !image.photos[0].thumbnail_url) {
+    return <div></div>;
+  }
+
   return (
-    <div>
-      {/* {!!image && <img src={image.thumbnail_url} />} */}
-      Related Proudct
+    <div className="related-item">
+      <img src={image.photos[0].thumbnail_url} id="related-img" />
+      <div>{product.category}</div>
+      <div>{product.name}</div>
+      <div>{product.slogan}</div>
+      {image.sale_price && <div>{'$' + image.sale_price}</div>}
+      <div>{'$' + image.original_price}</div>
     </div>
   );
 }

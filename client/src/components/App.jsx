@@ -29,7 +29,7 @@ export default function App() {
 
   ///// INITIALIZATION /////
   useEffect(() => {
-    fetcher.getProductById(40344)
+    fetcher.getProductById(40350)
       .then(result => setFeaturedProduct(result.data))
       .catch(err => console.log('error initial fetch: ', err));
   }, []);

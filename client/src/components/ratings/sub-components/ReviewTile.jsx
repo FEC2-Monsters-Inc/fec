@@ -20,7 +20,6 @@ export default function ReviewTile({review}) {
 
   return (
     <div>
-      {console.log(review)}
       <div>
         <div style={{display: 'flex'}}>
           <div style={{fontWeight: 'bold'}}>{review.summary}</div>

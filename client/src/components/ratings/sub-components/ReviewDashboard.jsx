@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import starImage from '/client/dist/assets/star.png';
 
 
 export default function ReviewDashboard({reviews}) {
@@ -54,14 +55,15 @@ export default function ReviewDashboard({reviews}) {
         tempStars.push(0);
       }
       rating = rating - 1;
+      setStars(tempStars);
     }
   };
 
   const starMapper = stars.map((e, i) => {
     return (
       <div className="review-single-star-container" key={i}>
-        <div className="review-single-star-fill" style={{width: `${parseInt(i * 31)}px`}}>
-          <img className="review-single-star-outline" src="client/dist/star.png" alt="stars alt"></img>
+        <div className="review-single-star-fill" style={{width: `${parseInt(e * 31)}px`}}>
+          <img className="review-single-star-outline" src={starImage} alt="stars alt"></img>
         </div>
       </div>
     );
@@ -76,15 +78,7 @@ export default function ReviewDashboard({reviews}) {
   return (
     <div>
       <div>
-        {stars.map((item, i) => {
-          return (
-            <div className="review-single-star-container" key={i}>
-              <div className="review-single-star-fill" style={{width: `${parseInt(item * 31)}px`}}>
-                <img className="review-single-star-outline" src="star.png" alt="stars alt"></img>
-              </div>
-            </div>
-          );
-        })}
+        {starMapper}
       </div>
       Average Rating: {avgRating} Stars
     </div>

@@ -17,10 +17,12 @@ export default function Ratings({
   }, [feature]);
 
   return (
-    <div id="ratings">
+    <div>
       <h3>Ratings and Reviews</h3>
-      <ReviewDashboard reviews={reviews} />
-      <ReviewList reviews={reviews} />
+      <div id="ratings-parent">
+        <ReviewDashboard reviews={reviews} />
+        <ReviewList reviews={reviews} />
+      </div>
     </div>
   );
 }

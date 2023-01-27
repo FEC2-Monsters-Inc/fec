@@ -15,3 +15,15 @@
   width: 31px;
   display: inline-block;
 }
+
+#ratings-parent {
+  display: flex;
+  flex-direction: row;
+}
+
+.ReviewList {
+  max-height: 50px;
+  max-width: auto;
+  overflow: scroll;
+  background-color: aqua;
+}

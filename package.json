@@ -8,6 +8,12 @@
     "client-dev": "npx webpack --watch",
     "test": "jest"
   },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FEC2-Monsters-Inc/fec.git"

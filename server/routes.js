@@ -6,17 +6,29 @@ router.get('/products', controllers.products.getProducts);
 router.get('/products/:product_id', controllers.products.getProductById);
 router.get('/products/:product_id/related', controllers.products.getRelatedProduct);
 router.get('/products/:product_id/styles', controllers.products.getProductStyle);
+
 /* REVIEWS */
 router.get('/reviews', controllers.reviews.getReviews);
 router.post('/reviews', controllers.reviews.addReviews);
 router.post('/reviews', controllers.reviews.addReviews);
 router.put('/reviews/:review_id/helpful', controllers.reviews.updateUseful);
 router.put('/reviews/:review_id/report', controllers.reviews.updateReport);
-/* QUESTIONS */
-router.get('/questions/:product_id', controllers.questions.getQuestionsForProduct);
 
-/* CART */
+/* QUESTIONS */
+router.get('/qa/questions', controllers.questions.getQuestions);
+router.get('/qa/questions/:question_id/answers', controllers.questions.getAnswers);
+router.post('/qa/questions', controllers.questions.addQuestion);
+router.post('/qa/questions/:question_id/answers', controllers.questions.answerQuestion);
+router.put('/qa/questions/:question_id/helpful', controllers.questions.markHelpfulQuestion);
+router.put('/qa/questions/:question_id/report', controllers.questions.reportQuestion);
+router.put('/qa/answers/:answer_id/helpful', controllers.questions.markHelpfulAnswer);
+router.put('/qa/answers/:answer_id/report', controllers.questions.reportAnswer);
+
+// /* CART */
+router.get('/cart', controllers.cart.getCartItems);
+router.post('/cart', controllers.cart.addCartItem);
 
 /* INTERACTIONS */
+router.post('/interactions', controllers.interactions.addInteraction);
 
 module.exports = router;

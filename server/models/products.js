@@ -6,11 +6,16 @@ const authHeader = {
 };
 
 module.exports = {
-  getProducts: () => {
+  getProducts: (page = 1, count = 5) => {
+    console.log(page, count);
     let options = {
       url: endpoint,
       method: 'get',
-      headers: authHeader
+      headers: authHeader,
+      params: {
+        'page': page,
+        'count': count
+      }
     };
     return axios(options);
   },

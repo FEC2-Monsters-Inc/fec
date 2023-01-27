@@ -6,5 +6,13 @@ const authHeader = {
 };
 
 module.exports = {
-
+  addInteraction: (params) => {
+    let options = {
+      url: endpoint,
+      method: 'post',
+      headers: authHeader,
+      data: params
+    };
+    return axios(options);
+  }
 };

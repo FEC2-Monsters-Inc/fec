@@ -21,13 +21,6 @@ module.exports = {
           }
         },
       },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        exclude: /nodeModules/,
-        use: {
-          loader: 'file-loader',
-        }
-      }
     ]
   }
 };

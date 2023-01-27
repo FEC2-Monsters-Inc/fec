@@ -52,9 +52,4 @@ table {
   box-sizing: border-box;
 }
 
-.ReviewList {
-  max-height: 50px;
-  max-width: auto;
-  overflow: scroll;
-  background-color: aqua;
-}
+/* ///// MAKE CSS CHANGES IN YOUR RELEVANT FILE WITHIN soloCSS FOLDER */

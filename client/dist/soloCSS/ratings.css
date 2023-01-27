@@ -1,0 +1,52 @@
+.ratings-parent {
+  display: flex;
+}
+
+.review-tile-container {
+  display: flex;
+}
+
+.review-tile-summary {
+  font-weight: 'bold';
+}
+
+.review-tile-stars {
+  font-style: 'italic';
+}
+
+.review-tile-name {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.review-tile-date {
+  margin-left: 20px;
+}
+
+.review-single-star-container {
+  height: 36px;
+  width: 31px;
+  display: inline-block;
+}
+
+.review-single-star-fill {
+  position: relative;
+  display: inline-block;
+  height: 36px;
+  background-color: #333333;
+}
+
+.review-single-star-outline {
+  height: 36px;
+  width: 31px;
+  display: inline-block;
+}
+
+.review-main-star-container {
+  display: flex;
+}
+
+.review-header {
+  font-size: 32px;
+  text-decoration: underline;
+}

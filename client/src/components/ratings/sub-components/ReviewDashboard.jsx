@@ -11,7 +11,7 @@ export default function ReviewDashboard({reviews}) {
       total += review.rating;
     }
     if (reviews.length > 0) {
-      setAvgRating(total / reviews.length);
+      setAvgRating((total / reviews.length).toFixed(1));
       starRating(total / reviews.length);
     }
   };
@@ -74,11 +74,11 @@ export default function ReviewDashboard({reviews}) {
 
 
   return (
-    <div>
+    <div className="review-main-star-container">
+      <p>{avgRating}</p>
       <div>
         {starMapper}
       </div>
-      Average Rating: {avgRating} Stars
     </div>
   );
 }

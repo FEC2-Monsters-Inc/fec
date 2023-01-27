@@ -21,14 +21,14 @@ export default function ReviewTile({review}) {
   return (
     <div>
       <div>
-        <div style={{display: 'flex'}}>
-          <div style={{fontWeight: 'bold'}}>{review.summary}</div>
-          <div style={{marginLeft: '20px'}}>{starRater()}</div>
+        <div className="review-tile-container">
+          <div className="review-tile-summary">{review.summary}</div>
+          <div className="review-tile-stars">{starRater()}</div>
         </div>
-        <p style={{fontStyle: 'italic'}}>{review.body}</p>
-        <div style={{display: 'flex'}}>
-          <div style={{fontSize: '12px', textDecoration: 'underline'}}>{review.reviewer_name}</div>
-          <div style={{marginLeft: '20px'}}>{dateConverter(review.date)}</div>
+        <p >{review.body}</p>
+        <div className="review-tile-container">
+          <div className="review-tile-name">{review.reviewer_name}</div>
+          <div className="review-tile-date">{dateConverter(review.date)}</div>
         </div>
       </div>
       <div>

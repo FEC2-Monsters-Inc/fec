@@ -11,7 +11,6 @@ module.exports = {
   },
 
   addCartItem: (req, res) => {
-    console.log('controller');
     model.addCartItem(req.body)
       .then(() => res.sendStatus(201))
       .catch(err => {

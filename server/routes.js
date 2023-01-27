@@ -18,14 +18,11 @@ router.put('/reviews/:review_id/report', controllers.reviews.updateReport);
 router.get('/qa/questions', controllers.questions.getQuestions);
 router.get('/qa/questions/:question_id/answers', controllers.questions.getAnswers);
 router.post('/qa/questions', controllers.questions.addQuestion);
-
-///// STILL IMPLEMENTING THE BELOW COMMENTED OUT ROUTES /////
-
-// router.post('/qa/questions/:question_id/answers', controllers.questions.answerQuestion);
-// router.put('/qa/questions/:question_id/helpful', controllers.questions.markHelpfulQuestion);
-// router.put('/qa/questions/:question_id/report', controllers.questions.reportQuestion);
-// router.put('/qa/answers/:answer_id/helpful', controllers.questions.markHelpfulAnswer);
-// router.put('/qa/answers/:answer_id/report', controllers.questions.reportAnswer);
+router.post('/qa/questions/:question_id/answers', controllers.questions.answerQuestion);
+router.put('/qa/questions/:question_id/helpful', controllers.questions.markHelpfulQuestion);
+router.put('/qa/questions/:question_id/report', controllers.questions.reportQuestion);
+router.put('/qa/answers/:answer_id/helpful', controllers.questions.markHelpfulAnswer);
+router.put('/qa/answers/:answer_id/report', controllers.questions.reportAnswer);
 
 // /* CART */
 router.get('/cart', controllers.cart.getCartItems);

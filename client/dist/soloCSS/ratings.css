@@ -50,3 +50,43 @@
   font-size: 32px;
   text-decoration: underline;
 }
+
+.review-list-container {
+  margin-left: 50px;
+}
+
+.review-tracker-bar-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%
+}
+
+.review-tracker-text {
+
+}
+
+.review-tracker-bar-parent {
+  height: 20px;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 40px;
+  margin: 5px;
+}
+
+.review-tracker-bar-child {
+  height: 100%;
+  width: 0px;
+  background-color: chartreuse;
+  border-radius: 40px;
+  text-align: 'right';
+}
+
+.review-tracker-bar-percent {
+  padding: 10px;
+  color: 'black';
+  font-weight: 900;
+}
+
+.rvw-txt {
+  width: 20%
+}

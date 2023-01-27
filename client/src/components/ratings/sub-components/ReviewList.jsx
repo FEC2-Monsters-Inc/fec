@@ -8,7 +8,7 @@ export default function ReviewList({reviews}) {
   );
 
   return (
-    <div>
+    <div className="review-list-container">
       {reviewMapper}
     </div>
   );

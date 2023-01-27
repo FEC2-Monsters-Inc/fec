@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import ReviewTracker from './DashboardReviewTracker.jsx';
 
 export default function ReviewDashboard({reviews}) {
 
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
+  const [recommended, setRecommended] = useState(0);
 
   const ratingSetter = function() {
     let total = 0;
@@ -13,6 +15,19 @@ export default function ReviewDashboard({reviews}) {
     if (reviews.length > 0) {
       setAvgRating((total / reviews.length).toFixed(1));
       starRating(total / reviews.length);
+    }
+  };
+
+  const recommendedSetter = function() {
+    let totalRecs = 0;
+    for (let review of reviews) {
+      if (review.recommend === true) {
+        totalRecs++;
+      }
+    }
+    if (reviews.length > 0) {
+      var percent = (totalRecs / reviews.length) * 100 + '%';
+      setRecommended(percent);
     }
   };
 
@@ -70,14 +85,24 @@ export default function ReviewDashboard({reviews}) {
 
   useEffect(() => {
     ratingSetter();
+    recommendedSetter();
   }, [reviews]);
 
+  const percentString = recommended + ' of reviews recommend this product';
 
   return (
-    <div className="review-main-star-container">
-      <p>{avgRating}</p>
+    <div>
+      <div className="review-main-star-container">
+        <p>{avgRating}</p>
+        <div>
+          {starMapper}
+        </div>
+      </div>
       <div>
-        {starMapper}
+        {percentString}
+      </div>
+      <div>
+        <ReviewTracker reviews={reviews}/>
       </div>
     </div>
   );

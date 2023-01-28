@@ -33,10 +33,10 @@ export default function App() {
 
   return (
     <div>
-      <Overview feature={featuredProduct} />
-      <Related feature={featuredProduct} />
-      <Questions feature={featuredProduct} />
-      <Ratings feature={featuredProduct} />
+      {/* <Overview feature={featuredProduct} /> */}
+      {/* <Related feature={featuredProduct} /> */}
+      {/* <Questions feature={featuredProduct} /> */}
+      {/* <Ratings feature={featuredProduct} /> */}
     </div>
   );
 }

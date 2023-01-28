@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fetcher from '../../fetchers';
+import './overview.css';
 
 ///// SUB-COMPONENETS /////
 import Search from './sub-comps/Search.jsx';
@@ -18,10 +19,6 @@ export default function Overview({
   ///// STATE DATA /////
   const [prodStyle, setStyle] = useState({});
   const [description, setDisplay] = useState(true);
-
-  console.log('feature: ', feature);
-  console.log('style: ', prodStyle);
-
 
 
   ///// INITIALIZATION /////

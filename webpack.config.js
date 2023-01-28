@@ -8,7 +8,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   mode: 'development',
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -19,8 +18,16 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
-        },
+        }
       },
+      {
+        test: /\.css?$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|jpeg|svg|gif)?$/,
+        use: 'file-loader'
+      }
     ]
   }
 };

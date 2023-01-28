@@ -1,7 +1,5 @@
 // IMPORT LIBRARY
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import RelatedProduct from './RelatedProduct.jsx';
 
 // IMPORT COMPONENTS AND STYLE
 import RelatedProduct from './RelatedProduct.jsx';

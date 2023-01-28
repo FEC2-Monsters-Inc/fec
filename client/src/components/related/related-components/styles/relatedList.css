@@ -1,0 +1,49 @@
+.carousel-outside {
+  display: flex;
+}
+
+.carousel-inside {
+  width: 68rem;
+  display: flex;
+  border: 1px solid red;
+  margin: 0 10px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 1rem;
+}
+
+.rel-item {
+  width: 15rem;
+  height: 25rem;
+  border: 1px solid green;
+  margin: 0 1rem;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+}
+
+#rel-img {
+  height: 15rem;
+  width: 15rem;
+  position: relative;
+}
+
+#rel-ori-img {}
+
+.star-modal {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: pink;
+  width: 1.5rem;
+  height: auto;
+  z-index: 1;
+}
+
+.carousel-rel-scrollBtn {
+  cursor: pointer;
+  width: 3rem;
+  height: auto;
+}

@@ -6,9 +6,9 @@ export default function ReviewList({reviews, selectedRating}) {
   const reviewMapper = reviews.map((review, index) =>
     <ReviewTile review={review} key={index}/>
   );
-
+  //console.log(selectedRating);
   const filterReviewMapper = () => {
-    const filteredReviews = reviews.filter(review => review.rating === selectedRating);
+    const filteredReviews = reviews.filter(review => selectedRating[review.rating] === true);
     if (filteredReviews.length === 0) {
       return reviewMapper;
     } else {

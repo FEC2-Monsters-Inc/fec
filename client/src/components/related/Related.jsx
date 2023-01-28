@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import fetcher from '../../fetchers';
 import axios from 'axios';
-import RelatedList from './RelatedList.jsx';
+import RelatedList from './related-components/RelatedList.jsx';
 
 export default function Related({ feature, getRelatedList }) {
   const [relatedList, setRelatedList] = useState([]);

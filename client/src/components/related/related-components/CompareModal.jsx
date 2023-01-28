@@ -21,22 +21,32 @@ export default function CompareModal({ setShowModal, feature, relProd }) {
   }, []);
 
   if (featureStyle && relProdStyle) {
-    console.log(featureStyle, relProdStyle);
-    console.log(feature, relProd);
+
     const feaChars = Object.keys(featureStyle.characteristics);
     const relChars = Object.keys(relProdStyle.characteristics);
-    const allChars = new Set(feaChars.concat(relChars));
+    const allChars = Array.from(new Set(feaChars.concat(relChars)));
 
     return (
-      <div>
-        <AiOutlineClose onClick={() => setShowModal(false)} />
-        <table>
-          <tbody>
-            <tr>
-              <th>{feature.name}</th>
+      <div className="compare-modal">
+        <AiOutlineClose className="compare-close" onClick={() => setShowModal(false)} />
+        <table className="compare-table">
+          <thead className="compare-thead">
+            <tr className="compare-tr">
+              <th className="compare-thead">{feature.name}</th>
               <th></th>
               <th>{relProd.name}</th>
             </tr>
+          </thead>
+          <tbody className="compare-tbody">
+            {allChars.map((char, index) => (
+              <tr key={index}>
+                <td>{featureStyle.characteristics[char] ?
+                  Math.floor(Number(featureStyle.characteristics[char].value)) : ''}</td>
+                <td>{char}</td>
+                <td>{relProdStyle.characteristics[char] ?
+                  Math.floor(Number(relProdStyle.characteristics[char].value)) : ''}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

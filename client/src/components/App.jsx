@@ -39,7 +39,7 @@ export default function App() {
       {/* <Overview feature={featuredProduct} /> */}
       <Related feature={featuredProduct} />
       {/* <Questions feature={featuredProduct} /> */}
-      <Ratings feature={featuredProduct} />
+      {/* <Ratings feature={featuredProduct} /> */}
     </div>
   );
 }

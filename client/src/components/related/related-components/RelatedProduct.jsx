@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
+import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
 import { AiOutlineStar } from 'react-icons/ai';
 
@@ -7,6 +7,7 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
 
   const [image, setImage] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [showImg, setShowImg] = useState(false);
 
   useEffect(() => {
     fetcher.related.getProductStyle(relProd.id)
@@ -23,7 +24,9 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
     <div>
       <div className="rel-item">
         <AiOutlineStar className="star-modal" onClick={() => setShowModal(true)} />
-        <img id="rel-img" src={image.photos[0].thumbnail_url} alt={relProd.description} />
+        <img id="rel-img" src={image.photos[0].thumbnail_url} alt={relProd.description}
+          onMouseEnter={() => setShowImg(true)} onMouseLeave={() => setShowImg(false)} />
+        {showImg && <img id="rel-img" src={image.photos[0].url} alt={relProd.description} />}
         <div className="rel-cat">{relProd.category}</div>
         <div className="rel-name">{relProd.name}</div>
         <div className="rel-slogan">{relProd.slogan}</div>

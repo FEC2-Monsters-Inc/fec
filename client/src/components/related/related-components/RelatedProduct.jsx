@@ -26,7 +26,7 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
         <AiOutlineStar className="star-modal" onClick={() => setShowModal(true)} />
         <img id="rel-img" src={image.photos[0].thumbnail_url} alt={relProd.description}
           onMouseEnter={() => setShowImg(true)} onMouseLeave={() => setShowImg(false)} />
-        {showImg && <img id="rel-img" src={image.photos[0].url} alt={relProd.description} />}
+        {showImg && <img id="rel-ori-img" src={image.photos[0].url} alt={relProd.description} />}
         <div className="rel-cat">{relProd.category}</div>
         <div className="rel-name">{relProd.name}</div>
         <div className="rel-slogan">{relProd.slogan}</div>

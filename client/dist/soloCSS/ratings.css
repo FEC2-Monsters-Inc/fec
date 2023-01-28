@@ -56,14 +56,15 @@
 }
 
 .review-list-container {
-  margin-left: 50px;
+  margin-left: 5rem;
 }
 
 .review-tracker-bar-container {
   display: flex;
   flex-direction: row;
-  width: 100%
+  width: 20rem;
 }
+
 
 .review-tracker-text {
 
@@ -71,7 +72,7 @@
 
 .review-tracker-bar-parent {
   height: 20px;
-  width: 100%;
+  width: 20rem;
   background-color: whitesmoke;
   border-radius: 40px;
   margin: 5px;
@@ -94,4 +95,7 @@
 
 .rvw-txt {
   width: 20%
+}
+.test-test-test {
+  display: inline-block
 }

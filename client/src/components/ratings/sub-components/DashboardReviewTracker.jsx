@@ -31,12 +31,14 @@ export default function ReviewTracker({reviews}) {
   }, [reviews]);
 
   return (
-    <div>
+    <div className ="test-test-test">
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>5 stars</p><TrackerBar progress={percentages[5]}/>
+        <p className='rvw-txt'>5 stars</p>
+        <TrackerBar progress={percentages[5]}/>
+        <p>test test</p>
       </div>
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>4 stars</p><TrackerBar progress={percentages[4]}/>
+        <p className='rvw-txt'>4 stars</p><TrackerBar progress={percentages[4]}/><p>test test</p>
       </div>
       <div className="review-tracker-bar-container">
         <p className='rvw-txt'>3 stars</p><TrackerBar progress={percentages[3]}/>

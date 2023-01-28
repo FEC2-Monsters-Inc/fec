@@ -28,4 +28,6 @@
   width: 15rem;
 }
 
-.rel-info {}
+.rel-info {
+  background-color: aqua;
+}

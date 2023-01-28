@@ -10,9 +10,10 @@ export default function Ratings({
 }) {
 
   const [reviews, setReviews] = useState([]);
+  const [selectedRating, setSelectedRating] = useState(0);
 
   useEffect(() => {
-    fetcher.ratings.getReviews(40344)
+    fetcher.ratings.getReviews(40348)
       .then(({data}) => setReviews(data.results))
       .catch((error) => console.log(error));
   }, [feature]);
@@ -21,8 +22,8 @@ export default function Ratings({
     <div>
       <div className="review-header">Ratings and Reviews</div>
       <div className="ratings-parent">
-        <ReviewDashboard reviews={reviews} />
-        <ReviewList reviews={reviews} />
+        <ReviewDashboard reviews={reviews} setSelectedRating={setSelectedRating}/>
+        <ReviewList reviews={reviews} selectedRating={selectedRating}/>
       </div>
     </div>
   );

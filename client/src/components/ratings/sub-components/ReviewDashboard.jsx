@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import ReviewTracker from './DashboardReviewTracker.jsx';
 import StarImg from '../../../../dist/assets/star.png';
 
-export default function ReviewDashboard({reviews}) {
+export default function ReviewDashboard({reviews, setSelectedRating}) {
 
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
   const [recommended, setRecommended] = useState(0);
+
 
   const ratingSetter = function() {
     let total = 0;
@@ -94,7 +95,7 @@ export default function ReviewDashboard({reviews}) {
   return (
     <div>
       <div className="review-main-star-container">
-        <p>{avgRating}</p>
+        <p className="review-avg-rating">{avgRating}</p>
         <div>
           {starMapper}
         </div>
@@ -103,7 +104,7 @@ export default function ReviewDashboard({reviews}) {
         {percentString}
       </div>
       <div>
-        <ReviewTracker reviews={reviews}/>
+        <ReviewTracker reviews={reviews} setSelectedRating={setSelectedRating}/>
       </div>
     </div>
   );

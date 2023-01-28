@@ -1,5 +1,6 @@
 .ratings-parent {
   display: flex;
+  margin: auto;
 }
 
 .review-tile-container {
@@ -56,13 +57,20 @@
 }
 
 .review-list-container {
-  margin-left: 5rem;
+  margin-left: 6rem;
 }
 
 .review-tracker-bar-container {
   display: flex;
   flex-direction: row;
   width: 20rem;
+}
+
+.review-hover:hover {
+  width: 120%;
+  transform: scale(1.15, 1.15);
+  /* background-color:#F3D8FF; */
+  filter: drop-shadow(0 0 1rem black);
 }
 
 
@@ -100,8 +108,11 @@
   text-align: center;
   margin: auto;
   font-size: 13px;
+
 }
+
 .test-test-test {
+  width: auto;
   display: flex;
   flex-direction: column;
 }

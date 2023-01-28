@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReviewTracker from './DashboardReviewTracker.jsx';
+import StarImg from '../../../../dist/assets/star.png';
 
 export default function ReviewDashboard({reviews}) {
 
@@ -76,7 +77,7 @@ export default function ReviewDashboard({reviews}) {
     return (
       <div className="review-single-star-container" key={i}>
         <div className="review-single-star-fill" style={{width: `${parseInt(e * 31)}px`}}>
-          <img className="review-single-star-outline" alt="stars alt"></img>
+          <img className="review-single-star-outline" src={StarImg} alt="stars alt"></img>
         </div>
       </div>
     );

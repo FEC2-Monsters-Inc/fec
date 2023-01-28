@@ -21,6 +21,7 @@
   flex-shrink: 0;
   scroll-snap-align: start;
   text-align: center;
+  position: relative;
 }
 
 #rel-img {
@@ -28,6 +29,17 @@
   width: 15rem;
 }
 
-.rel-info {
-  background-color: aqua;
+.star-modal {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: pink;
+  width: 1.5rem;
+  height: auto;
+}
+
+.carousel-rel-scrollBtn {
+  cursor: pointer;
+  width: 3rem;
+  height: auto;
 }

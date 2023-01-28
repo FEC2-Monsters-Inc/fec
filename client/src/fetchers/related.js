@@ -3,7 +3,7 @@ import axios from 'axios';
 const SERVER_BASEURL = 'http://localhost:3000/api';
 
 export default {
-  // YOUR REQUESTS HERE
+
   getRelatedProduct: (id) => {
     let options = {
       url: SERVER_BASEURL + `/products/${id}/related`,
@@ -20,5 +20,17 @@ export default {
     };
 
     return axios(options);
-  }
+  },
+
+  getReviewMeta: (id) => {
+    let options = {
+      url: SERVER_BASEURL + '/reviews/meta',
+      method: 'get',
+      params: {
+        product_id: id
+      }
+    };
+
+    return axios(options);
+  },
 };

@@ -1,8 +1,14 @@
+// IMPORT LIBRARY
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx';
 
-export default function RelatedList({ end, relatedList }) {
+// IMPORT COMPONENTS AND STYLE
+import RelatedProduct from './RelatedProduct.jsx';
+import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
+import './styles/relatedList.css';
+
+export default function RelatedList({ feature, end, relatedList }) {
 
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
@@ -19,15 +25,15 @@ export default function RelatedList({ end, relatedList }) {
 
   return (
     <div className="carousel-outside">
-      {/* <img src="" alt="left-scroll" /> */}
-      {posIndex === 0 ? null : <button onClick={scrollLeft}>Left</button>}
+      <AiOutlineLeftSquare className="carousel-rel-scrollBtn"
+        style={{ opacity: posIndex === 0 ? 0 : 1 }} onClick={scrollLeft} />
       <div className="carousel-inside" ref={ref}>
-        {relatedList.map((product, index) =>
-          <RelatedProduct key={product.id} product={product} />
+        {relatedList.map((relProd, index) =>
+          <RelatedProduct key={relProd.id} feature={feature} relProd={relProd} />
         )}
       </div>
-      {posIndex === end ? null : <button onClick={scrollRight}>Right</button>}
-      {/* <img src="" alt="right-scroll" /> */}
+      <AiOutlineRightSquare className="carousel-rel-scrollBtn"
+        style={{ opacity: posIndex === end ? 0 : 1 }} onClick={scrollRight} />
     </div>
   );
 }

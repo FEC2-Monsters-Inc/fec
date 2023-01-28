@@ -8,7 +8,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   mode: 'development',
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -18,6 +17,14 @@ module.exports = {
           loader: 'babel-loader'
         },
       },
+      {
+        test: /\.css?$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|jpeg|svg|gif)?$/,
+        use: 'file-loader'
+      }
     ]
   }
 };

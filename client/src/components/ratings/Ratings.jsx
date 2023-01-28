@@ -18,8 +18,8 @@ export default function Ratings({
 
   return (
     <div>
-      <h3>Ratings and Reviews</h3>
-      <div id="ratings-parent">
+      <div className="review-header">Ratings and Reviews</div>
+      <div className="ratings-parent">
         <ReviewDashboard reviews={reviews} />
         <ReviewList reviews={reviews} />
       </div>

@@ -3,30 +3,29 @@
 }
 
 .carousel-inside {
-  width: 70rem;
+  width: 68rem;
   display: flex;
   border: 1px solid red;
-  margin: 0 5px;
+  margin: 0 10px;
   overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 1rem;
 }
 
-/* .carousel-item {
-  list-style-type: none;
-  width: 20rem;
-  height: 20rem;
-  display: flex;
-  border: 1px solid blue;
-} */
-
-.related-item {
+.rel-item {
   width: 15rem;
   height: 25rem;
   border: 1px solid green;
   margin: 0 1rem;
   flex-shrink: 0;
+  scroll-snap-align: start;
+  text-align: center;
 }
 
-#related-img {
+#rel-img {
   height: 15rem;
   width: 15rem;
 }
+
+.rel-info {}

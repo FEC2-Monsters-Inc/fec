@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx';
 
-export default function RelatedList({ relatedList }) {
+export default function RelatedList({ end, relatedList }) {
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
@@ -13,11 +13,13 @@ export default function RelatedList({ relatedList }) {
   return (
     <div className="carousel-outside">
       {/* <img src="" alt="left-scroll" /> */}
-      <button onClick={() => scroll(-20)}>Left</button>
+      <button onClick={() => scroll(-15 * 16)}>Left</button>
       <div className="carousel-inside" ref={ref}>
-        {relatedList.map(product => <RelatedProduct key={product.id} product={product} />)}
+        {relatedList.map((product, index) =>
+          <RelatedProduct key={product.id} product={product} />
+        )}
       </div>
-      <button>Right</button>
+      <button onClick={() => scroll(15 * 16)}>Right</button>
       {/* <img src="" alt="right-scroll" /> */}
     </div>
   );

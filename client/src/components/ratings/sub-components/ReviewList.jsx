@@ -5,6 +5,7 @@ export default function ReviewList({reviews, selectedRating}) {
 
   // consider using hook to track length of current reviews
   //const [numReviews, setNumReviews] = useState(reviews.length);
+  // TESTING W BOLTON //
 
   const reviewMapper = reviews.map((review, index) =>
     <ReviewTile review={review} key={index}/>

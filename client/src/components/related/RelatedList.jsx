@@ -5,21 +5,28 @@ import RelatedProduct from './RelatedProduct.jsx';
 export default function RelatedList({ end, relatedList }) {
 
   const ref = useRef(null);
+  const [posIndex, setPosIndex] = useState(0);
 
-  const scroll = (scrollOffset) => {
-    ref.current.scrollLeft += scrollOffset;
+  const scrollLeft = () => {
+    posIndex > 0 ? setPosIndex(posIndex - 1) : null;
+    ref.current.scrollLeft -= 15 * 16;
+  };
+
+  const scrollRight = () => {
+    posIndex < end ? setPosIndex(posIndex + 1) : null;
+    ref.current.scrollLeft += 15 * 16;
   };
 
   return (
     <div className="carousel-outside">
       {/* <img src="" alt="left-scroll" /> */}
-      <button onClick={() => scroll(-15 * 16)}>Left</button>
+      {posIndex === 0 ? null : <button onClick={scrollLeft}>Left</button>}
       <div className="carousel-inside" ref={ref}>
         {relatedList.map((product, index) =>
           <RelatedProduct key={product.id} product={product} />
         )}
       </div>
-      <button onClick={() => scroll(15 * 16)}>Right</button>
+      {posIndex === end ? null : <button onClick={scrollRight}>Right</button>}
       {/* <img src="" alt="right-scroll" /> */}
     </div>
   );

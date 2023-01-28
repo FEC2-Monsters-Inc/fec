@@ -20,7 +20,7 @@ export default function Related({ feature, getRelatedList }) {
 
   return (
     <div>
-      <RelatedList end={relatedList.length - 4} relatedList={relatedList} />
+      <RelatedList end={relatedList.length - 5} relatedList={relatedList} />
     </div>
   );
 }

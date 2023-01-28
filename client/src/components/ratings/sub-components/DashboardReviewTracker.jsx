@@ -4,6 +4,7 @@ import TrackerBar from './TrackerBar.jsx';
 export default function ReviewTracker({reviews}) {
 
   const [percentages, setPercentages] = useState({});
+  const [numReviews, setNumReviews] = useState({});
 
   const getRatingPercentages = function () {
     let ratingTotals = {
@@ -17,6 +18,7 @@ export default function ReviewTracker({reviews}) {
       ratingTotals[review.rating]++;
     }
     let total = reviews.length;
+    setNumReviews(ratingTotals);
     setPercentages({
       1: ratingTotals[1] / total * 100,
       2: ratingTotals[2] / total * 100,
@@ -35,19 +37,27 @@ export default function ReviewTracker({reviews}) {
       <div className="review-tracker-bar-container">
         <p className='rvw-txt'>5 stars</p>
         <TrackerBar progress={percentages[5]}/>
-        <p>test test</p>
+        <p className='rvw-txt'>{numReviews[5] ? numReviews[5] : null}</p>
       </div>
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>4 stars</p><TrackerBar progress={percentages[4]}/><p>test test</p>
+        <p className='rvw-txt'>4 stars</p>
+        <TrackerBar progress={percentages[4]}/>
+        <p className='rvw-txt'>{numReviews[4] ? numReviews[4] : null}</p>
       </div>
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>3 stars</p><TrackerBar progress={percentages[3]}/>
+        <p className='rvw-txt'>3 stars</p>
+        <TrackerBar progress={percentages[3]}/>
+        <p className='rvw-txt'>{numReviews[3] ? numReviews[3] : null}</p>
       </div>
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>2 stars</p><TrackerBar progress={percentages[2]}/>
+        <p className='rvw-txt'>2 stars</p>
+        <TrackerBar progress={percentages[2]}/>
+        <p className='rvw-txt'>{numReviews[2] ? numReviews[2] : null}</p>
       </div>
       <div className="review-tracker-bar-container">
-        <p className='rvw-txt'>1 stars</p><TrackerBar progress={percentages[1]}/>
+        <p className='rvw-txt'>1 stars</p>
+        <TrackerBar progress={percentages[1]}/>
+        <p className='rvw-txt'>{numReviews[1] ? numReviews[1] : null}</p>
       </div>
     </div>
   );

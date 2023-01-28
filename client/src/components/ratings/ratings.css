@@ -76,6 +76,7 @@
   background-color: whitesmoke;
   border-radius: 40px;
   margin: 5px;
+  display: flex;
 }
 
 .review-tracker-bar-child {
@@ -94,8 +95,13 @@
 }
 
 .rvw-txt {
-  width: 20%
+  display: flex;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  font-size: 13px;
 }
 .test-test-test {
-  display: inline-block
+  display: flex;
+  flex-direction: column;
 }

@@ -3,3 +3,10 @@ client/dist/bundle.js.map
 node_modules/
 .env
 .DS_store
+
+# Ignores transpiled images
+client/dist/*.png
+client/dist/*.jpg
+client/dist/*.jpeg
+client/dist/*.svg
+client/dist/*.gif

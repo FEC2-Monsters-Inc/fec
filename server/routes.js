@@ -9,8 +9,8 @@ router.get('/products/:product_id/styles', controllers.products.getProductStyle)
 
 /* REVIEWS */
 router.get('/reviews', controllers.reviews.getReviews);
-router.post('/reviews', controllers.reviews.addReviews);
 router.get('/reviews/meta', controllers.reviews.getReviewMeta);
+router.post('/reviews', controllers.reviews.addReviews);
 router.put('/reviews/:review_id/helpful', controllers.reviews.updateUseful);
 router.put('/reviews/:review_id/report', controllers.reviews.updateReport);
 
@@ -24,7 +24,7 @@ router.put('/qa/questions/:question_id/report', controllers.questions.reportQues
 router.put('/qa/answers/:answer_id/helpful', controllers.questions.markHelpfulAnswer);
 router.put('/qa/answers/:answer_id/report', controllers.questions.reportAnswer);
 
-// /* CART */
+/* CART */
 router.get('/cart', controllers.cart.getCartItems);
 router.post('/cart', controllers.cart.addCartItem);
 

@@ -1,92 +1,85 @@
 const axios = require('axios');
 
-const endpoint = process.env.BASEURL + '/qa/questions';
-const answerEndpoint = process.env.BASEURL + '/qa/answers';
+const endpoint = `${process.env.BASEURL}/qa/questions`;
+const answerEndpoint = `${process.env.BASEURL}/qa/answers`;
 const authHeader = {
-  'Authorization': process.env.TOKEN
+  Authorization: process.env.TOKEN,
 };
 
 module.exports = {
-  getQuestions: ({ count, page, product_id }) => {
-    let options = {
+  getQuestions: ({ count = 5, page = 1, product_id }) => {
+    const options = {
       url: endpoint,
       method: 'get',
       headers: authHeader,
-      params: {
-        'page': page || 1,
-        'count': count || 5,
-        'product_id': product_id
-      }
+      params: { page, count, product_id },
     };
     return axios(options);
   },
 
-  getAnswers: (id, page, count) => {
-    let options = {
-      url: endpoint + `/${id}/answers`,
+  getAnswers: (id, page = 1, count = 5) => {
+    const options = {
+      url: `${endpoint}/${id}/answers`,
       method: 'get',
       headers: authHeader,
-      params: {
-        'page': page || 1,
-        'count': count || 5
-      }
+      params: { page, count },
     };
     return axios(options);
   },
 
   addQuestion: (question) => {
-    let options = {
+    const options = {
       url: endpoint,
       method: 'post',
       headers: authHeader,
-      data: question
+      data: question,
     };
     return axios(options);
   },
 
   answerQuestion: (id, answer) => {
-    let options = {
-      url: endpoint + `/${id}/answers`,
+    const options = {
+      url: `${endpoint}/${id}/answers`,
       method: 'post',
       headers: authHeader,
-      data: answer
+      data: answer,
     };
     return axios(options);
   },
 
   markHelpfulQuestion: (id) => {
-    let options = {
-      url: endpoint + `/${id}/helpful`,
+    const options = {
+      url: `${endpoint}/${id}/helpful`,
       method: 'put',
-      headers: authHeader
+      headers: authHeader,
     };
     return axios(options);
   },
 
   reportQuestion: (id) => {
-    let options = {
-      url: endpoint + `/${id}/report`,
+    const options = {
+      url: `${endpoint}/${id}/report`,
       method: 'put',
-      headers: authHeader
+      headers: authHeader,
     };
     return axios(options);
   },
 
   markHelpfulAnswer: (id) => {
-    let options = {
-      url: answerEndpoint + `/${id}/helpful`,
+    const options = {
+      url: `${answerEndpoint}/${id}/helpful`,
       method: 'put',
-      headers: authHeader
+      headers: authHeader,
     };
     return axios(options);
   },
 
   reportAnswer: (id) => {
-    let options = {
-      url: answerEndpoint + `/${id}/report`,
+    const options = {
+      url: `${answerEndpoint}/${id}/report`,
       method: 'put',
-      headers: authHeader
+      headers: authHeader,
     };
     return axios(options);
-  }
+  },
 };

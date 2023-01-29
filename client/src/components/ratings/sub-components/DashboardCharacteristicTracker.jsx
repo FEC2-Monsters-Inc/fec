@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CharacteristicBar from './CharacteristicBar.jsx';
 
-
-export default function CharacteristicTracker({reviewMeta}) {
-
-
-
-  const charTrackerMapper = function() {
+export default function CharacteristicTracker({ reviewMeta }) {
+  const charTrackerMapper = function () {
     let components = [];
     for (var key in reviewMeta.characteristics) {
       var keyVal = reviewMeta.characteristics[key].id;

@@ -13,6 +13,15 @@ export default {
     };
 
     return axios(options);
+  },
+  getReviewMeta: (id) => {
+    let options = {
+      url: SERVER_BASEURL + 'meta',
+      method: 'get',
+      params: {'product_id': id}
+    };
+
+    return axios(options);
   }
 };
 

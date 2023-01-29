@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import ReviewTracker from './DashboardReviewTracker.jsx';
+import CharacteristicTracker from './DashboardCharacteristicTracker.jsx';
 import StarImg from '../../../../dist/assets/star.png';
 
-export default function ReviewDashboard({reviews, setSelectedRating, selectedRating}) {
+export default function ReviewDashboard({ reviews, setSelectedRating, selectedRating, reviewMeta }) {
 
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
@@ -105,6 +106,9 @@ export default function ReviewDashboard({reviews, setSelectedRating, selectedRat
       </div>
       <div>
         <ReviewTracker reviews={reviews} setSelectedRating={setSelectedRating} selectedRating={selectedRating}/>
+      </div>
+      <div>
+        <CharacteristicTracker reviewMeta={reviewMeta}/>
       </div>
     </div>
   );

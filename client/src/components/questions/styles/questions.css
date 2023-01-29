@@ -1,3 +1,11 @@
+h3 {
+  margin: 1rem 0;
+}
+
+.qa.q\&a {
+  margin-bottom: 0.5rem;
+}
+
 .qa.question {
   display: flex;
   align-items: baseline;
@@ -7,6 +15,7 @@
 .qa.control {
   font-size: 1rem;
   font-weight: normal;
+  align-self: flex-end;
 }
 
 .qa.link {

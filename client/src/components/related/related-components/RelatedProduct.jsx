@@ -10,23 +10,21 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
   const [image, setImage] = useState();
   const [showModal, setShowModal] = useState(false);
   const [showImg, setShowImg] = useState(false);
-  const [ratings, setRatings] = useState(0);
+  const [featureMeta, setFeatureMeta] = useState(0);
+  const [relProdMeta, setRelProdMeta] = useState(0);
 
   useEffect(() => {
     axios.all([
       fetcher.related.getProductStyle(relProd.id),
+      fetcher.related.getReviewMeta(feature.id),
       fetcher.related.getReviewMeta(relProd.id)
     ])
       .then(axios.spread((...data) => {
-        // console.log(data[0].data.results[0]);
         setImage(data[0].data.results[0]);
-        // console.log(data[1].data);
-        setRatings(data[1].data);
+        setFeatureMeta(data[1].data);
+        setRelProdMeta(data[2].data);
       }))
       .catch(err => console.error(err));
-    // fetcher.related.getProductStyle(relProd.id)
-    //   .then(({ data }) => setImage(data.results[0]))
-    //   .catch(err => console.log(err));
   }, [feature]);
 
   // TODO: FIX NO IMAGE LATER
@@ -34,7 +32,13 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
     return <div></div>;
   }
 
-  console.log(ratings);
+  let actualPts = 0;
+  let totalPts = 0;
+  for (var key in relProdMeta.ratings) {
+    actualPts += Number(key) * Number(relProdMeta.ratings[key]);
+    totalPts += 5 * Number(relProdMeta.ratings[key]);
+  }
+  const ratingPercentage = Math.floor(actualPts / totalPts * 100).toString();
 
   return (
     <div>
@@ -48,12 +52,14 @@ export default function RelatedProduct({ start, last, feature, relProd }) {
         <div className="rel-slogan">{relProd.slogan}</div>
         {image.sale_price && <div className="rel-sale-price">{'$' + image.sale_price}</div>}
         <div className="rel-orig-price">{'$' + image.original_price}</div>
-        <StarRating ratingPercentage={'50%'}></StarRating>
+        <StarRating ratingPercentage={`${ratingPercentage}%`}></StarRating>
       </div>
       {showModal &&
         (<div className="overlay">
           <div className="modal-container">
-            <CompareModal setShowModal={setShowModal} feature={feature} relProd={relProd} />
+            <CompareModal setShowModal={setShowModal}
+              feature={feature} relProd={relProd}
+              featureMeta={featureMeta} relProdMeta={relProdMeta} />
           </div>
         </div>)
       }

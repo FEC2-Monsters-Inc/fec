@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ReviewTracker from './ReviewTracker.jsx';
+import { ReviewTracker } from './ReviewTracker.jsx';
 import CharacteristicTracker from './DashboardCharacteristicTracker.jsx';
+import ActiveFilters from './ActiveFilters.jsx';
 import StarImg from '../../../../dist/assets/star.png';
 
 export default function ReviewDashboard({
@@ -102,6 +103,16 @@ export default function ReviewDashboard({
       </div>
       <div>
         {percentString}
+      </div>
+      <div className="review-rating-breakdown-title">
+        Rating Breakdown
+      </div>
+      <div>
+        <ActiveFilters
+          selectedRating={selectedRating}
+          reviews={reviews}
+          setSelectedRating={setSelectedRating}
+        />
       </div>
       <div>
         <ReviewTracker

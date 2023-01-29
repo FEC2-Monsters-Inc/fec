@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import TrackerBar from './TrackerBar.jsx';
 
-export default function ReviewTracker({reviews, setSelectedRating, selectedRating}) {
+export function ReviewTracker({reviews, setSelectedRating, selectedRating}) {
 
   const [percentages, setPercentages] = useState({});
   const [numReviews, setNumReviews] = useState({});

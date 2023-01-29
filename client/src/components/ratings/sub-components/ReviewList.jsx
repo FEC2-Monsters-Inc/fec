@@ -14,10 +14,8 @@ export default function ReviewList({ reviews, selectedRating }) {
   const filterReviewMapper = () => {
     const filteredReviews = reviews.filter(review => selectedRating[review.rating] === true);
     if (filteredReviews.length === 0) {
-      //setNumReviews(reviewMapper.length);
       return reviewMapper;
     } else {
-      //setNumReviews(filteredReviews.length);
       return filteredReviews.map((review, index) =>
         <ReviewTile review={review} key={index}/>
       );
@@ -27,10 +25,8 @@ export default function ReviewList({ reviews, selectedRating }) {
   const numReviewsTracker = function() {
     let trueKeys = Object.keys(selectedRating).filter(key => selectedRating[key] === true).map(Number);
     let filteredArr = reviews.filter(review => trueKeys.includes(review.rating));
-    //console.log(filteredArr)
     if (filteredArr.length === 0) {
-      //console.log('test')
-      setNumReviews(reviews.length); //FIX HARD CODED SOLUTION
+      setNumReviews(reviews.length);
       return;
     }
     setNumReviews(filteredArr.length);
@@ -43,7 +39,7 @@ export default function ReviewList({ reviews, selectedRating }) {
 
   return (
     <div className="review-list-container">
-      <p>{numReviews} reviews, sorted by relevance</p>
+      <p>{numReviews === 0 ? 'No Reviews' : numReviews === 1 ? '1 review, sorted by relevance' : `${numReviews} reviews, sorted by relevance`}</p>
       {filterReviewMapper()}
     </div>
   );

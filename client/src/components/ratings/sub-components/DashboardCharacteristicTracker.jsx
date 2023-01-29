@@ -9,9 +9,8 @@ export default function CharacteristicTracker({ reviewMeta }) {
       components.push(
         <div key={keyVal}>
           <p>{key}</p>
-          <CharacteristicBar reviewMeta={reviewMeta.characteristics[key].value}/>
+          <CharacteristicBar reviewMeta={reviewMeta.characteristics[key].value} charName={key}/>
         </div>
-
       );
     }
     return components;

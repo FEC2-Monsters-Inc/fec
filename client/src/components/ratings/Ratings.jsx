@@ -6,16 +6,15 @@ import ReviewList from './sub-components/ReviewList.jsx';
 import axios from 'axios';
 
 export default function Ratings({
-  feature
+  feature,
 }) {
-
   const [reviews, setReviews] = useState([]);
   const [selectedRating, setSelectedRating] = useState({
     1: false,
     2: false,
     3: false,
     4: false,
-    5: false
+    5: false,
   });
   const [reviewMeta, setReviewMeta] = useState({});
 

@@ -18,8 +18,12 @@ export default function CharacteristicBar({ reviewMeta }) {
   }, [reviewMeta]);
 
   return (
-    <div className="characteristic-rating-bar-parent">
-      <div className="characteristic-bar-child" style={{width: 50 + '%'}}>
+    <div className="review-slidecontainer">
+      <input type="range" min="1" max="100" value={'' + barWidth} className="slider" readOnly={true} />
+      <div className="reivew-slider-label-container">
+        <label className="review-slider-label-1">{charRatings.small}</label>
+        <label className="review-slider-label-2">{charRatings.perf}</label>
+        <label className="review-slider-label-3">{charRatings.big}</label>
       </div>
     </div>
   );

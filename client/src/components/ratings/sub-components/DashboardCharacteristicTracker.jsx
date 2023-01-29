@@ -11,9 +11,9 @@ export default function CharacteristicTracker({reviewMeta}) {
     for (var key in reviewMeta.characteristics) {
       var keyVal = reviewMeta.characteristics[key].id;
       components.push(
-        <div key={keyVal} className="review-charTrackerMapper">
+        <div key={keyVal}>
           <p>{key}</p>
-          <CharacteristicBar reviewMeta={reviewMeta.characteristics[key].value} characteristicName={key}/>
+          <CharacteristicBar reviewMeta={reviewMeta.characteristics[key].value}/>
         </div>
 
       );

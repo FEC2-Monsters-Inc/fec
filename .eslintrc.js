@@ -16,10 +16,11 @@ module.exports = {
   ],
   ignorePatterns: ['**/example/Link*'],
   rules: {
-    'react/prop-types': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'react/prop-types': 'off',
     'import/extensions': ['error', { jsx: 'always' }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'jsx-a11y/img-redundant-alt': 'off',
     camelcase: ['error', {
       allow: [
         'product_id',

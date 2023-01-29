@@ -22,6 +22,18 @@ export default {
     return axios(options);
   },
 
+  getReview: (id) => {
+    let options = {
+      url: SERVER_BASEURL + '/reviews',
+      method: 'get',
+      params: {
+        product_id: id
+      }
+    };
+
+    return axios(options);
+  },
+
   getReviewMeta: (id) => {
     let options = {
       url: SERVER_BASEURL + '/reviews/meta',

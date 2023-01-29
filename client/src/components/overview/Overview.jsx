@@ -39,7 +39,7 @@ export default function Overview({
         <ProdInfo />
         <StyleSelect />
         <AddCart />
-        { description
+        {description
           ? <Description />
           : null}
       </div>

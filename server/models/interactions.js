@@ -1,18 +1,18 @@
 const axios = require('axios');
 
-const endpoint = process.env.BASEURL + '/interactions';
+const endpoint = `${process.env.BASEURL}/interactions`;
 const authHeader = {
-  'Authorization': process.env.TOKEN
+  Authorization: process.env.TOKEN,
 };
 
 module.exports = {
   addInteraction: (params) => {
-    let options = {
+    const options = {
       url: endpoint,
       method: 'post',
       headers: authHeader,
-      data: params
+      data: params,
     };
     return axios(options);
-  }
+  },
 };

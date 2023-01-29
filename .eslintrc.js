@@ -1,47 +1,32 @@
 module.exports = {
   env: {
-    'es6': true /* need for es6 syntax */
+    es6: true,
+    browser: true, /* need for document to be considered global */
+    'jest/globals': true,
   },
   parserOptions: { /* necessary otherwise lints all react jsx */
     sourceType: 'module',
     ecmaVersion: 6,
-    ecmaFeatures: {
-      'jsx': true
-    }
+    ecmaFeatures: { jsx: true },
   },
+  plugins: ['jest'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+  ],
+  ignorePatterns: ['**/example/Link*'],
   rules: {
-    /* Indentation */
-    'no-mixed-spaces-and-tabs': 2,
-    'indent': [2, 2],
-    /* Variable names */
-    'camelcase': [2, {
+    'react/prop-types': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'import/extensions': ['error', { jsx: 'always' }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    camelcase: ['error', {
       allow: [
         'product_id',
         'default_price',
         'created_at',
-        'updated_at']
+        'updated_at',
+      ],
     }],
-    /* Language constructs */
-    'curly': 2,
-    'eqeqeq': [2, 'smart'],
-    'func-style': [2, 'expression'],
-    /* Semicolons */
-    'semi': 2,
-    'no-extra-semi': 2,
-    /* Padding & additional whitespace (perferred but optional) */
-    'brace-style': [2, '1tbs', { 'allowSingleLine': true }],
-    'semi-spacing': 1,
-    'key-spacing': 1,
-    'block-spacing': 1,
-    'comma-spacing': 1,
-    'no-multi-spaces': 1,
-    'space-before-blocks': 1,
-    'keyword-spacing': [1, { 'before': true, 'after': true }],
-    'space-infix-ops': 1,
-    /* Variable declaration */
-    'one-var': [1, { 'uninitialized': 'always', 'initialized': 'never' }],
-    /* Minuta */
-    'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
-  }
+  },
 };

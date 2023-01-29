@@ -1,27 +1,27 @@
 const axios = require('axios');
 
-const endpoint = process.env.BASEURL + '/cart';
+const endpoint = `${process.env.BASEURL}/cart`;
 const authHeader = {
-  'Authorization': process.env.TOKEN
+  Authorization: process.env.TOKEN,
 };
 
 module.exports = {
   getCartItems: () => {
-    let options = {
+    const options = {
       url: endpoint,
       method: 'get',
-      headers: authHeader
+      headers: authHeader,
     };
     return axios(options);
   },
 
   addCartItem: (item) => {
-    let options = {
+    const options = {
       url: endpoint,
       method: 'post',
       headers: authHeader,
-      data: item
+      data: item,
     };
     return axios(options);
-  }
+  },
 };

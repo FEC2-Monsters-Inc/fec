@@ -30,17 +30,18 @@ export default function ReviewTracker({reviews, setSelectedRating, selectedRatin
 
   useEffect(() => {
     getRatingPercentages();
-  }, [reviews]);
+  }, [reviews, selectedRating]);
 
   const toggleRating = (num) => {
     setSelectedRating({
       ...selectedRating,
       [num]: !selectedRating[num],
     });
+    console.log(selectedRating)
   };
 
   return (
-    <div className ="test-test-test">
+    <div className ="test-test-test">{console.log(selectedRating)}
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={()=>toggleRating(5)}>
           <p className='rvw-txt'>5 stars</p>

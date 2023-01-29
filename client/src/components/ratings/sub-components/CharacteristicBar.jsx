@@ -20,7 +20,6 @@ export default function CharacteristicBar({ reviewMeta }) {
   return (
     <div className="characteristic-rating-bar-parent">
       <div className="characteristic-bar-child" style={{width: 50 + '%'}}>
-        {console.log(barWidth)}
       </div>
     </div>
   );

@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import fetcher from '../../fetchers';
+import SearchBar from './SearchBar.jsx';
+import QuestionsList from './QuestionsList.jsx';
+import './styles/questions.css';
 
 export default function Questions({
   feature,
 }) {
   const [questions, setQuestions] = useState([]);
+  const [filterText, setFilterText] = useState('');
 
   useEffect(() => {
     fetcher.questions.getById(feature.id)
-      .then((results) => setQuestions(results.data.results))
+      .then(({ data }) => setQuestions(data.results))
       .catch((err) => console.error('Questions on feature change fetch: ', err));
   }, [feature]);
 
   return (
-    <div>
-      Questions and Answers
-      <div>
-        Questions List
-        {questions.length > 0
-          ? questions.map((question) => (
-            // TODO: more formatting, extract questions to a component
-            <div key={question.question_id}>{question.question_body}</div>
-          ))
-          : null}
-      </div>
+    <div className="qa section">
+      <h2>QUESTIONS & ANSWERS</h2>
+      <SearchBar text={filterText} handleChange={setFilterText} />
+      <QuestionsList questions={questions} />
     </div>
   );
 }

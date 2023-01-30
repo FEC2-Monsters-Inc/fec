@@ -6,7 +6,7 @@ module.exports = {
   },
   parserOptions: { /* necessary otherwise lints all react jsx */
     sourceType: 'module',
-    ecmaVersion: 6,
+    ecmaVersion: 'latest',
     ecmaFeatures: { jsx: true },
   },
   plugins: ['jest'],
@@ -27,6 +27,7 @@ module.exports = {
         'default_price',
         'created_at',
         'updated_at',
+        'question_id',
       ],
     }],
   },

@@ -20,7 +20,7 @@ export default function Questions({
     <div className="qa section">
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchBar text={filterText} handleChange={setFilterText} />
-      <QuestionsList questions={questions} />
+      <QuestionsList product_id={feature.id} questions={questions} />
     </div>
   );
 }

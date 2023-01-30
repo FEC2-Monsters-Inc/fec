@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import Question from './Question.jsx';
+import QandAModal from './QandAModal.jsx';
 
 export default function QuestionsList({
   questions,
+  product_id,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
+  const [showAddQ, setShowAddQ] = useState(false);
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Load more questions
       setNumQuestions(numQuestions + 2);
     }
   };
 
-  const addQuestion = (e) => {
+  // TODO: same function in Question.jsx
+  const showModal = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Render Add Question modal
-      // console.log('ADD A QUESTION')
+      setShowAddQ(true);
     }
   };
 
@@ -49,11 +51,17 @@ export default function QuestionsList({
           className="qa footer-btn"
           type="button"
           tabIndex={0}
-          onKeyUp={addQuestion}
-          onClick={addQuestion}
+          onKeyUp={showModal}
+          onClick={showModal}
         >
           {'ADD A QUESTION \t +'}
         </button>
+        <QandAModal
+          type="question"
+          show={showAddQ}
+          closeModal={setShowAddQ}
+          product_id={product_id}
+        />
       </div>
     </div>
   );

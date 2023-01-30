@@ -39,7 +39,7 @@ export default function Question({
   return (
     <div className="qa q&a">
       <div className="qa question">
-        <h3>
+        <h3 className="qa question-body">
           {`Q: ${body}`}
         </h3>
         <span className="qa control">

@@ -37,6 +37,10 @@ h3 {
   justify-content: space-between;
 }
 
+.qa.question-body {
+  max-width: 70%
+}
+
 .qa.control {
   font-size: 1rem;
   font-weight: normal;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-// import fetcher from '../../fetchers/questions';
+import fetcher from '../../fetchers/questions';
 
 export default function AddQuestionModal({
   show,
@@ -29,11 +29,16 @@ export default function AddQuestionModal({
     });
   };
 
-  const submitForm = () => {
-    if (!product_id) {
-      // THROW ERROR, SOMEHOW DOESN'T HAVE PRODUCT_ID ON SUBMIT
-    } else {
-      // FETCHER POST QUESTION
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (e.type === 'click' || e.key === 'Enter') {
+      if (!product_id) {
+        // THROW ERROR, SOMEHOW DOESN'T HAVE PRODUCT_ID ON SUBMIT
+      } else {
+        // FETCHER POST QUESTION
+        fetcher.postQuestion({ ...addForm, product_id })
+          .catch((err) => console.error('postQuestion: ', err));
+      }
     }
   };
 
@@ -64,7 +69,6 @@ export default function AddQuestionModal({
                   value={addForm.body}
                   onChange={handleChange}
                   maxLength="1000"
-                  placeholder="Ask your question here"
                 />
               </label>
             </div>
@@ -78,7 +82,7 @@ export default function AddQuestionModal({
                     value={addForm.name}
                     onChange={handleChange}
                     maxLength="60"
-                    placeholder="Enter your nickname here"
+                    placeholder="Example: jackson11!"
                   />
                 </label>
               </div>
@@ -91,7 +95,7 @@ export default function AddQuestionModal({
                     value={addForm.email}
                     onChange={handleChange}
                     maxLength="60"
-                    placeholder="Enter your email here"
+                    placeholder="Why did you like the product or not?"
                   />
                 </label>
               </div>

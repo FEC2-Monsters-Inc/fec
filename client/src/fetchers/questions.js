@@ -12,4 +12,14 @@ export default {
 
     return axios(options);
   },
+
+  postQuestion: (data) => {
+    const options = {
+      url: BASEURL,
+      method: 'post',
+      data,
+    };
+
+    return axios(options);
+  },
 };

@@ -9,9 +9,6 @@ export default function ActiveFilters({ selectedRating, setSelectedRating }) {
         newFilterStrings.push(`${key} star, `);
       }
     });
-    // for (var i = 0; i < reviews.length; i++) {
-    //  create a
-    // }
     setFilterStrings(newFilterStrings);
   }
 

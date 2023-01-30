@@ -47,7 +47,7 @@ export function ReviewTracker({reviews, setSelectedRating, selectedRating}) {
   }
 
   return (
-    <div className ="test-test-test">{console.log(reviews)}
+    <div className ="test-test-test">
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={() => toggleRating(5)}>
           <p className='rvw-txt'>5 stars</p>

@@ -22,7 +22,7 @@ export default function CharacteristicTracker({ reviewMeta }) {
   };
 
   return (
-    <div>{console.log(reviewMeta)}
+    <div>
       {charTrackerMapper()}
     </div>
   );

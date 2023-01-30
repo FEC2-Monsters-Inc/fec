@@ -4,7 +4,6 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
   const [chars, setChars] = useState({});
   const [sliderText, setSliderText] = useState({ small: '', perf: '', big: '' });
   const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
-  // const roundedRating = Math.round(chars.Size);
 
   function ratingDescription() {
     if (charName === 'Size') {

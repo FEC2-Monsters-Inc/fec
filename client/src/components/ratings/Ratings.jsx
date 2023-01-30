@@ -3,7 +3,6 @@ import fetcher from '../../fetchers';
 import './ratings.css';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
-import axios from 'axios';
 
 export default function Ratings({
   feature,
@@ -18,15 +17,15 @@ export default function Ratings({
   });
   const [reviewMeta, setReviewMeta] = useState({});
 
-  const metaDataFetcher = function() {
+  const metaDataFetcher = () => {
     fetcher.ratings.getReviewMeta(40348)
-      .then(({data}) => setReviewMeta(data))
+      .then(({ data }) => setReviewMeta(data))
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    fetcher.ratings.getReviews(40348) //40344 is our test
-      .then(({data}) => setReviews(data.results))
+    fetcher.ratings.getReviews(40348) // 40344 is our test
+      .then(({ data }) => setReviews(data.results))
       .catch((error) => console.log(error));
     metaDataFetcher();
   }, [feature]);
@@ -35,10 +34,14 @@ export default function Ratings({
     <div>
       <div className="review-header">Ratings and Reviews</div>
       <div className="ratings-parent">
-        <ReviewDashboard reviews={reviews} setSelectedRating={setSelectedRating} selectedRating={selectedRating} reviewMeta={reviewMeta}/>
-        <ReviewList reviews={reviews} selectedRating={selectedRating}/>
+        <ReviewDashboard
+          reviews={reviews}
+          setSelectedRating={setSelectedRating}
+          selectedRating={selectedRating}
+          reviewMeta={reviewMeta}
+        />
+        <ReviewList reviews={reviews} selectedRating={selectedRating} />
       </div>
     </div>
   );
 }
-

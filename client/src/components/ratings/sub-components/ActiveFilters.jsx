@@ -9,6 +9,9 @@ export default function ActiveFilters({ selectedRating, setSelectedRating }) {
         newFilterStrings.push(`${key} star, `);
       }
     });
+    // for (var i = 0; i < reviews.length; i++) {
+    //  create a
+    // }
     setFilterStrings(newFilterStrings);
   }
 
@@ -32,8 +35,7 @@ export default function ActiveFilters({ selectedRating, setSelectedRating }) {
 
   return (
     <div className="review-active-filter-container">
-      {/* {console.log(filterJoiner())} */}
-      {filterStrings.length !== 0 ? `Reviews Displayed: ${filterJoiner()}` : null}
+      {filterStrings.length !== 0 ? `Reviews Displayed: ${filterJoiner()}` : <div style={{ height: '37px' }} />}
       <div>
         {filterStrings.length !== 0 ? filterResetButton() : null }
       </div>

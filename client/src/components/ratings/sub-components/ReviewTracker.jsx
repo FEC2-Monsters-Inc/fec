@@ -33,14 +33,21 @@ export function ReviewTracker({reviews, setSelectedRating, selectedRating}) {
   }, [reviews]);
 
   const toggleRating = (num) => {
-    setSelectedRating({
-      ...selectedRating,
-      [num]: !selectedRating[num],
-    });
-  };
+    var ratingsComp = []
+    for (var i = 0; i < reviews.length; i++) {
+      ratingsComp.push(reviews[i].rating)
+    }
+    var ratingsSet = Array.from(new Set(ratingsComp))
+    if (ratingsSet.includes(num)) {
+      setSelectedRating({
+        ...selectedRating,
+        [num]: !selectedRating[num],
+      });
+    };
+  }
 
   return (
-    <div className ="test-test-test">
+    <div className ="test-test-test">{console.log(reviews)}
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={() => toggleRating(5)}>
           <p className='rvw-txt'>5 stars</p>

@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function TrackerBar ({progress}) {
-
+export default function TrackerBar({ progress }) {
   const childDiv = {
     width: `${progress}%`,
   };

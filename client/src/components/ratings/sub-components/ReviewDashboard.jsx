@@ -13,29 +13,6 @@ export default function ReviewDashboard({
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
   const [recommended, setRecommended] = useState(0);
-  const ratingSetter = function dynamicRating() {
-    let total = 0;
-    for (let review of reviews) {
-      total += review.rating;
-    }
-    if (reviews.length > 0) {
-      setAvgRating((total / reviews.length).toFixed(1));
-      starRating(total / reviews.length);
-    }
-  };
-
-  const recommendedSetter = function() {
-    let totalRecs = 0;
-    for (let review of reviews) {
-      if (review.recommend === true) {
-        totalRecs++;
-      }
-    }
-    if (reviews.length > 0) {
-      const percent = `${(totalRecs / reviews.length) * 100}%`;
-      setRecommended(percent);
-    }
-  };
 
   const starRating = function dynamicStarRater(x) {
     const tempStars = [];
@@ -78,8 +55,33 @@ export default function ReviewDashboard({
     }
   };
 
-  const starMapper = stars.map((e, i) => (
-    <div className="review-single-star-container" key={i}>
+  const ratingSetter = () => {
+    let total = 0;
+    reviews.reduce((accumulator, review) => {
+      total += review.rating;
+      return total;
+    }, 0);
+    if (reviews.length > 0) {
+      setAvgRating((total / reviews.length).toFixed(1));
+      starRating(total / reviews.length);
+    }
+  };
+
+  const recommendedSetter = () => {
+    let totalRecs = 0;
+    reviews.forEach((review) => {
+      if (review.recommend === true) {
+        totalRecs += 1;
+      }
+    });
+    if (reviews.length > 0) {
+      const percent = `${(totalRecs / reviews.length) * 100}%`;
+      setRecommended(percent);
+    }
+  };
+
+  const starMapper = stars.map((e) => (
+    <div className="review-single-star-container" key={`star key-${Math.random()}`}>
       <div className="review-single-star-fill" style={{ width: `${parseInt((e * 31), 10)}px` }}>
         <img className="review-single-star-outline" src={StarImg} alt="stars alt" />
       </div>

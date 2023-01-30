@@ -6,11 +6,6 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
   const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
   // const roundedRating = Math.round(chars.Size);
 
-  useEffect(() => {
-    setChars(reviewMeta);
-    ratingDescription();
-  }, [reviewMeta, charName]);
-
   function ratingDescription() {
     if (charName === 'Size') {
       setSliderText({ small: 'tight', perf: 'perfect!', big: 'baggy' });
@@ -26,6 +21,11 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
       setSliderText({ small: 'too long', perf: 'perfect!', big: 'too short' });
     }
   }
+
+  useEffect(() => {
+    setChars(reviewMeta);
+    ratingDescription();
+  }, [reviewMeta, charName]);
 
   return (
     <div className="review-slide-container">

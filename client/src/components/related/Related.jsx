@@ -1,10 +1,21 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import fetcher from '../../fetchers';
-import axios from 'axios';
 import RelatedList from './related-components/RelatedList.jsx';
+import OutfitList from './outfit-components/OutfitList.jsx';
 
-export default function Related({ feature, getRelatedList }) {
+export default function Related({ feature }) {
   const [relatedList, setRelatedList] = useState([]);
+  const [outfitIdList, setOutfitIdList] = useState([]);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('Outfit-List');
+    if (data) { setOutfitIdList(JSON.parse(data)); }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('Outfit-List', JSON.stringify(outfitIdList));
+  }, [outfitIdList]);
 
   useEffect(() => {
     if (feature.id) {
@@ -13,16 +24,23 @@ export default function Related({ feature, getRelatedList }) {
           if (!data.length) {
             throw new Error('No Related Product!');
           }
-          return Promise.all(data.map(id => fetcher.getProductById(id)));
+          return Promise.all(data.map((id) => fetcher.getProductById(id)));
         })
-        .then(results => setRelatedList(results.map(result => result.data)))
-        .catch(err => console.log(err));
+        .then((results) => { setRelatedList(results.map((result) => result.data)); })
+        .catch((err) => console.error(err));
     }
   }, [feature]);
 
   return (
     <div>
-      <RelatedList feature={feature} end={relatedList.length - 5} relatedList={relatedList} />
+      <h2>RELATED PRODUCTS</h2>
+      <br />
+      <RelatedList feature={feature} relatedList={relatedList} />
+      <br />
+      <br />
+      <h2>OUTFIT PRODUCTS</h2>
+      <br />
+      <OutfitList feature={feature} outfitIdList={outfitIdList} setOutfitIdList={setOutfitIdList} />
     </div>
   );
 }

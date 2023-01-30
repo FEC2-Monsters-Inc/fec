@@ -1,47 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
 import './overview.css';
 
-///// SUB-COMPONENETS /////
+/// // SUB-COMPONENETS /////
 import Search from './sub-comps/Search.jsx';
 import Gallery from './sub-comps/Gallery.jsx';
 import ProdInfo from './sub-comps/ProdInfo.jsx';
-import StyleSelect from './sub-comps/StyleSelect.jsx';
-import AddCart from './sub-comps/AddCart.jsx';
+import StyleAndCart from './sub-comps/StyleAndCart.jsx';
 import Description from './sub-comps/Description.jsx';
 
+export default function Overview({ product, styles }) {
+  // STATE DATA //
+  const [style, setStyle] = useState(null);
 
-export default function Overview({
-  feature,
-  setFeature
-}) {
-
-  ///// STATE DATA /////
-  const [prodStyle, setStyle] = useState({});
-  const [description, setDisplay] = useState(true);
-
-
-  ///// INITIALIZATION /////
+  // INITIALIZATION //
   useEffect(() => {
-    fetcher.overview.getStylesById(40344)
-      .then(result => setStyle(result.data))
-      .catch(err => console.log('err initial styles fetch: ', err));
-  }, []);
+    if (styles) {
+      setStyle(styles.results[0]);
+    }
+  }, [styles]);
 
   return (
     <>
-      <div id="header">
+      {/* <div id="header">
         <h1 className="temp-logo">FEC Project</h1>
         <Search />
-      </div>
+      </div> */}
       <div id="overview">
-        <Gallery />
-        <ProdInfo />
-        <StyleSelect />
-        <AddCart />
-        {description
-          ? <Description />
-          : null}
+        <div className="left-main">
+          <Gallery product={product} style={style} />
+        </div>
+        <div className="right-main">
+          <ProdInfo product={product} />
+          <StyleAndCart styles={styles} />
+        </div>
+        <div className="bottom-main">
+          <Description product={product} />
+        </div>
       </div>
     </>
   );

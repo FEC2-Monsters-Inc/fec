@@ -23,17 +23,22 @@ export default function App() {
 
   // STATE DATA //
   const [featuredProduct, setFeaturedProduct] = useState(initProd);
+  const [styles, setStyles] = useState(null);
 
   // INITIALIZATION //
   useEffect(() => {
     fetcher.getProductById(40350)
       .then((result) => setFeaturedProduct(result.data))
-      .catch((err) => console.error('initial fetch: ', err));
+      .catch((err) => console.error('initial product fetch: ', err));
+
+    fetcher.overview.getStylesById(40350)
+      .then((result) => setStyles(result.data))
+      .catch((err) => console.error('initial style fetch: ', err));
   }, []);
 
   return (
     <div>
-      {/* <Overview feature={featuredProduct} /> */}
+      <Overview product={featuredProduct} styles={styles} />
       {/* <Related feature={featuredProduct} /> */}
       {/* <Questions feature={featuredProduct} /> */}
       {/* <Ratings feature={featuredProduct} /> */}

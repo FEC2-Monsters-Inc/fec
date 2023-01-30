@@ -16,10 +16,3 @@ export default function ReviewImageModal({ imgString, setModalToggle }) {
       </div>
     </div>), document.getElementById('modal'));
 }
-
-
-        {/* <button type="button" onClick={onCloseClick}>
-          Close
-        </button> */}
-
-        // {console.log('modal loaded')}

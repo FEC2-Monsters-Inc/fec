@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReviewTracker } from './ReviewTracker.jsx';
+import ReviewTracker from './ReviewTracker.jsx';
 import CharacteristicTracker from './DashboardCharacteristicTracker.jsx';
 import ActiveFilters from './ActiveFilters.jsx';
 import StarImg from '../../../../dist/assets/star.png';

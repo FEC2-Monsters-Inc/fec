@@ -3,7 +3,7 @@
 }
 
 .outfit-carousel-inside {
-  width: 68rem;
+  max-width: 68rem;
   display: flex;
   border: 1px solid red;
   margin: 0 10px;

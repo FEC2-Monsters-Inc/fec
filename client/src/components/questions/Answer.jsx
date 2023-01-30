@@ -28,9 +28,8 @@ export default function Answer({
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
         .reportAnswer(question_id)
-        .then((results) => {
-          // TODO: maybe update answers..
-          console.log(results);
+        .then(() => {
+          // TODO: update answers..
         })
         .catch((err) => console.error('reportAnswer: ', err));
     }

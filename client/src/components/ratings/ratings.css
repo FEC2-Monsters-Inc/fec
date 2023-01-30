@@ -229,3 +229,7 @@
 .review-tile-body {
   word-break: break-all;
 }
+
+.review-elipses-span:hover {
+  cursor: context-menu
+}

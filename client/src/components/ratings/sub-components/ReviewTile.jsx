@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AiFillCheckCircle } from 'react-icons/ai';
 import ReviewImageModal from './ReviewImageModal.jsx';
 
 export default function ReviewTile({ review }) {
@@ -24,23 +25,27 @@ export default function ReviewTile({ review }) {
   };
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
+
   const summaryLengthChecker = () => {
     if (review.summary.length > 60) {
       return `${review.summary.substring(0, 60)} ...`;
     }
     return review.summary;
   };
+
   const elipsesSpan = () => (
-      <span onClick={() => setShowFull(true)}>
-        {showFull ? review.body : '...'}
-      </span>
+    <span className="review-elipses-span" onClick={() => setShowFull(true)}>
+      {showFull ? review.body : '...'}
+    </span>
   );
+
   const bodyLengthChecker = () => {
     if (review.body.length > 250) {
       return `${review.body.substring(0, 250)}`;
     }
     return review.body;
   };
+
   const imgToggler = (pic) => {
     setModalToggle(!modalToggle);
     setImgString(pic);
@@ -63,13 +68,16 @@ export default function ReviewTile({ review }) {
     if (review.body.length < 250) {
       setShowFull(true);
     }
-  });
+  }, [review]);
 
   return (
-    <div className="review-tile-main-container">{console.log(review.photos)}
+    <div className="review-tile-main-container">
       <div>
         <div className="review-tile-container-1">
-          <div className="review-tile-nameAndDate">{nameAndDate}</div>
+          <div className="review-tile-nameAndDate">
+            {review.recommend ? <AiFillCheckCircle /> : null}
+            {nameAndDate}
+          </div>
           <div className="review-tile-stars">{starRater()}</div>
         </div>
         <div className="review-tile-summary">{summaryLengthChecker()}</div>

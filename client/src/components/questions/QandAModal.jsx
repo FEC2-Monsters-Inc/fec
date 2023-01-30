@@ -2,17 +2,27 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import fetcher from '../../fetchers/questions';
 
-export default function AddQuestionModal({
+export default function QandAModal({
+  type,
   show,
   closeModal,
   product_id,
+  question_id,
 }) {
   const blankForm = {
-    name: '',
-    body: '',
-    email: '',
+    question: {
+      name: '',
+      body: '',
+      email: '',
+    },
+    answer: {
+      name: '',
+      body: '',
+      email: '',
+      photos: [],
+    },
   };
-  const [addForm, setAddForm] = useState(blankForm);
+  const [addForm, setAddForm] = useState(blankForm[type]);
 
   const close = (e) => {
     if ((e.type === 'click' && e.target.classList.contains('modal-close'))
@@ -34,10 +44,20 @@ export default function AddQuestionModal({
     if (e.type === 'click' || e.key === 'Enter') {
       if (!product_id) {
         // THROW ERROR, SOMEHOW DOESN'T HAVE PRODUCT_ID ON SUBMIT
-      } else {
-        // FETCHER POST QUESTION
-        fetcher.postQuestion({ ...addForm, product_id })
-          .catch((err) => console.error('postQuestion: ', err));
+      }
+      switch (type) {
+        case 'question':
+          fetcher
+            .postQuestion({ ...addForm, product_id })
+            .catch((err) => console.error('postQuestion: ', err));
+          break;
+        case 'answer':
+          fetcher
+            .postAnswer({ ...addForm, question_id }, question_id)
+            .catch((err) => console.error('postAnswer: ', err));
+          break;
+        default:
+          break;
       }
     }
   };
@@ -56,13 +76,17 @@ export default function AddQuestionModal({
     <div className="qa modal-bg modal-close" onClick={close}>
       <div className="qa modal-fg">
         <div className="qa modal-header">
-          <h4 className="qa modal-title">Add a Question</h4>
+          <h4 className="qa modal-title">
+            {type === 'question' ? 'Add a Question' : 'Add an Answer'}
+          </h4>
         </div>
         <div className="qa modal-body">
-          <form id="add-question-form" onSubmit={submitForm}>
-            <div className="qa add-question">
-              <label htmlFor="add-question-form">
-                <div className="qa add-label">Question</div>
+          <form id={`add-${type}-form`} onSubmit={submitForm}>
+            <div className={`qa add-${type}`}>
+              <label htmlFor={`add-${type}-form`}>
+                <div className="qa add-label">
+                  {type === 'question' ? 'Question' : 'Answer'}
+                </div>
                 <textarea
                   type="text"
                   name="body"
@@ -74,7 +98,7 @@ export default function AddQuestionModal({
             </div>
             <div className="qa add-personal">
               <div className="qa add-name">
-                <label htmlFor="add-question-form">
+                <label htmlFor={`add-${type}-form`}>
                   <div className="qa add-label">Nickname</div>
                   <input
                     type="text"
@@ -82,12 +106,14 @@ export default function AddQuestionModal({
                     value={addForm.name}
                     onChange={handleChange}
                     maxLength="60"
-                    placeholder="Example: jackson11!"
+                    placeholder={type === 'question'
+                      ? 'Example: jackson11!'
+                      : 'Example: jack543!'}
                   />
                 </label>
               </div>
               <div className="qa add-email">
-                <label htmlFor="add-question-form">
+                <label htmlFor={`add-${type}-form`}>
                   <div className="qa add-label">Email</div>
                   <input
                     type="text"
@@ -95,16 +121,32 @@ export default function AddQuestionModal({
                     value={addForm.email}
                     onChange={handleChange}
                     maxLength="60"
-                    placeholder="Why did you like the product or not?"
+                    placeholder={type === 'question'
+                      ? 'Why did you like the product or not?'
+                      : 'Example: jack@email.com'}
                   />
                 </label>
               </div>
             </div>
+            {type === 'answer' ? (
+              <div className="qa add-photos">
+                <button
+                  form="add-answer-form"
+                  className="qa modal-btn"
+                  type="button"
+                  tabIndex={0}
+                  // onKeyUp={}
+                  // onClick={}
+                >
+                  Choose Photo
+                </button>
+              </div>
+            ) : null}
           </form>
         </div>
         <div className="qa modal-footer">
           <button
-            form="add-question-form"
+            form={`add-${type}-form`}
             className="qa modal-btn modal-close"
             type="submit"
             tabIndex={0}

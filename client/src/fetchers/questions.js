@@ -22,4 +22,14 @@ export default {
 
     return axios(options);
   },
+
+  postAnswer: (data, question_id) => {
+    const options = {
+      url: `${BASEURL}/${question_id}/answers`,
+      method: 'post',
+      data,
+    };
+
+    return axios(options);
+  },
 };

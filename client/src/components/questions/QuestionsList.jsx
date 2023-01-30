@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Question from './Question.jsx';
-import AddQuestionModal from './AddQuestionModal.jsx';
+import QandAModal from './QandAModal.jsx';
 
 export default function QuestionsList({
   questions,
@@ -16,6 +16,7 @@ export default function QuestionsList({
     }
   };
 
+  // TODO: same function in Question.jsx
   const showModal = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       setShowAddQ(true);
@@ -56,7 +57,8 @@ export default function QuestionsList({
         >
           {'ADD A QUESTION \t +'}
         </button>
-        <AddQuestionModal
+        <QandAModal
+          type="question"
           show={showAddQ}
           closeModal={setShowAddQ}
           product_id={product_id}

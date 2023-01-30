@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const BASEURL = 'http://localhost:3000/api/qa/questions';
+const BASEURL_QUESTIONS = 'http://localhost:3000/api/qa/questions';
+const BASEURL_ANSWERS = 'http://localhost:3000/api/qa/answers';
 
 export default {
   getById: (product_id, page = 1, count = 100) => {
     const options = {
-      url: BASEURL,
+      url: BASEURL_QUESTIONS,
       method: 'get',
       params: { product_id, page, count },
     };
@@ -15,7 +16,7 @@ export default {
 
   postQuestion: (data) => {
     const options = {
-      url: BASEURL,
+      url: BASEURL_QUESTIONS,
       method: 'post',
       data,
     };
@@ -25,7 +26,7 @@ export default {
 
   postAnswer: (data, question_id) => {
     const options = {
-      url: `${BASEURL}/${question_id}/answers`,
+      url: `${BASEURL_QUESTIONS}/${question_id}/answers`,
       method: 'post',
       data,
     };
@@ -35,7 +36,7 @@ export default {
 
   markHelpfulQuestion: (question_id) => {
     const options = {
-      url: `${BASEURL}/${question_id}/helpful`,
+      url: `${BASEURL_QUESTIONS}/${question_id}/helpful`,
       method: 'put',
     };
 
@@ -44,7 +45,7 @@ export default {
 
   markHelpfulAnswer: (answer_id) => {
     const options = {
-      url: `${BASEURL}/${answer_id}/helpful`,
+      url: `${BASEURL_ANSWERS}/${answer_id}/helpful`,
       method: 'put',
     };
 
@@ -53,7 +54,7 @@ export default {
 
   reportAnswer: (answer_id) => {
     const options = {
-      url: `${BASEURL}/${answer_id}/report`,
+      url: `${BASEURL_ANSWERS}/${answer_id}/report`,
       method: 'put',
     };
 

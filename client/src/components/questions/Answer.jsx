@@ -11,6 +11,7 @@ export default function Answer({
     helpfulness,
     photos,
   },
+  question_id,
 }) {
   const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -26,10 +27,10 @@ export default function Answer({
   const reportAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
-        .reportAnswer(id)
-        .then(() => {
-          // TODO: maybe update answers.. it doesn't seem like
-          // it has any effect though, as the answer still appears
+        .reportAnswer(question_id)
+        .then((results) => {
+          // TODO: maybe update answers..
+          console.log(results);
         })
         .catch((err) => console.error('reportAnswer: ', err));
     }

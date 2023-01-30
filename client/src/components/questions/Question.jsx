@@ -88,6 +88,7 @@ export default function Question({
                 <Answer
                   key={key}
                   answer={answers[key]}
+                  question_id={question_id}
                 />
               ))}
             </div>

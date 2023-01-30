@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Question from './Question.jsx';
+import AddQuestionModal from './AddQuestionModal.jsx';
 
 export default function QuestionsList({
   questions,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
+  const [showModal, setShowModal] = useState(false);
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -15,8 +17,7 @@ export default function QuestionsList({
 
   const addQuestion = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Render Add Question modal
-      // console.log('ADD A QUESTION')
+      setShowModal(true);
     }
   };
 
@@ -54,6 +55,10 @@ export default function QuestionsList({
         >
           {'ADD A QUESTION \t +'}
         </button>
+        <AddQuestionModal
+          show={showModal}
+          closeModal={setShowModal}
+        />
       </div>
     </div>
   );

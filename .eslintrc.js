@@ -6,7 +6,7 @@ module.exports = {
   },
   parserOptions: { /* necessary otherwise lints all react jsx */
     sourceType: 'module',
-    ecmaVersion: 6,
+    ecmaVersion: 'latest',
     ecmaFeatures: { jsx: true },
   },
   plugins: ['jest'],
@@ -16,16 +16,18 @@ module.exports = {
   ],
   ignorePatterns: ['**/example/Link*'],
   rules: {
-    'react/prop-types': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'react/prop-types': 'off',
     'import/extensions': ['error', { jsx: 'always' }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'jsx-a11y/img-redundant-alt': 'off',
     camelcase: ['error', {
       allow: [
         'product_id',
         'default_price',
         'created_at',
         'updated_at',
+        'question_id',
       ],
     }],
   },

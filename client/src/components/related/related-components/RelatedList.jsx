@@ -1,16 +1,14 @@
-// IMPORT LIBRARY
-import React, { useState, useEffect, useRef } from 'react';
-
-// IMPORT COMPONENTS AND STYLE
-import RelatedProduct from './RelatedProduct.jsx';
+/* eslint-disable no-unused-expressions */
+import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
+import RelatedProduct from './RelatedProduct.jsx';
 import './styles/relatedList.css';
 
-export default function RelatedList({ feature, end, relatedList }) {
-
+export default function RelatedList({ feature, relatedList }) {
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+
+  const endOfRelatedList = relatedList.length ? relatedList.length - 5 : 0;
 
   const scrollLeft = () => {
     posIndex > 0 ? setPosIndex(posIndex - 1) : null;
@@ -18,22 +16,35 @@ export default function RelatedList({ feature, end, relatedList }) {
   };
 
   const scrollRight = () => {
-    posIndex < end ? setPosIndex(posIndex + 1) : null;
+    posIndex < endOfRelatedList ? setPosIndex(posIndex + 1) : null;
     ref.current.scrollLeft += 15 * 16;
   };
 
+  useEffect(() => {
+
+  }, []);
+
   return (
-    <div className="carousel-outside">
-      <AiOutlineLeftSquare className="carousel-rel-scrollBtn"
-        style={{ opacity: posIndex === 0 ? 0 : 1 }} onClick={scrollLeft} />
-      <div className="carousel-inside" ref={ref}>
-        {relatedList.map((relProd, index) =>
-          <RelatedProduct key={relProd.id} feature={feature} relProd={relProd}
-            setShowModal={setShowModal} />
-        )}
+    <div className="related-carousel-outside">
+      <AiOutlineLeftSquare
+        className="related-carousel-rel-scrollBtn"
+        style={{ opacity: posIndex === 0 ? 0 : 1 }}
+        onClick={scrollLeft}
+      />
+      <div className="related-carousel-inside" ref={ref}>
+        {relatedList.map((relProd) => (
+          <RelatedProduct
+            key={relProd.id}
+            feature={feature}
+            relProd={relProd}
+          />
+        ))}
       </div>
-      <AiOutlineRightSquare className="carousel-rel-scrollBtn"
-        style={{ opacity: posIndex === end ? 0 : 1 }} onClick={scrollRight} />
+      <AiOutlineRightSquare
+        className="related-carousel-rel-scrollBtn"
+        style={{ opacity: posIndex === endOfRelatedList ? 0 : 1 }}
+        onClick={scrollRight}
+      />
     </div>
   );
 }

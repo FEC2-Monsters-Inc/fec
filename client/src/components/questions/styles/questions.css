@@ -1,0 +1,145 @@
+h3 {
+  margin: 1rem 0;
+}
+
+/* QUESTIONS & ANSWERS + GENERALS */
+
+.qa.q\&a {
+  margin-bottom: 0.5rem;
+}
+
+.qa.footer-btn {
+  margin: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
+  cursor: pointer;
+  font-style: bold;
+}
+
+.qa.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.qa.link-bold {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.qa.link-bold:hover {
+  text-decoration: underline;
+}
+
+/* QUESTION SECTION */
+
+.qa.question {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.qa.question-body {
+  max-width: 70%
+}
+
+.qa.control {
+  font-size: 1rem;
+  font-weight: normal;
+  align-self: flex-end;
+}
+
+/* ANSWERS SECTION */
+
+.qa.answers-section {
+  display: flex;
+  align-items: baseline;
+}
+
+.qa.answers-list {
+  padding-left: 0.5rem;
+}
+
+.qa.answer {
+  margin-bottom: 1.5rem;
+}
+
+.qa.photo-sml {
+  max-width: 7.08rem;
+  max-height: 4rem;
+  margin-top: 0.7rem;
+  margin-right: 0.25rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.qa.answer-info {
+  margin: 0.7rem 0;
+  font-size: 0.9rem;
+  color: gray;
+}
+
+/* SEARCH FORM */
+
+.qa.search {
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa.search-input {
+  border-style: none;
+  flex: auto;
+  height: 3rem;
+  padding-left: 5px;
+  padding-right: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.qa.search-icon {
+  position: absolute;
+  right: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+/* ADD QUESTION FORM MODAL */
+
+.qa.modal-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qa.modal-fg {
+  width: 65%;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.qa.modal-header, .qa.modal-footer {
+  padding: 1rem;
+}
+
+.qa.modal-title {
+  margin: 0;
+}
+
+.qa.modal-body {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.qa.add-personal {
+  display: flex;
+  justify-content: space-between;
+}

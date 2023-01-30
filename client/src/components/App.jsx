@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 
 import Overview from './overview/Overview.jsx';
@@ -34,7 +35,7 @@ export default function App() {
   return (
     <div>
       {/* <Overview feature={featuredProduct} /> */}
-      {/* <Related feature={featuredProduct} /> */}
+      <Related feature={featuredProduct} />
       {/* <Questions feature={featuredProduct} /> */}
       <Ratings feature={featuredProduct} />
     </div>

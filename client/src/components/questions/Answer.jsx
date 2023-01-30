@@ -1,9 +1,10 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import fetcher from '../../fetchers/questions';
 
 export default function Answer({
   answer: {
-    // id,
+    id,
     body,
     date,
     answerer_name: name,
@@ -11,15 +12,26 @@ export default function Answer({
     photos,
   },
 }) {
-  const clickYes = (e) => {
+  const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Helpful Answer PUT request
+      fetcher
+        .markHelpfulAnswer(id)
+        .then(() => {
+          // TODO: update the answer
+        })
+        .catch((err) => console.error('markHelpfulAnswer: ', err));
     }
   };
 
   const reportAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Report Answer PUT request
+      fetcher
+        .reportAnswer(id)
+        .then(() => {
+          // TODO: maybe update answers.. it doesn't seem like
+          // it has any effect though, as the answer still appears
+        })
+        .catch((err) => console.error('reportAnswer: ', err));
     }
   };
 
@@ -47,8 +59,8 @@ export default function Answer({
           className="qa link"
           role="link"
           tabIndex={0}
-          onKeyUp={clickYes}
-          onClick={clickYes}
+          onKeyUp={markHelpfulAnswer}
+          onClick={markHelpfulAnswer}
         >
           Yes
         </span>

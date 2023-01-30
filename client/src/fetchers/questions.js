@@ -32,4 +32,31 @@ export default {
 
     return axios(options);
   },
+
+  markHelpfulQuestion: (question_id) => {
+    const options = {
+      url: `${BASEURL}/${question_id}/helpful`,
+      method: 'put',
+    };
+
+    return axios(options);
+  },
+
+  markHelpfulAnswer: (answer_id) => {
+    const options = {
+      url: `${BASEURL}/${answer_id}/helpful`,
+      method: 'put',
+    };
+
+    return axios(options);
+  },
+
+  reportAnswer: (answer_id) => {
+    const options = {
+      url: `${BASEURL}/${answer_id}/report`,
+      method: 'put',
+    };
+
+    return axios(options);
+  },
 };

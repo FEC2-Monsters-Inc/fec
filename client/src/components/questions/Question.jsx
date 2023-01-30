@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
+import fetcher from '../../fetchers/questions';
 
 export default function Question({
   question: {
@@ -16,10 +17,14 @@ export default function Question({
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
 
-  const clickYes = (e) => {
+  const markHelpfulQuestion = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Helpful Question PUT request
-      // console.log('CLICK YES');
+      fetcher
+        .markHelpfulQuestion(question_id)
+        .then(() => {
+          // TODO: update the questions
+        })
+        .catch((err) => console.error('markHelpfulQuestion: ', err));
     }
   };
 
@@ -50,8 +55,8 @@ export default function Question({
             className="qa link"
             role="link"
             tabIndex={0}
-            onKeyUp={clickYes}
-            onClick={clickYes}
+            onKeyUp={markHelpfulQuestion}
+            onClick={markHelpfulQuestion}
           >
             Yes
           </span>

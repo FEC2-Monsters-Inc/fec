@@ -74,6 +74,7 @@ export default function QandAModal({
         jsx-a11y/click-events-have-key-events,
         jsx-a11y/no-static-element-interactions */
     <div className="qa modal-bg modal-close" onClick={close}>
+      {/* TODO escape key */}
       <div className="qa modal-fg">
         <div className="qa modal-header">
           <h4 className="qa modal-title">

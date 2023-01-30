@@ -11,7 +11,6 @@ export default function QuestionsList({
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Load more questions
       setNumQuestions(numQuestions + 2);
     }
   };

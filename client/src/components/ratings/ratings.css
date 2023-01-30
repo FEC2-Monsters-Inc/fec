@@ -3,16 +3,23 @@
   margin: auto;
 }
 
-.review-tile-container {
+.review-tile-container-1 {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.review-tile-container-2 {
   display: flex;
 }
 
 .review-tile-summary {
   font-weight: 'bold';
+  margin-left: auto;
 }
 
 .review-tile-stars {
   font-style: 'italic';
+  margin-right: auto;
 }
 
 .review-tile-name {
@@ -38,7 +45,8 @@
   position: relative;
   display: inline-block;
   height: 36px;
-  background-color: #333333;
+  background-color: #04AA6D;
+  opacity: 0.7;
 }
 
 .review-single-star-outline {
@@ -73,11 +81,6 @@
   filter: drop-shadow(0 0 1rem black);
 }
 
-
-.review-tracker-text {
-
-}
-
 .review-tracker-bar-parent {
   height: 20px;
   width: 20rem;
@@ -94,6 +97,7 @@
   border-radius: 40px;
   text-align: 'right';
   transition: ease-in 1s;
+  opacity: 0.7;
 }
 
 .review-tracker-bar-percent {
@@ -182,5 +186,10 @@
 }
 
 .review-rating-breakdown-title {
+  font-size: 24px;
+}
+
+.review-list-header {
+  margin-bottom: 2em;
   font-size: 24px;
 }

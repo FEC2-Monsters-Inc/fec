@@ -50,7 +50,7 @@ export default function ReviewList({ reviews, selectedRating }) {
 
   return (
     <div className="review-list-container">
-      <p>{numReviewsText()}</p>
+      <div className="review-list-header">{numReviewsText()}</div>
       {filterReviewMapper()}
     </div>
   );

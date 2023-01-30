@@ -50,35 +50,35 @@ export function ReviewTracker({reviews, setSelectedRating, selectedRating}) {
     <div className ="test-test-test">
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={() => toggleRating(5)}>
-          <p className='rvw-txt'>5 stars</p>
+          <p className='rvw-txt'>5 star</p>
           <TrackerBar progress={percentages[5]}/>
           <p className='rvw-txt'>{numReviews[5] ? numReviews[5] : null}</p>
         </div>
       </div>
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={()=>toggleRating(4)}>
-          <p className='rvw-txt'>4 stars</p>
+          <p className='rvw-txt'>4 star</p>
           <TrackerBar progress={percentages[4]}/>
           <p className='rvw-txt'>{numReviews[4] ? numReviews[4] : null}</p>
         </div>
       </div>
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={()=>toggleRating(3)}>
-          <p className='rvw-txt'>3 stars</p>
+          <p className='rvw-txt'>3 star</p>
           <TrackerBar progress={percentages[3]}/>
           <p className='rvw-txt'>{numReviews[3] ? numReviews[3] : null}</p>
         </div>
       </div>
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={()=>toggleRating(2)}>
-          <p className='rvw-txt'>2 stars</p>
+          <p className='rvw-txt'>2 star</p>
           <TrackerBar progress={percentages[2]}/>
           <p className='rvw-txt'>{numReviews[2] ? numReviews[2] : null}</p>
         </div>
       </div>
       <div className="review-hover">
         <div className="review-tracker-bar-container" onClick={()=>toggleRating(1)}>
-          <p className='rvw-txt'>1 stars</p>
+          <p className='rvw-txt'>1 star</p>
           <TrackerBar progress={percentages[1]}/>
           <p className='rvw-txt'>{numReviews[1] ? numReviews[1] : null}</p>
         </div>

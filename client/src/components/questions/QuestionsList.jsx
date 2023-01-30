@@ -4,9 +4,10 @@ import AddQuestionModal from './AddQuestionModal.jsx';
 
 export default function QuestionsList({
   questions,
+  product_id,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
-  const [showModal, setShowModal] = useState(false);
+  const [showAddQ, setShowAddQ] = useState(false);
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -15,9 +16,9 @@ export default function QuestionsList({
     }
   };
 
-  const addQuestion = (e) => {
+  const showModal = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      setShowModal(true);
+      setShowAddQ(true);
     }
   };
 
@@ -50,14 +51,15 @@ export default function QuestionsList({
           className="qa footer-btn"
           type="button"
           tabIndex={0}
-          onKeyUp={addQuestion}
-          onClick={addQuestion}
+          onKeyUp={showModal}
+          onClick={showModal}
         >
           {'ADD A QUESTION \t +'}
         </button>
         <AddQuestionModal
-          show={showModal}
-          closeModal={setShowModal}
+          show={showAddQ}
+          closeModal={setShowAddQ}
+          product_id={product_id}
         />
       </div>
     </div>

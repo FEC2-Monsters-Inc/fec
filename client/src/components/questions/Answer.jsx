@@ -35,7 +35,7 @@ export default function Answer({
             <img
               className="qa photo-sml"
               src={photo}
-              key={`${photo.slice(62, 82)}`}
+              key={photo}
               alt={`Customer's image ${index + 1}`}
             />
           ))

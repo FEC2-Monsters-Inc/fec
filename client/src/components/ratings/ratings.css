@@ -6,15 +6,20 @@
 .review-tile-container-1 {
   display: flex;
   flex-direction: row-reverse;
+  margin-bottom: .5em;
 }
 
 .review-tile-container-2 {
   display: flex;
 }
 
-.review-tile-summary {
-  font-weight: 'bold';
+.review-tile-nameAndDate {
+  font-style:italic;
   margin-left: auto;
+}
+
+.review-tile-summary {
+  font-weight: bold;
 }
 
 .review-tile-stars {
@@ -33,6 +38,7 @@
 
 .review-tile-main-container {
   border-bottom: solid;
+  margin-bottom: .5em;
 }
 
 .review-single-star-container {
@@ -192,4 +198,34 @@
 .review-list-header {
   margin-bottom: 2em;
   font-size: 24px;
+}
+
+.review-tile-photos-container {
+  display: flex;
+}
+
+.review-tile-individual-photo {
+  max-width: 100px;
+  max-height: 100px;
+  padding: 5px;
+}
+
+.review-tile-individual-photo:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.review-image-modal-full-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-tile-body {
+  word-break: break-all;
 }

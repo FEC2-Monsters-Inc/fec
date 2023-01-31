@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
+import RelevanceDropdown from './SortDropDown.jsx';
 
 export default function ReviewList({ reviews, selectedRating, setReviews }) {
   const [numReviews, setNumReviews] = useState(reviews.length);
@@ -54,7 +55,10 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
 
   return (
     <div className="review-list-container">
-      <div className="review-list-header">{numReviewsText()}</div>
+      <div className="review-list-dropdown-container">
+        <RelevanceDropdown setReviews={setReviews} reviews={reviews}/>
+      </div>
+      {/* <div className="review-list-header">{numReviewsText()}</div> */}
       {filterReviewMapper()}
     </div>
   );

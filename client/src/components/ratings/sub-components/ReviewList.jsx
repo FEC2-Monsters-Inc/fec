@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 
-export default function ReviewList({ reviews, selectedRating }) {
+export default function ReviewList({ reviews, selectedRating, setReviews }) {
   const [numReviews, setNumReviews] = useState(reviews.length);
   const reviewMapper = reviews.map((review) => (
     <ReviewTile
       review={review}
       key={review.review_id}
+      reviews={reviews}
+      setReviews={setReviews}
     />
   ));
 
@@ -19,6 +21,8 @@ export default function ReviewList({ reviews, selectedRating }) {
       <ReviewTile
         review={review}
         key={review.review_id}
+        setReviews={setReviews}
+        reviews={reviews}
       />
     ));
   };

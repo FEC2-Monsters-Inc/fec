@@ -247,3 +247,8 @@
   text-decoration: none;
   display: inline-block;
 }
+
+.review-tile-report {
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -14,8 +14,8 @@ export default {
     return axios(options);
   },
   getReviewMeta: (id) => {
-    let options = {
-      url: SERVER_BASEURL + 'meta',
+    const options = {
+      url: `${SERVER_BASEURL}meta`,
       method: 'get',
       params: {'product_id': id}
     };
@@ -25,6 +25,14 @@ export default {
   updateUseful: (id) => {
     const options = {
       url: `${SERVER_BASEURL}${id}/helpful`,
+      method: 'put',
+    };
+
+    return axios(options);
+  },
+  updateReport: (id) => {
+    const options = {
+      url: `${SERVER_BASEURL}${id}/report`,
       method: 'put',
     };
 

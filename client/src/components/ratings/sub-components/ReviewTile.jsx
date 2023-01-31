@@ -3,11 +3,10 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 
-export default function ReviewTile({ review }) {
+export default function ReviewTile({ review, setReviews, reviews }) {
   const [modalToggle, setModalToggle] = useState(false);
   const [imgString, setImgString] = useState('');
   const [showFull, setShowFull] = useState(false);
-  const [helpful, setHelpful] = useState(review.helpfulness);
   const [helpfulClick, setHelpfulClick] = useState(false);
   const starRater = () => {
     let stars = '';
@@ -28,31 +27,32 @@ export default function ReviewTile({ review }) {
   };
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
-
+  // handles review summary
   const summaryLengthChecker = () => {
     if (review.summary.length > 60) {
       return `${review.summary.substring(0, 60)} ...`;
     }
     return review.summary;
   };
-
+  // elipses function that works with bodyLengthChecker
   const elipsesSpan = () => (
     <span className="review-elipses-span" onClick={() => setShowFull(true)}>
       {showFull ? review.body : '...'}
     </span>
   );
-
+  // Handles review body with truncation if neccessary
   const bodyLengthChecker = () => {
     if (review.body.length > 250) {
       return `${review.body.substring(0, 250)}`;
     }
     return review.body;
   };
-
+  // Handles image Modal
   const imgToggler = (pic) => {
     setModalToggle(!modalToggle);
     setImgString(pic);
   };
+  // Creates thumbnails with on-click functionality
   const photoHandler = () => {
     if (review.photos.length > 0) {
       const photoAltTxt = `Image for review titled ${review.summary}`;
@@ -70,8 +70,15 @@ export default function ReviewTile({ review }) {
 
   const helpfulHandler = () => {
     fetcher.ratings.updateUseful(review.review_id)
-      .then(fetcher.ratings.getReviews(40348))
-      .then(() => setHelpful(helpful + 1))
+      .then(() => fetcher.ratings.getReviews(40348))// needs id from App.jsx
+      .then(({ data }) => setReviews(data.results))
+      .then(() => setHelpfulClick(true))
+      .catch((error) => console.log(error));
+  };
+  const reportHandler = () => {
+    fetcher.ratings.updateReport(review.review_id)
+      .then(() => fetcher.ratings.getReviews(40348))// needs id from App.jsx
+      .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.log(error));
   };
@@ -79,8 +86,8 @@ export default function ReviewTile({ review }) {
     if (review.body.length < 250) {
       setShowFull(true);
     }
-    setHelpful(review.helpfulness);
-  }, [review, review.helpfulness]);
+    // setHelpful(review.helpfulness);
+  }, [review, review.helpfulness, reviews]);
 
   return (
     <div className="review-tile-main-container">
@@ -110,7 +117,12 @@ export default function ReviewTile({ review }) {
             className="review-tile-helpful"
             onClick={()=> !helpfulClick ? helpfulHandler() : null}>
             Yes
-            <span className="review-helpful-span">({helpful})</span>
+            <span className="review-helpful-span">({review.helpfulness})</span>
+          </div>
+          <div
+            className="review-tile-report"
+            onClick={()=> !helpfulClick ? reportHandler() : null}>
+            Report
           </div>
           <div>
             {modalToggle

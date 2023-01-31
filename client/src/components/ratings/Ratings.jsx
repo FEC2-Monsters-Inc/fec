@@ -39,7 +39,11 @@ export default function Ratings({
           selectedRating={selectedRating}
           reviewMeta={reviewMeta}
         />
-        <ReviewList reviews={reviews} selectedRating={selectedRating} />
+        <ReviewList
+          reviews={reviews}
+          selectedRating={selectedRating}
+          setReviews={setReviews}
+        />
       </div>
     </div>
   );

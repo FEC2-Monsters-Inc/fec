@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
+import StarRating from '../../../helpers/star-rating/starRating.jsx';
 
 export default function ReviewTile({ review, setReviews, reviews }) {
   const [modalToggle, setModalToggle] = useState(false);
   const [imgString, setImgString] = useState('');
   const [showFull, setShowFull] = useState(false);
   const [helpfulClick, setHelpfulClick] = useState(false);
-  const starRater = () => {
-    let stars = '';
-    for (let i = 0; i < review.rating; i += 1) {
-      stars += '*';
-    }
-    return stars;
-  };
 
   const getDateString = (dateString) => {
     const date = new Date(dateString);
@@ -86,7 +81,6 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     if (review.body.length < 250) {
       setShowFull(true);
     }
-    // setHelpful(review.helpfulness);
   }, [review, review.helpfulness, reviews]);
 
   return (
@@ -96,7 +90,9 @@ export default function ReviewTile({ review, setReviews, reviews }) {
           <div className="review-tile-nameAndDate">
             {nameAndDate}
           </div>
-          <div className="review-tile-stars">{starRater()}</div>
+          <div className="review-tile-stars">
+            <StarRating ratingPercentage={`${(review.rating / 5) * 100}%`} />
+          </div>
         </div>
         <div className="review-tile-summary">{summaryLengthChecker()}</div>
         <p className="review-tile-body">
@@ -115,10 +111,16 @@ export default function ReviewTile({ review, setReviews, reviews }) {
           <div className="review-tile-name">Was this review helpful?</div>
           <div
             className="review-tile-helpful"
-            onClick={()=> !helpfulClick ? helpfulHandler() : null}>
+            onClick={()=> !helpfulClick ? helpfulHandler() : null}
+            style={helpfulClick ? {cursor: 'default'} : {}}>
             Yes
-            <span className="review-helpful-span">({review.helpfulness})</span>
+            <span className="review-helpful-span">
+              (
+              {review.helpfulness}
+              )
+            </span>
           </div>
+          <RxDividerVertical />
           <div
             className="review-tile-report"
             onClick={()=> !helpfulClick ? reportHandler() : null}>
@@ -141,3 +143,4 @@ export default function ReviewTile({ review, setReviews, reviews }) {
 // Check to see what "recommended" means for review tile
 // check to see what "response" means for tile...likely both from metadata
 // add helpful? Yes(numHelpful) | report buttons
+

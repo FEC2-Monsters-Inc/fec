@@ -246,9 +246,12 @@
 .review-helpful-span {
   text-decoration: none;
   display: inline-block;
+  margin-right: 25px;
 }
 
 .review-tile-report {
   text-decoration: underline;
   cursor: pointer;
+  margin-left: 25px;
+  font-size: 12px;
 }

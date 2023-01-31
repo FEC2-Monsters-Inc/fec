@@ -8,6 +8,7 @@ export default function Questions({
   feature,
 }) {
   const [questions, setQuestions] = useState([]);
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [filterText, setFilterText] = useState('');
   const [timer, setTimer] = useState(null);
 
@@ -22,6 +23,19 @@ export default function Questions({
       .catch((err) => console.error('Questions on feature change fetch: ', err));
   };
 
+  // const combineAnswerText = ()
+
+  const hasAnswers = (question) => {
+    if (!Object.keys(question.answers).length) return false;
+    return true;
+  };
+
+  const filterQuestionsWithAnswers = () => {
+    setFilteredQuestions(
+      questions.filter((question) => hasAnswers(question)),
+    );
+  };
+
   // TODO: investigate react-hooks/exhaustive-deps
   useEffect(() => {
     putQuestions();
@@ -30,11 +44,17 @@ export default function Questions({
   useEffect(() => {
     if (filterText.length >= 3) {
       setTimer(setTimeout(() => {
-        // TODO: filter the questions
-        console.log("I'M SEARCHING");
+        setFilteredQuestions(questions.filter((question) => (
+          question.question_body.toUpperCase()
+            .includes(filterText.toUpperCase())
+        )));
       }, 500));
-    }
+    } else filterQuestionsWithAnswers();
   }, [filterText]);
+
+  useEffect(() => {
+    filterQuestionsWithAnswers();
+  }, [questions]);
 
   return (
     <div className="qa qa-section">
@@ -42,7 +62,7 @@ export default function Questions({
       <SearchBar text={filterText} handleChange={onFilterTextChange} />
       <QuestionsList
         product_id={feature.id}
-        questions={questions}
+        questions={!filteredQuestions.length ? questions : filteredQuestions}
         updateQuestions={putQuestions}
       />
     </div>

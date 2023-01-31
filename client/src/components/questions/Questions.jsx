@@ -23,37 +23,43 @@ export default function Questions({
       .catch((err) => console.error('Questions on feature change fetch: ', err));
   };
 
+  // TODO: maybe want to search through answers too
   // const combineAnswerText = ()
 
-  const hasAnswers = (question) => {
+  const byHasAnswers = (question) => {
     if (!Object.keys(question.answers).length) return false;
     return true;
   };
 
+  const bySearchTerm = (question) => {
+    if (!question.question_body
+      .toUpperCase()
+      .includes(filterText.toUpperCase())) return false;
+    return true;
+  };
+
   const filterQuestionsWithAnswers = () => {
-    setFilteredQuestions(
-      questions.filter((question) => hasAnswers(question)),
-    );
+    setFilteredQuestions(questions.filter(byHasAnswers));
+  };
+
+  const filterQuestionsBySearch = () => {
+    if (filterText.length >= 3) {
+      setFilteredQuestions(questions.filter(bySearchTerm));
+    } else filterQuestionsWithAnswers();
   };
 
   // TODO: investigate react-hooks/exhaustive-deps
+  // TODO: probably some way to use less useEffects and condense the functions
   useEffect(() => {
     putQuestions();
   }, [feature]);
 
   useEffect(() => {
-    if (filterText.length >= 3) {
-      setTimer(setTimeout(() => {
-        setFilteredQuestions(questions.filter((question) => (
-          question.question_body.toUpperCase()
-            .includes(filterText.toUpperCase())
-        )));
-      }, 500));
-    } else filterQuestionsWithAnswers();
+    setTimer(setTimeout(filterQuestionsBySearch, 500));
   }, [filterText]);
 
   useEffect(() => {
-    filterQuestionsWithAnswers();
+    filterQuestionsBySearch();
   }, [questions]);
 
   return (

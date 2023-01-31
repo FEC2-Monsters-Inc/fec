@@ -1,37 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 
-export default function ReviewList({reviews, selectedRating}) {
-
-  // consider using hook to track length of current reviews
+export default function ReviewList({ reviews, selectedRating }) {
   const [numReviews, setNumReviews] = useState(reviews.length);
-  // TESTING W BOLTON //
-
-
-  const reviewMapper = reviews.map((review, index) =>
-    <ReviewTile review={review} key={index}/>
-  );
+  const reviewMapper = reviews.map((review) => (
+    <ReviewTile
+      review={review}
+      key={review.review_id}
+    />
+  ));
 
   const filterReviewMapper = () => {
-    const filteredReviews = reviews.filter(review => selectedRating[review.rating] === true);
+    const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
     if (filteredReviews.length === 0) {
-      //setNumReviews(reviewMapper.length);
       return reviewMapper;
-    } else {
-      //setNumReviews(filteredReviews.length);
-      return filteredReviews.map((review, index) =>
-        <ReviewTile review={review} key={index}/>
-      );
     }
+    return filteredReviews.map((review) => (
+      <ReviewTile
+        review={review}
+        key={review.review_id}
+      />
+    ));
   };
 
-  const numReviewsTracker = function() {
-    let trueKeys = Object.keys(selectedRating).filter(key => selectedRating[key] === true).map(Number);
-    let filteredArr = reviews.filter(review => trueKeys.includes(review.rating));
-    //console.log(filteredArr)
+  const numReviewsTracker = () => {
+    const trueKeys = Object.keys(selectedRating)
+      .filter((key) => selectedRating[key] === true)
+      .map(Number);
+    const filteredArr = reviews.filter((review) => trueKeys.includes(review.rating));
     if (filteredArr.length === 0) {
-      //console.log('test')
-      setNumReviews(reviews.length); //FIX HARD CODED SOLUTION
+      setNumReviews(reviews.length);
       return;
     }
     setNumReviews(filteredArr.length);
@@ -41,10 +39,18 @@ export default function ReviewList({reviews, selectedRating}) {
     numReviewsTracker();
   }, [selectedRating, reviews]);
 
+  const numReviewsText = () => {
+    if (numReviews === 0) {
+      return 'No Reviews';
+    } if (numReviews === 1) {
+      return '1 review, sorted by relevance';
+    }
+    return `${numReviews} reviews, sorted by relevance`;
+  };
 
   return (
     <div className="review-list-container">
-      <p>{numReviews} reviews, sorted by relevance</p>
+      <div className="review-list-header">{numReviewsText()}</div>
       {filterReviewMapper()}
     </div>
   );

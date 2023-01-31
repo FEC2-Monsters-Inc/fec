@@ -11,7 +11,6 @@ export default function Answer({
     helpfulness,
     photos,
   },
-  question_id,
 }) {
   const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {

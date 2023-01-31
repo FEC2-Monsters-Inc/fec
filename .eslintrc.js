@@ -28,6 +28,7 @@ module.exports = {
         'created_at',
         'updated_at',
         'question_id',
+        'answer_id',
       ],
     }],
   },

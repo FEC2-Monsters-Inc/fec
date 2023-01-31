@@ -32,7 +32,7 @@ export default function Related({ feature }) {
   }, [feature.id]);
 
   return (
-    <div data-testid="related">
+    <div id="related-section">
       <h2>RELATED PRODUCTS</h2>
       <br />
       <RelatedList feature={feature} relatedList={relatedList} />

@@ -26,9 +26,7 @@ export default function RelatedProduct({ feature, relProd }) {
         setRelProdMeta(data[2].data);
       }))
       .catch((err) => console.error(err));
-    // Avoid infinity loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // [feature.id, relProd.id, relStyle]
+  }, [feature, relProd.id]);
 
   if (!relStyle || !relStyle.photos[0].thumbnail_url) {
     return <div />;

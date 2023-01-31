@@ -12,18 +12,19 @@
   position: fixed;
   top: 10%;
   left: 10%;
+  max-width: 80rem;
   z-index: 1;
 }
 
 .img-carousel {
   display: flex;
-  width: 41rem;
-  height: 15rem;
+  max-width: 50rem;
+  height: 18rem;
   overflow-x: scroll;
 }
 
 .img-modal {
-  width: 12rem;
-  height: 12rem;
+  width: 15rem;
+  height: 15rem;
   margin: 1rem;
 }

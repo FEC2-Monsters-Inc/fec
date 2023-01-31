@@ -265,20 +265,20 @@
   font-size: 16px;
   border: 1px solid #ebebeb;
   border-radius: 25px;
-  animation: fadeIn 3s;
+  animation: fadeIn 1s;
 }
 .review-li-2 {
   font-size: 16px;
   border: 1px solid #ebebeb;
   border-radius: 25px;
-  animation: fadeIn 3s 1s forwards;
+  animation: fadeIn 1s 1s forwards;
   opacity: 0;
 }
 .review-li-3 {
   font-size: 16px;
   border: 1px solid #ebebeb;
   border-radius: 25px;
-  animation: fadeIn 3s 2s forwards;
+  animation: fadeIn 1s 2s forwards;
   opacity: 0;
 }
 

@@ -13,7 +13,7 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
     fetcher.ratings.getReviewsSortedNew(40348) // PLACEHOLDER VALUE
       .then(({ data }) => setReviews(data.results))
       .then(() => setShowDropdown(false))
-      .then(() => setSortString('date'))
+      .then(() => setSortString('recency'))
       .catch((error) => console.log(error));
   };
   const handleHelpful = () => {
@@ -33,13 +33,13 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
 
   return (
     <div className="review-sort-dropdown-main">
-      {reviews.length} reviews sorted by <span onClick={handleClick}>{sortString} <VscTriangleDown style={{display: 'inline-block', position: 'absolute'}}/></span>
+      {reviews.length} reviews sorted by <span onClick={handleClick} style={{textDecoration: 'underline'}}>{sortString} <VscTriangleDown style={{display: 'inline-block', position: 'absolute'}}/></span>
       {showDropdown && (
         <div className="review-sort-dropdown-child">
           <ul className="review-ul">
-            <li className="review-li-1" onClick={() => handleNew()}>Most Recent</li>
-            <li className="review-li-2" onClick={() => handleHelpful()}>Highest Rated</li>
-            <li className="review-li-3" onClick={() => handleRelevant()}>Most Relevant</li>
+            {sortString !== 'recency' && <li className="review-li-1" onClick={() => handleNew()}>recency</li>}
+            {sortString !== 'helpfulness' && <li className="review-li-2" onClick={() => handleHelpful()}>helpfulness</li>}
+            {sortString !== 'relevance' && <li className="review-li-3" onClick={() => handleRelevant()}>relevance</li>}
           </ul>
         </div>
       )}

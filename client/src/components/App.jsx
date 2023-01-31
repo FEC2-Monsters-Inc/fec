@@ -36,7 +36,7 @@ export default function App() {
     <div>
       {/* <Overview feature={featuredProduct} /> */}
       <Related feature={featuredProduct} />
-      {/* <Questions feature={featuredProduct} /> */}
+      <Questions feature={featuredProduct} />
       <Ratings feature={featuredProduct} />
     </div>
   );

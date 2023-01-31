@@ -57,6 +57,7 @@ h3 {
 
 .qa.answers-list {
   padding-left: 0.5rem;
+  width: -webkit-fill-available;
 }
 
 .qa.answer {

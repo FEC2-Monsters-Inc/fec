@@ -2,11 +2,10 @@ import axios from 'axios';
 
 const SERVER_BASEURL = 'http://localhost:3000/api/reviews/';
 
-
 export default {
   // YOUR REQUESTS HERE
   getReviews: (id) => {
-    let options = {
+    const options = {
       url: SERVER_BASEURL,
       method: 'get',
       params: {'product_id': id}
@@ -22,6 +21,13 @@ export default {
     };
 
     return axios(options);
-  }
-};
+  },
+  updateUseful: (id) => {
+    const options = {
+      url: `${SERVER_BASEURL}${id}/helpful`,
+      method: 'put',
+    };
 
+    return axios(options);
+  },
+};

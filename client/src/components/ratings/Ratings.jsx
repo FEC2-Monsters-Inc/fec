@@ -29,7 +29,6 @@ export default function Ratings({
       .catch((error) => console.log(error));
     metaDataFetcher();
   }, [feature]);
-
   return (
     <div>
       <div className="review-header">Ratings and Reviews</div>

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import ReviewImageModal from './ReviewImageModal.jsx';
+import fetcher from '../../../fetchers';
 
 export default function ReviewTile({ review }) {
   const [modalToggle, setModalToggle] = useState(false);
   const [imgString, setImgString] = useState('');
   const [showFull, setShowFull] = useState(false);
+  const [helpful, setHelpful] = useState(review.helpfulness);
+  const [helpfulClick, setHelpfulClick] = useState(false);
   const starRater = () => {
     let stars = '';
     for (let i = 0; i < review.rating; i += 1) {
@@ -64,18 +67,26 @@ export default function ReviewTile({ review }) {
       ));
     }
   };
+
+  const helpfulHandler = () => {
+    fetcher.ratings.updateUseful(review.review_id)
+      .then(fetcher.ratings.getReviews(40348))
+      .then(() => setHelpful(helpful + 1))
+      .then(() => setHelpfulClick(true))
+      .catch((error) => console.log(error));
+  };
   useEffect(() => {
     if (review.body.length < 250) {
       setShowFull(true);
     }
-  }, [review]);
+    setHelpful(review.helpfulness);
+  }, [review, review.helpfulness]);
 
   return (
     <div className="review-tile-main-container">
       <div>
         <div className="review-tile-container-1">
           <div className="review-tile-nameAndDate">
-            {review.recommend ? <AiFillCheckCircle /> : null}
             {nameAndDate}
           </div>
           <div className="review-tile-stars">{starRater()}</div>
@@ -85,10 +96,22 @@ export default function ReviewTile({ review }) {
           {bodyLengthChecker()}
           {showFull ? review.body.substring(250) : elipsesSpan()}
         </p>
+        <div className="review-tile-recommendation">
+          {review.recommend ? <AiFillCheckCircle /> : null}
+          {review.recommend ? 'I recommend this product' : null}
+        </div>
+        <div className="review-tile-response">
+          {review.response ? `Response from seller: ${review.response}` : null}
+        </div>
         <div className="review-tile-photos-container">{photoHandler()}</div>
         <div className="review-tile-container-2">
-          <div className="review-tile-name">{review.reviewer_name}</div>
-          <div className="review-tile-date">{getDateString(review.date)}</div>
+          <div className="review-tile-name">Was this review helpful?</div>
+          <div
+            className="review-tile-helpful"
+            onClick={()=> !helpfulClick ? helpfulHandler() : null}>
+            Yes
+            <span className="review-helpful-span">({helpful})</span>
+          </div>
           <div>
             {modalToggle
             && <ReviewImageModal imgString={imgString} setModalToggle={setModalToggle} />}
@@ -98,8 +121,6 @@ export default function ReviewTile({ review }) {
     </div>
   );
 }
-
-{/* <div className="review-tile-summary">{review.summary}</div> */}
 
 // TO-DO:
 // Combine username and date into 1 string.

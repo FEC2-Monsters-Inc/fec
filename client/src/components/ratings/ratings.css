@@ -16,6 +16,7 @@
 .review-tile-nameAndDate {
   font-style:italic;
   margin-left: auto;
+  margin-right: 1em;
 }
 
 .review-tile-summary {
@@ -29,11 +30,7 @@
 
 .review-tile-name {
   font-size: 12px;
-  text-decoration: underline;
-}
-
-.review-tile-date {
-  margin-left: 20px;
+  text-decoration: none;
 }
 
 .review-tile-main-container {
@@ -232,4 +229,21 @@
 
 .review-elipses-span:hover {
   cursor: context-menu
+}
+
+.review-tile-recommendation {
+  margin: 1em;
+}
+
+.review-tile-helpful {
+  cursor: pointer;
+  margin-left: 20px;
+  font-size: 12px;
+  text-decoration: underline;
+  margin-bottom: .25em;
+}
+
+.review-helpful-span {
+  text-decoration: none;
+  display: inline-block;
 }

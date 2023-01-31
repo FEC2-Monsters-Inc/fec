@@ -93,18 +93,18 @@ export default function ReviewDashboard({
     recommendedSetter();
   }, [reviews]);
 
-  const percentString = `${recommended} of reviews recommend this product`;
-
   return (
     <div>
       <div className="review-main-star-container">
-        <p className="review-avg-rating">{avgRating}</p>
+        <p className="review-avg-rating">
+          {avgRating}
+        </p>
         <div>
           {starMapper}
         </div>
       </div>
       <div>
-        {percentString}
+        {`${recommended} of reviews recommend this product`}
       </div>
       <div className="review-rating-breakdown-title">
         Rating Breakdown

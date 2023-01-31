@@ -8,9 +8,7 @@ export default function TrackerBar({ progress }) {
   return (
     <div className="review-tracker-bar-container">
       <div className="review-tracker-bar-parent">
-        <div className="review-tracker-bar-child" style={childDiv}>
-          {/* <span className="review-tracker-bar-percent">{`${progress}%`}</span> */}
-        </div>
+        <div className="review-tracker-bar-child" style={childDiv} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 .overlay {
   position: Fixed;
-  background-color: rgba(199, 57, 57, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   top: 0;
@@ -17,16 +17,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   background-color: #FFFFFF;
   justify-content: center;
   align-items: center;
   z-index: 1;
   overflow-y: scroll;
+  animation: fadeIn 1s;
 }
 
 .compare-modal {
   position: relative;
   top: 1rem;
+  justify-content: center;
 }
 
 .compare-close {
@@ -37,44 +40,29 @@
   height: 1.5rem;
 }
 
-.compare-modal {
-  justify-content: center;
+#compare-thead {
+  position: sticky;
+  top: 0.5rem;
+  background: #e2e2e2;
+  color: black;
+  font-weight: bold;
+  z-index: 2;
 }
 
-.compare-table {
-  position: relative;
-  top: 1rem;
-}
-
-.compare-modal>table,
-thead,
-tbody,
-th,
-tr,
-td {
-  width: 40rem;
+.compare-th {
+  width: 12rem;
   height: 3rem;
-  border: 2px solid rgb(1, 1, 14);
+  border: 1px solid black;
   text-align: center;
   vertical-align: middle;
 }
 
-.compare-thead {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-/* @keyframes fadeIn {
-  from {
+@keyframes fadeIn {
+  0% {
     opacity: 0;
   }
 
-  to {
+  100% {
     opacity: 1;
   }
-} */
-
-/*
-.modal-container.open {
-  animation: fadeIn 4s forwards;
-} */
+}

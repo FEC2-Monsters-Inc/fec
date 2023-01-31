@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
 import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import './styles/compareModal.css';
 
 export default function RelatedProduct({ feature, relProd }) {
   const [relStyle, setRelStyle] = useState();
@@ -63,6 +65,13 @@ export default function RelatedProduct({ feature, relProd }) {
         && (
           <div className="overlay">
             <div className="modal-container">
+              <thead id="compare-thead">
+                <tr className="compare-tr">
+                  <th className="compare-th">{feature.name}</th>
+                  <th className="compare-th" />
+                  <th className="compare-th">{relProd.name}</th>
+                </tr>
+              </thead>
               <CompareModal
                 setShowModal={setShowModal}
                 feature={feature}

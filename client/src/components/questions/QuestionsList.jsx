@@ -6,6 +6,7 @@ export default function QuestionsList({
   questions,
   product_id,
   updateQuestions,
+  filterText,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
   const [showAddQ, setShowAddQ] = useState(false);
@@ -44,6 +45,7 @@ export default function QuestionsList({
             key={question.question_id}
             question={question}
             updateQuestions={updateQuestions}
+            filterText={filterText}
           />
         ))
         : null}

@@ -64,6 +64,7 @@ export default function Questions({
         product_id={feature.id}
         questions={!filteredQuestions.length ? questions : filteredQuestions}
         updateQuestions={putQuestions}
+        filterText={filterText}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import QandAModal from './QandAModal.jsx';
 export default function QuestionsList({
   questions,
   product_id,
+  updateQuestions,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
   const [showAddQ, setShowAddQ] = useState(false);
@@ -34,6 +35,7 @@ export default function QuestionsList({
           <Question
             key={`q_${question.question_id}`}
             question={question}
+            updateQuestions={updateQuestions}
           />
         ))
         : null}

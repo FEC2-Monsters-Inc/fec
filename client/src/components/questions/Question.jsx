@@ -13,6 +13,7 @@ export default function Question({
     // reported,
     answers,
   },
+  updateQuestions,
 }) {
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
@@ -21,9 +22,7 @@ export default function Question({
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
         .markHelpfulQuestion(question_id)
-        .then(() => {
-          // TODO: update the questions
-        })
+        .then(updateQuestions)
         .catch((err) => console.error('markHelpfulQuestion: ', err));
     }
   };
@@ -88,6 +87,8 @@ export default function Question({
                 <Answer
                   key={key}
                   answer={answers[key]}
+                  updateQuestions={updateQuestions}
+                  decrementAnswers={() => setNumAnswers(numAnswers - 1)}
                 />
               ))}
             </div>

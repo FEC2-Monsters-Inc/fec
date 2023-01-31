@@ -11,7 +11,6 @@ export default function Answer({
     helpfulness,
     photos,
   },
-  question_id,
 }) {
   const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -27,7 +26,7 @@ export default function Answer({
   const reportAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
-        .reportAnswer(question_id)
+        .reportAnswer(id)
         .then(() => {
           // TODO: update answers..
         })

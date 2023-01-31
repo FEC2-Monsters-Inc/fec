@@ -27,7 +27,7 @@ export default function Answer({
   const reportAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
-        .reportAnswer(question_id)
+        .reportAnswer(id)
         .then(() => {
           // TODO: update answers..
         })

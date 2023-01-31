@@ -11,14 +11,14 @@ export default function Answer({
     helpfulness,
     photos,
   },
+  updateQuestions,
+  decrementAnswers,
 }) {
   const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
         .markHelpfulAnswer(id)
-        .then(() => {
-          // TODO: update the answer
-        })
+        .then(updateQuestions)
         .catch((err) => console.error('markHelpfulAnswer: ', err));
     }
   };
@@ -27,9 +27,8 @@ export default function Answer({
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
         .reportAnswer(id)
-        .then(() => {
-          // TODO: update answers..
-        })
+        .then(decrementAnswers)
+        .then(updateQuestions)
         .catch((err) => console.error('reportAnswer: ', err));
     }
   };

@@ -38,7 +38,8 @@ h3 {
 }
 
 .qa.question-body {
-  max-width: 70%
+  max-width: 70%;
+  margin-bottom: 0rem;
 }
 
 .qa.control {
@@ -56,10 +57,12 @@ h3 {
 
 .qa.answers-list {
   padding-left: 0.5rem;
+  width: -webkit-fill-available;
 }
 
 .qa.answer {
   margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .qa.photo-sml {
@@ -135,8 +138,8 @@ h3 {
 
 .qa.modal-body {
   padding: 1rem;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .qa.add-personal {

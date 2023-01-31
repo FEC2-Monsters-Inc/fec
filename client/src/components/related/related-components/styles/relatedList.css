@@ -22,13 +22,13 @@
   scroll-snap-align: start;
   text-align: center;
   position: relative;
-  z-index: 0;
 }
 
 #rel-img {
   height: 15rem;
   width: 15rem;
   position: relative;
+  cursor: pointer;
 }
 
 .star-modal {

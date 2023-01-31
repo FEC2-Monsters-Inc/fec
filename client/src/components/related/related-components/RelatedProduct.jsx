@@ -1,10 +1,10 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect } from 'react';
 import { AiOutlineStar } from 'react-icons/ai';
 import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import ImageModal from './ImageModal.jsx';
 import './styles/compareModal.css';
 
 export default function RelatedProduct({ feature, relProd }) {
@@ -26,9 +26,10 @@ export default function RelatedProduct({ feature, relProd }) {
         setRelProdMeta(data[2].data);
       }))
       .catch((err) => console.error(err));
-  }, [feature, relProd.id]);
+    // Avoid infinity loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // [feature.id, relProd.id, relStyle]
 
-  // TODO: FIX NO IMAGE LATER
   if (!relStyle || !relStyle.photos[0].thumbnail_url) {
     return <div />;
   }
@@ -51,9 +52,16 @@ export default function RelatedProduct({ feature, relProd }) {
           src={relStyle.photos[0].thumbnail_url}
           alt={relProd.description}
           onMouseEnter={() => setShowImg(true)}
-          onMouseLeave={() => setShowImg(false)}
         />
-        {showImg && <img id="rel-ori-img" src={relStyle.photos[0].url} alt={relProd.description} />}
+        {showImg
+          && (
+            <ImageModal
+              relStyle={relStyle}
+              relProd={relProd}
+              setRelStyle={setRelStyle}
+              setShowImg={setShowImg}
+            />
+          )}
         <div className="rel-cat">{relProd.category}</div>
         <div className="rel-name">{relProd.name}</div>
         <div className="rel-slogan">{relProd.slogan}</div>
@@ -65,13 +73,18 @@ export default function RelatedProduct({ feature, relProd }) {
         && (
           <div className="overlay">
             <div className="modal-container">
-              <thead id="compare-thead">
-                <tr className="compare-tr">
-                  <th className="compare-th">{feature.name}</th>
-                  <th className="compare-th" />
-                  <th className="compare-th">{relProd.name}</th>
-                </tr>
-              </thead>
+              <table id="compare-thead">
+                <thead>
+                  <tr className="compare-tr">
+                    <th className="compare-th">{feature.name}</th>
+                    {// Empty th for style
+                      // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                      <th className="compare-th" />
+                    }
+                    <th className="compare-th">{relProd.name}</th>
+                  </tr>
+                </thead>
+              </table>
               <CompareModal
                 setShowModal={setShowModal}
                 feature={feature}

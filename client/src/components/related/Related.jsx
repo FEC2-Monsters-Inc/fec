@@ -29,10 +29,10 @@ export default function Related({ feature }) {
         .then((results) => { setRelatedList(results.map((result) => result.data)); })
         .catch((err) => console.error(err));
     }
-  }, [feature]);
+  }, [feature.id]);
 
   return (
-    <div>
+    <div data-testid="related">
       <h2>RELATED PRODUCTS</h2>
       <br />
       <RelatedList feature={feature} relatedList={relatedList} />
@@ -40,7 +40,11 @@ export default function Related({ feature }) {
       <br />
       <h2>OUTFIT PRODUCTS</h2>
       <br />
-      <OutfitList feature={feature} outfitIdList={outfitIdList} setOutfitIdList={setOutfitIdList} />
+      <OutfitList
+        feature={feature}
+        outfitIdList={outfitIdList}
+        setOutfitIdList={setOutfitIdList}
+      />
     </div>
   );
 }

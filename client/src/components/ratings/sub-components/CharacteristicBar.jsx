@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from 'react';
 
-export default function ActiveFilters({ filter, setSelectedRating, setFilter }) {
+export default function CharacteristicBar({ reviewMeta, charName }) {
   // STATE DATA //
-  const [filterStrings, setFilterStrings] = useState();
+  const [chars, setChars] = useState({});
+  const [sliderText, setSliderText] = useState({ small: '', perf: '', big: '' });
+  const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
+
 
   // HELPER FUNCTIONS //
-  function filterJoiner(string) {
-    return string.join('').slice(2);
+  function ratingDescription() {
+    if (charName === 'Size') {
+      setSliderText({ small: 'tight', perf: 'perfect!', big: 'baggy' });
+    } else if (charName === 'Width') {
+      setSliderText({ small: 'small', perf: 'perfect!', big: 'loose' });
+    } else if (charName === 'Comfort') {
+      setSliderText({ small: 'can\'t breathe', perf: 'perfect!', big: 'like a tent' });
+    } else if (charName === 'Quality') {
+      setSliderText({ small: 'cheap', perf: 'perfect!', big: 'delicate' });
+    } else if (charName === 'Fit') {
+      setSliderText({ small: 'small', perf: 'perfect!', big: 'large' });
+    } else if (charName === 'Length') {
+      setSliderText({ small: 'too long', perf: 'perfect!', big: 'too short' });
+    }
   }
 
-  function handleFilterStrings() {
-    const newFilterStrings = [];
-    Object.keys(filter).forEach((key) => {
-      newFilterStrings.push(`, ${key} star`);
-    });
-    setFilterStrings(filterJoiner(newFilterStrings));
-  }
-
-  // EVENT HANDLERS //
-  function filterReset() {
-    setFilter({});
-    setFilterStrings([]);
-    setSelectedRating(null);
-    setFilterStrings(null);
-  }
 
   // INITIALIZATION //
   useEffect(() => {
-    if (filter) {
-      handleFilterStrings();
-    }
-  }, [filter]);
+    setChars(reviewMeta);
+    ratingDescription();
+  }, [reviewMeta, charName]);
 
   return (
-    <div className="review-active-filter-container" style={{ height: '37px' }}>
-      { filterStrings
-        ? `Reviews Displayed: ${filterStrings}`
-        : null }
-      { Object.keys(filter).length
-        ? <button type="button" onClick={() => filterReset()}>Reset Filters</button>
-        : null }
+    <div className="review-slide-container">
+      <input type="range" min="1" max="100" value={`${barWidth}`} className="review-slider" readOnly />
+      <div className="reivew-slider-label-container">
+        <p className="review-slider-label-1">{sliderText.small}</p>
+        <p className="review-slider-label-2">{sliderText.perf}</p>
+        <p className="review-slider-label-3">{sliderText.big}</p>
+      </div>
     </div>
   );
 }

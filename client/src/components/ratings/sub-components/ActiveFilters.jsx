@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from 'react';
 
-export default function ActiveFilters({ selectedRating, setSelectedRating }) {
+export default function ActiveFilters({ filter, setSelectedRating, setFilter }) {
   // STATE DATA //
-  const [filterStrings, setFilterStrings] = useState('');
+  const [filterStrings, setFilterStrings] = useState();
 
   // HELPER FUNCTIONS //
-  function filterJoiner() {
-    return filterStrings.join(' ').replace(/[,\s]+$/, '');
+  function filterJoiner(string) {
+    return string.join('').slice(2);
   }
 
   function handleFilterStrings() {
-    console.log('selected: ', selectedRating);
     const newFilterStrings = [];
-    Object.keys(selectedRating).forEach((key) => {
-      newFilterStrings.push(`${key} star, `);
+    Object.keys(filter).forEach((key) => {
+      newFilterStrings.push(`, ${key} star`);
     });
     setFilterStrings(filterJoiner(newFilterStrings));
   }
 
   // EVENT HANDLERS //
   function filterReset() {
+    setFilter({});
+    setFilterStrings([]);
     setSelectedRating(null);
     setFilterStrings(null);
   }
 
   // INITIALIZATION //
   useEffect(() => {
-    if (selectedRating) {
+    if (filter) {
       handleFilterStrings();
     }
-  }, [selectedRating]);
+  }, [filter]);
 
   return (
     <div className="review-active-filter-container" style={{ height: '37px' }}>
-      { filterStrings.length
+      { filterStrings
         ? `Reviews Displayed: ${filterStrings}`
         : null }
-      <button type="button" onClick={() => filterReset()}>Reset Filters</button>
+      { Object.keys(filter).length
+        ? <button type="button" onClick={() => filterReset()}>Reset Filters</button>
+        : null }
     </div>
   );
 }

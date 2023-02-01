@@ -10,6 +10,12 @@
   justify-content: space-between;
 }
 
+body {
+  display: block;
+  margin: 8px;
+  line-height: 120%;
+}
+
 /* QUESTIONS & ANSWERS + GENERALS */
 
 .qa.q\&a {
@@ -26,6 +32,11 @@
 .qa.link {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.qa.link.disabled {
+  text-decoration: none;
+  cursor: text;
 }
 
 .qa.link-bold {
@@ -136,7 +147,8 @@
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-.qa.modal-header, .qa.modal-footer {
+.qa.modal-header,
+.qa.modal-footer {
   padding: 1rem;
 }
 

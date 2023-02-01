@@ -33,7 +33,7 @@ export default function Related({ feature }) {
   }, [feature]);
 
   return (
-    <div id="related-section">
+    <div id="related-widget">
       <h2>RELATED PRODUCTS</h2>
       <br />
       <RelatedList feature={feature} relatedList={relatedList} />

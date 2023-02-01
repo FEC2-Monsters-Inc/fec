@@ -1,25 +1,35 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import fetcher from '../../fetchers/questions';
 
 export default function Answer({
   answer: {
-    // id,
+    id,
     body,
     date,
     answerer_name: name,
     helpfulness,
     photos,
   },
+  updateQuestions,
+  decrementAnswers,
 }) {
-  const clickYes = (e) => {
+  const markHelpfulAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Helpful Answer PUT request
+      fetcher
+        .markHelpfulAnswer(id)
+        .then(updateQuestions)
+        .catch((err) => console.error('markHelpfulAnswer: ', err));
     }
   };
 
   const reportAnswer = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Report Answer PUT request
+      fetcher
+        .reportAnswer(id)
+        .then(decrementAnswers)
+        .then(updateQuestions)
+        .catch((err) => console.error('reportAnswer: ', err));
     }
   };
 
@@ -35,7 +45,7 @@ export default function Answer({
             <img
               className="qa photo-sml"
               src={photo}
-              key={`${photo.slice(62, 82)}`}
+              key={photo}
               alt={`Customer's image ${index + 1}`}
             />
           ))
@@ -47,8 +57,8 @@ export default function Answer({
           className="qa link"
           role="link"
           tabIndex={0}
-          onKeyUp={clickYes}
-          onClick={clickYes}
+          onKeyUp={markHelpfulAnswer}
+          onClick={markHelpfulAnswer}
         >
           Yes
         </span>

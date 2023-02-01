@@ -21,11 +21,6 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
     return reviewMapper(filteredReviews);
   };
 
-  // INITIALIZATION //
-  useEffect(() => {
-
-  }, [selectedRating, reviews]);
-
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">

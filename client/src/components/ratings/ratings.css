@@ -18,6 +18,18 @@
 
 .review-tile-container-2 {
   display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: .5em;
+}
+
+.review-tile-container-2 {
+  display: flex;
+}
+
+.review-tile-nameAndDate {
+  font-style:italic;
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 .review-tile-nameAndDate {

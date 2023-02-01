@@ -10,9 +10,8 @@ export default function ReviewList({
   listLength,
   setListLength,
 }) {
-
-  const [loadedReviews, setLoadedReviews] = useState(null);
-
+  const [loadedReviews, setLoadedReviews] = useState([]);
+  const [listIndex, setListIndex] = useState(2);
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -31,20 +30,27 @@ export default function ReviewList({
     return reviewMapper(filteredReviews);
   };
 
-  // const twoAtATime = () => {
-  //   if (loadedReviews) {
-  //     setLoadedReviews(loadedReviews.slice(2));
-  //     setReviews([...reviews, loadedReviews[1], loadedReviews[2]]);
-  //   }
-  //   //console.log(reviews);
-  // };
+  const twoAtATime = () => {
+    if (loadedReviews) {
+      // setReviews([...reviews, loadedReviews.slice(listIndex, listIndex + 2)]);
+      setListIndex(listIndex + 2);
+      //setReviews(reviews.push(loadedReviews[listIndex], loadedReviews[listIndex + 1]));
+      setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
+      console.log('loaded reviews:', loadedReviews);
+      console.log('reviews:', reviews);
+      // console.log('loadedReviews first two elements:', newReviews);
+    }
+  };
 
   // INITIALIZATION //
   useEffect(() => {
     fetcher.ratings.getAllReviews(40350)
-      .then(({ data }) => setLoadedReviews(data.results));
-    //twoAtATime();
-  }, [selectedRating, reviews]);
+      .then(({ data }) => setLoadedReviews(data.results))
+      .then(() => console.log(loadedReviews))
+      .catch((err) => console.error(err));
+  }, []);
+
+
 
   return (
     <div className="review-list-container">

@@ -73,7 +73,6 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   const roundedPercentage = (rounder, num) => {
     const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
     const result = (roundsByFive / 5) * 100;
-    console.log(result);
     return result;
   };
 

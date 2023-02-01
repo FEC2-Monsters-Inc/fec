@@ -30,7 +30,7 @@ export default function Related({ feature }) {
         .catch((err) => console.error(err));
     }
   }, [feature]);
-
+  console.log('RELATED IS RENDER');
   return (
     <div id="related-section">
       <h2>RELATED PRODUCTS</h2>

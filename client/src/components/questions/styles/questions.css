@@ -1,5 +1,30 @@
+/* GENERAL TAGS */
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
 h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
   margin: 1rem 0;
+}
+
+body {
+  display: block;
+  margin: 8px;
+  line-height: 120%;
 }
 
 /* QUESTIONS & ANSWERS + GENERALS */
@@ -18,6 +43,11 @@ h3 {
 .qa.link {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.qa.link.disabled {
+  text-decoration: none;
+  cursor: text;
 }
 
 .qa.link-bold {

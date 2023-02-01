@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
 import RelatedProduct from './RelatedProduct.jsx';
 import './styles/relatedList.css';
@@ -19,10 +19,6 @@ export default function RelatedList({ feature, relatedList }) {
     posIndex < endOfRelatedList ? setPosIndex(posIndex + 1) : null;
     ref.current.scrollLeft += 15 * 16;
   };
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <div className="related-carousel-outside">

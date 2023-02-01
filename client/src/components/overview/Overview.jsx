@@ -8,7 +8,7 @@ import ProdInfo from './sub-comps/ProdInfo.jsx';
 import StyleAndCart from './sub-comps/StyleAndCart.jsx';
 import Description from './sub-comps/Description.jsx';
 
-export default function Overview({ product, styles }) {
+export default function Overview({ product, styles, reviews }) {
   // STATE DATA //
   const [currStyle, setCurrStyle] = useState(null);
 
@@ -30,7 +30,7 @@ export default function Overview({ product, styles }) {
           <Gallery product={product} currStyle={currStyle} />
         </div>
         <div className="right-main">
-          <ProdInfo product={product} currStyle={currStyle} />
+          <ProdInfo product={product} currStyle={currStyle} reviews={reviews} />
           <StyleAndCart styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
         </div>
         <div className="bottom-main">

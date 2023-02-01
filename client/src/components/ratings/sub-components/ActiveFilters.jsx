@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ActiveFilters({ selectedRating, setSelectedRating }) {
-  const [filterStrings, setFilterStrings] = useState([]);
-  function handleFilterStrings() {
-    const newFilterStrings = [];
-    Object.keys(selectedRating).forEach((key) => {
-      if (selectedRating[key]) {
-        newFilterStrings.push(`${key} star, `);
-      }
-    });
-    setFilterStrings(newFilterStrings);
-  }
+  // STATE DATA //
+  const [filterStrings, setFilterStrings] = useState('');
 
-  useEffect(() => {
-    handleFilterStrings();
-  }, [selectedRating]);
+  // HELPER FUNCTIONS //
   function filterJoiner() {
     return filterStrings.join(' ').replace(/[,\s]+$/, '');
   }
-  function filterReset() {
-    setSelectedRating({
-      1: false, 2: false, 3: false, 4: false, 5: false,
+
+  function handleFilterStrings() {
+    console.log('selected: ', selectedRating);
+    const newFilterStrings = [];
+    Object.keys(selectedRating).forEach((key) => {
+      newFilterStrings.push(`${key} star, `);
     });
-    setFilterStrings([]);
-  }
-  function filterResetButton() {
-    return (
-      <button type="button" onClick={() => filterReset()}>Reset Filters</button>
-    );
+    setFilterStrings(filterJoiner(newFilterStrings));
   }
 
+  // EVENT HANDLERS //
+  function filterReset() {
+    setSelectedRating(null);
+    setFilterStrings(null);
+  }
+
+  // INITIALIZATION //
+  useEffect(() => {
+    if (selectedRating) {
+      handleFilterStrings();
+    }
+  }, [selectedRating]);
+
   return (
-    <div className="review-active-filter-container">
-      {filterStrings.length !== 0 ? `Reviews Displayed: ${filterJoiner()}` : <div style={{ height: '37px' }} />}
-      <div>
-        {filterStrings.length !== 0 ? filterResetButton() : null }
-      </div>
+    <div className="review-active-filter-container" style={{ height: '37px' }}>
+      { filterStrings.length
+        ? `Reviews Displayed: ${filterStrings}`
+        : null }
+      <button type="button" onClick={() => filterReset()}>Reset Filters</button>
     </div>
   );
 }

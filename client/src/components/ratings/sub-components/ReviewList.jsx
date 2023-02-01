@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
-import RelevanceDropdown from './SortDropDown.jsx';
+import RelevanceDropdown from './RelevanceDropdown.jsx';
 
 export default function ReviewList({ reviews, selectedRating, setReviews }) {
-  const [numReviews, setNumReviews] = useState(reviews.length);
-  const reviewMapper = reviews.map((review) => (
+  // HELPER FUNCTIONS //
+  const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
       review={review}
       key={review.review_id}
@@ -13,53 +13,27 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
     />
   ));
 
-  const filterReviewMapper = () => {
+  const reviewRenderer = () => {
+    if (!selectedRating) {
+      return reviewMapper(reviews);
+    }
     const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
-    if (filteredReviews.length === 0) {
-      return reviewMapper;
-    }
-    return filteredReviews.map((review) => (
-      <ReviewTile
-        review={review}
-        key={review.review_id}
-        setReviews={setReviews}
-        reviews={reviews}
-      />
-    ));
+    return reviewMapper(filteredReviews);
   };
 
-  const numReviewsTracker = () => {
-    const trueKeys = Object.keys(selectedRating)
-      .filter((key) => selectedRating[key] === true)
-      .map(Number);
-    const filteredArr = reviews.filter((review) => trueKeys.includes(review.rating));
-    if (filteredArr.length === 0) {
-      setNumReviews(reviews.length);
-      return;
-    }
-    setNumReviews(filteredArr.length);
-  };
-
+  // INITIALIZATION //
   useEffect(() => {
-    numReviewsTracker();
-  }, [selectedRating, reviews]);
 
-  const numReviewsText = () => {
-    if (numReviews === 0) {
-      return 'No Reviews';
-    } if (numReviews === 1) {
-      return '1 review, sorted by relevance';
-    }
-    return `${numReviews} reviews, sorted by relevance`;
-  };
+  }, [selectedRating, reviews]);
 
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">
-        <RelevanceDropdown setReviews={setReviews} reviews={reviews}/>
+        <RelevanceDropdown setReviews={setReviews} reviews={reviews} />
       </div>
-      {/* <div className="review-list-header">{numReviewsText()}</div> */}
-      {filterReviewMapper()}
+      { reviews
+        ? reviewRenderer()
+        : null }
     </div>
   );
 }

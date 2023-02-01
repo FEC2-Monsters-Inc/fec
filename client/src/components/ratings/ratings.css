@@ -1,3 +1,9 @@
+/* ///// TOP LEVEL COMPONTENT ///// */
+#ratings-widget {
+  margin: auto;
+  max-width: 1200px;
+}
+
 .ratings-parent {
   display: flex;
   margin: auto;
@@ -77,12 +83,12 @@
   width: 20rem;
 }
 
-.review-hover:hover {
+/* .hover {
   width: 120%;
   transform: scale(1.15, 1.15);
-  /* background-color:#F3D8FF; */
+  background-color:#F3D8FF;
   filter: drop-shadow(0 0 1rem black);
-}
+} */
 
 .review-tracker-bar-parent {
   height: 20px;
@@ -300,3 +306,5 @@
 /* .review-sort-dropdown-main {
   border: medium dashed black;
 } */
+
+/* ///// ACTIVE FILTER COMPONENT ///// */

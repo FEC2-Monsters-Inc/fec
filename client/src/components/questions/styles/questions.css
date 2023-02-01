@@ -16,6 +16,12 @@ body {
   line-height: 120%;
 }
 
+body {
+  display: block;
+  margin: 8px;
+  line-height: 120%;
+}
+
 /* QUESTIONS & ANSWERS + GENERALS */
 
 .qa.q\&a {

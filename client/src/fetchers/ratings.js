@@ -3,12 +3,21 @@ import axios from 'axios';
 const SERVER_BASEURL = 'http://localhost:3000/api/reviews/';
 
 export default {
-  // Default sort is 'Relevant'
+  // Default sort is 'Relevant', default count set to 2
   getReviews: (id) => {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: {'product_id': id}
+      params: {'product_id': id, 'count': 2}
+    };
+
+    return axios(options);
+  },
+  getAllReviews: (id) => {
+    const options = {
+      url: SERVER_BASEURL,
+      method: 'get',
+      params: {'product_id': id, 'count': 5000}
     };
 
     return axios(options);

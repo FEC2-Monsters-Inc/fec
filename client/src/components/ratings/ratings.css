@@ -313,6 +313,11 @@
   flex-direction: column;
 }
 
+.scroll-review-list {
+  overflow-y: auto;
+  height: 25rem;
+}
+
 /* .review-sort-dropdown-main {
   border: medium dashed black;
 } */

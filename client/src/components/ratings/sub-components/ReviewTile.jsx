@@ -3,7 +3,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
-import StarRating from '../../../helpers/star-rating/starRating.jsx';
+import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
 export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //
@@ -62,6 +62,13 @@ export default function ReviewTile({ review, setReviews, reviews }) {
       ));
     }
   };
+  // Rounds star rating to 5 intervals on a 1-100 scale
+  const roundedPercentage = (rounder, num) => {
+    const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
+    const result = (roundsByFive / 5) * 100;
+    console.log(result);
+    return result;
+  };
 
   // EVENT HANDLERS //
   const imgToggler = (pic) => {
@@ -90,6 +97,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     if (review.body.length < 250) {
       setShowFull(true);
     }
+    roundedPercentage(0.25, review.rating);
   }, [review, review.helpfulness, reviews]);
 
   return (
@@ -97,7 +105,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
       <div className="review-tile-container-1">
         <p className="review-tile-nameAndDate">{nameAndDate}</p>
         <div className="review-tile-stars">
-          <StarRating ratingPercentage={`${(review.rating / 5) * 100}%`} />
+          <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
         </div>
       </div>
       <p className="review-tile-summary">{summaryLengthChecker()}</p>

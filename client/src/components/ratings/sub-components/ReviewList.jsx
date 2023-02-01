@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
+import fetcher from '../../../fetchers';
 
 export default function ReviewList({
   reviews,
@@ -9,7 +10,9 @@ export default function ReviewList({
   listLength,
   setListLength,
 }) {
-  // const [listLength, setListLength] = useState(0);
+
+  const [loadedReviews, setLoadedReviews] = useState(null);
+
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -25,14 +28,22 @@ export default function ReviewList({
       return reviewMapper(reviews);
     }
     const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
-    // setListLength(filteredReviews.length);
-    // console.log(listLength);
     return reviewMapper(filteredReviews);
   };
 
+  // const twoAtATime = () => {
+  //   if (loadedReviews) {
+  //     setLoadedReviews(loadedReviews.slice(2));
+  //     setReviews([...reviews, loadedReviews[1], loadedReviews[2]]);
+  //   }
+  //   //console.log(reviews);
+  // };
+
   // INITIALIZATION //
   useEffect(() => {
-
+    fetcher.ratings.getAllReviews(40350)
+      .then(({ data }) => setLoadedReviews(data.results));
+    //twoAtATime();
   }, [selectedRating, reviews]);
 
   return (
@@ -45,9 +56,14 @@ export default function ReviewList({
           setListLength={setListLength}
         />
       </div>
-      { reviews
-        ? reviewRenderer()
-        : null }
+      <div className="scroll-review-list">
+        { reviews
+          ? reviewRenderer()
+          : null }
+      </div>
+      <div className="review-list-add-more-button">
+          <button onClick={()=>twoAtATime()}>click me</button>
+      </div>
     </div>
   );
 }

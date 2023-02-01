@@ -85,6 +85,13 @@ export default function ReviewDashboard({
     }
   };
 
+  const roundedPercentage = (rounder, num) => {
+    const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
+    const result = (roundsByFive / 5) * 100;
+    console.log(result);
+    return result;
+  };
+
   const starMapper = stars.map((e) => (
     <div className="review-single-star-container" key={`star key-${Math.random()}`}>
       <div className="review-single-star-fill" style={{ width: `${parseInt((e * 31), 10)}px` }}>

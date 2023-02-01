@@ -49,7 +49,6 @@ export default function RelevanceDropdown({ setReviews, reviews, listLength, set
     if (reviews) {
       setDisplay(true);
     }
-    console.log(listLength)
   }, [reviews, listLength]);
 
   return (
@@ -63,7 +62,7 @@ export default function RelevanceDropdown({ setReviews, reviews, listLength, set
             {' '}
             <span onClick={handleClick} style={{ textDecoration: 'underline' }}>
               {sortString}
-              <VscTriangleDown style={{ display: 'inline-block', position: 'absolute' }} />
+              <VscTriangleDown />
             </span>
           </p>
         )

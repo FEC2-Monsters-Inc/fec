@@ -9,7 +9,7 @@ export default function Gallery({ style }) {
   useEffect(() => {
     if (style) {
       setHero(style.photos[0].url);
-      setImages(style.photos.slice(1).map((photo, index) => ({
+      setImages(style.photos.map((photo, index) => ({
         url: photo.url,
         key: index,
       }
@@ -20,7 +20,7 @@ export default function Gallery({ style }) {
   return (
     <div id="gallery">
       <div className="side-thumb-images">
-        { images.map((img) => <img className="side-thumbs" src={img.url} key={img.key} alt="More product thumbs" />)}
+        { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" />)}
         <button className="scroll-images" type="button">Scroll</button>
       </div>
       <div className="hero-image-container">

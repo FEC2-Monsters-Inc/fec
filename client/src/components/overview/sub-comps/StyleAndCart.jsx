@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function StyleSelect({ styles }) {
+export default function StyleSelect({ styles, setStyle }) {
   // STATE DATA //
   const [currStyle, setCurrStyle] = useState({ name: '' });
   const [styleThumbs, setStyleThumbs] = useState([]);

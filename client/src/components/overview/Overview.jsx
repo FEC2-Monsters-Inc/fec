@@ -31,7 +31,7 @@ export default function Overview({ product, styles }) {
         </div>
         <div className="right-main">
           <ProdInfo product={product} />
-          <StyleAndCart styles={styles} />
+          <StyleAndCart styles={styles} setStyle={setStyle} />
         </div>
         <div className="bottom-main">
           <Description product={product} />

@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function Decsription({ product }) {
-  console.log(product);
-
   // HELPER FUNCTIONS //
   const featureRenderer = () => product.features.map((feat, index) => {
     const id = index;

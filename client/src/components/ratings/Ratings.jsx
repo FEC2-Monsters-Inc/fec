@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
-import './ratings.css';
+import React, { useState } from 'react';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
-import axios from 'axios';
+import './ratings.css';
 
 export default function Ratings({
-  feature,
+  reviews,
+  setReviews,
+  reviewMeta,
 }) {
-  const [reviews, setReviews] = useState([]);
-  const [selectedRating, setSelectedRating] = useState({
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-  });
-
-  useEffect(() => {
-    fetcher.ratings.getReviews(40348) // 40344 is our test
-      .then(({ data }) => setReviews(data.results))
-      .catch((error) => console.log(error));
-  }, [feature]);
+  // STATE DATA //
+  const [selectedRating, setSelectedRating] = useState(null);
 
   return (
-    <div id="reviews-widget">
-      <div className="review-header">Ratings and Reviews</div>
+    <div id="ratings-widget">
+      <h1 className="review-header">Ratings and Reviews</h1>
       <div className="ratings-parent">
-        <ReviewDashboard reviews={reviews} setSelectedRating={setSelectedRating} selectedRating={selectedRating} />
-        <ReviewList reviews={reviews} selectedRating={selectedRating} />
+        <ReviewDashboard
+          reviews={reviews}
+          setSelectedRating={setSelectedRating}
+          selectedRating={selectedRating}
+          reviewMeta={reviewMeta}
+        />
+        <ReviewList
+          reviews={reviews}
+          selectedRating={selectedRating}
+          setReviews={setReviews}
+        />
       </div>
     </div>
   );

@@ -78,8 +78,10 @@ export default function QandAModal({
       <div className="qa modal-fg">
         <div className="qa modal-header">
           <h4 className="qa modal-title">
-            {type === 'question' ? 'Add a Question' : 'Add an Answer'}
+            {type === 'question' ? 'Ask your Question' : 'Submit your Answer'}
           </h4>
+          {/* TODO: add subtitle 'About the [Product Name Here]' */}
+          {/* TODO: add subtitle (for answer) '[Product Name]: [Question Body]' */}
         </div>
         <div className="qa modal-body">
           <form id={`add-${type}-form`} onSubmit={submitForm}>

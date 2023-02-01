@@ -22,15 +22,19 @@ export default {
 
     return axios(options);
   },
+
   getReviewMeta: (id) => {
     const options = {
       url: `${SERVER_BASEURL}meta`,
+    const options = {
+      url: `${SERVER_BASEURL}meta`,
       method: 'get',
-      params: {'product_id': id}
+      params: { product_id: id },
     };
 
     return axios(options);
   },
+
   updateUseful: (id) => {
     const options = {
       url: `${SERVER_BASEURL}${id}/helpful`,

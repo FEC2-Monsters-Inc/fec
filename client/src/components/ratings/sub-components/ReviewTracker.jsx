@@ -14,6 +14,7 @@ export default function ReviewTracker({
   const [numReviews, setNumReviews] = useState({});
 
   // HELPER FUNCTIONS //
+  // HELPER FUNCTIONS //
   const getRatingPercentages = () => {
     const ratingTotals = {
       1: 0,
@@ -36,6 +37,7 @@ export default function ReviewTracker({
     });
   };
 
+  // EVENT HANDLERS //
   // EVENT HANDLERS //
   const toggleRating = (num) => {
     // lines 42-48: Make review bars w/o reviews un-clickable.

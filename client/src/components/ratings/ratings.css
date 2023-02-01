@@ -1,12 +1,19 @@
 /* ///// TOP LEVEL COMPONTENT ///// */
 #ratings-widget {
   margin: auto;
+  margin-bottom: 5em;
+  max-width: 1000px;
+}
+
+/* ///// TOP LEVEL COMPONTENT ///// */
+#ratings-widget {
+  margin: auto;
   max-width: 1200px;
 }
 
 .ratings-parent {
   display: flex;
-  margin: auto;
+  justify-content: space-between;
 }
 
 .review-tile-container-1 {
@@ -17,6 +24,18 @@
 
 .review-tile-container-2 {
   display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: .5em;
+}
+
+.review-tile-container-2 {
+  display: flex;
+}
+
+.review-tile-nameAndDate {
+  font-style:italic;
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 .review-tile-nameAndDate {
@@ -70,12 +89,13 @@
 }
 
 .review-header {
-  font-size: 32px;
+  font-size: 2em;
+  margin-bottom: 1em;
   text-decoration: underline;
 }
 
 .review-list-container {
-  margin-left: 6rem;
+  width: 50%;
 }
 
 .review-tracker-bar-container {
@@ -89,7 +109,7 @@
   transform: scale(1.05, 1.05);
 
   filter: drop-shadow(0 0 1rem black);
-}
+} */
 
 .review-tracker-bar-parent {
   height: 20px;

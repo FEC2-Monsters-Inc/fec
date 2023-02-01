@@ -1,10 +1,11 @@
 import React from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
 
-export default function Search(props) {
-
+export default function Search() {
   return (
     <div id="search">
-      <h3>SEARCH COMPONENT</h3>
+      __________________
+      <AiOutlineSearch className="search-icon" size="1.5em" />
     </div>
   );
 }

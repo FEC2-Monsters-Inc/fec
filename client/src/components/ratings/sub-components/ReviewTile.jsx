@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
+import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
+export default function ReviewTile({ review, setReviews, reviews }) {
+  // STATE DATA //
 export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -12,6 +16,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   const [showFull, setShowFull] = useState(false);
   const [helpfulClick, setHelpfulClick] = useState(false);
 
+  // HELPER FUNCTIIONS //
   // HELPER FUNCTIIONS //
   const getDateString = (dateString) => {
     const date = new Date(dateString);
@@ -25,6 +30,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
   // handles review summary
+  // handles review summary
   const summaryLengthChecker = () => {
     if (review.summary.length > 60) {
       return `${review.summary.substring(0, 60)} ...`;
@@ -33,12 +39,14 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   };
 
   // elipses function that works with bodyLengthChecker
+  // elipses function that works with bodyLengthChecker
   const elipsesSpan = () => (
     <span className="review-elipses-span" onClick={() => setShowFull(true)}>
       {showFull ? review.body : '...'}
     </span>
   );
 
+  // Handles review body with truncation if neccessary
   // Handles review body with truncation if neccessary
   const bodyLengthChecker = () => {
     if (review.body.length > 250) {
@@ -47,6 +55,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     return review.body;
   };
 
+  // Creates thumbnails with on-click functionality
   // Creates thumbnails with on-click functionality
   const photoHandler = () => {
     if (review.photos.length > 0) {
@@ -57,6 +66,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
           alt={photoAltTxt}
           key={element.id}
           className="review-tile-individual-photo"
+          onClick={() => imgToggler(element.url)}
           onClick={() => imgToggler(element.url)}
         />
       ));
@@ -88,9 +98,20 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     fetcher.ratings.updateReport(review.review_id)
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
+      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
+      .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.log(error));
   };
+  const reportHandler = () => {
+    fetcher.ratings.updateReport(review.review_id)
+      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
+      .then(({ data }) => setReviews(data.results))
+      .then(() => setHelpfulClick(true))
+      .catch((error) => console.log(error));
+  };
+
+  // INITIALIZATION //
 
   // INITIALIZATION //
   useEffect(() => {

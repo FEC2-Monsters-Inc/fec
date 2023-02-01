@@ -6,6 +6,7 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
   const [sliderText, setSliderText] = useState({ small: '', perf: '', big: '' });
   const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
 
+
   // HELPER FUNCTIONS //
   function ratingDescription() {
     if (charName === 'Size') {
@@ -22,6 +23,7 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
       setSliderText({ small: 'too long', perf: 'perfect!', big: 'too short' });
     }
   }
+
 
   // INITIALIZATION //
   useEffect(() => {

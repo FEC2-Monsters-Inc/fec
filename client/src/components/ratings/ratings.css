@@ -17,6 +17,18 @@
 
 .review-tile-container-2 {
   display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: .5em;
+}
+
+.review-tile-container-2 {
+  display: flex;
+}
+
+.review-tile-nameAndDate {
+  font-style:italic;
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 .review-tile-nameAndDate {
@@ -89,6 +101,7 @@
   background-color:#F3D8FF;
   filter: drop-shadow(0 0 1rem black);
 } */
+
 
 .review-tracker-bar-parent {
   height: 20px;

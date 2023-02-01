@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Answer from './Answer.jsx';
+import QandAModal from './QandAModal.jsx';
+import fetcher from '../../fetchers/questions';
 
 export default function Question({
   question: {
-    // question_id: id,
+    question_id,
     question_body: body,
     // question_date: date,
     // asker_name: asker,
@@ -11,20 +13,18 @@ export default function Question({
     // reported,
     answers,
   },
+  updateQuestions,
+  filterText,
 }) {
   const [numAnswers, setNumAnswers] = useState(2);
+  const [showAddA, setShowAddA] = useState(false);
 
-  const clickYes = (e) => {
+  const markHelpfulQuestion = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Send Helpful Question PUT request
-      // console.log('CLICK YES');
-    }
-  };
-
-  const addAnswer = (e) => {
-    if (e.type === 'click' || e.key === 'Enter') {
-      // TODO: Render Add Answer modal
-      // console.log('ADD ANSWER')
+      fetcher
+        .markHelpfulQuestion(question_id)
+        .then(updateQuestions)
+        .catch((err) => console.error('markHelpfulQuestion: ', err));
     }
   };
 
@@ -36,11 +36,33 @@ export default function Question({
     }
   };
 
+  // TODO: same function in QuestionsList.jsx
+  const showModal = (e) => {
+    if (e.type === 'click' || e.key === 'Enter') {
+      setShowAddA(true);
+    }
+  };
+
+  const formatBody = () => {
+    if (filterText.length < 3) return body;
+    const parts = body.split(new RegExp(`(${filterText})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, i) => (
+          part.toLowerCase() === filterText.toLowerCase()
+            ? <mark key={`${i + 1}_${part}`}>{part}</mark>
+            : part
+        ))}
+      </span>
+    );
+  };
+
   return (
     <div className="qa q&a">
       <div className="qa question">
-        <h3>
-          {`Q: ${body}`}
+        <h3 className="qa question-body">
+          {'Q: '}
+          {formatBody()}
         </h3>
         <span className="qa control">
           {'Helpful? '}
@@ -48,21 +70,28 @@ export default function Question({
             className="qa link"
             role="link"
             tabIndex={0}
-            onKeyUp={clickYes}
-            onClick={clickYes}
+            onKeyUp={markHelpfulQuestion}
+            onClick={markHelpfulQuestion}
           >
             Yes
           </span>
+          {/* TODO: conditional rendering + 1 on yes click */}
           {` (${helpfulness}) | `}
           <span
             className="qa link"
             role="link"
             tabIndex={0}
-            onKeyUp={addAnswer}
-            onClick={addAnswer}
+            onKeyUp={showModal}
+            onClick={showModal}
           >
             Add Answer
           </span>
+          <QandAModal
+            type="answer"
+            show={showAddA}
+            closeModal={setShowAddA}
+            question_id={question_id}
+          />
         </span>
       </div>
       {/* TODO: should only render 2 answers */}
@@ -75,6 +104,8 @@ export default function Question({
                 <Answer
                   key={key}
                   answer={answers[key]}
+                  updateQuestions={updateQuestions}
+                  decrementAnswers={() => setNumAnswers(numAnswers - 1)}
                 />
               ))}
             </div>
@@ -93,7 +124,6 @@ export default function Question({
           </span>
         )
         : null}
-
     </div>
   );
 }

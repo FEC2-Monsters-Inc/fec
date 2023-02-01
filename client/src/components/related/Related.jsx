@@ -34,7 +34,18 @@ export default function Related({ feature }) {
 
   return (
     <div id="related-widget">
-      <RelatedList feature={feature} end={relatedList.length - 5} relatedList={relatedList} />
+      <h2>RELATED PRODUCTS</h2>
+      <br />
+      <RelatedList feature={feature} relatedList={relatedList} />
+      <br />
+      <br />
+      <h2>OUTFIT PRODUCTS</h2>
+      <br />
+      <OutfitList
+        feature={feature}
+        outfitIdList={outfitIdList}
+        setOutfitIdList={setOutfitIdList}
+      />
     </div>
   );
 }

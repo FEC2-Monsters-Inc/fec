@@ -14,22 +14,24 @@ export default function CompareModal({
     return (
       <div className="compare-modal">
         <AiOutlineClose className="compare-close" onClick={() => setShowModal(false)} />
-        <tbody id="compare-tbody">
-          {allChars.map((char, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <tr className="compare-tr" key={index}>
-              <td className="compare-th">
-                {featureMeta.characteristics[char]
-                  ? Math.floor(Number(featureMeta.characteristics[char].value)) : ''}
-              </td>
-              <td className="compare-th">{char}</td>
-              <td className="compare-th">
-                {relProdMeta.characteristics[char]
-                  ? Math.floor(Number(relProdMeta.characteristics[char].value)) : ''}
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <table id="compare-tbody">
+          <tbody>
+            {allChars.map((char, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <tr className="compare-tr" key={index}>
+                <td className="compare-th">
+                  {featureMeta.characteristics[char]
+                    ? Math.floor(Number(featureMeta.characteristics[char].value)) : ''}
+                </td>
+                <td className="compare-th">{char}</td>
+                <td className="compare-th">
+                  {relProdMeta.characteristics[char]
+                    ? Math.floor(Number(relProdMeta.characteristics[char].value)) : ''}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }

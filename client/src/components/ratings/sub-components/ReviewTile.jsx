@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
-import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
-export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //
 export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //
@@ -89,15 +86,6 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
     fetcher.ratings.updateUseful(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setHelpfulClick(true))
-      .catch((error) => console.log(error));
-  };
-  const reportHandler = () => {
-    fetcher.ratings.updateReport(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
-      .then(({ data }) => setReviews(data.results))
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))

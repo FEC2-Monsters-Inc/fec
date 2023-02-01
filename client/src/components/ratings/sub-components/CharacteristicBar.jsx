@@ -39,9 +39,6 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
         <p className="review-slider-label-1">{sliderText.small}</p>
         <p className="review-slider-label-2">{sliderText.perf}</p>
         <p className="review-slider-label-3">{sliderText.big}</p>
-        <p className="review-slider-label-1">{sliderText.small}</p>
-        <p className="review-slider-label-2">{sliderText.perf}</p>
-        <p className="review-slider-label-3">{sliderText.big}</p>
       </div>
     </div>
   );

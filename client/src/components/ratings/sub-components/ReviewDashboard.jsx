@@ -14,14 +14,11 @@ export default function ReviewDashboard({
   setListLength,
 }) {
   // STATE DATA //
-  // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
   const [recommended, setRecommended] = useState(0);
   const [filter, setFilter] = useState({});
-  const [filter, setFilter] = useState({});
 
-  // HELPER FUNCTIONS //
   // HELPER FUNCTIONS //
   const starRating = function dynamicStarRater(x) {
     const tempStars = [];
@@ -70,24 +67,12 @@ export default function ReviewDashboard({
       reviews.forEach((review) => {
         total += review.rating;
       });
-    if (reviews.length) {
-      let total = 0;
-      reviews.forEach((review) => {
-        total += review.rating;
-      });
       setAvgRating((total / reviews.length).toFixed(1));
       starRating(total / reviews.length);
     }
   };
 
   const recommendedSetter = () => {
-    if (reviews.length) {
-      let totalRecs = 0;
-      reviews.forEach((review) => {
-        if (review.recommend) {
-          totalRecs += 1;
-        }
-      });
     if (reviews.length) {
       let totalRecs = 0;
       reviews.forEach((review) => {
@@ -133,22 +118,16 @@ export default function ReviewDashboard({
       <div className="review-main-star-container">
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
-        <p className="review-avg-rating">{avgRating}</p>
-        <div className="review-stars-main">
           {starMapper}
         </div>
-        <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       </div>
       <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       <div className="review-dash-main">
         <h3 className="review-rating-breakdown-title">Review Breakdown</h3>
         <ActiveFilters
           reviews={reviews}
-          reviews={reviews}
           selectedRating={selectedRating}
           setSelectedRating={setSelectedRating}
-          filter={filter}
-          setFilter={setFilter}
           filter={filter}
           setFilter={setFilter}
         />
@@ -160,7 +139,6 @@ export default function ReviewDashboard({
           listLength={listLength}
           setListLength={setListLength}
         />
-        <CharacteristicTracker reviewMeta={reviewMeta} />
         <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>
     </div>

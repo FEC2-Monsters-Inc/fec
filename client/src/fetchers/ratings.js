@@ -8,7 +8,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: {'product_id': id, 'count': 2}
+      params: { product_id: id, count: 2 },
     };
 
     return axios(options);
@@ -17,15 +17,13 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: {'product_id': id, 'count': 5000}
+      params: { product_id: id, count: 5000 },
     };
 
     return axios(options);
   },
 
   getReviewMeta: (id) => {
-    const options = {
-      url: `${SERVER_BASEURL}meta`,
     const options = {
       url: `${SERVER_BASEURL}meta`,
       method: 'get',
@@ -55,7 +53,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: {'product_id': id, 'sort': 'newest'},
+      params: { product_id: id, sort: 'newest' },
     };
 
     return axios(options);
@@ -64,7 +62,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: {'product_id': id, 'sort': 'helpful'},
+      params: { product_id: id, sort: 'helpful' },
     };
 
     return axios(options);

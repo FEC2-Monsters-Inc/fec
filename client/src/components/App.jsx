@@ -27,9 +27,6 @@ export default function App() {
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
-  const [styles, setStyles] = useState(null);
-  const [reviews, setReviews] = useState(null);
-  const [reviewMeta, setReviewMeta] = useState(null);
 
   // INITIALIZATION //
   useEffect(() => {
@@ -47,21 +44,9 @@ export default function App() {
 
     fetcher.ratings.getReviewMeta(40350)
       .then(({ data }) => setReviewMeta(data))
-      .catch((err) => console.error('initial review meta fetch: ', err));
+      .catch((err) => console.error('initial review meta fetch: ', err))
       .then(({ data }) => setFeaturedProduct(data))
       .catch((err) => console.error('initial product fetch: ', err));
-
-    fetcher.overview.getStylesById(40350)
-      .then(({ data }) => setStyles(data))
-      .catch((err) => console.error('initial style fetch: ', err));
-
-    fetcher.ratings.getReviews(40350)
-      .then(({ data }) => setReviews(data.results))
-      .catch((err) => console.error('initial reviews fetch: ', err));
-
-    fetcher.ratings.getReviewMeta(40350)
-      .then(({ data }) => setReviewMeta(data))
-      .catch((err) => console.error('initial review meta fetch: ', err));
   }, []);
 
   return (

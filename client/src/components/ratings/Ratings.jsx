@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import React, { useState } from 'react';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
 import './ratings.css';
-import './ratings.css';
 
 export default function Ratings({
-  reviews,
-  setReviews,
-  reviewMeta,
   reviews,
   setReviews,
   reviewMeta,
@@ -18,8 +13,6 @@ export default function Ratings({
   const [listLength, setListLength] = useState(0);
 
   return (
-    <div id="ratings-widget">
-      <h1 className="review-header">Ratings and Reviews</h1>
     <div id="ratings-widget">
       <h1 className="review-header">Ratings and Reviews</h1>
       <div className="ratings-parent">

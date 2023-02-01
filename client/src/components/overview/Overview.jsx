@@ -10,28 +10,28 @@ import Description from './sub-comps/Description.jsx';
 
 export default function Overview({ product, styles }) {
   // STATE DATA //
-  const [style, setStyle] = useState(null);
+  const [currStyle, setCurrStyle] = useState(null);
 
   // INITIALIZATION //
   useEffect(() => {
     if (styles) {
-      setStyle(styles.results[0]);
+      setCurrStyle(styles.results[0]);
     }
   }, [styles]);
 
   return (
     <>
-      {/* <div id="header">
+      <div id="header">
         <h1 className="temp-logo">FEC Project</h1>
         <Search />
-      </div> */}
+      </div>
       <div id="overview">
         <div className="left-main">
-          <Gallery product={product} style={style} />
+          <Gallery product={product} currStyle={currStyle} />
         </div>
         <div className="right-main">
-          <ProdInfo product={product} />
-          <StyleAndCart styles={styles} setStyle={setStyle} />
+          <ProdInfo product={product} currStyle={currStyle} />
+          <StyleAndCart styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
         </div>
         <div className="bottom-main">
           <Description product={product} />

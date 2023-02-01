@@ -1,35 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import {
+  AiOutlineDoubleLeft, AiOutlineDoubleRight, AiOutlineDown, AiOutlineExpand,
+} from 'react-icons/ai';
 
-export default function Gallery({ style }) {
+export default function Gallery({ currStyle, setCurrStyle }) {
   // STATE DATA //
   const [images, setImages] = useState([]);
   const [heroImage, setHero] = useState('');
+  console.log(images);
+
+  // EVENT HANDLERS //
+  const toggleHero = (event) => {
+    setHero(event.target.src);
+  };
 
   // INITIALIZATION //
   useEffect(() => {
-    if (style) {
-      setHero(style.photos[0].url);
-      setImages(style.photos.map((photo, index) => ({
+    if (currStyle) {
+      setHero(currStyle.photos[0].url);
+      setImages(currStyle.photos.map((photo, index) => ({
         url: photo.url,
         key: index,
       }
       )));
     }
-  }, [style]);
+  }, [currStyle]);
 
   return (
     <div id="gallery">
-      <div className="side-thumb-images">
-        { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" />)}
-        <button className="scroll-images" type="button">Scroll</button>
-      </div>
+      <button className="scroll-hero-left" type="button"><AiOutlineDoubleLeft size="2em" /></button>
       <div className="hero-image-container">
-        <button className="scroll-hero left" type="button">Left</button>
+        <div className="side-thumb-images">
+          { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" onClick={(e) => toggleHero(e)} />)}
+          <button className="scroll-images" type="button"><AiOutlineDown size="2em" /></button>
+        </div>
         <img className="hero-image" src={heroImage} alt="product hero" />
-        <button className="expand-hero" type="button">Expand</button>
-        <button className="scroll-hero right" type="button">Right</button>
+        <button className="expand-hero" type="button"><AiOutlineExpand size="1.5em" /></button>
       </div>
-
+      <button className="scroll-hero-right" type="button"><AiOutlineDoubleRight size="2em" /></button>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
 import axios from 'axios';
+import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 
 export default function Related({ feature, getRelatedList }) {
@@ -13,15 +13,15 @@ export default function Related({ feature, getRelatedList }) {
           if (!data.length) {
             throw new Error('No Related Product!');
           }
-          return Promise.all(data.map(id => fetcher.getProductById(id)));
+          return Promise.all(data.map((id) => fetcher.getProductById(id)));
         })
-        .then(results => setRelatedList(results.map(result => result.data)))
-        .catch(err => console.log(err));
+        .then((results) => setRelatedList(results.map((result) => result.data)))
+        .catch((err) => console.log(err));
     }
   }, [feature]);
 
   return (
-    <div>
+    <div id="related-widget">
       <RelatedList feature={feature} end={relatedList.length - 5} relatedList={relatedList} />
     </div>
   );

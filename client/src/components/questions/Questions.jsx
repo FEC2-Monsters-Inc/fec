@@ -17,7 +17,7 @@ export default function Questions({
   }, [feature]);
 
   return (
-    <div className="qa section">
+    <div id="questions-widget" className="qa section">
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchBar text={filterText} handleChange={setFilterText} />
       <QuestionsList questions={questions} />

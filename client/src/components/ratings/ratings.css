@@ -1,12 +1,13 @@
 /* ///// TOP LEVEL COMPONTENT ///// */
 #ratings-widget {
   margin: auto;
-  max-width: 1200px;
+  margin-bottom: 5em;
+  max-width: 1000px;
 }
 
 .ratings-parent {
   display: flex;
-  margin: auto;
+  justify-content: space-between;
 }
 
 .review-tile-container-1 {
@@ -69,12 +70,13 @@
 }
 
 .review-header {
-  font-size: 32px;
+  font-size: 2em;
+  margin-bottom: 1em;
   text-decoration: underline;
 }
 
 .review-list-container {
-  margin-left: 6rem;
+  width: 50%;
 }
 
 .review-tracker-bar-container {
@@ -307,4 +309,9 @@
   border: medium dashed black;
 } */
 
-/* ///// ACTIVE FILTER COMPONENT ///// */
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2em;
+  width: 50%;
+}

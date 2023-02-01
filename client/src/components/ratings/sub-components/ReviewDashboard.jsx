@@ -100,7 +100,7 @@ export default function ReviewDashboard({
   }, [reviews]);
 
   return (
-    <>
+    <div className="dashboard-main">
       <div className="review-main-star-container">
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
@@ -125,6 +125,6 @@ export default function ReviewDashboard({
         />
         <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>
-    </>
+    </div>
   );
 }

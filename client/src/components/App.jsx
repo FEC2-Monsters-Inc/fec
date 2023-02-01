@@ -50,7 +50,7 @@ export default function App() {
   return (
     <div>
       <Overview product={featuredProduct} styles={styles} />
-      {/* <Related feature={featuredProduct} />
+      <Related feature={featuredProduct} />
       <Questions feature={featuredProduct} />
       <Ratings
         feature={featuredProduct}
@@ -58,7 +58,7 @@ export default function App() {
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
-      /> */}
+      />
     </div>
   );
 }

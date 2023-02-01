@@ -23,7 +23,7 @@ export default function ProdInfo({ product, currStyle }) {
           <StarRating ratingPercentage="60%" className="star-icons" />
           {/* Star Rating will need dynamically rendered review data. Using dummy data for now. */}
         </h3>
-        <a className="gray-text reviews-link" href="#reviews-widget">Read all reviews</a>
+        <a className="gray-text reviews-link" href="#ratings-widget">Read all reviews</a>
       </div>
       { product
         ? (

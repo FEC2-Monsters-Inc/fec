@@ -7,7 +7,6 @@ export default function Gallery({ currStyle, setCurrStyle }) {
   // STATE DATA //
   const [images, setImages] = useState([]);
   const [heroImage, setHero] = useState('');
-  console.log(images);
 
   // EVENT HANDLERS //
   const toggleHero = (event) => {

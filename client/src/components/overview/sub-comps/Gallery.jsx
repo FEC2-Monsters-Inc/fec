@@ -27,16 +27,16 @@ export default function Gallery({ currStyle, setCurrStyle }) {
 
   return (
     <div id="gallery">
-      <button className="scroll-hero-left" type="button"><AiOutlineDoubleLeft size="2em" /></button>
       <div className="hero-image-container">
+        <button className="scroll-hero-left" type="button"><AiOutlineDoubleLeft size="2em" /></button>
         <div className="side-thumb-images">
           { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" onClick={(e) => toggleHero(e)} />)}
           <button className="scroll-images" type="button"><AiOutlineDown size="2em" /></button>
         </div>
         <img className="hero-image" src={heroImage} alt="product hero" />
         <button className="expand-hero" type="button"><AiOutlineExpand size="1.5em" /></button>
+        <button className="scroll-hero-right" type="button"><AiOutlineDoubleRight size="2em" /></button>
       </div>
-      <button className="scroll-hero-right" type="button"><AiOutlineDoubleRight size="2em" /></button>
     </div>
   );
 }

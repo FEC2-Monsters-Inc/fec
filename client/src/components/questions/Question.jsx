@@ -20,6 +20,15 @@ export default function Question({
   const [showAddA, setShowAddA] = useState(false);
   const [helpfulStatus, setHelpfulStatus] = useState(true);
 
+  // TODO: need to sort answers by helpfulness
+  // const byHelpfulness = (a, b) => {
+  //   if (a[1].helpfulness > b[1].helpfulness) return -1;
+  //   if (a[1].helpfulness < b[1].helpfulness) return 1;
+  //   return 0;
+  // };
+
+  // const sortedAnswers = () => Object.entries(answers).sort(byHelpfulness);
+
   const markHelpfulQuestion = (e) => {
     if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
       fetcher
@@ -102,6 +111,7 @@ export default function Question({
           <div className="qa answers-section">
             <h3>A: </h3>
             <div className="qa answers-list">
+              {/* TODO: sort answers by helpfulness */}
               {Object.keys(answers).slice(0, numAnswers).map((key) => (
                 <Answer
                   key={key}

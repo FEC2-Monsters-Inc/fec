@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import fetcher from '../../fetchers/questions';
 
@@ -12,23 +12,26 @@ export default function Answer({
     photos,
   },
   updateQuestions,
-  decrementAnswers,
+  // decrementAnswers, TODO: consider removing if update unnecessary
 }) {
+  const [helpfulStatus, setHelpfulStatus] = useState(true);
+  const [reportStatus, setReportStatus] = useState(true);
+
   const markHelpfulAnswer = (e) => {
-    if (e.type === 'click' || e.key === 'Enter') {
+    if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
       fetcher
         .markHelpfulAnswer(id)
         .then(updateQuestions)
+        .then(() => setHelpfulStatus(false))
         .catch((err) => console.error('markHelpfulAnswer: ', err));
     }
   };
 
   const reportAnswer = (e) => {
-    if (e.type === 'click' || e.key === 'Enter') {
+    if ((e.type === 'click' || e.key === 'Enter') && reportStatus) {
       fetcher
         .reportAnswer(id)
-        .then(decrementAnswers)
-        .then(updateQuestions)
+        .then(() => setReportStatus(false))
         .catch((err) => console.error('reportAnswer: ', err));
     }
   };
@@ -54,23 +57,23 @@ export default function Answer({
       <div className="qa answer-info">
         {`by ${name}, ${format(parseISO(date), 'MMMM d, yyyy')} | Helpful? `}
         <span
-          className="qa link"
+          className={'qa link'.concat(helpfulStatus ? '' : ' disabled')}
           role="link"
           tabIndex={0}
           onKeyUp={markHelpfulAnswer}
           onClick={markHelpfulAnswer}
         >
-          Yes
+          {helpfulStatus ? 'Yes' : 'Marked!'}
         </span>
         {` (${helpfulness}) | `}
         <span
-          className="qa link"
+          className={'qa link'.concat(reportStatus ? '' : ' disabled')}
           role="link"
           tabIndex={0}
           onKeyUp={reportAnswer}
           onClick={reportAnswer}
         >
-          Report
+          {reportStatus ? 'Report' : 'Reported'}
         </span>
       </div>
     </div>

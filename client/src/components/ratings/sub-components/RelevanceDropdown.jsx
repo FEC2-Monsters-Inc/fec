@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
 import fetcher from '../../../fetchers';
 
-export default function RelevanceDropdown({ setReviews, reviews }) {
+export default function RelevanceDropdown({ setReviews, reviews, listLength, setListLength }) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -36,19 +36,28 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
       .catch((error) => console.error('error fetching relevant: ', error));
   };
 
+  // HELPER FUNCTIONS //
+  const reviewListLength = () => {
+    if (!listLength) {
+      return reviews.length;
+    }
+    return listLength;
+  };
+
   // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
       setDisplay(true);
     }
-  }, [reviews]);
-  // TO-DO: FIX Number of Reviews
+    console.log(listLength)
+  }, [reviews, listLength]);
+
   return (
     <div className="review-sort-dropdown-main">
       { display
         ? (
           <p className="review-sort-title">
-            {reviews.length}
+            {reviewListLength()}
             {' '}
             reviews sorted by
             {' '}

@@ -123,7 +123,13 @@ export default function ReviewTile({ review, setReviews, reviews }) {
           style={helpfulClick ? { cursor: 'default' } : {}}
         >
           Yes
-          <span className="review-helpful-span">{review.helpfulness}</span>
+          <span className="review-helpful-span">
+            (
+            {
+                review.helpfulness
+            }
+            )
+          </span>
         </p>
         <RxDividerVertical />
         <p className="review-tile-report" onClick={() => (!helpfulClick ? reportHandler() : null)}>Report</p>

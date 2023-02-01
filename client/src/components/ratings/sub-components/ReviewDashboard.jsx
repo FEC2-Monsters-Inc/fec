@@ -10,6 +10,8 @@ export default function ReviewDashboard({
   selectedRating,
   reviewMeta,
   changeSelect,
+  listLength,
+  setListLength,
 }) {
   // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
@@ -100,14 +102,14 @@ export default function ReviewDashboard({
   }, [reviews]);
 
   return (
-    <>
+    <div className="test-container">
       <div className="review-main-star-container">
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
           {starMapper}
         </div>
-        <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       </div>
+      <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       <div className="review-dash-main">
         <h3 className="review-rating-breakdown-title">Review Breakdown</h3>
         <ActiveFilters
@@ -122,9 +124,11 @@ export default function ReviewDashboard({
           setSelectedRating={setSelectedRating}
           filter={filter}
           setFilter={setFilter}
+          listLength={listLength}
+          setListLength={setListLength}
         />
         <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>
-    </>
+    </div>
   );
 }

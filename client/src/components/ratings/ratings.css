@@ -66,6 +66,7 @@
 
 .review-main-star-container {
   display: flex;
+  flex-direction: row;
 }
 
 .review-header {
@@ -83,12 +84,12 @@
   width: 20rem;
 }
 
-/* .hover {
+.review-hover-shell-container:hover {
   width: 120%;
-  transform: scale(1.15, 1.15);
-  background-color:#F3D8FF;
+  transform: scale(1.05, 1.05);
+
   filter: drop-shadow(0 0 1rem black);
-} */
+}
 
 .review-tracker-bar-parent {
   height: 20px;
@@ -301,6 +302,15 @@
 
 .review-ul {
 
+}
+
+.review-dash-main  {
+  display: block;
+}
+
+.test-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /* .review-sort-dropdown-main {

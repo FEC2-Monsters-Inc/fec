@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
 
-export default function ReviewList({ reviews, selectedRating, setReviews }) {
+export default function ReviewList({
+  reviews,
+  selectedRating,
+  setReviews,
+  listLength,
+  setListLength,
+}) {
+  // const [listLength, setListLength] = useState(0);
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -18,6 +25,8 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
       return reviewMapper(reviews);
     }
     const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
+    // setListLength(filteredReviews.length);
+    // console.log(listLength);
     return reviewMapper(filteredReviews);
   };
 
@@ -29,7 +38,12 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">
-        <RelevanceDropdown setReviews={setReviews} reviews={reviews} />
+        <RelevanceDropdown
+          setReviews={setReviews}
+          reviews={reviews}
+          listLength={listLength}
+          setListLength={setListLength}
+        />
       </div>
       { reviews
         ? reviewRenderer()

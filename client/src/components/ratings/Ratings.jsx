@@ -10,6 +10,7 @@ export default function Ratings({
 }) {
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
+  const [listLength, setListLength] = useState(0);
 
   return (
     <div id="ratings-widget">
@@ -20,11 +21,15 @@ export default function Ratings({
           setSelectedRating={setSelectedRating}
           selectedRating={selectedRating}
           reviewMeta={reviewMeta}
+          listLength={listLength}
+          setListLength={setListLength}
         />
         <ReviewList
           reviews={reviews}
           selectedRating={selectedRating}
           setReviews={setReviews}
+          listLength={listLength}
+          setListLength={setListLength}
         />
       </div>
     </div>

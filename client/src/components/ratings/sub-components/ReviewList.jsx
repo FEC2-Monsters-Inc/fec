@@ -36,8 +36,8 @@ export default function ReviewList({
       setListIndex(listIndex + 2);
       //setReviews(reviews.push(loadedReviews[listIndex], loadedReviews[listIndex + 1]));
       setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
-      console.log('loaded reviews:', loadedReviews);
-      console.log('reviews:', reviews);
+      // console.log('loaded reviews:', loadedReviews);
+      // console.log('reviews:', reviews);
       // console.log('loadedReviews first two elements:', newReviews);
     }
   };

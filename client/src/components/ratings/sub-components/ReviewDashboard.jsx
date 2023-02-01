@@ -9,11 +9,15 @@ export default function ReviewDashboard({
   setSelectedRating,
   selectedRating,
   reviewMeta,
+  changeSelect,
 }) {
+  // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
   const [stars, setStars] = useState([]);
   const [recommended, setRecommended] = useState(0);
+  const [filter, setFilter] = useState({});
 
+  // HELPER FUNCTIONS //
   const starRating = function dynamicStarRater(x) {
     const tempStars = [];
     let rating = x;
@@ -56,25 +60,24 @@ export default function ReviewDashboard({
   };
 
   const ratingSetter = () => {
-    let total = 0;
-    reviews.reduce((accumulator, review) => {
-      total += review.rating;
-      return total;
-    }, 0);
-    if (reviews.length > 0) {
+    if (reviews.length) {
+      let total = 0;
+      reviews.forEach((review) => {
+        total += review.rating;
+      });
       setAvgRating((total / reviews.length).toFixed(1));
       starRating(total / reviews.length);
     }
   };
 
   const recommendedSetter = () => {
-    let totalRecs = 0;
-    reviews.forEach((review) => {
-      if (review.recommend === true) {
-        totalRecs += 1;
-      }
-    });
-    if (reviews.length > 0) {
+    if (reviews.length) {
+      let totalRecs = 0;
+      reviews.forEach((review) => {
+        if (review.recommend) {
+          totalRecs += 1;
+        }
+      });
       const percent = `${(totalRecs / reviews.length) * 100}%`;
       setRecommended(percent);
     }
@@ -88,45 +91,39 @@ export default function ReviewDashboard({
     </div>
   ));
 
+  // INITIALIZATION //
   useEffect(() => {
-    ratingSetter();
-    recommendedSetter();
+    if (reviews) {
+      ratingSetter();
+      recommendedSetter();
+    }
   }, [reviews]);
 
   return (
-    <div>
+    <div className="dashboard-main">
       <div className="review-main-star-container">
-        <p className="review-avg-rating">
-          {avgRating}
-        </p>
-        <div>
+        <p className="review-avg-rating">{avgRating}</p>
+        <div className="review-stars-main">
           {starMapper}
         </div>
+        <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       </div>
-      <div>
-        {`${recommended} of reviews recommend this product`}
-      </div>
-      <div className="review-rating-breakdown-title">
-        Rating Breakdown
-      </div>
-      <div>
+      <div className="review-dash-main">
+        <h3 className="review-rating-breakdown-title">Review Breakdown</h3>
         <ActiveFilters
-          selectedRating={selectedRating}
           reviews={reviews}
+          selectedRating={selectedRating}
           setSelectedRating={setSelectedRating}
+          filter={filter}
+          setFilter={setFilter}
         />
-      </div>
-      <div>
         <ReviewTracker
           reviews={reviews}
           setSelectedRating={setSelectedRating}
-          selectedRating={selectedRating}
+          filter={filter}
+          setFilter={setFilter}
         />
-      </div>
-      <div>
-        <CharacteristicTracker
-          reviewMeta={reviewMeta}
-        />
+        <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>
     </div>
   );

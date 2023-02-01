@@ -1,5 +1,13 @@
-h3 {
-  margin: 1rem 0;
+#questions-widget {
+  margin: auto;
+  margin-bottom: 5em;
+  max-width: 1000px;
+}
+
+.qa.question {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 /* QUESTIONS & ANSWERS + GENERALS */

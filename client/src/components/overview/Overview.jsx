@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
 import './overview.css';
 
-///// SUB-COMPONENETS /////
+/// // SUB-COMPONENETS /////
 import Search from './sub-comps/Search.jsx';
 import Gallery from './sub-comps/Gallery.jsx';
 import ProdInfo from './sub-comps/ProdInfo.jsx';
-import StyleSelect from './sub-comps/StyleSelect.jsx';
-import AddCart from './sub-comps/AddCart.jsx';
+import StyleAndCart from './sub-comps/StyleAndCart.jsx';
 import Description from './sub-comps/Description.jsx';
 
+export default function Overview({ product, styles }) {
+  // STATE DATA //
+  const [currStyle, setCurrStyle] = useState(null);
 
-export default function Overview({
-  feature,
-  setFeature
-}) {
-
-  ///// STATE DATA /////
-  const [prodStyle, setStyle] = useState({});
-  const [description, setDisplay] = useState(true);
-
-
-  ///// INITIALIZATION /////
+  // INITIALIZATION //
   useEffect(() => {
-    fetcher.overview.getStylesById(40344)
-      .then(result => setStyle(result.data))
-      .catch(err => console.log('err initial styles fetch: ', err));
-  }, []);
+    if (styles) {
+      setCurrStyle(styles.results[0]);
+    }
+  }, [styles]);
 
   return (
     <>
@@ -35,13 +26,16 @@ export default function Overview({
         <Search />
       </div>
       <div id="overview">
-        <Gallery />
-        <ProdInfo />
-        <StyleSelect />
-        <AddCart />
-        {description
-          ? <Description />
-          : null}
+        <div className="left-main">
+          <Gallery product={product} currStyle={currStyle} />
+        </div>
+        <div className="right-main">
+          <ProdInfo product={product} currStyle={currStyle} />
+          <StyleAndCart styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
+        </div>
+        <div className="bottom-main">
+          <Description product={product} />
+        </div>
       </div>
     </>
   );

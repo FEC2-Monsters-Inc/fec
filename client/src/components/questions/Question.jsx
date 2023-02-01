@@ -13,6 +13,8 @@ export default function Question({
     // reported,
     answers,
   },
+  updateQuestions,
+  filterText,
 }) {
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
@@ -21,9 +23,7 @@ export default function Question({
     if (e.type === 'click' || e.key === 'Enter') {
       fetcher
         .markHelpfulQuestion(question_id)
-        .then(() => {
-          // TODO: update the questions
-        })
+        .then(updateQuestions)
         .catch((err) => console.error('markHelpfulQuestion: ', err));
     }
   };
@@ -43,11 +43,26 @@ export default function Question({
     }
   };
 
+  const formatBody = () => {
+    if (filterText.length < 3) return body;
+    const parts = body.split(new RegExp(`(${filterText})`, 'gi'));
+    return (
+      <span>
+        {parts.map((part, i) => (
+          part.toLowerCase() === filterText.toLowerCase()
+            ? <mark key={`${i + 1}_${part}`}>{part}</mark>
+            : part
+        ))}
+      </span>
+    );
+  };
+
   return (
     <div className="qa q&a">
       <div className="qa question">
         <h3 className="qa question-body">
-          {`Q: ${body}`}
+          {'Q: '}
+          {formatBody()}
         </h3>
         <span className="qa control">
           {'Helpful? '}
@@ -60,6 +75,7 @@ export default function Question({
           >
             Yes
           </span>
+          {/* TODO: conditional rendering + 1 on yes click */}
           {` (${helpfulness}) | `}
           <span
             className="qa link"
@@ -88,6 +104,8 @@ export default function Question({
                 <Answer
                   key={key}
                   answer={answers[key]}
+                  updateQuestions={updateQuestions}
+                  decrementAnswers={() => setNumAnswers(numAnswers - 1)}
                 />
               ))}
             </div>

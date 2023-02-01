@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 import QandAModal from './QandAModal.jsx';
 
 export default function QuestionsList({
   questions,
   product_id,
+  updateQuestions,
+  filterText,
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
   const [showAddQ, setShowAddQ] = useState(false);
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      setNumQuestions(numQuestions + 2);
+      let increment = 2;
+      if (numQuestions + increment > questions.length) {
+        increment = questions.length - numQuestions;
+      }
+      setNumQuestions(numQuestions + increment);
     }
   };
 
@@ -27,13 +33,19 @@ export default function QuestionsList({
     return true;
   };
 
+  useEffect(() => {
+    setNumQuestions(questions.length < 2 ? questions.length : 2);
+  }, [questions]);
+
   return (
     <div className="qa list">
       {questions.length > 0
         ? questions.filter(hasAnswer).slice(0, numQuestions).map((question) => (
           <Question
-            key={`q_${question.question_id}`}
+            key={question.question_id}
             question={question}
+            updateQuestions={updateQuestions}
+            filterText={filterText}
           />
         ))
         : null}

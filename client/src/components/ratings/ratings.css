@@ -1,6 +1,13 @@
+/* ///// TOP LEVEL COMPONTENT ///// */
+#ratings-widget {
+  margin: auto;
+  margin-bottom: 5em;
+  max-width: 1000px;
+}
+
 .ratings-parent {
   display: flex;
-  margin: auto;
+  justify-content: space-between;
 }
 
 .review-tile-container-1 {
@@ -11,6 +18,18 @@
 
 .review-tile-container-2 {
   display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: .5em;
+}
+
+.review-tile-container-2 {
+  display: flex;
+}
+
+.review-tile-nameAndDate {
+  font-style:italic;
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 .review-tile-nameAndDate {
@@ -63,12 +82,13 @@
 }
 
 .review-header {
-  font-size: 32px;
+  font-size: 2em;
+  margin-bottom: 1em;
   text-decoration: underline;
 }
 
 .review-list-container {
-  margin-left: 6rem;
+  width: 50%;
 }
 
 .review-tracker-bar-container {
@@ -77,12 +97,12 @@
   width: 20rem;
 }
 
-.review-hover:hover {
+/* .hover {
   width: 120%;
   transform: scale(1.15, 1.15);
-  /* background-color:#F3D8FF; */
+  background-color:#F3D8FF;
   filter: drop-shadow(0 0 1rem black);
-}
+} */
 
 .review-tracker-bar-parent {
   height: 20px;
@@ -246,4 +266,64 @@
 .review-helpful-span {
   text-decoration: none;
   display: inline-block;
+  margin-right: 25px;
+}
+
+.review-tile-report {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 25px;
+  font-size: 12px;
+}
+
+.review-list-dropdown-container {
+  margin-bottom: 1rem;
+  font-size: 24px;
+}
+
+.review-li-1 {
+  font-size: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 25px;
+  animation: fadeIn 1s;
+}
+.review-li-2 {
+  font-size: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 25px;
+  animation: fadeIn 1s 1s forwards;
+  opacity: 0;
+}
+.review-li-3 {
+  font-size: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 25px;
+  animation: fadeIn 1s 2s forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.review-sort-dropdown-child {
+  margin-left: 12rem;
+  width: 115px;
+  text-align: center;
+}
+
+.review-ul {
+
+}
+
+/* .review-sort-dropdown-main {
+  border: medium dashed black;
+} */
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2em;
+  width: 50%;
 }

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
@@ -26,8 +27,8 @@ export default function Related({ feature }) {
           }
           return Promise.all(data.map((id) => fetcher.getProductById(id)));
         })
-        .then((results) => { setRelatedList(results.map((result) => result.data)); })
-        .catch((err) => console.error(err));
+        .then((results) => setRelatedList(results.map((result) => result.data)))
+        .catch((err) => console.log(err));
     }
   }, [feature]);
 

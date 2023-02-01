@@ -4,8 +4,6 @@ import './styles/imageModal.css';
 export default function ImageModal({
   relStyle, setRelStyle, relProd, setShowImg,
 }) {
-  // console.log('IMAGE MODAL is RENDERING');
-
   const handlePhotoChange = (e, index) => {
     e.stopPropagation();
     const newStyle = {};

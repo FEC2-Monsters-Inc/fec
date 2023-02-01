@@ -29,7 +29,7 @@ export default function Related({ feature }) {
         .then((results) => { setRelatedList(results.map((result) => result.data)); })
         .catch((err) => console.error(err));
     }
-  }, [feature.id]);
+  }, [feature]);
 
   return (
     <div id="related-section">

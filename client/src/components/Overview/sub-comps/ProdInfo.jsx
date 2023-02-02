@@ -4,6 +4,7 @@ import StarRating from '../../shared/StarRating/StarRating.jsx';
 export default function ProdInfo({ product, currStyle, reviews }) {
   // STATE DATA //
   const [price, setPrice] = useState(null);
+  const [sale, setSale] = useState(null);
 
   // HELPER FUNCTIONS //
   const starAverager = (reviewData) => {
@@ -15,14 +16,32 @@ export default function ProdInfo({ product, currStyle, reviews }) {
     return `${total * 20}%`;
   };
 
+  const toggleStrike = () => { // refactor this later -----------------
+    const target = document.getElementById('price');
+    if (target) {
+      if (sale) {
+        if (!target.className.includes('strike')) {
+          target.className = 'prod-price strike';
+        }
+      } else {
+        target.className = 'prod-price';
+      }
+    }
+  };
+
   // INITIALIZATION //
+  useEffect(() => {
+    toggleStrike();
+  }, [sale]);
+
   useEffect(() => {
     if (currStyle) {
       if (currStyle.sale_price) {
-        setPrice(currStyle.sale_price.slice(0, currStyle.sale_price.length - 3));
+        setSale(currStyle.sale_price.slice(0, currStyle.sale_price.length - 3));
       } else {
-        setPrice(currStyle.original_price.slice(0, currStyle.original_price.length - 3));
+        setSale(null);
       }
+      setPrice(currStyle.original_price.slice(0, currStyle.original_price.length - 3));
     }
   }, [currStyle]);
 
@@ -44,14 +63,24 @@ export default function ProdInfo({ product, currStyle, reviews }) {
           </>
         )
         : null }
-      { price
-        ? (
-          <h3 className="gray-text prod-price">
-            $
-            {price}
-          </h3>
-        )
-        : null}
+      <div className="price-holder">
+        { price
+          ? (
+            <h3 id="price" className="prod-price">
+              $
+              {price}
+            </h3>
+          )
+          : null}
+        { sale
+          ? (
+            <h3 className="sale-price">
+              $
+              {sale}
+            </h3>
+          )
+          : null }
+      </div>
     </div>
   );
 }

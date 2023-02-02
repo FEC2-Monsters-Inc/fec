@@ -5,10 +5,11 @@ import './overview.css';
 import Search from './sub-comps/Search.jsx';
 import Gallery from './sub-comps/Gallery.jsx';
 import ProdInfo from './sub-comps/ProdInfo.jsx';
-import StyleAndCart from './sub-comps/StyleAndCart.jsx';
+import StyleSelect from './sub-comps/StyleSelect.jsx';
+import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
 
-export default function Overview({ product, styles }) {
+export default function Overview({ product, styles, reviews }) {
   // STATE DATA //
   const [currStyle, setCurrStyle] = useState(null);
 
@@ -30,8 +31,9 @@ export default function Overview({ product, styles }) {
           <Gallery product={product} currStyle={currStyle} />
         </div>
         <div className="right-main">
-          <ProdInfo product={product} currStyle={currStyle} />
-          <StyleAndCart styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
+          <ProdInfo product={product} currStyle={currStyle} reviews={reviews} />
+          <StyleSelect styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
+          <Cart currStyle={currStyle} />
         </div>
         <div className="bottom-main">
           <Description product={product} />

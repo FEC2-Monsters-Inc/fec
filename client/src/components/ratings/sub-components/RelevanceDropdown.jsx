@@ -12,36 +12,44 @@ export default function RelevanceDropdown({
 
   // EVENT HANDLERS //
   const handleClick = () => {
-    setShowDropdown(!showDropdown);
+    setShowDropdown(true);
   };
-
+  const handleClose = (e) => {
+    if (e.target.className !== 'review-close-dropdown') {
+      setShowDropdown(false);
+    }
+  };
   // HTTP REQUEST HANDLERS //
   const handleNew = (id) => {
-    // fetcher.ratings.getReviewsSortedNew(40350) // productID - currently a placeholder
-    //   .then(({ data }) => setReviews(data.results))
-    //   .then(() => setShowDropdown(false))
-    //   .then(() => setSortString('recency'))
-    //   .catch((error) => console.error('error fetching newest: ', error));
-
     const sortByDate = (data) => { return data.sort((a, b) => new Date(b.date) - new Date(a.date));
       };
     const onPage = sortByDate(reviews.slice(0, listIndex));
     setReviews(onPage.concat(reviews.slice(listIndex)));
     setShowDropdown(false);
+    setSortString('recency');
   };
   const handleHelpful = (id) => {
-    fetcher.ratings.getReviewsSortedHelpful(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('helpfulness'))
-      .catch((error) => console.error('error fetching helpful: ', error));
+    const sortByHelp = (data) => { return data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
+    };
+    const onPage = sortByHelp(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
+    setSortString('helpful');
   };
   const handleRelevant = (id) => {
-    fetcher.ratings.getReviews(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('relevance'))
-      .catch((error) => console.error('error fetching relevant: ', error));
+    const sortByRelevancy = (data) => { return data.sort((a, b) => {
+      if (b.helpfulness > 20) {
+        return (b.helpfulness) - (a.helpfulness);
+      } else if (new Date(b.date) - new Date(a.date) === 0) {
+        return (b.helpfulness) - (a.helpfulness);
+      }
+      return new Date(b.date) - new Date(a.date);
+    });
+  };
+    const onPage = sortByRelevancy(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
+    setSortString('relevance');
   };
 
   // HELPER FUNCTIONS //
@@ -58,6 +66,7 @@ export default function RelevanceDropdown({
       setDisplay(true);
       reviewRenderer(reviews);
     }
+    document.addEventListener('click', handleClose);
   }, [reviews, listLength]);
 
   return (
@@ -69,9 +78,9 @@ export default function RelevanceDropdown({
             {' '}
             reviews sorted by
             {' '}
-            <span onClick={handleClick} style={{ textDecoration: 'underline' }}>
+            <span onClick={handleClick} style={{ textDecoration: 'underline' }} className="review-close-dropdown">
               {sortString}
-              <VscTriangleDown />
+              <VscTriangleDown onClick={handleClick} className="review-close-icon" />
             </span>
           </p>
         )

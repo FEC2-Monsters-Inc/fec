@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
+import WriteReviewModal from './WriteReview.jsx';
 
 export default function ReviewList({
   reviews,
@@ -10,9 +11,11 @@ export default function ReviewList({
   setListLength,
   listIndex,
   setListIndex,
+  feature,
 }) {
   const [reviewExpander, setReviewExpander] = useState('25rem');
   const [expandedStatus, setExpandedStatus] = useState(false);
+  const [writeModal, setWriteModal] = useState(false);
 
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
@@ -81,6 +84,14 @@ export default function ReviewList({
         {
           !expandedStatus
             ? <button type="button" onClick={() => handleClick()}>Expand Reviews</button>
+            : null
+        }
+      </div>
+      <div>
+        <button type="button" onClick={() => setWriteModal(true)}>Write a Review</button>
+        {
+          writeModal
+            ? <WriteReviewModal setWriteModal={setWriteModal} feature={feature} />
             : null
         }
       </div>

@@ -19,6 +19,7 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
       fetcher.related.getReviewMeta(relProd.id),
     ])
       .then(axios.spread((...data) => {
+        console.log(data);
         setRelStyle(data[0].data.results[0]);
         setRelProdMeta(data[1].data);
       }))
@@ -50,6 +51,7 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
             onMouseEnter={() => setShowImg(true)}
           />
         </div>
+        HELLO
         {showImg
           && (
             <ImageModal

@@ -22,16 +22,6 @@ export default function App() {
     features: [],
   };
 
-  // // STATE DATA //
-  // const [featuredProduct, setFeaturedProduct] = useState(initProd);
-
-  // // INITIALIZATION //
-  // useEffect(() => {
-  //   fetcher.getProductById(40350)
-  //     .then((result) => setFeaturedProduct(result.data))
-  //     .catch((err) => console.error('initial fetch: ', err));
-  // }, []);
-
   const [featuredProduct, setFeaturedProduct] = useState(initProd);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);

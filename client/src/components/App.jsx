@@ -40,9 +40,9 @@ export default function App() {
 
   return (
     <div>
-      <Overview product={feature} styles={styles} />
-      <Related feature={feature} relatedIdList={relatedIdList} />
-      <Questions feature={feature} />
+      <Overview product={featuredProduct} styles={styles} reviews={reviews} />
+      <Related feature={featuredProduct} />
+      <Questions feature={featuredProduct} />
       <Ratings
         feature={feature}
         reviews={reviews}

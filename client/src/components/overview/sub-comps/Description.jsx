@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineCheck } from 'react-icons/ai';
 
 export default function Decsription({ product }) {
   // HELPER FUNCTIONS //
@@ -6,6 +7,7 @@ export default function Decsription({ product }) {
     const id = index;
     return (
       <li className="feature" key={id}>
+        <AiOutlineCheck className="check" />
         {feat.feature}
         :
         {' '}

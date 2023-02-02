@@ -5,7 +5,8 @@ import './overview.css';
 import Search from './sub-comps/Search.jsx';
 import Gallery from './sub-comps/Gallery.jsx';
 import ProdInfo from './sub-comps/ProdInfo.jsx';
-import StyleAndCart from './sub-comps/StyleAndCart.jsx';
+import StyleSelect from './sub-comps/StyleSelect.jsx';
+import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
 
 export default function Overview({ product, styles, reviews }) {
@@ -31,7 +32,8 @@ export default function Overview({ product, styles, reviews }) {
         </div>
         <div className="right-main">
           <ProdInfo product={product} currStyle={currStyle} reviews={reviews} />
-          <StyleAndCart styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
+          <StyleSelect styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle} />
+          <Cart currStyle={currStyle} />
         </div>
         <div className="bottom-main">
           <Description product={product} />

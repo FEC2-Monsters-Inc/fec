@@ -18,12 +18,23 @@ export default function Question({
 }) {
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
+  const [helpfulStatus, setHelpfulStatus] = useState(true);
+
+  // TODO: need to sort answers by helpfulness
+  // const byHelpfulness = (a, b) => {
+  //   if (a[1].helpfulness > b[1].helpfulness) return -1;
+  //   if (a[1].helpfulness < b[1].helpfulness) return 1;
+  //   return 0;
+  // };
+
+  // const sortedAnswers = () => Object.entries(answers).sort(byHelpfulness);
 
   const markHelpfulQuestion = (e) => {
-    if (e.type === 'click' || e.key === 'Enter') {
+    if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
       fetcher
         .markHelpfulQuestion(question_id)
         .then(updateQuestions)
+        .then(() => setHelpfulStatus(false))
         .catch((err) => console.error('markHelpfulQuestion: ', err));
     }
   };
@@ -67,13 +78,13 @@ export default function Question({
         <span className="qa control">
           {'Helpful? '}
           <span
-            className="qa link"
+            className={'qa link'.concat(helpfulStatus ? '' : ' disabled')}
             role="link"
             tabIndex={0}
             onKeyUp={markHelpfulQuestion}
             onClick={markHelpfulQuestion}
           >
-            Yes
+            {helpfulStatus ? 'Yes' : 'Marked!'}
           </span>
           {/* TODO: conditional rendering + 1 on yes click */}
           {` (${helpfulness}) | `}
@@ -100,6 +111,7 @@ export default function Question({
           <div className="qa answers-section">
             <h3>A: </h3>
             <div className="qa answers-list">
+              {/* TODO: sort answers by helpfulness */}
               {Object.keys(answers).slice(0, numAnswers).map((key) => (
                 <Answer
                   key={key}

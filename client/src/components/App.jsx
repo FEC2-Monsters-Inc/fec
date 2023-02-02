@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 import Overview from './overview/Overview.jsx';
 import Questions from './questions/Questions.jsx';
 import Ratings from './ratings/Ratings.jsx';
@@ -22,7 +22,16 @@ export default function App() {
     features: [],
   };
 
-  // STATE DATA //
+  // // STATE DATA //
+  // const [featuredProduct, setFeaturedProduct] = useState(initProd);
+
+  // // INITIALIZATION //
+  // useEffect(() => {
+  //   fetcher.getProductById(40350)
+  //     .then((result) => setFeaturedProduct(result.data))
+  //     .catch((err) => console.error('initial fetch: ', err));
+  // }, []);
+
   const [featuredProduct, setFeaturedProduct] = useState(initProd);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
@@ -30,21 +39,19 @@ export default function App() {
 
   // INITIALIZATION //
   useEffect(() => {
-    fetcher.getProductById(40350)
-      .then(({ data }) => setFeaturedProduct(data))
-      .catch((err) => console.error('initial product fetch: ', err));
-
-    fetcher.overview.getStylesById(40350)
-      .then(({ data }) => setStyles(data))
-      .catch((err) => console.error('initial style fetch: ', err));
-
-    fetcher.ratings.getReviews(40350)
-      .then(({ data }) => setReviews(data.results))
-      .catch((err) => console.error('initial reviews fetch: ', err));
-
-    fetcher.ratings.getReviewMeta(40350)
-      .then(({ data }) => setReviewMeta(data))
-      .catch((err) => console.error('initial review meta fetch: ', err));
+    axios.all([
+      fetcher.getProductById(40350),
+      fetcher.overview.getStylesById(40350),
+      fetcher.ratings.getReviews(40350),
+      fetcher.ratings.getReviewMeta(40350),
+    ])
+      .then(axios.spread((...data) => {
+        setFeaturedProduct(data[0].data);
+        setStyles(data[1].data);
+        setReviews(data[2].data.results);
+        setReviewMeta(data[3].data);
+      }))
+      .catch((err) => console.error(err));
   }, []);
 
   return (

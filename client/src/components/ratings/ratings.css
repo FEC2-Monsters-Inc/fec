@@ -269,6 +269,7 @@
   font-size: 12px;
   text-decoration: underline;
   margin-bottom: .25em;
+  border: none;
 }
 
 .review-helpful-span {
@@ -281,7 +282,9 @@
   text-decoration: underline;
   cursor: pointer;
   margin-left: 25px;
+  margin-right: 20px;
   font-size: 12px;
+  border: none;
 }
 
 .review-list-dropdown-container {

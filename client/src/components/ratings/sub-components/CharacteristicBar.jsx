@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 export default function CharacteristicBar({ reviewMeta, charName }) {
   // STATE DATA //
-  // STATE DATA //
   const [chars, setChars] = useState({});
   const [sliderText, setSliderText] = useState({ small: '', perf: '', big: '' });
   const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
-
 
   // HELPER FUNCTIONS //
   function ratingDescription() {
@@ -24,7 +22,6 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
       setSliderText({ small: 'too long', perf: 'perfect!', big: 'too short' });
     }
   }
-
 
   // INITIALIZATION //
   useEffect(() => {

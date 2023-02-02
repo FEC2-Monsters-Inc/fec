@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
-import fetcher from '../../../fetchers';
 
 export default function ReviewList({
   reviews,
@@ -14,6 +13,7 @@ export default function ReviewList({
 }) {
   const [reviewExpander, setReviewExpander] = useState('25rem');
   const [expandedStatus, setExpandedStatus] = useState(false);
+
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -28,7 +28,8 @@ export default function ReviewList({
     if (!selectedRating) {
       return reviewMapper(reviews.slice(0, listIndex));
     }
-    const filteredReviews = reviews.slice(0, listIndex).filter((review) => selectedRating[review.rating] === true);
+    const filteredReviews = reviews
+      .slice(0, listIndex).filter((review) => selectedRating[review.rating] === true);
     return reviewMapper(filteredReviews);
   };
 
@@ -71,7 +72,7 @@ export default function ReviewList({
           reviewRenderer={reviewRenderer}
         />
       </div>
-      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)} style={{height: reviewExpander}}>
+      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)} style={{ height: reviewExpander }}>
         { reviews
           ? reviewRenderer()
           : null }
@@ -79,7 +80,7 @@ export default function ReviewList({
       <div>
         {
           !expandedStatus
-            ? <button onClick={()=>handleClick()}>Expand Reviews</button>
+            ? <button type="button" onClick={() => handleClick()}>Expand Reviews</button>
             : null
         }
       </div>

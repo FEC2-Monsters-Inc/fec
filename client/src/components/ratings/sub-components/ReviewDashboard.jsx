@@ -9,7 +9,6 @@ export default function ReviewDashboard({
   setSelectedRating,
   selectedRating,
   reviewMeta,
-  changeSelect,
   listLength,
   setListLength,
   listIndex,

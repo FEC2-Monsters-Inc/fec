@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
-import fetcher from '../../../fetchers';
 
 export default function RelevanceDropdown({
-  setReviews, reviews, listLength, setListLength, listIndex, reviewRenderer,
+  setReviews, reviews, listLength, listIndex, reviewRenderer,
 }) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
@@ -19,40 +18,38 @@ export default function RelevanceDropdown({
       setShowDropdown(false);
     }
   };
-  // HTTP REQUEST HANDLERS //
-  const handleNew = (id) => {
-    const sortByDate = (data) => { return data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      };
+  // SORT HELPER FUNCTIONS //
+  const handleNew = () => {
+    const sortByDate = (data) => data.sort((a, b) => new Date(b.date) - new Date(a.date));
     const onPage = sortByDate(reviews.slice(0, listIndex));
     setReviews(onPage.concat(reviews.slice(listIndex)));
     setShowDropdown(false);
     setSortString('recency');
   };
-  const handleHelpful = (id) => {
-    const sortByHelp = (data) => { return data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
-    };
+  const handleHelpful = () => {
+    const sortByHelp = (data) => data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
     const onPage = sortByHelp(reviews.slice(0, listIndex));
     setReviews(onPage.concat(reviews.slice(listIndex)));
     setShowDropdown(false);
     setSortString('helpful');
   };
-  const handleRelevant = (id) => {
-    const sortByRelevancy = (data) => { return data.sort((a, b) => {
+  const handleRelevant = () => {
+    const sortByRelevancy = (data) => data.sort((a, b) => {
       if (b.helpfulness > 20) {
         return (b.helpfulness) - (a.helpfulness);
-      } else if (new Date(b.date) - new Date(a.date) === 0) {
+      }
+      if (new Date(b.date) - new Date(a.date) === 0) {
         return (b.helpfulness) - (a.helpfulness);
       }
       return new Date(b.date) - new Date(a.date);
     });
-  };
     const onPage = sortByRelevancy(reviews.slice(0, listIndex));
     setReviews(onPage.concat(reviews.slice(listIndex)));
     setShowDropdown(false);
     setSortString('relevance');
   };
 
-  // HELPER FUNCTIONS //
+  // OTHER HELPER FUNCTIONS //
   const reviewListLength = () => {
     if (!listLength) {
       return reviews.slice(0, listIndex).length;
@@ -78,7 +75,14 @@ export default function RelevanceDropdown({
             {' '}
             reviews sorted by
             {' '}
-            <span onClick={handleClick} style={{ textDecoration: 'underline' }} className="review-close-dropdown">
+            <span
+              onClick={handleClick}
+              onKeyPress={handleClick}
+              tabIndex="0"
+              role="button"
+              style={{ textDecoration: 'underline' }}
+              className="review-close-dropdown"
+            >
               {sortString}
               <VscTriangleDown onClick={handleClick} className="review-close-icon" />
             </span>
@@ -89,13 +93,49 @@ export default function RelevanceDropdown({
         <div className="review-sort-dropdown-child">
           <ul className="review-ul">
             { sortString !== 'recency'
-              ? <li className="review-li-1" onClick={() => handleNew()}>recency</li>
+              ? (
+                <li>
+                  <div
+                    className="review-li-1"
+                    onClick={() => handleNew()}
+                    onKeyPress={() => handleNew()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    recency
+                  </div>
+                </li>
+              )
               : null }
             { sortString !== 'helpfulness'
-              ? <li className="review-li-2" onClick={() => handleHelpful()}>helpfulness</li>
+              ? (
+                <li>
+                  <div
+                    className="review-li-2"
+                    onClick={() => handleHelpful()}
+                    onKeyPress={() => handleHelpful()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    helpfulness
+                  </div>
+                </li>
+              )
               : null }
             { sortString !== 'relevance'
-              ? <li className="review-li-3" onClick={() => handleRelevant()}>relevance</li>
+              ? (
+                <li>
+                  <div
+                    className="review-li-3"
+                    onClick={() => handleRelevant()}
+                    onKeyPress={() => handleRelevant()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    relevance
+                  </div>
+                </li>
+              )
               : null }
           </ul>
         </div>

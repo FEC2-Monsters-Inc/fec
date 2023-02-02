@@ -5,7 +5,6 @@ import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
-  // STATE DATA //
 export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -13,7 +12,12 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   const [showFull, setShowFull] = useState(false);
   const [helpfulClick, setHelpfulClick] = useState(false);
 
-  // HELPER FUNCTIIONS //
+  // EVENT HANDLERS //
+  const imgToggler = (pic) => {
+    setModalToggle(!modalToggle);
+    setImgString(pic);
+  };
+
   // HELPER FUNCTIIONS //
   const getDateString = (dateString) => {
     const date = new Date(dateString);
@@ -26,7 +30,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   };
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
-  // handles review summary
+
   // handles review summary
   const summaryLengthChecker = () => {
     if (review.summary.length > 60) {
@@ -36,14 +40,18 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   };
 
   // elipses function that works with bodyLengthChecker
-  // elipses function that works with bodyLengthChecker
   const elipsesSpan = () => (
-    <span className="review-elipses-span" onClick={() => setShowFull(true)}>
+    <span
+      className="review-elipses-span"
+      onClick={() => setShowFull(true)}
+      onKeyPress={() => setShowFull(true)}
+      role="button"
+      tabIndex="0"
+    >
       {showFull ? review.body : '...'}
     </span>
   );
 
-  // Handles review body with truncation if neccessary
   // Handles review body with truncation if neccessary
   const bodyLengthChecker = () => {
     if (review.body.length > 250) {
@@ -53,21 +61,23 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   };
 
   // Creates thumbnails with on-click functionality
-  // Creates thumbnails with on-click functionality
   const photoHandler = () => {
     if (review.photos.length > 0) {
       const photoAltTxt = `Image for review titled ${review.summary}`;
       return review.photos.map((element) => (
-        <img
+        <input
+          type="image"
           src={element.url}
           alt={photoAltTxt}
           key={element.id}
           className="review-tile-individual-photo"
           onClick={() => imgToggler(element.url)}
-          onClick={() => imgToggler(element.url)}
+          onKeyPress={() => imgToggler(element.url)}
+          tabIndex="0"
         />
       ));
     }
+    return null;
   };
   // Rounds star rating to 5 intervals on a 1-100 scale
   const roundedPercentage = (rounder, num) => {
@@ -76,29 +86,21 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     return result;
   };
 
-  // EVENT HANDLERS //
-  const imgToggler = (pic) => {
-    setModalToggle(!modalToggle);
-    setImgString(pic);
-  };
-
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
     fetcher.ratings.updateUseful(review.review_id)
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
   const reportHandler = () => {
     fetcher.ratings.updateReport(review.review_id)
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
-
-  // INITIALIZATION //
 
   // INITIALIZATION //
   useEffect(() => {
@@ -133,10 +135,12 @@ export default function ReviewTile({ review, setReviews, reviews }) {
       <div className="review-tile-photos-container">{photoHandler()}</div>
       <div className="review-tile-container-2">
         <p className="review-tile-name">Was this review helpful?</p>
-        <p
+        <button
           className="review-tile-helpful"
           onClick={() => (!helpfulClick ? helpfulHandler() : null)}
+          onKeyPress={() => (!helpfulClick ? helpfulHandler() : null)}
           style={helpfulClick ? { cursor: 'default' } : {}}
+          type="button"
         >
           Yes
           <span className="review-helpful-span">
@@ -146,21 +150,26 @@ export default function ReviewTile({ review, setReviews, reviews }) {
             }
             )
           </span>
-        </p>
+        </button>
         <RxDividerVertical />
-        <p className="review-tile-report" onClick={() => (!helpfulClick ? reportHandler() : null)}>Report</p>
+        <button
+          className="review-tile-report"
+          onClick={() => (!helpfulClick ? reportHandler() : null)}
+          onKeyPress={() => (!helpfulClick ? reportHandler() : null)}
+          type="button"
+        >
+          Report
+        </button>
         { modalToggle
-          ? <ReviewImageModal imgString={imgString} setModalToggle={setModalToggle} />
+          ? (
+            <ReviewImageModal
+              imgString={imgString}
+              setModalToggle={setModalToggle}
+              name={review.reviewer_name}
+            />
+          )
           : null }
       </div>
     </div>
   );
 }
-
-// TO-DO:
-// Combine username and date into 1 string.
-// place this new string where summary is
-// move summary to its own container below container-1
-// Check to see what "recommended" means for review tile
-// check to see what "response" means for tile...likely both from metadata
-// add helpful? Yes(numHelpful) | report buttons

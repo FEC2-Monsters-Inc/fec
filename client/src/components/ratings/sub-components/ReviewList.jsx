@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
 import fetcher from '../../../fetchers';
@@ -40,12 +40,18 @@ export default function ReviewList({
     }
   };
 
+  const handleScroll = (e) => {
+    const bottom = Math.round(e.currentTarget.scrollHeight - e.currentTarget.scrollTop)
+     === Math.round(e.currentTarget.clientHeight);
+    if (bottom) {
+      twoAtATime();
+    }
+  };
+
   // INITIALIZATION //
   useEffect(() => {
     setListIndex(2);
   }, []);
-
-
 
   return (
     <div className="review-list-container">
@@ -56,15 +62,13 @@ export default function ReviewList({
           listLength={listLength}
           setListLength={setListLength}
           listIndex={listIndex}
+          reviewRenderer={reviewRenderer}
         />
       </div>
-      <div className="scroll-review-list">
+      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)}>
         { reviews
           ? reviewRenderer()
           : null }
-      </div>
-      <div className="review-list-add-more-button">
-          <button onClick={()=>twoAtATime()}>click me</button>
       </div>
     </div>
   );

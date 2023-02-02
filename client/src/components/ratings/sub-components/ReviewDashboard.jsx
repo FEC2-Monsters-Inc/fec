@@ -82,16 +82,9 @@ export default function ReviewDashboard({
           totalRecs += 1;
         }
       });
-      const percent = `${(totalRecs / reviews.length) * 100}%`;
+      const percent = `${Math.round((totalRecs / reviews.length) * 100)}%`;
       setRecommended(percent);
     }
-  };
-
-  const roundedPercentage = (rounder, num) => {
-    const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
-    const result = (roundsByFive / 5) * 100;
-    console.log(result);
-    return result;
   };
 
   const starMapper = stars.map((e) => (
@@ -103,17 +96,12 @@ export default function ReviewDashboard({
   ));
 
   // INITIALIZATION //
-  // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
       ratingSetter();
       recommendedSetter();
     }
-    if (reviews) {
-      ratingSetter();
-      recommendedSetter();
-    }
-  }, [reviews]);
+  }, [reviews, listIndex]);
 
   return (
     <div className="test-container">

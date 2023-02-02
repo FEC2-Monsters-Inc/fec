@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
 import fetcher from '../../../fetchers';
 
-export default function RelevanceDropdown({ setReviews, reviews, listLength, setListLength, listIndex }) {
+export default function RelevanceDropdown({
+  setReviews, reviews, listLength, setListLength, listIndex, reviewRenderer,
+}) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -15,11 +17,17 @@ export default function RelevanceDropdown({ setReviews, reviews, listLength, set
 
   // HTTP REQUEST HANDLERS //
   const handleNew = (id) => {
-    fetcher.ratings.getReviewsSortedNew(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('recency'))
-      .catch((error) => console.error('error fetching newest: ', error));
+    // fetcher.ratings.getReviewsSortedNew(40350) // productID - currently a placeholder
+    //   .then(({ data }) => setReviews(data.results))
+    //   .then(() => setShowDropdown(false))
+    //   .then(() => setSortString('recency'))
+    //   .catch((error) => console.error('error fetching newest: ', error));
+
+    const sortByDate = (data) => { return data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      };
+    const onPage = sortByDate(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
   };
   const handleHelpful = (id) => {
     fetcher.ratings.getReviewsSortedHelpful(40350) // productID - currently a placeholder
@@ -48,6 +56,7 @@ export default function RelevanceDropdown({ setReviews, reviews, listLength, set
   useEffect(() => {
     if (reviews) {
       setDisplay(true);
+      reviewRenderer(reviews);
     }
   }, [reviews, listLength]);
 

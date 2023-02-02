@@ -44,7 +44,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: { product_id: id, sort: 'newest' },
+      params: { product_id: id, sort: 'newest', count: 200 },
     };
 
     return axios(options);
@@ -53,7 +53,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: { product_id: id, sort: 'helpful' },
+      params: { product_id: id, sort: 'helpful', count: 200 },
     };
 
     return axios(options);

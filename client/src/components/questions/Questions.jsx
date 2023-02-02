@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
+import fetcher from '../../fetchers/questions';
 import SearchBar from './SearchBar.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import './styles/questions.css';
@@ -18,7 +18,7 @@ export default function Questions({
   };
 
   const putQuestions = () => {
-    fetcher.questions.getById(feature.id)
+    fetcher.getQuestionsById(feature.id)
       .then(({ data }) => setQuestions(data.results))
       .catch((err) => console.error('Questions on feature change fetch: ', err));
   };
@@ -63,9 +63,12 @@ export default function Questions({
   }, [questions]);
 
   return (
-    <div className="qa qa-section">
+    <div id="qa-widget" className="qa qa-section">
       <h2>QUESTIONS & ANSWERS</h2>
-      <SearchBar text={filterText} handleChange={onFilterTextChange} />
+      <SearchBar
+        text={filterText}
+        handleChange={onFilterTextChange}
+      />
       <QuestionsList
         product_id={feature.id}
         questions={!filteredQuestions.length ? questions : filteredQuestions}

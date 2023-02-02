@@ -1,56 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import StyleThumbnails from './StyleThumbnails.jsx';
 
 export default function StyleSelect({ styles, currStyle, setCurrStyle }) {
-  // STATE DATA //
-  const [selectedStyle, setSelectedStyle] = useState({ name: '' });
-  const [styleThumbs, setStyleThumbs] = useState([]);
-  console.log(selectedStyle);
-
   // HELPER FUNCTIONS //
-  const thumbRenderer = () => styleThumbs.map((pic) => (
-    <img
-      id={pic.key}
-      className="style-thumbnail"
-      src={pic.url}
-      key={pic.key}
-      alt="style thumbnail"
-      onClick={(e) => toggleStyle(e)}
-    />
-  ));
+  const toggleCheck = (newCheckId) => {
+    const oldCheckWrap = document.getElementById(currStyle.style_id).parentElement;
+    oldCheckWrap.className = 'check-wrapper';
+    const newCheckWrap = document.getElementById(newCheckId).parentElement;
+    if (newCheckWrap) {
+      newCheckWrap.className = 'checked';
+    }
+  };
 
   // EVENT HANDLERS //
   const toggleStyle = (event) => {
     const { id } = event.target;
+    if (currStyle.style_id === Number(id)) {
+      return;
+    }
+    toggleCheck(id);
     styles.results.forEach((style) => {
       if (style.style_id === Number(id)) {
         setCurrStyle(style);
-        setSelectedStyle(style);
       }
     });
   };
 
   // INITIALIZATION //
   useEffect(() => {
-    if (styles) {
-      const prod = styles.results;
-      setSelectedStyle(prod[0]);
-      setStyleThumbs(prod.map((style) => ({
-        url: style.photos[0].thumbnail_url,
-        key: style.style_id,
-      })));
+    if (currStyle) {
+      toggleCheck(currStyle.style_id);
     }
-  }, [styles]);
+  }, [currStyle]);
 
   return (
     <div id="style-select">
       <h3 className="style-pointer">
         STYLE &gt;
         {' '}
-        <span className="selected-style">{selectedStyle.name}</span>
+        { currStyle
+          ? <span className="selected-style">{currStyle.name}</span>
+          : null }
       </h3>
-      <div className="thumbs-container">
-        {thumbRenderer()}
-      </div>
+      <StyleThumbnails styles={styles} toggleStyle={toggleStyle} />
     </div>
   );
 }

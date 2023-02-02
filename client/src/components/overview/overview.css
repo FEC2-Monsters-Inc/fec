@@ -20,6 +20,12 @@ select:hover {
   color: #746F72
 }
 
+li {
+  align-items: center;
+  display: flex;
+  list-style: none;
+}
+
 /* ///// HEADER ///// */
 #header {
   align-items: center;
@@ -172,6 +178,10 @@ select:hover {
 .reviews-stars {
   align-items: center;
   display: flex;
+}
+
+.reviews-stars * {
+  color: #2C394B;
 }
 
 .reviews-link {
@@ -335,4 +345,8 @@ select:hover {
 
 .feature {
   margin: 10px 0;
+}
+
+.check {
+  margin-right: 10px;
 }

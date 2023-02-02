@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <div>
-      <Overview product={featuredProduct} styles={styles} />
+      <Overview product={featuredProduct} styles={styles} reviews={reviews} />
       <Related feature={featuredProduct} />
       <Questions feature={featuredProduct} />
       <Ratings

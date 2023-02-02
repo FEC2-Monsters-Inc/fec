@@ -1,57 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
+import RelevanceDropdown from './RelevanceDropdown.jsx';
 
-export default function ReviewList({ reviews, selectedRating }) {
-  const [numReviews, setNumReviews] = useState(reviews.length);
-  const reviewMapper = reviews.map((review) => (
+export default function ReviewList({ reviews, selectedRating, setReviews }) {
+  // HELPER FUNCTIONS //
+  const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
       review={review}
       key={review.review_id}
+      reviews={reviews}
+      setReviews={setReviews}
     />
   ));
 
-  const filterReviewMapper = () => {
+  const reviewRenderer = () => {
+    if (!selectedRating) {
+      return reviewMapper(reviews);
+    }
     const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
-    if (filteredReviews.length === 0) {
-      return reviewMapper;
-    }
-    return filteredReviews.map((review) => (
-      <ReviewTile
-        review={review}
-        key={review.review_id}
-      />
-    ));
-  };
-
-  const numReviewsTracker = () => {
-    const trueKeys = Object.keys(selectedRating)
-      .filter((key) => selectedRating[key] === true)
-      .map(Number);
-    const filteredArr = reviews.filter((review) => trueKeys.includes(review.rating));
-    if (filteredArr.length === 0) {
-      setNumReviews(reviews.length);
-      return;
-    }
-    setNumReviews(filteredArr.length);
-  };
-
-  useEffect(() => {
-    numReviewsTracker();
-  }, [selectedRating, reviews]);
-
-  const numReviewsText = () => {
-    if (numReviews === 0) {
-      return 'No Reviews';
-    } if (numReviews === 1) {
-      return '1 review, sorted by relevance';
-    }
-    return `${numReviews} reviews, sorted by relevance`;
+    return reviewMapper(filteredReviews);
   };
 
   return (
     <div className="review-list-container">
-      <div className="review-list-header">{numReviewsText()}</div>
-      {filterReviewMapper()}
+      <div className="review-list-dropdown-container">
+        <RelevanceDropdown setReviews={setReviews} reviews={reviews} />
+      </div>
+      { reviews
+        ? reviewRenderer()
+        : null }
     </div>
   );
 }

@@ -63,7 +63,7 @@ export default function Questions({
   }, [questions]);
 
   return (
-    <div id="qa-widget" className="qa qa-section">
+    <div id="questions-widget" className="qa qa-section">
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchBar
         text={filterText}

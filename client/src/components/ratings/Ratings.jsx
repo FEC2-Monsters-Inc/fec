@@ -21,9 +21,9 @@ export default function Ratings({
   // });
 
   return (
-    <div id="ratings-widget">
+    <div id="ratings-widget">{console.log("this is reviews: ", reviews)}
       <h1 className="review-header">Ratings and Reviews</h1>
-      <div className="ratings-parent">
+      <div className="ratings-parent">{console.log("this is reviewsMeta: ", reviewMeta)}
         <ReviewDashboard
           reviews={reviews}
           setSelectedRating={setSelectedRating}

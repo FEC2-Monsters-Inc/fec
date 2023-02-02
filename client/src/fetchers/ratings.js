@@ -8,7 +8,7 @@ export default {
     const options = {
       url: SERVER_BASEURL,
       method: 'get',
-      params: { product_id: id, count: 2 },
+      params: { product_id: id, count: 200 },
     };
 
     return axios(options);

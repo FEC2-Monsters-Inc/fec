@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
 import fetcher from '../../../fetchers';
 
-export default function RelevanceDropdown({ setReviews, reviews, listLength, setListLength }) {
+export default function RelevanceDropdown({ setReviews, reviews, listLength, setListLength, listIndex }) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -39,7 +39,7 @@ export default function RelevanceDropdown({ setReviews, reviews, listLength, set
   // HELPER FUNCTIONS //
   const reviewListLength = () => {
     if (!listLength) {
-      return reviews.length;
+      return reviews.slice(0, listIndex).length;
     }
     return listLength;
   };

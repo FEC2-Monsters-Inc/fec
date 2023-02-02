@@ -11,7 +11,7 @@ export default function ReviewList({
   setListLength,
 }) {
   const [loadedReviews, setLoadedReviews] = useState([]);
-  const [listIndex, setListIndex] = useState(2);
+  const [listIndex, setListIndex] = useState(0);
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -24,18 +24,16 @@ export default function ReviewList({
 
   const reviewRenderer = () => {
     if (!selectedRating) {
-      return reviewMapper(reviews);
+      return reviewMapper(reviews.slice(0, listIndex));
     }
-    const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
+    const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true).slice(0, listIndex);
     return reviewMapper(filteredReviews);
   };
 
   const twoAtATime = () => {
-    if (loadedReviews) {
-      // setReviews([...reviews, loadedReviews.slice(listIndex, listIndex + 2)]);
+    if (listIndex < reviews.length) {
       setListIndex(listIndex + 2);
-      //setReviews(reviews.push(loadedReviews[listIndex], loadedReviews[listIndex + 1]));
-      setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
+      // setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
       // console.log('loaded reviews:', loadedReviews);
       // console.log('reviews:', reviews);
       // console.log('loadedReviews first two elements:', newReviews);
@@ -44,10 +42,11 @@ export default function ReviewList({
 
   // INITIALIZATION //
   useEffect(() => {
-    fetcher.ratings.getAllReviews(40350)
-      .then(({ data }) => setLoadedReviews(data.results))
-      .then(() => console.log(loadedReviews))
-      .catch((err) => console.error(err));
+    // fetcher.ratings.getAllReviews(40350)
+    //   .then(({ data }) => setLoadedReviews(data.results))
+    //   .catch((err) => console.error(err));
+    // setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
+    setListIndex(2);
   }, []);
 
 
@@ -60,6 +59,7 @@ export default function ReviewList({
           reviews={reviews}
           listLength={listLength}
           setListLength={setListLength}
+          listIndex={listIndex}
         />
       </div>
       <div className="scroll-review-list">

@@ -12,7 +12,8 @@ export default function ReviewList({
   listIndex,
   setListIndex,
 }) {
-  const [loadedReviews, setLoadedReviews] = useState([]);
+  const [reviewExpander, setReviewExpander] = useState('25rem');
+  const [expandedStatus, setExpandedStatus] = useState(false);
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -47,6 +48,11 @@ export default function ReviewList({
       twoAtATime();
     }
   };
+  const handleClick = () => {
+    twoAtATime();
+    setReviewExpander('50rem');
+    setExpandedStatus(true);
+  };
 
   // INITIALIZATION //
   useEffect(() => {
@@ -65,10 +71,17 @@ export default function ReviewList({
           reviewRenderer={reviewRenderer}
         />
       </div>
-      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)}>
+      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)} style={{height: reviewExpander}}>
         { reviews
           ? reviewRenderer()
           : null }
+      </div>
+      <div>
+        {
+          !expandedStatus
+            ? <button onClick={()=>handleClick()}>Expand Reviews</button>
+            : null
+        }
       </div>
     </div>
   );

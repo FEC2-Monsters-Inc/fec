@@ -20,7 +20,7 @@ export default function Related({ feature }) {
 
   useEffect(() => {
     if (feature.id) {
-      fetcher.related.getRelatedProduct(feature.id)
+      fetcher.getRelatedProduct(feature.id)
         .then(({ data }) => {
           if (!data.length) {
             throw new Error('No Related Product!');
@@ -30,7 +30,7 @@ export default function Related({ feature }) {
         .then((results) => setRelatedList(results.map((result) => result.data)))
         .catch((err) => console.log(err));
     }
-  }, [feature]);
+  }, [feature.id]);
 
   return (
     <div id="related-widget">

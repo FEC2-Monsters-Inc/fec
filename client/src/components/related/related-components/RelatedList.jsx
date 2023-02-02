@@ -23,7 +23,7 @@ export default function RelatedList({ feature, relatedList }) {
   };
 
   useEffect(() => {
-    fetcher.related.getReviewMeta(feature.id)
+    fetcher.getReviewMeta(feature.id)
       .then(({ data }) => setFeatureMeta(data))
       .catch((err) => console.error(err));
   }, [feature.id]);

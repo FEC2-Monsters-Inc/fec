@@ -32,7 +32,7 @@ export default {
     return axios(options);
   },
 
-  getReview: (id) => {
+  getReviews: (id) => {
     const options = {
       url: `${SERVER_BASEURL}/reviews`,
       method: 'get',
@@ -130,4 +130,5 @@ export default {
 
     return axios(options);
   },
+
 };

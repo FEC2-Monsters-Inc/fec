@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
 import RelatedProduct from './RelatedProduct.jsx';
+import fetcher from '../../../fetchers';
 import './styles/relatedList.css';
 
 export default function RelatedList({ feature, relatedList }) {
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
+  const [featureMeta, setFeatureMeta] = useState(0);
 
   const endOfRelatedList = relatedList.length ? relatedList.length - 5 : 0;
 
@@ -20,6 +22,12 @@ export default function RelatedList({ feature, relatedList }) {
     ref.current.scrollLeft += 15 * 16;
   };
 
+  useEffect(() => {
+    fetcher.related.getReviewMeta(feature.id)
+      .then(({ data }) => setFeatureMeta(data))
+      .catch((err) => console.error(err));
+  }, [feature.id]);
+
   return (
     <div className="related-carousel-outside">
       <AiOutlineLeftSquare
@@ -32,6 +40,7 @@ export default function RelatedList({ feature, relatedList }) {
           <RelatedProduct
             key={relProd.id}
             feature={feature}
+            featureMeta={featureMeta}
             relProd={relProd}
           />
         ))}

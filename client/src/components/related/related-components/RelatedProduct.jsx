@@ -7,23 +7,20 @@ import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 import ImageModal from './ImageModal.jsx';
 import './styles/compareModal.css';
 
-export default function RelatedProduct({ feature, relProd }) {
+export default function RelatedProduct({ feature, featureMeta, relProd }) {
   const [relStyle, setRelStyle] = useState();
   const [showModal, setShowModal] = useState(false);
   const [showImg, setShowImg] = useState(false);
-  const [featureMeta, setFeatureMeta] = useState(0);
   const [relProdMeta, setRelProdMeta] = useState(0);
 
   useEffect(() => {
     axios.all([
       fetcher.related.getProductStyle(relProd.id),
-      fetcher.related.getReviewMeta(feature.id),
       fetcher.related.getReviewMeta(relProd.id),
     ])
       .then(axios.spread((...data) => {
         setRelStyle(data[0].data.results[0]);
-        setFeatureMeta(data[1].data);
-        setRelProdMeta(data[2].data);
+        setRelProdMeta(data[1].data);
       }))
       .catch((err) => console.error(err));
   }, [feature, relProd.id]);
@@ -45,12 +42,14 @@ export default function RelatedProduct({ feature, relProd }) {
     <div>
       <div className="rel-item">
         <AiOutlineStar className="star-modal" onClick={() => setShowModal(true)} />
-        <img
-          id="rel-img"
-          src={relStyle.photos[0].thumbnail_url}
-          alt={relProd.description}
-          onMouseEnter={() => setShowImg(true)}
-        />
+        <div id="rel-img-wrapper">
+          <img
+            id="rel-img"
+            src={relStyle.photos[0].thumbnail_url}
+            alt={relProd.description}
+            onMouseEnter={() => setShowImg(true)}
+          />
+        </div>
         {showImg
           && (
             <ImageModal

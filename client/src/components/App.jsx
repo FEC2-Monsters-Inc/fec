@@ -12,7 +12,7 @@ export default function App() {
   const initFeature = { id: 40350, name: null };
 
   // STATE
-  const [feature, setFeature] = useState(initFeature);
+  const [featureProduct, setFeatureProduct] = useState(initFeature);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
@@ -21,31 +21,31 @@ export default function App() {
   // INITIALIZATION //
   useEffect(() => {
     axios.all([
-      fetcher.getProductById(feature.id),
-      fetcher.getProductStyle(feature.id),
-      fetcher.getReviews(feature.id),
-      fetcher.getReviewMeta(feature.id),
-      fetcher.getRelatedProduct(feature.id),
+      fetcher.getProductById(featureProduct.id),
+      fetcher.getProductStyle(featureProduct.id),
+      fetcher.getReviews(featureProduct.id),
+      fetcher.getReviewMeta(featureProduct.id),
+      fetcher.getRelatedProduct(featureProduct.id),
     ])
       .then(axios.spread((...data) => {
-        setFeature(data[0].data);
+        setFeatureProduct(data[0].data);
         setStyles(data[1].data);
         setReviews(data[2].data.results);
         setReviewMeta(data[3].data);
         setRelatedIdList(data[4].data);
       }))
       .catch((err) => console.error(err));
-  }, [feature.id]);
+  }, [featureProduct.id]);
 
-  if (!feature.name) return <div />;
+  if (!featureProduct.name) return <div />;
 
   return (
     <div>
-      <Overview product={featuredProduct} styles={styles} reviews={reviews} />
-      <Related feature={featuredProduct} relatedIdList={relatedIdList} />
-      <Questions feature={featuredProduct} />
+      <Overview product={featureProduct} styles={styles} reviews={reviews} />
+      <Related feature={featureProduct} relatedIdList={relatedIdList} />
+      <Questions feature={featureProduct} />
       <Ratings
-        feature={feature}
+        feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}

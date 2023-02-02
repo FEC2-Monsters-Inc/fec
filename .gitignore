@@ -3,6 +3,7 @@ node_modules/
 .env
 .DS_store
 **/__snapshots__
+**/coverage
 
 # Ignores transpiled images
 client/dist/*.png

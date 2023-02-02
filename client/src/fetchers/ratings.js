@@ -13,15 +13,6 @@ export default {
 
     return axios(options);
   },
-  getAllReviews: (id) => {
-    const options = {
-      url: SERVER_BASEURL,
-      method: 'get',
-      params: { product_id: id, count: 5000 },
-    };
-
-    return axios(options);
-  },
 
   getReviewMeta: (id) => {
     const options = {

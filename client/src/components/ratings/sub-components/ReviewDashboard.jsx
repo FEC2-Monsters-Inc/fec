@@ -12,6 +12,8 @@ export default function ReviewDashboard({
   changeSelect,
   listLength,
   setListLength,
+  listIndex,
+  setListIndex,
 }) {
   // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
@@ -138,6 +140,8 @@ export default function ReviewDashboard({
           setFilter={setFilter}
           listLength={listLength}
           setListLength={setListLength}
+          listIndex={listIndex}
+          setListIndex={setListIndex}
         />
         <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>

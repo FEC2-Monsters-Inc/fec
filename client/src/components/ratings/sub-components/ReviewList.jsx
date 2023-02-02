@@ -9,9 +9,10 @@ export default function ReviewList({
   setReviews,
   listLength,
   setListLength,
+  listIndex,
+  setListIndex,
 }) {
   const [loadedReviews, setLoadedReviews] = useState([]);
-  const [listIndex, setListIndex] = useState(0);
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -26,26 +27,21 @@ export default function ReviewList({
     if (!selectedRating) {
       return reviewMapper(reviews.slice(0, listIndex));
     }
-    const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true).slice(0, listIndex);
+    const filteredReviews = reviews.slice(0, listIndex).filter((review) => selectedRating[review.rating] === true);
     return reviewMapper(filteredReviews);
   };
 
   const twoAtATime = () => {
+    if (reviews.length - listIndex === 1) {
+      setListIndex(listIndex + 1);
+    }
     if (listIndex < reviews.length) {
       setListIndex(listIndex + 2);
-      // setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
-      // console.log('loaded reviews:', loadedReviews);
-      // console.log('reviews:', reviews);
-      // console.log('loadedReviews first two elements:', newReviews);
     }
   };
 
   // INITIALIZATION //
   useEffect(() => {
-    // fetcher.ratings.getAllReviews(40350)
-    //   .then(({ data }) => setLoadedReviews(data.results))
-    //   .catch((err) => console.error(err));
-    // setReviews(reviews.concat(loadedReviews.slice(listIndex, listIndex + 2)));
     setListIndex(2);
   }, []);
 

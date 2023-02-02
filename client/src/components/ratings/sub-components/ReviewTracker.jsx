@@ -8,6 +8,8 @@ export default function ReviewTracker({
   setFilter,
   listLength,
   setListLength,
+  listIndex,
+  setListIndex,
 }) {
   // STATE DATA //
   const [percentages, setPercentages] = useState({});
@@ -23,10 +25,10 @@ export default function ReviewTracker({
       4: 0,
       5: 0,
     };
-    for (let i = 0; i < reviews.length; i += 1) {
+    for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
       ratingTotals[reviews[i].rating] += 1;
     }
-    const total = reviews.length;
+    const total = reviews.slice(0, listIndex).length;
     setNumReviews(ratingTotals);
     setPercentages({
       1: (ratingTotals[1] / total) * 100,
@@ -42,12 +44,13 @@ export default function ReviewTracker({
   const toggleRating = (num) => {
     // lines 42-48: Make review bars w/o reviews un-clickable.
     const temp = [];
-    for (let i = 0; i < reviews.length; i += 1) {
+    for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
       temp.push(reviews[i].rating);
     }
     if (temp.includes(num) === false) {
       return;
     }
+    //
     let newSelect = {};
     newSelect = Object.assign(newSelect, filter);
     if (!newSelect[num]) {
@@ -73,7 +76,7 @@ export default function ReviewTracker({
       const trueKeys = (Object.keys(filter).map(Number));
       const getReviewLength = () => {
         let counter = 0;
-        for (let i = 0; i < reviews.length; i += 1) {
+        for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
           if (trueKeys.includes(reviews[i].rating)) {
             counter += 1;
           }
@@ -82,7 +85,7 @@ export default function ReviewTracker({
       };
       getReviewLength();
     }
-  }, [reviews, filter]);
+  }, [reviews, filter, listIndex]);
 
   return (
     <div className="review-tracker-main">

@@ -12,6 +12,7 @@ export default function Ratings({
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
   const [listLength, setListLength] = useState(0);
+  const [listIndex, setListIndex] = useState(0);
 
   // useEffect(() => {
   //   fetcher.ratings.getAllReviews(40350)
@@ -29,6 +30,8 @@ export default function Ratings({
           reviewMeta={reviewMeta}
           listLength={listLength}
           setListLength={setListLength}
+          listIndex={listIndex}
+          setListIndex={setListIndex}
         />
         <ReviewList
           reviews={reviews}
@@ -36,6 +39,8 @@ export default function Ratings({
           setReviews={setReviews}
           listLength={listLength}
           setListLength={setListLength}
+          listIndex={listIndex}
+          setListIndex={setListIndex}
         />
       </div>
     </div>

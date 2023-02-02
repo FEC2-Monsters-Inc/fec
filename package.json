@@ -8,7 +8,6 @@
     "client-dev": "npx webpack --watch",
     "test": "jest --watch"
   },
-<<<<<<< HEAD
   "jest": {
     "verbose": true,
     "transform": {
@@ -20,8 +19,6 @@
     },
     "testEnvironment": "jsdom"
   },
-=======
->>>>>>> main
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FEC2-Monsters-Inc/fec.git"
@@ -78,11 +75,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-<<<<<<< HEAD
-=======
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
->>>>>>> main
     "style-loader": "^3.3.1"
   }
 }

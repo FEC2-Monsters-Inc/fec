@@ -24,11 +24,17 @@
   position: relative;
 }
 
-#rel-img {
+#rel-img-wrapper {
   height: 15rem;
   width: 15rem;
-  position: relative;
+  display: flex;
   cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#rel-img {
+  max-height: 15rem
 }
 
 .star-modal {

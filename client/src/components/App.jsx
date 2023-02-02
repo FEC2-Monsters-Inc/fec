@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { actions } from '../reduxStore/index';
 import Overview from './overview/Overview.jsx';
 import Questions from './questions/Questions.jsx';
 import Ratings from './ratings/Ratings.jsx';
@@ -24,16 +22,6 @@ export default function App() {
     features: [],
   };
 
-  // // REDUX
-  // const feature = useSelector((state) => state.feature);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   fetcher.getProductById(40350)
-  //     .then((result) => dispatch(actions.setFeature(result.data)))
-  //     .catch((err) => console.error('initial fetch: ', err));
-  // }, []);
-
   // // STATE DATA //
   // const [featuredProduct, setFeaturedProduct] = useState(initProd);
 
@@ -44,46 +32,13 @@ export default function App() {
   //     .catch((err) => console.error('initial fetch: ', err));
   // }, []);
 
-  // console.log(feature);
-  // if (!feature) {
-  //   return (
-  //     <div>
-  //       HELLO
-  //     </div>
-  //   );
-  // }
   const [featuredProduct, setFeaturedProduct] = useState(initProd);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
-  console.time();
+
   // INITIALIZATION //
   useEffect(() => {
-    // fetcher.getProductById(40350)
-    //   .then(({ data }) => {
-    //     setFeaturedProduct(data);
-    //   })
-    //   .catch((err) => console.error('initial product fetch: ', err));
-
-    // fetcher.overview.getStylesById(40350)
-    //   .then(({ data }) => {
-    //     setStyles(data);
-    //   })
-    //   .catch((err) => console.error('initial style fetch: ', err));
-
-    // fetcher.ratings.getReviews(40350)
-    //   .then(({ data }) => {
-    //     setReviews(data.results);
-    //   })
-    //   .catch((err) => console.error('initial reviews fetch: ', err));
-
-    // fetcher.ratings.getReviewMeta(40350)
-    //   .then(({ data }) => {
-    //     setReviewMeta(data);
-    //   })
-    //   .then(() => console.timeEnd())
-    //   .catch((err) => console.error('initial review meta fetch: ', err));
-
     axios.all([
       fetcher.getProductById(40350),
       fetcher.overview.getStylesById(40350),
@@ -96,13 +51,9 @@ export default function App() {
         setReviews(data[2].data.results);
         setReviewMeta(data[3].data);
       }))
-      .then(() => console.timeEnd())
       .catch((err) => console.error(err));
-
-    console.log('USEEFFECT IS CALLED');
   }, []);
-  console.log(featuredProduct, styles, reviews, reviewMeta);
-  console.log('5');
+
   return (
     <div>
       HELLO

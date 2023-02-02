@@ -3,7 +3,7 @@ import axios from 'axios';
 const SERVER_BASEURL = 'http://localhost:3000/api/reviews/';
 
 export default {
-  // YOUR REQUESTS HERE
+  // Default sort is 'Relevant'
   getReviews: (id) => {
     const options = {
       url: SERVER_BASEURL,
@@ -13,6 +13,7 @@ export default {
 
     return axios(options);
   },
+
   getReviewMeta: (id) => {
     const options = {
       url: `${SERVER_BASEURL}meta`,
@@ -22,6 +23,7 @@ export default {
 
     return axios(options);
   },
+
   updateUseful: (id) => {
     const options = {
       url: `${SERVER_BASEURL}${id}/helpful`,

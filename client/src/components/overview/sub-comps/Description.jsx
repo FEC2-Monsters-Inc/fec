@@ -1,10 +1,37 @@
 import React from 'react';
 
-export default function Decsription(props) {
+export default function Decsription({ product }) {
+  // HELPER FUNCTIONS //
+  const featureRenderer = () => product.features.map((feat, index) => {
+    const id = index;
+    return (
+      <li className="feature" key={id}>
+        {feat.feature}
+        :
+        {' '}
+        {feat.value}
+      </li>
+    );
+  });
 
   return (
     <div id="description">
-      <h3>DESCRIPTION COMPONENT</h3>
+      <div className="desc-left">
+        { product.slogan
+          ? <h3 className="slogan">{product.slogan}</h3>
+          : null }
+        { product.description
+          ? <p className="description-pars">{product.description}</p>
+          : null }
+      </div>
+      <div className="line-break" />
+      <div className="desc-right">
+        <div className="features">
+          { product.features
+            ? featureRenderer()
+            : null }
+        </div>
+      </div>
     </div>
   );
 }

@@ -56,11 +56,16 @@ export default function App() {
 
   return (
     <div>
-      HELLO
-      {/* <Overview feature={featuredProduct} /> */}
+      <Overview product={featuredProduct} styles={styles} />
       <Related feature={featuredProduct} />
-      {/* <Questions feature={featuredProduct} /> */}
-      {/* <Ratings feature={featuredProduct} /> */}
+      <Questions feature={featuredProduct} />
+      <Ratings
+        feature={featuredProduct}
+        reviews={reviews}
+        setReviews={setReviews}
+        reviewMeta={reviewMeta}
+        setReviewMeta={setReviewMeta}
+      />
     </div>
   );
 }

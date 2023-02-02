@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetcher from '../../fetchers';
+import fetcher from '../../fetchers/questions';
 import SearchBar from './SearchBar.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import './styles/questions.css';

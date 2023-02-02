@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
-import fetcher from '../../fetchers/questions';
+import fetcher from '../../fetchers';
 
 export default function Question({
   question: {

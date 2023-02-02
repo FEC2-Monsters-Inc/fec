@@ -20,6 +20,12 @@ select:hover {
   color: #746F72
 }
 
+li {
+  align-items: center;
+  display: flex;
+  list-style: none;
+}
+
 /* ///// HEADER ///// */
 #header {
   align-items: center;
@@ -83,7 +89,7 @@ select:hover {
   display: flex;
   height: 100%;
   justify-content: center;
-  padding-right: 15px;
+  padding: 0 15px;
   width: 100%;
 }
 
@@ -94,14 +100,41 @@ select:hover {
   background-color: #EEEEEE00;
   border: none;
   color: red;
-  margin: auto;
 }
 
+.scroll-hero-left:hover,
+.scroll-hero-right:hover,
+.expand-hero:hover,
+.scroll-images:hover {
+  transform: scale(1.25);
+}
+
+.side-thumb-images {
+  display: flex;
+  flex-direction: column;
+  left: 10%;
+  max-width: 15%;
+  padding: 12.5px;
+  position: absolute;
+  top: 0;
+  width: 15%;
+
+}
+
+.side-thumb {
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin-bottom: 10px;
+}
+
+.side-thumb-images:hover {
+  cursor: pointer;
+}
 
 .hero-image-container {
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
   max-height: 100%;
   max-width: 100%;
@@ -109,43 +142,26 @@ select:hover {
   width: 100%
 }
 
-.side-thumb-images {
-  background-color: #2C394B59;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  padding: 12.5px;
-  position: absolute;
-  left: 1em;
-  top: 1em;
-  z-index: 1;
+.scroll-hero-left {
+  width: 5%
 }
 
-.side-thumb {
-  border-radius: 3px;
-  height: 75px;
-  margin-bottom: 10px;
-  width: 75px;
+.scroll-hero-right {
+  width: 5%
 }
-
-.side-thumb-images:hover {
-  cursor: pointer;
-}
-
 
 .expand-hero {
-  padding: 2em;
   position: absolute;
   top: 0;
   right: 0;
+  width: 5%;
 }
-
 
 .hero-image {
   background-size: cover;
-  border-radius: 3px;
-  height: 100%;
-  width: 100%;
+  border-radius: 2px;
+  max-height: 80%;
+  max-width: 80%;
 }
 
 
@@ -162,6 +178,10 @@ select:hover {
 .reviews-stars {
   align-items: center;
   display: flex;
+}
+
+.reviews-stars * {
+  color: #2C394B;
 }
 
 .reviews-link {
@@ -197,34 +217,72 @@ select:hover {
 }
 
 .selected-style {
-  color: #2C394B;
+  color: #746F72;
   font-weight: normal;
   margin-left: 5px;
   text-transform: uppercase;
 }
 
 .thumbs-container {
-  align-items: flex-start;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-top: 15px;
+  flex-direction: column;
+  justify-content: space-evenly;
   height: 100%;
   width: 100%;
 }
 
-.style-thumbnail {
-  border: 2px solid #082032;
-  border-radius: 100%;
-  height: 4em;
-  margin-right: 30px;
-  width: 4em;
+.thumb-row {
+  align-items: center;
+  display: flex;
+  width: fit-content;
 }
 
+.check-wrapper,
+.checked {
+  border-radius: 100%;
+  box-shadow: #0101014D 0 3px 20px 3px;
+  height: 5vw;
+  margin-right: 1em;
+  max-height: 60px;
+  max-width: 60px;
+  position: relative;
+  width: 5vw;
+  z-index: 1;
+}
+
+.check-wrapper {
+  border: 2px solid #2C394B4D;
+}
+
+.check-wrapper .check-mark {
+  display: none;
+}
+
+.checked {
+  border: 2px solid red;
+}
+
+.check-mark {
+  background-color: white;
+  border-radius: 100%;
+  color: red;
+  position: absolute;
+  right: -5px;
+  top: 0;
+}
+
+.checked:hover,
 .style-thumbnail:hover {
-  border-color: #E60023;
   cursor: pointer;
 }
+
+.style-thumbnail {
+  border-radius: 100%;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
 
 /*  ///// ADD TO CART ///// */
 #add-to-cart {
@@ -284,7 +342,7 @@ select:hover {
 
 .social:hover {
   cursor: pointer;
-  transform: scale(1.10);
+  transform: scale(1.25);
 }
 
 .facebook {
@@ -325,4 +383,8 @@ select:hover {
 
 .feature {
   margin: 10px 0;
+}
+
+.check {
+  margin-right: 10px;
 }

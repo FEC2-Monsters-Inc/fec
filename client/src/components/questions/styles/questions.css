@@ -10,10 +10,27 @@
   justify-content: space-between;
 }
 
-body {
+/* GENERAL TAGS */
+
+.qa h2 {
   display: block;
-  margin: 8px;
-  line-height: 120%;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.qa h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin: 1rem 0;
 }
 
 /* QUESTIONS & ANSWERS + GENERALS */

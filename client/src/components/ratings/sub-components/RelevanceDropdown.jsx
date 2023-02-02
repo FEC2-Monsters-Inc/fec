@@ -15,21 +15,21 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
 
   // HTTP REQUEST HANDLERS //
   const handleNew = (id) => {
-    fetcher.ratings.getReviewsSortedNew(40350) // productID - currently a placeholder
+    fetcher.getReviews(40350) // productID - currently a placeholder
       .then(({ data }) => setReviews(data.results))
       .then(() => setShowDropdown(false))
       .then(() => setSortString('recency'))
       .catch((error) => console.error('error fetching newest: ', error));
   };
   const handleHelpful = (id) => {
-    fetcher.ratings.getReviewsSortedHelpful(40350) // productID - currently a placeholder
+    fetcher.getReviews(40350) // productID - currently a placeholder
       .then(({ data }) => setReviews(data.results))
       .then(() => setShowDropdown(false))
       .then(() => setSortString('helpfulness'))
       .catch((error) => console.error('error fetching helpful: ', error));
   };
   const handleRelevant = (id) => {
-    fetcher.ratings.getReviews(40350) // productID - currently a placeholder
+    fetcher.getReviews(40350) // productID - currently a placeholder
       .then(({ data }) => setReviews(data.results))
       .then(() => setShowDropdown(false))
       .then(() => setSortString('relevance'))
@@ -45,7 +45,7 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
   // TO-DO: FIX Number of Reviews
   return (
     <div className="review-sort-dropdown-main">
-      { display
+      {display
         ? (
           <p className="review-sort-title">
             {reviews.length}
@@ -58,19 +58,19 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
             </span>
           </p>
         )
-        : null }
+        : null}
       {showDropdown && (
         <div className="review-sort-dropdown-child">
           <ul className="review-ul">
-            { sortString !== 'recency'
+            {sortString !== 'recency'
               ? <li className="review-li-1" onClick={() => handleNew()}>recency</li>
-              : null }
-            { sortString !== 'helpfulness'
+              : null}
+            {sortString !== 'helpfulness'
               ? <li className="review-li-2" onClick={() => handleHelpful()}>helpfulness</li>
-              : null }
-            { sortString !== 'relevance'
+              : null}
+            {sortString !== 'relevance'
               ? <li className="review-li-3" onClick={() => handleRelevant()}>relevance</li>
-              : null }
+              : null}
           </ul>
         </div>
       )}

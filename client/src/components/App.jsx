@@ -9,48 +9,42 @@ import fetcher from '../fetchers';
 
 export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initProd = {
-    id: 0,
-    campus: '',
-    name: '',
-    slogan: '',
-    description: '',
-    category: '',
-    default_price: '',
-    created_at: '',
-    updated_at: '',
-    features: [],
-  };
+  const initFeature = { id: 40350, name: null };
 
   const [featuredProduct, setFeaturedProduct] = useState(initProd);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
+  const [relatedIdList, setRelatedIdList] = useState(null);
 
   // INITIALIZATION //
   useEffect(() => {
     axios.all([
-      fetcher.getProductById(40350),
-      fetcher.overview.getStylesById(40350),
-      fetcher.ratings.getReviews(40350),
-      fetcher.ratings.getReviewMeta(40350),
+      fetcher.getProductById(feature.id),
+      fetcher.getProductStyle(feature.id),
+      fetcher.getReviews(feature.id),
+      fetcher.getReviewMeta(feature.id),
+      fetcher.getRelatedProduct(feature.id),
     ])
       .then(axios.spread((...data) => {
-        setFeaturedProduct(data[0].data);
+        setFeature(data[0].data);
         setStyles(data[1].data);
         setReviews(data[2].data.results);
         setReviewMeta(data[3].data);
+        setRelatedIdList(data[4].data);
       }))
       .catch((err) => console.error(err));
-  }, []);
+  }, [feature.id]);
+
+  if (!feature.name) return <div />;
 
   return (
     <div>
-      <Overview product={featuredProduct} styles={styles} />
-      <Related feature={featuredProduct} />
-      <Questions feature={featuredProduct} />
+      <Overview product={feature} styles={styles} />
+      <Related feature={feature} relatedIdList={relatedIdList} />
+      <Questions feature={feature} />
       <Ratings
-        feature={featuredProduct}
+        feature={feature}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}

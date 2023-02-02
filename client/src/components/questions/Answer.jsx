@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import fetcher from '../../fetchers/questions';
+import fetcher from '../../fetchers';
 
 export default function Answer({
   answer: {

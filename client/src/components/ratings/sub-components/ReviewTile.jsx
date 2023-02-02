@@ -71,14 +71,14 @@ export default function ReviewTile({ review, setReviews, reviews }) {
 
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
-    fetcher.ratings.updateUseful(review.review_id)
+    fetcher.updateUseful(review.review_id)
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.log(error));
   };
   const reportHandler = () => {
-    fetcher.ratings.updateReport(review.review_id)
+    fetcher.updateReport(review.review_id)
       .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
@@ -110,9 +110,9 @@ export default function ReviewTile({ review, setReviews, reviews }) {
         {review.recommend ? 'I recommend this product' : null}
       </p>
       <p className="review-tile-response">
-        { review.response
+        {review.response
           ? `Response from seller: ${review.response}`
-          : null }
+          : null}
       </p>
       <div className="review-tile-photos-container">{photoHandler()}</div>
       <div className="review-tile-container-2">
@@ -127,9 +127,9 @@ export default function ReviewTile({ review, setReviews, reviews }) {
         </p>
         <RxDividerVertical />
         <p className="review-tile-report" onClick={() => (!helpfulClick ? reportHandler() : null)}>Report</p>
-        { modalToggle
+        {modalToggle
           ? <ReviewImageModal imgString={imgString} setModalToggle={setModalToggle} />
-          : null }
+          : null}
       </div>
     </div>
   );

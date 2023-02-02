@@ -41,7 +41,7 @@ li {
 }
 
 .temp-logo {
-  color: red;
+  color: #E60023;
   font-size: 2em;
   font-style: italic;
   font-weight: bold;
@@ -52,7 +52,7 @@ li {
 #search {
   align-items: flex-end;
   display: flex;
-  color: red;
+  color: #E60023;
 }
 
 .search-icon {
@@ -99,7 +99,7 @@ li {
 .scroll-images {
   background-color: #EEEEEE00;
   border: none;
-  color: red;
+  color: #E60023;
 }
 
 .scroll-hero-left:hover,
@@ -206,6 +206,47 @@ li {
   margin-top: -10px;
 }
 
+.price-holder {
+  align-items: center;
+  display: flex;
+  height: 1.25em;
+  justify-content: flex-start;
+  max-height: 1.25em;
+}
+
+.prod-price {
+  color: #746F72;
+  font-weight: 600;
+  margin-right: 1em;
+  width: fit-content;
+}
+
+.strike:before {
+  border-top: 2px solid #E60023;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 40%;
+  right: 0;
+
+  -webkit-transform:rotate(10deg);
+  -moz-transform:rotate(10deg);
+  -ms-transform:rotate(10deg);
+  -o-transform:rotate(10deg);
+  transform:rotate(10deg);
+}
+
+.strike {
+  position: relative;
+}
+
+.sale-price {
+  color: #E60023;
+  font-size: 1.25em;
+  font-weight: 600;
+  width: fit-content;
+}
+
 /* ///// STYLE SELECT ///// */
 #style-select {
   height: 33.33%;
@@ -259,13 +300,14 @@ li {
 }
 
 .checked {
-  border: 2px solid red;
+  border: 2px solid #E60023;
 }
 
 .check-mark {
   background-color: white;
   border-radius: 100%;
-  color: red;
+  color: #E60023;
+  padding: 1px;
   position: absolute;
   right: -5px;
   top: 0;

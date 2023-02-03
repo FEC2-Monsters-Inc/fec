@@ -2,7 +2,7 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import './styles/compareModal.css';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function CompareModal({
   setShowModal, featureMeta, relProdMeta,

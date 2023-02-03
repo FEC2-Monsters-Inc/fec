@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Overview from './overview/Overview.jsx';
-import Questions from './questions/Questions.jsx';
-import Ratings from './ratings/Ratings.jsx';
-import Related from './related/Related.jsx';
+import Overview from './Overview/Overview.jsx';
+import Questions from './Questions/Questions.jsx';
+import Ratings from './Ratings/Ratings.jsx';
+import Related from './Related/Related.jsx';
 import fetcher from '../fetchers';
 
 export default function App() {

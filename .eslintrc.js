@@ -14,7 +14,6 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
   ],
-  ignorePatterns: ['**/example/Link*'],
   rules: {
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'react/prop-types': 'off',

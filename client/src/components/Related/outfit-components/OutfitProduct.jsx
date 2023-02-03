@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdRemoveCircleOutline } from 'react-icons/md';
 import fetcher from '../../../fetchers';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function OutfitProduct({
   outfitId, outfitIdList, setOutfitIdList, setFeatureProduct,

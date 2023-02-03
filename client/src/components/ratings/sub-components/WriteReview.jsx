@@ -13,6 +13,17 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   const [selectedImage, setSelectedImage] = useState([]);
   const summaryRef = useRef();
   const bodyRef = useRef();
+  const [submitReview, setSubmitReview] = useState({
+    product_id: feature.id, // done
+    rating: 0, // done
+    summary: '', // done
+    body: '', // done
+    recommend: false, // done
+    name: '', // done
+    email: '', // done
+    photos: [], //
+    characteristics: {},
+  });
   // EVENT HANDLERS // Needs beeter functionality to exit Modal w/o Mouse
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
@@ -23,26 +34,46 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   const starRatingTextHandler = (value) => {
     if (value === 1) {
       setStarRatingText('Poor');
+      setSubmitReview({ ...submitReview, rating: value });
     }
     if (value === 2) {
       setStarRatingText('Fair');
+      setSubmitReview({ ...submitReview, rating: value });
     }
     if (value === 3) {
       setStarRatingText('Average');
+      setSubmitReview({ ...submitReview, rating: value });
     }
     if (value === 4) {
       setStarRatingText('Good');
+      setSubmitReview({ ...submitReview, rating: value });
     }
     if (value === 5) {
       setStarRatingText('Great');
+      setSubmitReview({ ...submitReview, rating: value });
     }
   };
   const handleSummaryChange = (e) => {
     setSummaryCount(e.target.value.length);
+    setSubmitReview({ ...submitReview, summary: e.target.value });
   };
   const handleBodyChange = (e) => {
     setBodyCount(e.target.value.length);
-  }
+    setSubmitReview({ ...submitReview, body: e.target.value });
+  };
+  const handleRecommendation = (e) => {
+    const { value } = e.target;
+    setSubmitReview({
+      ...submitReview,
+      recommend: value === 'yes',
+    });
+  };
+  const handleNameChange = (e) => {
+    setSubmitReview({ ...submitReview, name: e.target.value });
+  };
+  const handleEmailChange = (e) => {
+    setSubmitReview({ ...submitReview, email: e.target.value });
+  };
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
@@ -58,11 +89,11 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
         <div>
           <p>Do you recommend this product?</p>
           <label htmlFor="recommendation-yes">
-            <input type="radio" name="recommendation-yes" value="yes" />
+            <input type="radio" name="recommendation-yes" value="yes" onChange={handleRecommendation} />
             Yes
           </label>
           <label htmlFor="recommendation-no">
-            <input type="radio" name="recommendation-no" value="no" />
+            <input type="radio" name="recommendation-no" value="no" onChange={handleRecommendation} />
             No
           </label>
         </div>
@@ -95,14 +126,14 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
         <br />
         <div className="write-review-email-parent">
           <div className="form__group field">
-            <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" required />
+            <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
             <label htmlFor="nickname" className="form__label">Nickname</label>
           </div>
           <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For privacy reasons, do not use your full name or email address</p>
         </div>
         <div className="write-review-email-parent">
           <div className="form__group field">
-            <input type="input" className="form__field" placeholder="Name" name="name" id="name" maxLength="60" required />
+            <input type="input" className="form__field" placeholder="Name" name="name" id="name" maxLength="60" onChange={handleEmailChange} required />
             <label htmlFor="name" className="form__label">Email</label>
           </div>
           <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For authentication reasons, you will not be emailed</p>

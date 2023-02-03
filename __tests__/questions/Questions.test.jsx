@@ -4,20 +4,22 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import Questions from '../Questions.jsx';
-import exampleFeature from '../../../../../examples/products/product';
-import exampleQuestions from '../../../../../examples/questions/questions';
-import fetcherMock from '../../../fetchers/questions';
+import Questions from '../../client/src/components/questions/Questions.jsx';
+import mockProducts from '../example_data/products/product';
+import mockQuestions from '../example_data/questions/questions';
+import fetcherMock from '../../client/src/fetchers';
 
-jest.mock('../../../fetchers/questions');
+jest.mock('../../client/src/fetchers');
 
-beforeEach(() => jest.clearAllMocks());
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 afterEach(cleanup);
 
 describe('Questions & Answers Component', () => {
   beforeEach(async () => {
-    fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: exampleQuestions });
-    render(<Questions feature={exampleFeature} />);
+    fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
+    render(<Questions feature={mockProducts[40356]} />);
     await screen.findByRole('heading');
   });
 

@@ -3,7 +3,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 import ImageModal from './ImageModal.jsx';
 import './styles/compareModal.css';
 

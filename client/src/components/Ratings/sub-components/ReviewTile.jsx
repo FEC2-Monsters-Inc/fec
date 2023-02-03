@@ -3,7 +3,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function ReviewTile({ review, setReviews, reviews }) {
   // STATE DATA //

@@ -1,5 +1,6 @@
 .outfit-carousel-outside {
   display: flex;
+  width: 80rem;
 }
 
 .outfit-carousel-inside {

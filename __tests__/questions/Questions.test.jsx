@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  render, screen, cleanup, waitFor,
+  render, screen, cleanup, waitFor, act,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
@@ -10,11 +10,12 @@ import mockQuestions from '../example_data/questions/questions';
 import fetcherMock from '../../client/src/fetchers';
 
 jest.mock('../../client/src/fetchers');
-
 beforeEach(() => {
   jest.clearAllMocks();
 });
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+});
 
 describe('Questions & Answers Component', () => {
   beforeEach(async () => {
@@ -45,5 +46,57 @@ describe('Questions & Answers Component', () => {
     await userEvent.click(button);
     questions = await screen.findAllByText('Q: ', { exact: false });
     expect(questions.length).toBe(4);
+  });
+
+  describe('SearchBar Component', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.runOnlyPendingTimers();
+      jest.useRealTimers();
+    });
+
+    it('shouldn\'t filter questions if typing less than 3 characters', async () => {
+      const user = userEvent.setup({ delay: null });
+      const searchbar = screen.getByRole('searchbox', {
+        name: /search question/i,
+      });
+      const questionsBefore = await screen.findAllByRole('heading', { name: /q: /i });
+      await user.type(searchbar, 'te');
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+      const questionsAfter = await screen.findAllByRole('heading', { name: /q: /i });
+      expect(questionsBefore).toEqual(questionsAfter);
+    });
+
+    it('shouldn\'t filter questions before input is debounced', async () => {
+      const user = userEvent.setup({ delay: null });
+      const searchbar = screen.getByRole('searchbox', {
+        name: /search question/i,
+      });
+      const questionsBefore = await screen.findAllByRole('heading', { name: /q: /i });
+      await user.type(searchbar, 'tem');
+      act(() => {
+        jest.advanceTimersByTime(499);
+      });
+      const questionsAfter = await screen.findAllByRole('heading', { name: /q: /i });
+      expect(questionsBefore).toEqual(questionsAfter);
+    });
+
+    it('should filter questions after typing 3 characters and waiting 500ms', async () => {
+      const user = userEvent.setup({ delay: null });
+      const searchbar = screen.getByRole('searchbox', {
+        name: /search question/i,
+      });
+      await user.type(searchbar, 'tem');
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+      const questions = await screen.findAllByRole('heading', { name: /q: /i });
+      questions.map((question) => expect(question).toHaveTextContent(/tem/i));
+    });
   });
 });

@@ -9,58 +9,43 @@ import fetcher from '../fetchers';
 
 export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initProd = {
-    id: 0,
-    campus: '',
-    name: '',
-    slogan: '',
-    description: '',
-    category: '',
-    default_price: '',
-    created_at: '',
-    updated_at: '',
-    features: [],
-  };
+  const initFeature = { id: 40350, name: null };
 
-  // // STATE DATA //
-  // const [featuredProduct, setFeaturedProduct] = useState(initProd);
-
-  // // INITIALIZATION //
-  // useEffect(() => {
-  //   fetcher.getProductById(40350)
-  //     .then((result) => setFeaturedProduct(result.data))
-  //     .catch((err) => console.error('initial fetch: ', err));
-  // }, []);
-
-  const [featuredProduct, setFeaturedProduct] = useState(initProd);
+  // STATE
+  const [featureProduct, setFeatureProduct] = useState(initFeature);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
+  const [relatedIdList, setRelatedIdList] = useState(null);
 
   // INITIALIZATION //
   useEffect(() => {
     axios.all([
-      fetcher.getProductById(40350),
-      fetcher.overview.getStylesById(40350),
-      fetcher.ratings.getReviews(40350),
-      fetcher.ratings.getReviewMeta(40350),
+      fetcher.getProductById(featureProduct.id),
+      fetcher.getProductStyle(featureProduct.id),
+      fetcher.getReviews(featureProduct.id),
+      fetcher.getReviewMeta(featureProduct.id),
+      fetcher.getRelatedProduct(featureProduct.id),
     ])
       .then(axios.spread((...data) => {
-        setFeaturedProduct(data[0].data);
+        setFeatureProduct(data[0].data);
         setStyles(data[1].data);
         setReviews(data[2].data.results);
         setReviewMeta(data[3].data);
+        setRelatedIdList(data[4].data);
       }))
       .catch((err) => console.error(err));
-  }, []);
+  }, [featureProduct.id]);
+
+  if (!featureProduct.name) return <div />;
 
   return (
     <div>
-      <Overview product={featuredProduct} styles={styles} />
-      <Related feature={featuredProduct} />
-      <Questions feature={featuredProduct} />
+      <Overview product={featureProduct} styles={styles} reviews={reviews} />
+      <Related feature={featureProduct} relatedIdList={relatedIdList} />
+      <Questions feature={featureProduct} />
       <Ratings
-        feature={featuredProduct}
+        feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}

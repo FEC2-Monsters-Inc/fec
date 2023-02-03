@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
-export default function ProdInfo({ product, currStyle }) {
+export default function ProdInfo({ product, currStyle, reviews }) {
   // STATE DATA //
   const [price, setPrice] = useState(null);
+
+  // HELPER FUNCTIONS //
+  const starAverager = (reviewData) => {
+    let total = 0;
+    reviewData.forEach((review) => {
+      total += review.rating;
+    });
+    total = (total / reviews.length).toFixed(1);
+    return `${total * 20}%`;
+  };
 
   // INITIALIZATION //
   useEffect(() => {
@@ -20,8 +30,9 @@ export default function ProdInfo({ product, currStyle }) {
     <div id="prod-info">
       <div className="reviews-stars">
         <h3 className="stars">
-          <StarRating ratingPercentage="60%" className="star-icons" />
-          {/* Star Rating will need dynamically rendered review data. Using dummy data for now. */}
+          { reviews
+            ? <StarRating ratingPercentage={starAverager(reviews)} className="star-icons" />
+            : null }
         </h3>
         <a className="gray-text reviews-link" href="#ratings-widget">Read all reviews</a>
       </div>

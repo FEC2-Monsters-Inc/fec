@@ -15,8 +15,8 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
 
   useEffect(() => {
     axios.all([
-      fetcher.related.getProductStyle(relProd.id),
-      fetcher.related.getReviewMeta(relProd.id),
+      fetcher.getProductStyle(relProd.id),
+      fetcher.getReviewMeta(relProd.id),
     ])
       .then(axios.spread((...data) => {
         setRelStyle(data[0].data.results[0]);
@@ -59,10 +59,10 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
               setShowImg={setShowImg}
             />
           )}
-        <div className="rel-cat">{relProd.category}</div>
+        <div className="rel-category">{relProd.category}</div>
         <div className="rel-name">{relProd.name}</div>
         <div className="rel-slogan">{relProd.slogan}</div>
-        {relStyle.sale_price && <div className="rel-sale-price">{`$${relStyle.sale_price}`}</div>}
+        {relStyle.sale_price && <div className="rel-sale-price">{`${relStyle.sale_price}`}</div>}
         <div className="rel-orig-price">{`$${relStyle.original_price}`}</div>
         <StarRating ratingPercentage={`${ratingPercentage}%`} />
       </div>

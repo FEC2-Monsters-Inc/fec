@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import fetcher from '../../fetchers/questions';
+import fetcher from '../../fetchers';
 
 export default function QandAModal({
   type,
@@ -138,8 +138,8 @@ export default function QandAModal({
                   className="qa modal-btn"
                   type="button"
                   tabIndex={0}
-                  // onKeyUp={}
-                  // onClick={}
+                // onKeyUp={}
+                // onClick={}
                 >
                   Choose Photo
                 </button>

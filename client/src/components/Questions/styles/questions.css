@@ -122,7 +122,7 @@
   align-items: center;
 }
 
-.qa.search-input {
+.qa#question-search {
   border-style: none;
   flex: auto;
   height: 3rem;
@@ -135,7 +135,6 @@
 .qa.search-icon {
   position: absolute;
   right: 1rem;
-  cursor: pointer;
 }
 
 /* ADD QUESTION FORM MODAL */

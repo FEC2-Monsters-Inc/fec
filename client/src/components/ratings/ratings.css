@@ -354,12 +354,42 @@ align-items: center;
 justify-content: center;
 }
 
-.on {
+.write-on {
   color: gold;
 }
-.off {
+.write-off {
   color: lightgray;
 }
+
+.write-review-modal-label {
+  font-size: .7rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.radio-row-title {
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  width: 75px;
+}
+
+.write-review-characteristics-modal {
+  display: inline-block;
+  justify-content: center;
+}
+
+.review-characteristics-modal-container {
+  margin: auto;
+  text-align: center;
+}
+
+.review-radio-row-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
 /* .review-sort-dropdown-main {
   border: medium dashed black;
 } */

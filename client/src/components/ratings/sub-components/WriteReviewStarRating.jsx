@@ -17,7 +17,7 @@ export default function WriteReviewStarRating({ onChange }) {
         <WriteReviewStar
           key={Math.random()}
           filled={index < (rating || hover)}
-          className={index <= (hover || rating) ? 'on' : 'off'}
+          className={index <= (hover || rating) ? 'write-on' : 'write-off'}
           onClick={() => changeRating(index + 1)}
           onMouseEnter={() => setHover(index + 1)}
           onMouseLeave={() => setHover(rating)}

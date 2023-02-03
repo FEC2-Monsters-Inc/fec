@@ -12,6 +12,7 @@ export default function ReviewList({
   listIndex,
   setListIndex,
   feature,
+  reviewMeta,
 }) {
   const [reviewExpander, setReviewExpander] = useState('25rem');
   const [expandedStatus, setExpandedStatus] = useState(false);
@@ -91,7 +92,13 @@ export default function ReviewList({
         <button type="button" onClick={() => setWriteModal(true)}>Write a Review</button>
         {
           writeModal
-            ? <WriteReviewModal setWriteModal={setWriteModal} feature={feature} />
+            ? (
+              <WriteReviewModal
+                setWriteModal={setWriteModal}
+                feature={feature}
+                reviewMeta={reviewMeta}
+              />
+            )
             : null
         }
       </div>

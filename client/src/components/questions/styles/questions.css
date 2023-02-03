@@ -1,6 +1,7 @@
 /* GENERAL TAGS */
 
 div#questions-widget {
+  width: 90%;
   max-width: 1300px;
   margin: auto;
   line-height: 120%;

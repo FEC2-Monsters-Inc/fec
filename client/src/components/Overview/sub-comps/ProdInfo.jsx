@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function ProdInfo({ product, currStyle, reviews }) {
   // STATE DATA //

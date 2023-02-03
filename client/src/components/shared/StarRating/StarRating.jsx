@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai';
-import './star-rating.css';
+import './StarRating.css';
 
 export default function StarRating({ ratingPercentage }) {
   return (

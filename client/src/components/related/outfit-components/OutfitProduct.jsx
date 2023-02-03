@@ -15,9 +15,9 @@ export default function OutfitProduct({ outfitId, outfitIdList, setOutfitIdList 
 
   useEffect(() => {
     axios.all([
-      fetcher.related.getProductStyle(outfitId),
+      fetcher.getProductStyle(outfitId),
       fetcher.getProductById(outfitId),
-      fetcher.related.getReviewMeta(outfitId),
+      fetcher.getReviewMeta(outfitId),
     ])
       .then(axios.spread((...data) => {
         setOutfitStyle(data[0].data.results[0]);

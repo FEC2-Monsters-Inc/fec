@@ -9,8 +9,7 @@ export default function SearchBar({
     <div className="qa search">
       <input
         className="qa search-input"
-        name="search"
-        type="text"
+        type="search"
         value={text}
         onChange={(e) => handleChange(e.target.value)}
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."

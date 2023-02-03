@@ -117,9 +117,9 @@
 .qa.search {
   border-width: 1px;
   border-style: solid;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .qa.search-input {
@@ -127,15 +127,14 @@
   flex: auto;
   height: 3rem;
   padding-left: 5px;
-  padding-right: 2rem;
+  padding-right: 3rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .qa.search-icon {
   position: absolute;
-  right: 0.5rem;
-  padding: 1rem;
+  right: 1rem;
   cursor: pointer;
 }
 

@@ -5,7 +5,9 @@ import { GrAdd } from 'react-icons/gr';
 import OutfitProduct from './OutfitProduct.jsx';
 import './styles/outfitList.css';
 
-export default function OutfitList({ feature, outfitIdList, setOutfitIdList }) {
+export default function OutfitList({
+  feature, setFeatureProduct, outfitIdList, setOutfitIdList,
+}) {
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
 
@@ -42,6 +44,7 @@ export default function OutfitList({ feature, outfitIdList, setOutfitIdList }) {
               outfitId={outfitId}
               outfitIdList={outfitIdList}
               setOutfitIdList={setOutfitIdList}
+              setFeatureProduct={setFeatureProduct}
             />
           ))
           : null}

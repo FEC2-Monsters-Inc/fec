@@ -5,12 +5,12 @@ import RelatedProduct from './RelatedProduct.jsx';
 import fetcher from '../../../fetchers';
 import './styles/relatedList.css';
 
-export default function RelatedList({ feature, relatedList }) {
+export default function RelatedList({ feature, relatedInfoList, setFeatureProduct }) {
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
   const [featureMeta, setFeatureMeta] = useState(0);
 
-  const endOfRelatedList = relatedList.length ? relatedList.length - 5 : 0;
+  const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length - 5 : 0;
 
   const scrollLeft = () => {
     posIndex > 0 ? setPosIndex(posIndex - 1) : null;
@@ -36,11 +36,12 @@ export default function RelatedList({ feature, relatedList }) {
         onClick={scrollLeft}
       />
       <div className="related-carousel-inside" ref={ref}>
-        {relatedList.map((relProd) => (
+        {relatedInfoList.map((relProd) => (
           <RelatedProduct
             key={relProd.id}
             feature={feature}
             featureMeta={featureMeta}
+            setFeatureProduct={setFeatureProduct}
             relProd={relProd}
           />
         ))}

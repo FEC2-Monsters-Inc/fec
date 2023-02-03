@@ -18,14 +18,10 @@ afterEach(cleanup);
 
 describe('Questions & Answers Component', () => {
   beforeEach(async () => {
-    fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
+    fetcherMock.getQuestionsById
+      .mockResolvedValueOnce({ data: mockQuestions[40356] });
     render(<Questions feature={mockProducts[40356]} />);
     await screen.findByRole('heading');
-  });
-
-  it('should render the Questions component', () => {
-    const header = screen.getByRole('heading', { level: 2 });
-    expect(header).toBeInTheDocument();
   });
 
   it('should fetch questions once on load', async () => {

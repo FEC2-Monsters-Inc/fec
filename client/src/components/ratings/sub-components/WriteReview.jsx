@@ -46,7 +46,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
-      <div className="write-review-modal-parent">
+      <div className="write-review-modal-parent" style={{position: 'relative'}}>
         <p>Write your review</p>
         <p>About {feature.name}</p>
         <div style={{display: 'flex'}}> {/*Rename and Refactor */}
@@ -87,21 +87,33 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
           <textarea ref={bodyRef} maxLength="1000" placeholder="Why did you like the product?" className="write-review-summary" onChange={handleBodyChange} />
           <p className="write-review-character-count">
             {bodyCount >= 50
-              ? 'Minimum Reached'
+              ? 'Minimum Reached!'
               : `Minimum required characters left: ${50 - bodyCount}`}
           </p>
         </div>
-        <div>
-          <button type="button" onClick={() => setImageUploadModal(true)}>Upload Your Pics!</button>
-          {imageUploadModal
-            ? (
-              <UploadAndDisplayImage
-                setImageUploadModal={setImageUploadModal}
-                setSelectedImage={setSelectedImage}
-                selectedImage={selectedImage}
-              />
-            ) : null}
+        <br />
+        <br />
+        <div style={{textAlign: 'center'}}>
+          <p style={{fontSize: '1.25rem'}}>What's your name?</p>
+          <br />
+          <input type="text" placeholder="Example: jackson11!" maxLength="60" style={{width: "240px"}}/>
+          <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For privacy reasons, do not use your full name or email address.</p>
         </div>
+        <button type="button" onClick={() => setImageUploadModal(true)} style={{position: 'sticky', bottom: '0', fontSize: ".7rem", borderRadius: "25%"}}>
+          Upload
+          <br />
+          Your
+          <br />
+          Pics!
+        </button>
+        {imageUploadModal
+          ? (
+            <UploadAndDisplayImage
+              setImageUploadModal={setImageUploadModal}
+              setSelectedImage={setSelectedImage}
+              selectedImage={selectedImage}
+            />
+          ) : null}
       </div>
     </div>), document.getElementById('modal'));
 }

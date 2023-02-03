@@ -252,7 +252,7 @@
 }
 
 .review-tile-body {
-  word-break: break-all;
+  word-break: keep-all;
 }
 
 .review-elipses-span:hover {
@@ -340,6 +340,12 @@
 .scroll-review-list {
   overflow-y: auto;
   height: 25rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-review-list::-webkit-scrollbar {
+  display: none;
 }
 
 .write-review-modal {

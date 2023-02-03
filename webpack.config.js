@@ -23,7 +23,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|svg|gif)?$/,
-        use: 'file-loader',
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets/transpiled',
+          name: '[name]_[contenthash].[ext]',
+        },
       },
     ],
   },

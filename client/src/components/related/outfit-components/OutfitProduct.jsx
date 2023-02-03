@@ -57,11 +57,11 @@ export default function OutfitProduct({
             />
           }
         </div>
-        <div className="outfit-cat">{outfitProd.category}</div>
-        <div className="outfit-name">{outfitProd.name}</div>
-        <div className="outfit-slogan">{outfitProd.slogan}</div>
-        {outfitStyle.sale_price && <div className="outfit-sale-price">{`$${outfitStyle.sale_price}`}</div>}
-        <div className="outfit-orig-price">{`$${outfitStyle.original_price}`}</div>
+        <div className="outfit-category rel-text">{outfitProd.category}</div>
+        <div className="outfit-name rel-text">{outfitProd.name}</div>
+        <div className="outfit-slogan rel-text">{outfitProd.slogan}</div>
+        {outfitStyle.sale_price && <div className="outfit-sale-price rel-text">{`$${outfitStyle.sale_price}`}</div>}
+        <div className="outfit-orig-price rel-text">{`$${outfitStyle.original_price}`}</div>
         <StarRating ratingPercentage={`${ratingPercentage}%`} />
       </div>
     </div>

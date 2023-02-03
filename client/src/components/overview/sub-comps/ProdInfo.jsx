@@ -75,6 +75,8 @@ export default function ProdInfo({ product, currStyle, reviews }) {
         { sale
           ? (
             <h3 className="sale-price">
+              SALE:
+              {' '}
               $
               {sale}
             </h3>

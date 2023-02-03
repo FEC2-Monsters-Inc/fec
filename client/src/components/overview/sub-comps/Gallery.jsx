@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-  AiOutlineDoubleLeft, AiOutlineDoubleRight, AiOutlineDown, AiOutlineExpand,
+  AiOutlineDoubleRight, AiOutlineDown, AiOutlineExpand, AiOutlineUp,
 } from 'react-icons/ai';
+import GalleryThumbnails from './GalleryThumbnails.jsx';
 
 export default function Gallery({ currStyle, setCurrStyle }) {
   // STATE DATA //
@@ -27,12 +28,15 @@ export default function Gallery({ currStyle, setCurrStyle }) {
 
   return (
     <div id="gallery">
-      <div className="hero-image-container">
-        <button className="scroll-hero-left" type="button"><AiOutlineDoubleLeft size="2em" /></button>
+      <div className="side-thumb-container">
+        <button className="scroll-images" type="button"><AiOutlineUp size="2em" /></button>
         <div className="side-thumb-images">
           { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" onClick={(e) => toggleHero(e)} />)}
-          <button className="scroll-images" type="button"><AiOutlineDown size="2em" /></button>
         </div>
+        <button className="scroll-images" type="button"><AiOutlineDown size="2em" /></button>
+      </div>
+      <div className="hero-image-container">
+        <button className="scroll-hero-left" type="button"><AiOutlineDoubleRight size="2em" /></button>
         <img className="hero-image" src={heroImage} alt="product hero" />
         <button className="expand-hero" type="button"><AiOutlineExpand size="1.5em" /></button>
         <button className="scroll-hero-right" type="button"><AiOutlineDoubleRight size="2em" /></button>

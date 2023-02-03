@@ -4,10 +4,14 @@ import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
-import ImageModal from './ImageModal.jsx';
+import ImageCarousel from './ImageCarousel.jsx';
+import imgUnavailable from '../assets/imgUnavailable.png';
+
 import './styles/compareModal.css';
 
-export default function RelatedProduct({ feature, featureMeta, relProd }) {
+export default function RelatedProduct({
+  feature, featureMeta, setFeatureProduct, relProd,
+}) {
   const [relStyle, setRelStyle] = useState();
   const [showModal, setShowModal] = useState(false);
   const [showImg, setShowImg] = useState(false);
@@ -23,9 +27,9 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
         setRelProdMeta(data[1].data);
       }))
       .catch((err) => console.error(err));
-  }, [feature, relProd.id]);
+  }, [feature.id, relProd.id]);
 
-  if (!relStyle || !relStyle.photos[0].thumbnail_url) {
+  if (!relStyle) {
     return <div />;
   }
 
@@ -43,27 +47,31 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
       <div className="rel-item">
         <div id="rel-img-wrapper">
           <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} />
-          <img
-            id="rel-img"
-            src={relStyle.photos[0].thumbnail_url}
-            alt={relProd.description}
-            onMouseEnter={() => setShowImg(true)}
-          />
-        </div>
-        {showImg
-          && (
-            <ImageModal
-              relStyle={relStyle}
-              relProd={relProd}
-              setRelStyle={setRelStyle}
-              setShowImg={setShowImg}
+          {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <img
+              id="rel-img"
+              src={relStyle.photos[0].url || imgUnavailable}
+              alt="Not Available"
+              onMouseEnter={() => setShowImg(true)}
+              onKeyDown={() => setFeatureProduct(relProd)}
+              onClick={() => setFeatureProduct(relProd)}
             />
-          )}
-        <div className="rel-category">{relProd.category}</div>
-        <div className="rel-name">{relProd.name}</div>
-        <div className="rel-slogan">{relProd.slogan}</div>
-        {relStyle.sale_price && <div className="rel-sale-price">{`${relStyle.sale_price}`}</div>}
-        <div className="rel-orig-price">{`$${relStyle.original_price}`}</div>
+          }
+          {showImg
+            && (
+              <ImageCarousel
+                relStyle={relStyle}
+                setRelStyle={setRelStyle}
+                setShowImg={setShowImg}
+              />
+            )}
+        </div>
+        <div className="rel-category rel-text">{relProd.category}</div>
+        <div className="rel-name rel-text">{relProd.name}</div>
+        <div className="rel-slogan rel-text">{relProd.slogan}</div>
+        {relStyle.sale_price
+          && <div className="rel-sale-price rel-text">{`${relStyle.sale_price}`}</div>}
+        <div className="rel-orig-price rel-text">{`$${relStyle.original_price}`}</div>
         <StarRating ratingPercentage={`${ratingPercentage}%`} />
       </div>
       {showModal

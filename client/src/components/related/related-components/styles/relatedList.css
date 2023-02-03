@@ -43,8 +43,9 @@
 }
 
 #rel-img {
-  max-height: 15rem;
-  max-width: 15rem;
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
 }
 
 .star-modal {
@@ -53,7 +54,6 @@
   right: 0.25rem;
   width: 1.5rem;
   height: auto;
-  z-index: 2;
   white-space: nowrap;
   overflow: hidden;
   color: #e94864f2;
@@ -63,4 +63,17 @@
   cursor: pointer;
   width: 5rem;
   height: auto;
+}
+
+.rel-text {
+  margin: 3px;
+  font-weight: bold;
+}
+
+.rel-category {
+  margin-top: 10px;
+}
+
+.rel-orig-price {
+  margin-bottom: 10px;
 }

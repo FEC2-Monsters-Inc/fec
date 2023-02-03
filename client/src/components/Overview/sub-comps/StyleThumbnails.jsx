@@ -7,22 +7,18 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
 
   // HELPER FUNCTIONS //
   const thumbRowSorter = (styleInfo) => {
-    const result = [[]];
+    const rows = [[]];
     let index = 0;
-    let count = 1;
     styleInfo.forEach((style) => {
-      if (count === 5) {
-        count = 0;
+      if (rows[index].length === 4) {
         index += 1;
-        result[index] = [];
-        result[index].push(style);
+        rows[index] = [];
+        rows[index].push(style);
       } else {
-        result[index].push(style);
-        count += 1;
+        rows[index].push(style);
       }
     });
-
-    setThumbRows(result);
+    setThumbRows(rows);
   };
 
   const thumbRowMapper = (thumbs) => (

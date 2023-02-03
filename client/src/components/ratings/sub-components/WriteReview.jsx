@@ -93,11 +93,19 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
         </div>
         <br />
         <br />
-        <div style={{textAlign: 'center'}}>
-          <p style={{fontSize: '1.25rem'}}>What's your name?</p>
-          <br />
-          <input type="text" placeholder="Example: jackson11!" maxLength="60" style={{width: "240px"}}/>
-          <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For privacy reasons, do not use your full name or email address.</p>
+        <div className="write-review-email-parent">
+          <div className="form__group field">
+            <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" required />
+            <label htmlFor="nickname" className="form__label">Nickname</label>
+          </div>
+          <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For privacy reasons, do not use your full name or email address</p>
+        </div>
+        <div className="write-review-email-parent">
+          <div className="form__group field">
+            <input type="input" className="form__field" placeholder="Name" name="name" id="name" maxLength="60" required />
+            <label htmlFor="name" className="form__label">Email</label>
+          </div>
+          <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For authentication reasons, you will not be emailed</p>
         </div>
         <button type="button" onClick={() => setImageUploadModal(true)} style={{position: 'sticky', bottom: '0', fontSize: ".7rem", borderRadius: "25%"}}>
           Upload

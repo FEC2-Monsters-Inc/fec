@@ -354,6 +354,17 @@ align-items: center;
 justify-content: center;
 }
 
+.write-review-modal-parent {
+  background-color: white;
+  height: 25rem;
+  width: 40rem;
+  overflow-y: auto;
+}
+
+.write-review-modal-parent::-webkit-scrollbar {
+  display: none;
+}
+
 .write-on {
   color: gold;
 }
@@ -389,6 +400,41 @@ justify-content: center;
   display: flex;
   margin-bottom: 2rem;
 }
+
+.write-review-textarea {
+  height:auto;
+  max-width:400px;
+  color:#999;
+  font-weight:400;
+  font-size:24px;
+  font-family: 'Comic Sans MS';
+  width:100%;
+  background:#fff;
+  border-radius:3px;
+  line-height:2em;
+  border:none;
+  box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding:30px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
+  margin: 0 auto;
+  margin-bottom: 0.25rem;
+}
+
+::-webkit-resizer {
+  display: none;
+}
+
+.write-review-character-count {
+  margin-left: 8rem;
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Comic Sans MS';
+}
+
 
 /* .review-sort-dropdown-main {
   border: medium dashed black;

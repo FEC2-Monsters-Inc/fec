@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import WriteReviewStarRating from './WriteReviewStarRating.jsx';
 import CharacteristicRadioButtons from './CharacteristicRadioButtons.jsx';
@@ -6,6 +6,8 @@ import CharacteristicRadioButtons from './CharacteristicRadioButtons.jsx';
 export default function WriteReviewModal({ setWriteModal, feature, reviewMeta }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
+  const [charCount, setCharCount] = useState(0);
+  const textAreaRef = useRef();
   // EVENT HANDLERS // Needs beeter functionality to exit Modal w/o Mouse
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
@@ -13,7 +15,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
     }
     setWriteModal(false);
   };
-  function starRatingTextHandler(value) {
+  const starRatingTextHandler = (value) => {
     if (value === 1) {
       setStarRatingText('Poor');
     }
@@ -29,11 +31,14 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
     if (value === 5) {
       setStarRatingText('Great');
     }
-  }
+  };
+  const handleReviewChange = (e) => {
+    setCharCount(e.target.value.length);
+  };
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
-      <div style={{ background: 'white', height: '25rem', width: '40rem' }}>
+      <div className="write-review-modal-parent">
         <p>Write your review</p>
         <p>About {feature.name}</p>
         <div style={{display: 'flex'}}> {/*Rename and Refactor */}
@@ -57,9 +62,18 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
           <p>Tell us more...</p>
           {reviewMeta ? <CharacteristicRadioButtons reviewMeta={reviewMeta} /> : null}
         </div>
-        <form>
-          <input type="text"/>
-        </form>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <p style={{textAlign: 'center', marginBottom: '2rem'}}>Write your review below</p>
+          <textarea ref={textAreaRef} maxLength="60" placeholder="Example: Best purchase ever!" className="write-review-textarea" onChange={handleReviewChange} />
+          {charCount
+            ? (
+              <p className="write-review-character-count">
+                Character Count:
+                {charCount}
+              </p>
+            )
+            : <br />}
+        </div>
       </div>
     </div>), document.getElementById('modal'));
 }

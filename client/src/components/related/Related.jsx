@@ -28,7 +28,7 @@ export default function Related({ feature }) {
           return Promise.all(data.map((id) => fetcher.getProductById(id)));
         })
         .then((results) => setRelatedList(results.map((result) => result.data)))
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   }, [feature.id]);
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { MdRemoveCircleOutline } from 'react-icons/md';
 import fetcher from '../../../fetchers';
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
@@ -15,9 +15,9 @@ export default function OutfitProduct({ outfitId, outfitIdList, setOutfitIdList 
 
   useEffect(() => {
     axios.all([
-      fetcher.related.getProductStyle(outfitId),
+      fetcher.getProductStyle(outfitId),
       fetcher.getProductById(outfitId),
-      fetcher.related.getReviewMeta(outfitId),
+      fetcher.getReviewMeta(outfitId),
     ])
       .then(axios.spread((...data) => {
         setOutfitStyle(data[0].data.results[0]);
@@ -43,14 +43,14 @@ export default function OutfitProduct({ outfitId, outfitIdList, setOutfitIdList 
   return (
     <div>
       <div className="outfit-item">
-        <MdOutlineDeleteOutline className="outfit-delete-icon" onClick={handleDelete} />
-        <img
-          id="outfit-img"
-          src={outfitStyle.photos[0].thumbnail_url}
-          alt={outfitProd.description}
-        // onMouseEnter={() => setShowImg(true)}
-        // onMouseLeave={() => setShowImg(false)}
-        />
+        <div id="outfit-img-wrapper">
+          <MdRemoveCircleOutline className="outfit-delete-icon" onClick={handleDelete} />
+          <img
+            id="outfit-img"
+            src={outfitStyle.photos[0].thumbnail_url}
+            alt={outfitProd.description}
+          />
+        </div>
         {/* {showImg && <img id="rel-ori-img"
         src={relStyle.photos[0].url} alt={relProd.description} />} */}
         <div className="outfit-cat">{outfitProd.category}</div>

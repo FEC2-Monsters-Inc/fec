@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineStar } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
@@ -41,8 +41,8 @@ export default function RelatedProduct({ feature, featureMeta, relProd }) {
   return (
     <div>
       <div className="rel-item">
-        <AiOutlineStar className="star-modal" onClick={() => setShowModal(true)} />
         <div id="rel-img-wrapper">
+          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} />
           <img
             id="rel-img"
             src={relStyle.photos[0].thumbnail_url}

@@ -2,12 +2,17 @@ import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import WriteReviewStarRating from './WriteReviewStarRating.jsx';
 import CharacteristicRadioButtons from './CharacteristicRadioButtons.jsx';
+import UploadAndDisplayImage from './WriteReviewUploadImage.jsx';
 
 export default function WriteReviewModal({ setWriteModal, feature, reviewMeta }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
-  const [charCount, setCharCount] = useState(0);
-  const textAreaRef = useRef();
+  const [summaryCount, setSummaryCount] = useState(0);
+  const [bodyCount, setBodyCount] = useState(0);
+  const [imageUploadModal, setImageUploadModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState([]);
+  const summaryRef = useRef();
+  const bodyRef = useRef();
   // EVENT HANDLERS // Needs beeter functionality to exit Modal w/o Mouse
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
@@ -32,9 +37,12 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
       setStarRatingText('Great');
     }
   };
-  const handleReviewChange = (e) => {
-    setCharCount(e.target.value.length);
+  const handleSummaryChange = (e) => {
+    setSummaryCount(e.target.value.length);
   };
+  const handleBodyChange = (e) => {
+    setBodyCount(e.target.value.length);
+  }
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
@@ -63,16 +71,36 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
           {reviewMeta ? <CharacteristicRadioButtons reviewMeta={reviewMeta} /> : null}
         </div>
         <div style={{display: 'flex', flexDirection: 'column'}}>
-          <p style={{textAlign: 'center', marginBottom: '2rem'}}>Write your review below</p>
-          <textarea ref={textAreaRef} maxLength="60" placeholder="Example: Best purchase ever!" className="write-review-textarea" onChange={handleReviewChange} />
-          {charCount
+          <p style={{textAlign: 'center', marginBottom: '2rem'}}>Review Summary</p>
+          <textarea ref={summaryRef} maxLength="60" placeholder="Example: Best purchase ever!" className="write-review-summary" onChange={handleSummaryChange} />
+          {summaryCount
             ? (
               <p className="write-review-character-count">
                 Character Count:
-                {charCount}
+                {summaryCount}
               </p>
             )
             : <br />}
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <p style={{textAlign: 'center', marginBottom: '2rem'}}>Write your review below</p>
+          <textarea ref={bodyRef} maxLength="1000" placeholder="Why did you like the product?" className="write-review-summary" onChange={handleBodyChange} />
+          <p className="write-review-character-count">
+            {bodyCount >= 50
+              ? 'Minimum Reached'
+              : `Minimum required characters left: ${50 - bodyCount}`}
+          </p>
+        </div>
+        <div>
+          <button type="button" onClick={() => setImageUploadModal(true)}>Upload Your Pics!</button>
+          {imageUploadModal
+            ? (
+              <UploadAndDisplayImage
+                setImageUploadModal={setImageUploadModal}
+                setSelectedImage={setSelectedImage}
+                selectedImage={selectedImage}
+              />
+            ) : null}
         </div>
       </div>
     </div>), document.getElementById('modal'));

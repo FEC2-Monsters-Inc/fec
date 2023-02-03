@@ -361,6 +361,14 @@ justify-content: center;
   overflow-y: auto;
 }
 
+.test-test-test-test {
+  height:30px;
+  margin: 0;
+  clear: both;
+  width:100%;
+  position: relative;
+}
+
 .write-review-modal-parent::-webkit-scrollbar {
   display: none;
 }
@@ -401,7 +409,7 @@ justify-content: center;
   margin-bottom: 2rem;
 }
 
-.write-review-textarea {
+.write-review-summary {
   height:auto;
   max-width:400px;
   color:#999;
@@ -433,6 +441,10 @@ justify-content: center;
   font-size: 12px;
   font-weight: 300;
   font-family: 'Comic Sans MS';
+}
+
+.write-review-thumbnail {
+  text-align: center;
 }
 
 

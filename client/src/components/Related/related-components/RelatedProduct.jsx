@@ -28,7 +28,6 @@ export default function RelatedProduct({
       fetcher.getReviewMeta(relProd.id),
     ])
       .then(axios.spread((...data) => {
-        console.log(data);
         setRelStyle(data[0].data.results[0]);
         setRelProdMeta(data[1].data);
       }))

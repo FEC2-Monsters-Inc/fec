@@ -4,7 +4,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import Questions from '../../client/src/components/questions/Questions.jsx';
+import Questions from '../../client/src/components/Questions/Questions.jsx';
 import mockProducts from '../example_data/products/product';
 import mockQuestions from '../example_data/questions/questions';
 import fetcherMock from '../../client/src/fetchers';

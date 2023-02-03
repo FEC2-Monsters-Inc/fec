@@ -50,8 +50,9 @@
 }
 
 #outfit-img {
-  max-height: 15rem;
-  max-width: 15rem;
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
 }
 
 .outfit-delete-icon {

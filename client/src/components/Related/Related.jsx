@@ -5,8 +5,8 @@ import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
 
-export default function Related({ feature }) {
-  const [relatedList, setRelatedList] = useState([]);
+export default function Related({ feature, relatedIdList, setFeatureProduct }) {
+  const [relatedInfoList, setRelatedInfoList] = useState([]);
   const [outfitIdList, setOutfitIdList] = useState([]);
 
   useEffect(() => {
@@ -19,30 +19,31 @@ export default function Related({ feature }) {
   }, [outfitIdList]);
 
   useEffect(() => {
-    if (feature.id) {
-      fetcher.getRelatedProduct(feature.id)
-        .then(({ data }) => {
-          if (!data.length) {
-            throw new Error('No Related Product!');
-          }
-          return Promise.all(data.map((id) => fetcher.getProductById(id)));
-        })
-        .then((results) => setRelatedList(results.map((result) => result.data)))
-        .catch((err) => console.error(err));
-    }
-  }, [feature.id]);
+    axios.all(
+      Array.from(relatedIdList).map((id) => fetcher.getProductById(id)),
+    )
+      .then(axios.spread((...results) => {
+        setRelatedInfoList(results.map((result) => result.data));
+      }))
+      .catch((err) => console.error(err));
+  }, [relatedIdList]);
 
   return (
     <div id="related-widget">
       <h2>RELATED PRODUCTS</h2>
       <br />
-      <RelatedList feature={feature} relatedList={relatedList} />
+      <RelatedList
+        feature={feature}
+        relatedInfoList={relatedInfoList}
+        setFeatureProduct={setFeatureProduct}
+      />
       <br />
       <br />
       <h2>OUTFIT PRODUCTS</h2>
       <br />
       <OutfitList
         feature={feature}
+        setFeatureProduct={setFeatureProduct}
         outfitIdList={outfitIdList}
         setOutfitIdList={setOutfitIdList}
       />

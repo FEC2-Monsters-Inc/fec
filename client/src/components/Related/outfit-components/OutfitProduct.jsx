@@ -4,7 +4,9 @@ import { MdRemoveCircleOutline } from 'react-icons/md';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 
-export default function OutfitProduct({ outfitId, outfitIdList, setOutfitIdList }) {
+export default function OutfitProduct({
+  outfitId, outfitIdList, setOutfitIdList, setFeatureProduct,
+}) {
   const [outfitProd, setOutfitProd] = useState();
   const [outfitStyle, setOutfitStyle] = useState();
   const [outfitMeta, setOutfitMeta] = useState();
@@ -45,14 +47,16 @@ export default function OutfitProduct({ outfitId, outfitIdList, setOutfitIdList 
       <div className="outfit-item">
         <div id="outfit-img-wrapper">
           <MdRemoveCircleOutline className="outfit-delete-icon" onClick={handleDelete} />
-          <img
-            id="outfit-img"
-            src={outfitStyle.photos[0].thumbnail_url}
-            alt={outfitProd.description}
-          />
+          {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <img
+              id="outfit-img"
+              src={outfitStyle.photos[0].thumbnail_url}
+              alt={outfitProd.description}
+              onKeyDown={() => setFeatureProduct(outfitProd)}
+              onClick={() => setFeatureProduct(outfitProd)}
+            />
+          }
         </div>
-        {/* {showImg && <img id="rel-ori-img"
-        src={relStyle.photos[0].url} alt={relProd.description} />} */}
         <div className="outfit-cat">{outfitProd.category}</div>
         <div className="outfit-name">{outfitProd.name}</div>
         <div className="outfit-slogan">{outfitProd.slogan}</div>

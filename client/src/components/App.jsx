@@ -36,7 +36,7 @@ export default function App() {
         setStyles(data[1].data);
         setReviews(data[2].data.results);
         setReviewMeta(data[3].data);
-        setRelatedIdList(data[4].data);
+        setRelatedIdList(new Set(data[4].data));
       }))
       .catch((err) => console.error(err));
   }, [featureProduct.id]);
@@ -46,7 +46,11 @@ export default function App() {
   return (
     <div>
       <Overview product={featureProduct} styles={styles} reviews={reviews} />
-      <Related feature={featureProduct} relatedIdList={relatedIdList} />
+      <Related
+        feature={featureProduct}
+        relatedIdList={relatedIdList}
+        setFeatureProduct={setFeatureProduct}
+      />
       <Questions feature={featureProduct} />
       <Ratings
         feature={featureProduct}

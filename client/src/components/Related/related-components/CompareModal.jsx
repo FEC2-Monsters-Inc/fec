@@ -2,6 +2,7 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import './styles/compareModal.css';
+import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 
 export default function CompareModal({
   setShowModal, featureMeta, relProdMeta,
@@ -21,12 +22,26 @@ export default function CompareModal({
               <tr className="compare-tr" key={index}>
                 <td className="compare-th">
                   {featureMeta.characteristics[char]
-                    ? Math.floor(Number(featureMeta.characteristics[char].value)) : ''}
+                    ? (
+                      <StarRating ratingPercentage={
+                        `${(Math.floor(Number(featureMeta.characteristics[char].value) * 100) / 5)
+                          .toString()}%`
+                      }
+                      />
+                    )
+                    : ''}
                 </td>
                 <td className="compare-th">{char}</td>
                 <td className="compare-th">
                   {relProdMeta.characteristics[char]
-                    ? Math.floor(Number(relProdMeta.characteristics[char].value)) : ''}
+                    ? (
+                      <StarRating ratingPercentage={
+                        `${(Math.floor(Number(relProdMeta.characteristics[char].value) * 100) / 5)
+                          .toString()}%`
+                      }
+                      />
+                    )
+                    : ''}
                 </td>
               </tr>
             ))}

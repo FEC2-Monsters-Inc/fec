@@ -44,6 +44,20 @@ export default function UploadAndDisplayImage({
         <div style={{position: 'sticky', top: '0'}}>
           <button type="button" onClick={(e) => closeModal(e)} style={{position: 'sticky', top: '0'}}>Back</button>
           {selectedImage.length < 5 && (
+            <>
+            <div
+            style={{position: 'absolute', top: '0', left: '86.4%', height: '200px', width: '200px', backgroundColor: 'green', border: 'inset black 0.25rem',}}
+            className="drag-and-drop"
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault()
+              let files = e.dataTransfer.files;
+              if (files.length) {
+                setSelectedImage([...selectedImage, files[0]]);
+                handleSubmit(files[0]);
+              }
+            }}
+            ><p style={{position: 'absolute', bottom: '5px', left: '5px', right: '0px', fontSize: '.8rem'}}>Drag-N-Drop!</p></div>
             <input
               style={{position: 'absolute', top: '0', left: '86.4%', cursor: 'none'}}
               type="file"
@@ -53,6 +67,7 @@ export default function UploadAndDisplayImage({
                 handleSubmit(event.target.files[0]);
               }}
             />
+          </>
           )}
         </div>
         <h1 className="write-review-thumbnail">Show us your look!</h1>
@@ -68,7 +83,7 @@ export default function UploadAndDisplayImage({
         <br />
         <br />
         <div className="test-test-test-test">
-          {selectedImage.length < 5 && (
+          {/* {selectedImage.length < 5 && (
             <input
               style={{position: 'absolute', bottom: '0', left: '55%', transform: 'translateX(-50%)', color: 'white'}}
               type="file" //USE COLOR WHITE TO HIDE TEXT
@@ -78,7 +93,7 @@ export default function UploadAndDisplayImage({
                 setSelectedImage([...selectedImage, event.target.files[0]]);
               }}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>), document.getElementById('modal'));

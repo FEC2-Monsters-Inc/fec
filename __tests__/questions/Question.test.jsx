@@ -76,12 +76,16 @@ test('clicking add answer link will render an answer modal', async () => {
   expect(screen.getByText(/submit your answer/i)).toBeInTheDocument();
 });
 
-test('clicking outside the answer modal closes it', () => {
+// there isn't a good way to test this, since we remove styling and the
+// modal-bg thus has no dimensions and doesn't cover everything
+// test('clicking outside the answer modal closes it');
+
+test('clicking cancel closes the answer modal', async () => {
   render(<div id="modal" />);
   render(<Question question={proxyQuestion} filterText="" />);
 
-  userEvent.click(screen.getByText(/add answer/i));
-  userEvent.click(screen.getByText(/q: /i));
+  await userEvent.click(screen.getByText(/add answer/i));
+  await userEvent.click(screen.getByText(/cancel/i));
 
   expect(screen.queryByText(/submit your answer/i)).not.toBeInTheDocument();
 });

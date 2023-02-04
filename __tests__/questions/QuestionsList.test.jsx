@@ -63,12 +63,16 @@ test('clicking add a question button renders a question modal', async () => {
   expect(screen.getByText(/ask your question/i)).toBeInTheDocument();
 });
 
-test('clicking outside the question modal closes it', () => {
-  render(<div id="modal" />);
-  render(<QuestionsList questions={proxyQList.slice(0, 1)} filterText="" />);
+// there isn't a good way to test this, since we remove styling and the
+// modal-bg thus has no dimensions and doesn't cover everything
+// test('clicking outside the question modal closes it');
 
-  userEvent.click(screen.getByText(/add a question \+/i));
-  userEvent.click(screen.getByText(/q: /i));
+test('clicking cancel closes the question modal', async () => {
+  render(<div id="modal" />);
+  render(<QuestionsList questions={proxyQList} filterText="" />);
+
+  await userEvent.click(screen.getByText(/add a question \+/i));
+  await userEvent.click(screen.getByText(/cancel/i));
 
   expect(screen.queryByText(/ask your question/i)).not.toBeInTheDocument();
 });

@@ -10,7 +10,14 @@
     "test-watch": "jest --watch"
   },
   "jest": {
-    "verbose": true,
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "__mocks__",
+      "__tests__/example_data",
+      "client/src/fetchers.js"
+    ],
+    "coverageDirectory": "<rootDir>/__tests__/coverage",
+    "verbose": false,
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     },

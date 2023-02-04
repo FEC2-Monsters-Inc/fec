@@ -12,7 +12,6 @@ export default function Answer({
     photos,
   },
   updateQuestions,
-  // decrementAnswers, TODO: consider removing if update unnecessary
 }) {
   const [helpfulStatus, setHelpfulStatus] = useState(true);
   const [reportStatus, setReportStatus] = useState(true);

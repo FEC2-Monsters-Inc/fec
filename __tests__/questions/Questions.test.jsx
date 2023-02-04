@@ -3,24 +3,28 @@ import { render, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import Questions from '../../client/src/components/Questions/Questions.jsx';
-import mockProducts from '../example_data/products/product';
-import mockQuestions from '../example_data/questions/questions';
+import exampleProducts from '../example_data/products/product';
+import exampleQuestions from '../example_data/questions/questions';
 import fetcherMock from '../../client/src/fetchers';
 
 jest.mock('../../client/src/fetchers');
 jest.useFakeTimers();
 
+const proxyPID = 40356;
+const proxyProduct = exampleProducts[proxyPID];
+const proxyQList = exampleQuestions[proxyPID];
+
 beforeEach(jest.clearAllMocks);
 
 test('fetches questions once on load', () => {
-  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
-  render(<Questions feature={mockProducts[40356]} />);
+  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
+  render(<Questions feature={proxyProduct} />);
   expect(fetcherMock.getQuestionsById).toHaveBeenCalledTimes(1);
 });
 
 test('does not filter questions if typing less than 3 characters', async () => {
-  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
-  render(<Questions feature={mockProducts[40356]} />);
+  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
+  render(<Questions feature={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
@@ -34,8 +38,8 @@ test('does not filter questions if typing less than 3 characters', async () => {
 });
 
 test('does not filter questions before input is debounced', async () => {
-  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
-  render(<Questions feature={mockProducts[40356]} />);
+  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
+  render(<Questions feature={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
@@ -49,8 +53,8 @@ test('does not filter questions before input is debounced', async () => {
 });
 
 test('filters questions after typing 3 characters and waiting 500ms', async () => {
-  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: mockQuestions[40356] });
-  render(<Questions feature={mockProducts[40356]} />);
+  fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
+  render(<Questions feature={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   await user.type(screen.getByRole('searchbox'), 'tem');

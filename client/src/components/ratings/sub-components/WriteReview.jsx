@@ -172,5 +172,3 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
     </div>), document.getElementById('modal'));
 }
 
-
-// onClick={ (e) => closeModal(e)}

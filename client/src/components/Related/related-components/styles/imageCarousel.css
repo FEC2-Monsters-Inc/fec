@@ -1,0 +1,21 @@
+.img-carousel-outside {
+  position: absolute;
+  top: 60%;
+  max-width: 15rem;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 5px;
+}
+
+#img-carousel-inside {
+  display: flex;
+}
+
+#img-carousel {
+  width: 3.25rem;
+  height: 4.5rem;
+  margin: 0.25rem;
+  object-fit: cover;
+  scroll-snap-align: start;
+}

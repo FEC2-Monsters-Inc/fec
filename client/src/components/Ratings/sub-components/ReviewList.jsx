@@ -1,8 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
+import ReviewModal from './ReviewModal.jsx';
 
-export default function ReviewList({ reviews, selectedRating, setReviews }) {
+export default function ReviewList({
+  reviews,
+  selectedRating,
+  setReviews,
+  listLength,
+  setListLength,
+  listIndex,
+  setListIndex,
+  feature,
+  reviewMeta,
+}) {
+  // STATE DATA //
+  const [reviewExpander, setReviewExpander] = useState('25rem');
+  const [expandedStatus, setExpandedStatus] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
+
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
     <ReviewTile
@@ -10,25 +26,84 @@ export default function ReviewList({ reviews, selectedRating, setReviews }) {
       key={review.review_id}
       reviews={reviews}
       setReviews={setReviews}
+      feature={feature}
     />
   ));
 
   const reviewRenderer = () => {
     if (!selectedRating) {
-      return reviewMapper(reviews);
+      return reviewMapper(reviews.slice(0, listIndex));
     }
-    const filteredReviews = reviews.filter((review) => selectedRating[review.rating] === true);
+    const filteredReviews = reviews
+      .slice(0, listIndex).filter((review) => selectedRating[review.rating] === true);
     return reviewMapper(filteredReviews);
+  };
+
+  const twoAtATime = () => {
+    if (reviews.length - listIndex === 1) {
+      setListIndex(listIndex + 1);
+    }
+    if (listIndex < reviews.length) {
+      setListIndex(listIndex + 2);
+    }
+  };
+
+  const handleScroll = (e) => {
+    const bottom = Math.round(e.currentTarget.scrollHeight - e.currentTarget.scrollTop)
+     === Math.round(e.currentTarget.clientHeight);
+    if (bottom) {
+      twoAtATime();
+    }
+  };
+
+  const handleClick = () => {
+    twoAtATime();
+    setReviewExpander('50rem');
+    setExpandedStatus(true);
   };
 
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">
-        <RelevanceDropdown setReviews={setReviews} reviews={reviews} />
+        <RelevanceDropdown
+          setReviews={setReviews}
+          reviews={reviews}
+          listLength={listLength}
+          setListLength={setListLength}
+          listIndex={listIndex}
+          reviewRenderer={reviewRenderer}
+        />
       </div>
-      { reviews
-        ? reviewRenderer()
-        : null }
+      <div
+        className="scroll-review-list"
+        onScroll={(e) => handleScroll(e)}
+        style={{ height: reviewExpander }}
+      >
+        { reviews
+          ? reviewRenderer()
+          : null }
+      </div>
+      <div>
+        {
+          !expandedStatus
+            ? <button type="button" onClick={() => handleClick()}>Expand Reviews</button>
+            : null
+        }
+      </div>
+      <div>
+        <button type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
+        {
+          reviewModal
+            ? (
+              <ReviewModal
+                setReviewModal={setReviewModal}
+                feature={feature}
+                reviewMeta={reviewMeta}
+              />
+            )
+            : null
+        }
+      </div>
     </div>
   );
 }

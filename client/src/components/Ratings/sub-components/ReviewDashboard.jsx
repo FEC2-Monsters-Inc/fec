@@ -9,7 +9,10 @@ export default function ReviewDashboard({
   setSelectedRating,
   selectedRating,
   reviewMeta,
-  changeSelect,
+  listLength,
+  setListLength,
+  listIndex,
+  setListIndex,
 }) {
   // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
@@ -78,7 +81,7 @@ export default function ReviewDashboard({
           totalRecs += 1;
         }
       });
-      const percent = `${(totalRecs / reviews.length) * 100}%`;
+      const percent = `${Math.round((totalRecs / reviews.length) * 100)}%`;
       setRecommended(percent);
     }
   };
@@ -97,17 +100,17 @@ export default function ReviewDashboard({
       ratingSetter();
       recommendedSetter();
     }
-  }, [reviews]);
+  }, [reviews, listIndex]);
 
   return (
-    <div className="dashboard-main">
+    <div className="test-container">
       <div className="review-main-star-container">
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
           {starMapper}
         </div>
-        <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       </div>
+      <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       <div className="review-dash-main">
         <h3 className="review-rating-breakdown-title">Review Breakdown</h3>
         <ActiveFilters
@@ -122,6 +125,10 @@ export default function ReviewDashboard({
           setSelectedRating={setSelectedRating}
           filter={filter}
           setFilter={setFilter}
+          listLength={listLength}
+          setListLength={setListLength}
+          listIndex={listIndex}
+          setListIndex={setListIndex}
         />
         <CharacteristicTracker reviewMeta={reviewMeta} />
       </div>

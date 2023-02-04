@@ -4,7 +4,6 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
   // STATE DATA //
   const [chars, setChars] = useState({});
   const [sliderText, setSliderText] = useState({ small: '', perf: '', big: '' });
-  const barWidth = chars ? ((chars - 1) / 4) * 100 : 0;
 
   // HELPER FUNCTIONS //
   function ratingDescription() {
@@ -27,11 +26,18 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
   useEffect(() => {
     setChars(reviewMeta);
     ratingDescription();
-  }, [reviewMeta, charName]);
+  }, [reviewMeta]);
 
   return (
     <div className="review-slide-container">
-      <input type="range" min="1" max="100" value={`${barWidth}`} className="review-slider" readOnly />
+      <input
+        type="range"
+        min="1"
+        max="100"
+        value={chars ? (((chars - 1) / 4) * 100).toString() : '0'}
+        className="review-slider"
+        readOnly
+      />
       <div className="reivew-slider-label-container">
         <p className="review-slider-label-1">{sliderText.small}</p>
         <p className="review-slider-label-2">{sliderText.perf}</p>

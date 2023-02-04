@@ -4,7 +4,6 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import Answer from '../../client/src/components/Questions/Answer.jsx';
 import exampleAnswers from '../example_data/questions/answers';
-import exampleQuestions from '../example_data/questions/questions';
 import fetcherMock from '../../client/src/fetchers';
 
 jest.mock('../../client/src/fetchers');

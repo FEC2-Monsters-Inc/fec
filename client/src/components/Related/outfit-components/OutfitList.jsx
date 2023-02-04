@@ -11,7 +11,7 @@ export default function OutfitList({
   const ref = useRef(null);
   const [posIndex, setPosIndex] = useState(0);
 
-  const endOfOutfit = outfitIdList.length !== undefined ? outfitIdList.length - 5 : 0;
+  const endOfOutfit = outfitIdList.length !== undefined ? outfitIdList.length - 4 : 0;
 
   const scrollLeft = () => {
     posIndex > 0 ? setPosIndex(posIndex - 1) : null;

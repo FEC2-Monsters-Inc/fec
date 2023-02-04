@@ -9,6 +9,7 @@ import MockData from '../example_data/related/MockData';
 import Related from '../../client/src/components/Related/Related.jsx';
 import OutfitList from '../../client/src/components/Related/outfit-components/OutfitList.jsx';
 import RelatedProduct from '../../client/src/components/Related/related-components/RelatedProduct.jsx';
+import RelatedList from '../../client/src/components/Related/related-components/RelatedList.jsx';
 
 jest.mock('../../client/src/fetchers');
 
@@ -70,40 +71,30 @@ describe('Related & Outfit Component', () => {
     });
 
     test('should correctly render with non-empty outfit list', async () => {
-      // RELATED
       fetcherMock.getProductById
-        .mockResolvedValueOnce({ data: MockData.rel_40346 });
-
-      // RELATED LIST
-      fetcherMock.getReviewMeta
-        .mockResolvedValueOnce({ data: MockData.featureMeta });
-
-      // RELATED PRODUCT
-      fetcherMock.getProductStyle
-        .mockResolvedValueOnce({ data: MockData.style_40346 });
-      fetcherMock.getReviewMeta
-        .mockResolvedValueOnce({ data: MockData.meta_40346 });
-
-      // OUTFIT PRODUCT
-      fetcherMock.getProductById
+        .mockResolvedValueOnce({ data: MockData.rel_40346 })
         .mockResolvedValueOnce({ data: MockData.feature });
-      fetcherMock.getProductStyle
-        .mockResolvedValueOnce({ data: MockData.featureStyle });
+
       fetcherMock.getReviewMeta
+        .mockResolvedValueOnce({ data: MockData.featureMeta })
+        .mockResolvedValueOnce({ data: MockData.meta_40346 })
         .mockResolvedValueOnce({ data: MockData.featureMeta });
+
+      fetcherMock.getProductStyle
+        .mockResolvedValueOnce({ data: MockData.style_40346 })
+        .mockResolvedValueOnce({ data: MockData.featureStyle });
 
       render(<Related
-        feature={MockData.feature} // 40350
+        feature={MockData.feature}
         relatedIdList={[40346]}
       />);
 
-      const featureName = MockData.feature.name;
-
+      expect(screen.queryByText(MockData.feature.name)).not.toBeInTheDocument();
       const addElement = screen.getByTitle('outfit-add-icon');
       await userEvent.click(addElement);
-      screen.debug(undefined, 15000);
 
-      expect(await screen.findByText(featureName)).toBeInTheDocument();
+      expect(await screen.findByText(MockData.rel_40346.name)).toBeInTheDocument();
+      expect(await screen.findByText(MockData.feature.name)).toBeInTheDocument();
     });
   });
 

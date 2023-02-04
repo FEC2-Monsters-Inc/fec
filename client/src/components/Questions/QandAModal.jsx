@@ -5,30 +5,23 @@ import fetcher from '../../fetchers';
 export default function QandAModal({
   type,
   show,
-  closeModal,
+  setShowModal,
   product_id,
   question_id,
 }) {
   const blankForm = {
-    question: {
-      name: '',
-      body: '',
-      email: '',
-    },
-    answer: {
-      name: '',
-      body: '',
-      email: '',
-      photos: [],
-    },
+    name: '',
+    body: '',
+    email: '',
+    photos: [],
   };
-  const [addForm, setAddForm] = useState(blankForm[type]);
+  const [addForm, setAddForm] = useState(blankForm);
 
   const close = (e) => {
     if ((e.type === 'click' && e.target.classList.contains('modal-close'))
       || e.key === 'Enter') {
       setAddForm(blankForm);
-      closeModal(false);
+      setShowModal(false);
     }
   };
 
@@ -85,14 +78,14 @@ export default function QandAModal({
         </div>
         <div className="qa modal-body">
           <form id={`add-${type}-form`} onSubmit={submitForm}>
-            <div className={`qa add-${type}`}>
-              <label htmlFor={`add-${type}-form`}>
-                <div className="qa add-label">
-                  {type === 'question' ? 'Question' : 'Answer'}
-                </div>
+            <div className="qa add-body">
+              <label className="qa add-label" htmlFor={`${type}-bodybox`}>
+                {type === 'question' ? 'Question' : 'Answer'}
                 <textarea
                   type="text"
+                  id={`${type}-bodybox`}
                   name="body"
+                  form={`add-${type}-form`}
                   value={addForm.body}
                   onChange={handleChange}
                   maxLength="1000"
@@ -100,12 +93,14 @@ export default function QandAModal({
               </label>
             </div>
             <div className="qa add-personal">
-              <div className="qa add-name">
-                <label htmlFor={`add-${type}-form`}>
-                  <div className="qa add-label">Nickname</div>
+              <div className="qa add-nickname">
+                <label className="qa add-label" htmlFor="nicknamebox">
+                  Nickname
                   <input
                     type="text"
+                    id="nicknamebox"
                     name="name"
+                    form={`add-${type}-form`}
                     value={addForm.name}
                     onChange={handleChange}
                     maxLength="60"
@@ -116,11 +111,13 @@ export default function QandAModal({
                 </label>
               </div>
               <div className="qa add-email">
-                <label htmlFor={`add-${type}-form`}>
-                  <div className="qa add-label">Email</div>
+                <label className="qa add-label" htmlFor={`${type}-emailbox`}>
+                  Email
                   <input
                     type="text"
+                    id={`${type}-emailbox`}
                     name="email"
+                    form={`add-${type}-form`}
                     value={addForm.email}
                     onChange={handleChange}
                     maxLength="60"

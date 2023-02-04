@@ -48,7 +48,7 @@ export default function OutfitList({
             />
           ))
           : null}
-        <GrAdd className="outfit-add" onClick={addOutfit} />
+        <GrAdd className="outfit-add" onClick={addOutfit} title="outfit-add-icon" />
       </div>
       <AiOutlineRightSquare
         className="outfit-carousel-rel-scrollBtn"

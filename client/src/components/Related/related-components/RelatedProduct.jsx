@@ -3,15 +3,10 @@ import { AiFillHeart } from 'react-icons/ai';
 import axios from 'axios';
 import fetcher from '../../../fetchers';
 import CompareModal from './CompareModal.jsx';
-<<<<<<< HEAD:client/src/components/Related/related-components/RelatedProduct.jsx
-import StarRating from '../../shared/StarRating/StarRating.jsx';
-import ImageModal from './ImageModal.jsx';
-=======
 import StarRating from '../../../helpers/star-rating/StarRating.jsx';
 import ImageCarousel from './ImageCarousel.jsx';
 import imgUnavailable from '../assets/imgUnavailable.png';
 
->>>>>>> 78d24ce (Change Modal to Carousel & Add Change Feature Product Functionality & Style):client/src/components/related/related-components/RelatedProduct.jsx
 import './styles/compareModal.css';
 
 export default function RelatedProduct({
@@ -51,24 +46,7 @@ export default function RelatedProduct({
     <div>
       <div className="rel-item">
         <div id="rel-img-wrapper">
-          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} />
-<<<<<<< HEAD:client/src/components/Related/related-components/RelatedProduct.jsx
-          <img
-            id="rel-img"
-            src={relStyle.photos[0].thumbnail_url}
-            alt={relProd.description}
-            onMouseEnter={() => setShowImg(true)}
-          />
-        </div>
-        HELLO
-        {showImg
-          && (
-            <ImageModal
-              relStyle={relStyle}
-              relProd={relProd}
-              setRelStyle={setRelStyle}
-              setShowImg={setShowImg}
-=======
+          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} title="star-modal-icon" />
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
               id="rel-img"
@@ -77,7 +55,6 @@ export default function RelatedProduct({
               onMouseEnter={() => setShowImg(true)}
               onKeyDown={() => setFeatureProduct(relProd)}
               onClick={() => setFeatureProduct(relProd)}
->>>>>>> 78d24ce (Change Modal to Carousel & Add Change Feature Product Functionality & Style):client/src/components/related/related-components/RelatedProduct.jsx
             />
           }
           {showImg

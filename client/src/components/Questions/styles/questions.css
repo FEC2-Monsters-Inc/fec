@@ -29,6 +29,17 @@
   margin: 1rem 0;
 }
 
+.qa h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
 body {
   display: block;
   margin: 8px;
@@ -59,8 +70,7 @@ body {
   margin: 1rem 0;
 }
 
-=======
->>>>>>> 763ccb8 (user no longer able to vote more than once (helpful))
+=======>>>>>>>763ccb8 (user no longer able to vote more than once (helpful))
 /* QUESTIONS & ANSWERS + GENERALS */
 
 .qa.q\&a {
@@ -149,26 +159,24 @@ body {
 .qa.search {
   border-width: 1px;
   border-style: solid;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.qa.search-input {
+.qa#question-search {
   border-style: none;
   flex: auto;
   height: 3rem;
   padding-left: 5px;
-  padding-right: 2rem;
+  padding-right: 3rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .qa.search-icon {
   position: absolute;
-  right: 0.5rem;
-  padding: 1rem;
-  cursor: pointer;
+  right: 1rem;
 }
 
 /* ADD QUESTION FORM MODAL */

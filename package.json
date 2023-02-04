@@ -6,7 +6,8 @@
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
-    "test": "jest --watch"
+    "test-cover": "jest --coverage",
+    "test-watch": "jest --watch"
   },
   "jest": {
     "verbose": true,

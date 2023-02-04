@@ -13,10 +13,9 @@ export default function QuestionsList({
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      let increment = 2;
-      if (numQuestions + increment > questions.length) {
-        increment = questions.length - numQuestions;
-      }
+      const increment = numQuestions + 2 > questions.length
+        ? questions.length - numQuestions
+        : 2;
       setNumQuestions(numQuestions + increment);
     }
   };
@@ -28,11 +27,6 @@ export default function QuestionsList({
     }
   };
 
-  const hasAnswer = (question) => {
-    if (!Object.keys(question.answers).length) return false;
-    return true;
-  };
-
   useEffect(() => {
     setNumQuestions(questions.length < 2 ? questions.length : 2);
   }, [questions]);
@@ -40,7 +34,7 @@ export default function QuestionsList({
   return (
     <div className="qa list">
       {questions.length > 0
-        ? questions.filter(hasAnswer).slice(0, numQuestions).map((question) => (
+        ? questions.slice(0, numQuestions).map((question) => (
           <Question
             key={question.question_id}
             question={question}
@@ -54,20 +48,24 @@ export default function QuestionsList({
           className="qa footer-btn"
           type="button"
           tabIndex={0}
-          onKeyUp={loadMoreQuestions}
-          onClick={loadMoreQuestions}
-        >
-          MORE ANSWERED QUESTIONS
-        </button>
-        <button
-          className="qa footer-btn"
-          type="button"
-          tabIndex={0}
           onKeyUp={showModal}
           onClick={showModal}
         >
           {'ADD A QUESTION \t +'}
         </button>
+        {numQuestions !== questions.length ? (
+          <button
+            className="qa footer-btn"
+            type="button"
+            tabIndex={0}
+            onKeyUp={loadMoreQuestions}
+            onClick={loadMoreQuestions}
+          >
+            MORE ANSWERED QUESTIONS
+          </button>
+        )
+          : null}
+
         <QandAModal
           type="question"
           show={showAddQ}

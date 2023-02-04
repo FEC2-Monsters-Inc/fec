@@ -11,12 +11,8 @@ export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
   const initFeature = { id: 40350, name: null };
 
-<<<<<<< HEAD
-  const [featuredProduct, setFeaturedProduct] = useState(initProd);
-=======
   // STATE
   const [featureProduct, setFeatureProduct] = useState(initFeature);
->>>>>>> 31c0a26 (Modify State Name Again)
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);

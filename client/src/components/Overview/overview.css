@@ -2,11 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
 /* ///// GENERAL CLASS USE ///// */
-p, h1, h3, li  {
+p,
+h1,
+h3,
+li {
   color: #2C394B;
 }
 
-button, select {
+button,
+select {
   background-color: white;
   border-radius: 3px;
 }
@@ -31,6 +35,7 @@ li {
   align-items: center;
   background-color: #0C1B33;
   border-bottom: 2px solid #2C394B;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   color: #DDE2C6;
   display: flex;
   font-family: 'Open Sans', sans-serif;
@@ -55,9 +60,7 @@ li {
   color: #E60023;
 }
 
-.search-icon {
-
-}
+.search-icon {}
 
 
 /* ///// OVERVIEW COMPONENT ///// */
@@ -88,7 +91,6 @@ li {
 #gallery {
   display: flex;
   height: 100%;
-  justify-content: center;
   padding: 0 15px;
   position: relative;
   width: 100%;
@@ -103,6 +105,10 @@ li {
   color: #E60023;
 }
 
+.btn-hidden {
+  visibility: hidden;
+}
+
 .expand-hero:hover {
   transform: scale(1.25);
 }
@@ -113,52 +119,30 @@ li {
   flex-direction: column;
   justify-content: center;
   max-width: 15%;
+  width: 15%;
 }
+
 .side-thumb-images {
   display: flex;
   flex-direction: column;
   max-width: 100%;
+  max-height: 80%;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  max-height: 80%;
   width: 100%;
 
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.side-thumb-images::-webkit-scrollbar {
-  display: none;
-}
-
-.side-thumb-images {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.side-thumb-images:hover {
-  cursor: pointer;
-}
-
-.side-thumb {
-  border-radius: 2px;
-  min-height: 75px;
-  margin-top: 10px;
-  max-height: 75px;
-}
-
-
-.scroll-images {
-  margin: 10px;
-}
-
-.hero-image-container {
+.side-thumb-container {
   align-items: center;
   display: flex;
   justify-content: space-between;
   height: 100%;
   max-height: 100%;
-  max-width: 100%;
-  width: 100%
+  max-width: 85%;
+  padding: 0 1em;
+  position: relative;
+  width: 85%
 }
 
 .scroll-hero-left,
@@ -168,18 +152,23 @@ li {
   border-radius: 100px;
   display: flex;
   justify-content: center;
-  margin-left: 1em;
-  width: 7%
+  width: 7%;
 }
 
 .scroll-hero-left {
   transform: scaleX(-1);
 }
 
+.scroll-hero-left:hover,
+.scroll-hero-right:hover {
+  background-color: #E60023;
+  color: white;
+}
+
 .expand-hero {
   position: absolute;
-  top: 0;
-  right: 0;
+  right: 3%;
+  top: 3%;
   width: 5%;
 }
 
@@ -255,11 +244,11 @@ li {
   top: 40%;
   right: 0;
 
-  -webkit-transform:rotate(10deg);
-  -moz-transform:rotate(10deg);
-  -ms-transform:rotate(10deg);
-  -o-transform:rotate(10deg);
-  transform:rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
 }
 
 .strike {
@@ -455,4 +444,108 @@ li {
 
 .check {
   margin-right: 10px;
+}
+
+
+/* ///// SLIDER - CAROUSEL ///// */
+#slider {
+  border-radius: 2px;
+  box-shadow: 0 0 100px 10px rgba(0, 0, 0, 0.25) inset;
+  height: 585px;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  overflow: auto;
+  padding: 1em .5em;
+  scrollbar-width: none;
+  /* Firefox */
+  width: 100%;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#slider::-webkit-scrollbar {
+  display: none;
+}
+
+#slider:hover {
+  cursor: pointer;
+}
+
+.selected,
+.slide {
+  width: 100%;
+  height: 14%;
+  margin-bottom: 1em;
+  transition: all 0.5s;
+}
+
+.selected img,
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selected::before {
+  border-bottom: 5px solid #E60023;
+  bottom: 5px;
+  content: '';
+  position: absolute;
+  left: 5%;
+  width: 90%;
+}
+
+.selected {
+  position: relative;
+}
+
+.selected::after {
+  background-color: #0101014D;
+  content: '';
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
+/* ///// RESPONSIVE FOR SMALLER SCREENS ///// */
+@media screen and (max-width: 650px) {
+  #overview {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .left-main,
+  .bottom-main {
+    max-height: 50vh;
+    min-width: 100%;
+  }
+
+  .right-main {
+    min-width: 100%;
+  }
+
+  #description {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 100vw;
+  }
+
+  .line-break {
+    display: none;
+  }
+
+  .desc-left,
+  .desc-right {
+    border: none;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 100%;
+  }
+
+  .check-wrapper,
+  .checked {
+    height: 50px;
+    width: 50px;
+  }
 }

@@ -365,6 +365,7 @@ justify-content: center;
   height: 25rem;
   width: 40rem;
   overflow-y: auto;
+  position: relative;
 }
 
 .test-test-test-test {
@@ -526,9 +527,10 @@ justify-content: center;
 ::-webkit-file-upload-button { cursor: pointer; }
 
 .upload-image-progress-bar {
-  width: 100%;
+  width: 50%;
   border-radius: 5px;
   overflow: hidden;
+  margin: auto;
 }
 
 .upload-image-progress-bar-value {

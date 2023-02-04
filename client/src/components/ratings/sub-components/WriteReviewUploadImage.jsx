@@ -9,8 +9,9 @@ export default function UploadAndDisplayImage({
   submitReview,
   setSubmitReview,
 }) {
-  const [progress, setProgress] = useState(0);
-  const [progressBool, setProgressBool] = useState(false);
+  const [imgProgress, setImgProgress] = useState({
+    0: false, 1: false, 2: false, 3: false, 4: false,
+  });
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
       setImageUploadModal(false);
@@ -40,23 +41,9 @@ export default function UploadAndDisplayImage({
     };
   };
 
-  useEffect(() => {
-    // const interval = setInterval(() => {
-    //   setProgress(prevProgress => prevProgress + (100 / 30));
-    // }, 100);
-    // return () => {
-    //   clearInterval(interval);
-    // };
-    if (progressBool) {
-      console.log(selectedImage)
-      console.log('this should appear with each upload')
-    }
-  }, [selectedImage]);
-
-
   return ReactDOM.createPortal((
     <div className="write-review-modal">
-      <div className="write-review-modal-parent" style={{position: 'relative', flexDirection: 'column'}}>
+      <div className="write-review-modal-parent">
         <div style={{position: 'sticky', top: '0'}}>
           <button type="button" onClick={(e) => closeModal(e)} style={{position: 'sticky', top: '0'}}>Back</button>
           {selectedImage.length < 5 && (
@@ -87,7 +74,6 @@ export default function UploadAndDisplayImage({
                 name="myImage"
                 onChange={(event) => {
                   setSelectedImage([...selectedImage, event.target.files[0]]);
-                  setProgressBool(true);
                   handleSubmit(event.target.files[0]);
                 }}
               />
@@ -96,39 +82,53 @@ export default function UploadAndDisplayImage({
         </div>
         <h1 className="write-review-thumbnail">Show us your look!</h1>
         {selectedImage
-          ? selectedImage.map((image, index) => (
-            <div key={index} className="write-review-thumbnail">
+          ? selectedImage.map((image, index) => {
+            return (
+            <div key={index} className="write-review-thumbnail">{console.log(imgProgress[index])}
               <img alt="not found" width={"250px"} src={URL.createObjectURL(image)} />
               <br />
               <button style={{marginBottom: '2rem'}} type="button" onClick={() => setSelectedImage(selectedImage.filter((_, i) => i !== index))}>
                 Remove
               </button>
+              {imgProgress[index] === false ? (
+                <div className="upload-image-progress-bar">
+                  <div
+                    className="upload-image-progress-bar-value"
+                    style={{ width: '0%', animation: 'progress 2s linear' }}
+                  />
+                </div>
+              )
+                : null}
             </div>
-          ))
+            );
+            //setImgProgress({ ...imgProgress, [index]: true });
+          })
           : null}
-        {progressBool ? (
+        {/* {progressBool ? (
           <div className="upload-image-progress-bar">
             <div
               className="upload-image-progress-bar-value"
-              style={{ width: `${progress}%`, animation: 'progress 2s linear' }}
+              style={{ width: '0%', animation: 'progress 2s linear' }}
             />
           </div>
-        ) : null}
+        ) : null} */}
         <br />
         <br />
-        <div className="test-test-test-test">
-          {/* {selectedImage.length < 5 && (
-            <input
-              style={{position: 'absolute', bottom: '0', left: '55%', transform: 'translateX(-50%)', color: 'white'}}
-              type="file" //USE COLOR WHITE TO HIDE TEXT
-              name="myImage"
-              onChange={(event) => {
-                console.log(URL.createObjectURL(event.target.files[0]));
-                setSelectedImage([...selectedImage, event.target.files[0]]);
-              }}
-            />
-          )} */}
-        </div>
       </div>
     </div>), document.getElementById('modal'));
 }
+
+
+{/* <div className="test-test-test-test"> */}
+{/* {selectedImage.length < 5 && (
+  <input
+    style={{position: 'absolute', bottom: '0', left: '55%', transform: 'translateX(-50%)', color: 'white'}}
+    type="file" //USE COLOR WHITE TO HIDE TEXT
+    name="myImage"
+    onChange={(event) => {
+      console.log(URL.createObjectURL(event.target.files[0]));
+      setSelectedImage([...selectedImage, event.target.files[0]]);
+    }}
+  />
+)} */}
+// </div>

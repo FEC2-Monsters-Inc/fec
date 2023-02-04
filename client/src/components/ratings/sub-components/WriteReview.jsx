@@ -16,17 +16,16 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   const summaryRef = useRef();
   const bodyRef = useRef();
   const [submitReview, setSubmitReview] = useState({
-    product_id: feature.id, // done
-    rating: 0, // done
-    summary: '', // done
-    body: '', // done
+    product_id: feature.id,
+    rating: 1,
+    summary: 'this is a test summary', // done
+    body: 'this has to be at least 50 characters so ill keep typing for a while', // done
     recommend: false, // done
-    name: '', // done
-    email: '', // done
-    photos: [], // done
-    characteristics: {},
+    name: 'erik', // done
+    email: 'erik1234@gmail.com', // done // done
+    photos: [],
+    characteristics: {Size: 1, Width: 1, Comfort: 1, Quality: 1},
   });
-  const IMGBB_API_KEY = 'bdd59f30abcc14b4b7c13d1859a578da';
 
   // EVENT HANDLERS // Needs beeter functionality to exit Modal w/o Mouse
   const closeModal = (e) => {
@@ -80,7 +79,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   };
 
   return ReactDOM.createPortal((
-    <div className="write-review-modal">
+    <div className="write-review-modal">{console.log(submitReview)}
       <div className="write-review-modal-parent" style={{position: 'relative'}}>
         <p>Write your review</p>
         <p>About {feature.name}</p>
@@ -150,7 +149,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
           <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For authentication reasons, you will not be emailed</p>
         </div>
         <div>
-          <SubmitReview submitReview={submitReview}/>
+          <SubmitReview submitReview={submitReview} />
         </div>
         <button type="button" onClick={() => setImageUploadModal(true)} style={{position: 'sticky', bottom: '0', fontSize: ".7rem", borderRadius: "25%"}}>
           Upload

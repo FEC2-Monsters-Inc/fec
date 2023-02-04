@@ -37,7 +37,7 @@ test('clicking Yes replaces its text with Marked!', async () => {
   expect(screen.queryByText(/yes/i)).not.toBeInTheDocument();
 });
 
-test('clicking Marked! does nothing additional', async () => {
+test('clicking Marked! has no effect', async () => {
   fetcherMock.markHelpfulQuestion.mockResolvedValue();
   render(<Question question={proxyUnanswered} filterText="" />);
 

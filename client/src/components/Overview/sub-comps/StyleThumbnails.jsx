@@ -21,12 +21,12 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
     setThumbRows(rows);
   };
 
-  const thumbRowMapper = (thumbs) => (
+  const thumbRowMapper = (thumbs, rowIdx) => (
     <div className="thumb-row" key={thumbs[0].name}>
-      { thumbs.map((thumb) => {
+      { thumbs.map((thumb, index) => {
         const src = thumb.photos[0].thumbnail_url;
         return (
-          <div className="check-wrapper" key={thumb.style_id}>
+          <div className={!rowIdx && !index ? 'checked' : 'check-wrapper'} key={thumb.style_id}>
             <BsFillCheckCircleFill className="check-mark" size="1.25em" />
             <img
               id={thumb.style_id}
@@ -51,7 +51,7 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
   return (
     <div className="thumbs-container">
       { thumbRows.length
-        ? thumbRows.map((row) => thumbRowMapper(row))
+        ? thumbRows.map((row, index) => thumbRowMapper(row, index))
         : null }
     </div>
   );

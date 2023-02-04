@@ -12,7 +12,8 @@ export default function ProdInfo({ product, currStyle, reviews }) {
     reviewData.forEach((review) => {
       total += review.rating;
     });
-    total = (total / reviews.length).toFixed(1);
+    total /= reviews.length;
+    total = (Math.round(total * 4) / 4).toFixed(2);
     return `${total * 20}%`;
   };
 

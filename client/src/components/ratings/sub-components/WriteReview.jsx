@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import WriteReviewStarRating from './WriteReviewStarRating.jsx';
 import CharacteristicRadioButtons from './CharacteristicRadioButtons.jsx';
 import UploadAndDisplayImage from './WriteReviewUploadImage.jsx';
@@ -24,6 +25,8 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
     photos: [], //
     characteristics: {},
   });
+  const IMGBB_API_KEY = 'bdd59f30abcc14b4b7c13d1859a578da';
+
   // EVENT HANDLERS // Needs beeter functionality to exit Modal w/o Mouse
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
@@ -76,7 +79,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   };
 
   return ReactDOM.createPortal((
-    <div className="write-review-modal">
+    <div className="write-review-modal">{console.log(submitReview)}
       <div className="write-review-modal-parent" style={{position: 'relative'}}>
         <p>Write your review</p>
         <p>About {feature.name}</p>
@@ -151,6 +154,8 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
               setImageUploadModal={setImageUploadModal}
               setSelectedImage={setSelectedImage}
               selectedImage={selectedImage}
+              setSubmitReview={setSubmitReview}
+              submitReview={submitReview}
             />
           ) : null}
       </div>

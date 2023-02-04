@@ -1,16 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 export default function UploadAndDisplayImage({
   setImageUploadModal,
   selectedImage,
   setSelectedImage,
+  submitReview,
+  setSubmitReview,
 }) {
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
       setImageUploadModal(false);
     }
     setImageUploadModal(false);
+  };
+  const imageURLGenerator = (imgPath) => {
+    const options = {
+      url: 'http://localhost:3000/api/image',
+      method: 'post',
+      data: { imgPath },
+    };
+    axios(options)
+      .then(({ data }) => setSubmitReview({
+        ...submitReview,
+        photos: [...submitReview.photos, data],
+      }))
+      .catch((err) => console.error(err));
+  };
+  const handleSubmit = (file) => {
+    const rf = new FileReader();
+    rf.readAsDataURL(file);
+    rf.onloadend = function (event) {
+      const body = new FormData();
+      body.append('image', event.target.result.split(',').pop());
+      imageURLGenerator(event.target.result.split(',').pop());
+    };
   };
 
   return ReactDOM.createPortal((
@@ -20,12 +45,12 @@ export default function UploadAndDisplayImage({
           <button type="button" onClick={(e) => closeModal(e)} style={{position: 'sticky', top: '0'}}>Back</button>
           {selectedImage.length < 5 && (
             <input
-              style={{position: 'sticky', top: '0', left: '100%'}}
+              style={{position: 'absolute', top: '0', left: '86.4%', cursor: 'none'}}
               type="file"
               name="myImage"
               onChange={(event) => {
-                console.log(event.target.files[0]);
                 setSelectedImage([...selectedImage, event.target.files[0]]);
+                handleSubmit(event.target.files[0]);
               }}
             />
           )}
@@ -49,7 +74,7 @@ export default function UploadAndDisplayImage({
               type="file" //USE COLOR WHITE TO HIDE TEXT
               name="myImage"
               onChange={(event) => {
-                console.log(event.target.files[0]);
+                console.log(URL.createObjectURL(event.target.files[0]));
                 setSelectedImage([...selectedImage, event.target.files[0]]);
               }}
             />
@@ -58,3 +83,14 @@ export default function UploadAndDisplayImage({
       </div>
     </div>), document.getElementById('modal'));
 }
+
+// const handleSubmit = (file) => {
+//   const rf = new FileReader();
+//   rf.readAsDataURL(file); //file is from a useState() hook
+//   rf.onloadend = function (event) {
+//       const body = new FormData();
+//       body.append("image", event.target.result.split(",").pop()); //To delete 'data:image/png;base64,' otherwise imgbb won't process it.
+//       body.append("name", fileName);
+//       imageURLGenerator(body);
+//   }
+// }

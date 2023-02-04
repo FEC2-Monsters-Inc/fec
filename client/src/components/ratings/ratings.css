@@ -520,3 +520,7 @@ justify-content: center;
 .write-review-email-parent {
   text-align: -webkit-center;
 }
+
+/* Upload Image Modal */
+
+::-webkit-file-upload-button { cursor: pointer; }

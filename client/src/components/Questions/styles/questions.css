@@ -47,11 +47,6 @@
   cursor: pointer;
 }
 
-.qa.link.disabled {
-  text-decoration: none;
-  cursor: text;
-}
-
 .qa.link-bold {
   text-decoration: none;
   font-weight: bold;

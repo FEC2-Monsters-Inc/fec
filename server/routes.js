@@ -31,7 +31,4 @@ router.post('/cart', controllers.cart.addCartItem);
 /* INTERACTIONS */
 router.post('/interactions', controllers.interactions.addInteraction);
 
-/* 3rd PARTY */
-router.post('/image', controllers.thirdParty.uploadImage);
-
 module.exports = router;

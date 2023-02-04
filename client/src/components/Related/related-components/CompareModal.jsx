@@ -14,7 +14,7 @@ export default function CompareModal({
 
     return (
       <div className="compare-modal">
-        <AiOutlineClose className="compare-close" onClick={() => setShowModal(false)} />
+        <AiOutlineClose className="compare-close" onClick={() => setShowModal(false)} title="close-modal-icon" />
         <table id="compare-tbody">
           <tbody>
             {allChars.map((char, index) => (

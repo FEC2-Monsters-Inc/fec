@@ -23,9 +23,9 @@ export default function GalleryThumbnails({
     <div className="side-thumb-container">
       <button className="scroll-images pre-btn" type="button"><AiOutlineUp size="2em" /></button>
       <div id="slider">
-        { images.length
+        {images.length
           ? slideSorter(images).map((slide) => slide)
-          : null }
+          : null}
       </div>
       <button className="scroll-images nxt-btn" type="button"><AiOutlineDown size="2em" /></button>
     </div>

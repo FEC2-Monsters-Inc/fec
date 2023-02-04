@@ -10,7 +10,7 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
   const [posIndex, setPosIndex] = useState(0);
   const [featureMeta, setFeatureMeta] = useState(0);
 
-  const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length - 5 : 0;
+  const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length - 4 : 0;
 
   const scrollLeft = () => {
     posIndex > 0 ? setPosIndex(posIndex - 1) : null;

@@ -77,9 +77,9 @@ export default function Gallery({
         >
           <AiOutlineDoubleRight size="2em" />
         </button>
-        { heroImage.url
+        {heroImage.url
           ? <img className="hero-image" src={heroImage.url} alt="product hero" />
-          : null }
+          : null}
         <button
           className="expand-hero"
           type="button"

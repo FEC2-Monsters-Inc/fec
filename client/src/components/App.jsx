@@ -8,11 +8,8 @@ import Related from './Related/Related.jsx';
 import fetcher from '../fetchers';
 
 export default function App() {
-  // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40350, name: null };
-
-  // STATE
-  const [featureProduct, setFeatureProduct] = useState(initFeature);
+  // STATE DATA //
+  const [featureProduct, setFeatureProduct] = useState(null);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [reviewMeta, setReviewMeta] = useState(null);
@@ -37,7 +34,7 @@ export default function App() {
       .catch((err) => console.error(err));
   }, [featureProduct.id]);
 
-  if (!featureProduct.name) return <div />;
+  if (!featureProduct) return <div />;
 
   return (
     <div>

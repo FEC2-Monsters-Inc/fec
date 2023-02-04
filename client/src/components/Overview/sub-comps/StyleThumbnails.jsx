@@ -23,7 +23,7 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
 
   const thumbRowMapper = (thumbs, rowIdx) => (
     <div className="thumb-row" key={thumbs[0].name}>
-      { thumbs.map((thumb, index) => {
+      {thumbs.map((thumb, index) => {
         const src = thumb.photos[0].thumbnail_url;
         return (
           <div className={!rowIdx && !index ? 'checked' : 'check-wrapper'} key={thumb.style_id}>
@@ -50,9 +50,9 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
 
   return (
     <div className="thumbs-container">
-      { thumbRows.length
+      {thumbRows.length
         ? thumbRows.map((row, index) => thumbRowMapper(row, index))
-        : null }
+        : null}
     </div>
   );
 }

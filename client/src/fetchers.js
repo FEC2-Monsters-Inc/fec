@@ -56,6 +56,16 @@ export default {
     return axios(options);
   },
 
+  addReviews: (review) => {
+    const options = {
+      url: SERVER_BASEURL,
+      method: 'post',
+      data: review,
+    };
+
+    return axios(options);
+  },
+
   updateUseful: (id) => {
     const options = {
       url: `${SERVER_BASEURL}/reviews/${id}/helpful`,

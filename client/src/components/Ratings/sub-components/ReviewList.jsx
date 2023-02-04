@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
-import WriteReviewModal from './WriteReview.jsx';
+import ReviewModal from './ReviewModal.jsx';
 
 export default function ReviewList({
   reviews,
@@ -14,9 +14,10 @@ export default function ReviewList({
   feature,
   reviewMeta,
 }) {
+  // STATE DATA //
   const [reviewExpander, setReviewExpander] = useState('25rem');
   const [expandedStatus, setExpandedStatus] = useState(false);
-  const [writeModal, setWriteModal] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
 
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => (
@@ -25,6 +26,7 @@ export default function ReviewList({
       key={review.review_id}
       reviews={reviews}
       setReviews={setReviews}
+      feature={feature}
     />
   ));
 
@@ -53,16 +55,12 @@ export default function ReviewList({
       twoAtATime();
     }
   };
+
   const handleClick = () => {
     twoAtATime();
     setReviewExpander('50rem');
     setExpandedStatus(true);
   };
-
-  // INITIALIZATION //
-  useEffect(() => {
-    setListIndex(2);
-  }, []);
 
   return (
     <div className="review-list-container">
@@ -76,7 +74,11 @@ export default function ReviewList({
           reviewRenderer={reviewRenderer}
         />
       </div>
-      <div className="scroll-review-list" onScroll={(e) => handleScroll(e)} style={{ height: reviewExpander }}>
+      <div
+        className="scroll-review-list"
+        onScroll={(e) => handleScroll(e)}
+        style={{ height: reviewExpander }}
+      >
         { reviews
           ? reviewRenderer()
           : null }
@@ -89,12 +91,12 @@ export default function ReviewList({
         }
       </div>
       <div>
-        <button type="button" onClick={() => setWriteModal(true)}>Write a Review</button>
+        <button type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
         {
-          writeModal
+          reviewModal
             ? (
-              <WriteReviewModal
-                setWriteModal={setWriteModal}
+              <ReviewModal
+                setReviewModal={setReviewModal}
                 feature={feature}
                 reviewMeta={reviewMeta}
               />

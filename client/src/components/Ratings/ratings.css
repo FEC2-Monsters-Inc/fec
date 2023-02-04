@@ -324,10 +324,6 @@
   text-align: center;
 }
 
-.review-ul {
-
-}
-
 .review-dash-main  {
   display: block;
 }
@@ -409,6 +405,7 @@ justify-content: center;
 .review-characteristics-modal-container {
   margin: auto;
   text-align: center;
+  width: 75px;
 }
 
 .review-radio-row-container {
@@ -542,4 +539,92 @@ justify-content: center;
 @keyframes progress {
     from { width: 0; }
     to { width: 100%; }
+}
+
+/* ///// REMOVING INLINE STYLING ///// */
+.review-active-filter-container {
+  height: '37px';
+}
+
+.review-close-dropdown {
+  text-decoration: underline;
+}
+.write-review-modal-parent {
+  border-radius: 5px;
+  height: 85vh;
+  padding: 2em;
+  position: relative;
+  width: 60vw;
+}
+
+.review-summ-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-summ-label {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.email-disclaimer {
+  font-size: .75rem;
+  font-style: italic;
+}
+
+.submit-review-btn {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.close-review-modal {
+  margin: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.write-review-modal-back {
+  position: sticky;
+  top: 0;
+}
+
+.drap-and-drop {
+  position: absolute;
+  top: 0;
+  left: 86.4%;
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  border: inset black 0.25rem;
+}
+
+.review-image-main-upload-button{
+  position: absolute;
+  top: 0;
+  left: 86.4%;
+  cursor: none;
+}
+
+.close-img-modal {
+  position: sticky;
+  top: 0;
+}
+
+.drag-and-drop-text {
+  position: absolute;
+   bottom: 5px;
+   left: 5px;
+   right: 0px;
+   font-size: .8rem;
+}
+
+.set-selected-img {
+  margin-bottom: 2rem;
+}
+
+
+.upload-image-progress-bar-value {
+  width: 0%;
+  animation: progress 2s linear;
 }

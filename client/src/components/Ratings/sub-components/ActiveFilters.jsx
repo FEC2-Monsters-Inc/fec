@@ -33,7 +33,7 @@ export default function ActiveFilters({ filter, setSelectedRating, setFilter }) 
   }, [filter]);
 
   return (
-    <div className="review-active-filter-container" style={{ height: '37px' }}>
+    <div className="review-active-filter-container">
       { filterStrings
         ? `Reviews Displayed: ${filterStrings}`
         : null }

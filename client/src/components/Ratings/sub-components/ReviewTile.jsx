@@ -3,9 +3,11 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
-import StarRating from '../../../helpers/star-rating/StarRating.jsx';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
 
-export default function ReviewTile({ review, setReviews, reviews }) {
+export default function ReviewTile({
+  review, setReviews, reviews, feature,
+}) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
   const [imgString, setImgString] = useState('');
@@ -79,6 +81,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     }
     return null;
   };
+
   // Rounds star rating to 5 intervals on a 1-100 scale
   const roundedPercentage = (rounder, num) => {
     const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
@@ -88,21 +91,22 @@ export default function ReviewTile({ review, setReviews, reviews }) {
 
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
-    fetcher.ratings.updateUseful(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
+    fetcher.updateUseful(review.review_id)
+      .then(() => fetcher.getReviews(feature.id))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
-      .catch((error) => console.error(error));
-  };
-  const reportHandler = () => {
-    fetcher.ratings.updateReport(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setHelpfulClick(true))
-      .catch((error) => console.error(error));
+      .catch((error) => console.error('Error updating helpful in reviewtile: ', error));
   };
 
-  // INITIALIZATION //
+  const reportHandler = () => {
+    fetcher.updateReport(review.review_id)
+      .then(() => fetcher.getReviews(feature.id))
+      .then(({ data }) => setReviews(data.results))
+      .then(() => setHelpfulClick(true))
+      .catch((error) => console.error('Error updating reported in reviewtile: ', error));
+  };
+
+  // INITIALIZATION // Consider Refactor
   useEffect(() => {
     if (review.body.length < 250) {
       setShowFull(true);
@@ -139,7 +143,6 @@ export default function ReviewTile({ review, setReviews, reviews }) {
           className="review-tile-helpful"
           onClick={() => (!helpfulClick ? helpfulHandler() : null)}
           onKeyPress={() => (!helpfulClick ? helpfulHandler() : null)}
-          style={helpfulClick ? { cursor: 'default' } : {}}
           type="button"
         >
           Yes

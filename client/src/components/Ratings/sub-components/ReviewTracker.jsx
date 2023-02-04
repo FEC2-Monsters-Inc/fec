@@ -39,13 +39,13 @@ export default function ReviewTracker({
   // EVENT HANDLERS //
   const toggleRating = (num) => {
     // lines 42-48: Make review bars w/o reviews un-clickable.
-    const temp = [];
-    for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
-      temp.push(reviews[i].rating);
-    }
-    if (temp.includes(num) === false) {
-      return;
-    }
+    // const temp = [];
+    // for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
+    //   temp.push(reviews[i].rating);
+    // }
+    // if (temp.includes(num) === false) {
+    //   return;
+    // }
     //
     let newSelect = {};
     newSelect = Object.assign(newSelect, filter);

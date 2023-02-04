@@ -13,11 +13,13 @@ export default function RelevanceDropdown({
   const handleClick = () => {
     setShowDropdown(true);
   };
+
   const handleClose = (e) => {
     if (e.target.className !== 'review-close-dropdown') {
       setShowDropdown(false);
     }
   };
+
   // SORT HELPER FUNCTIONS //
   const handleNew = () => {
     const sortByDate = (data) => data.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -26,6 +28,7 @@ export default function RelevanceDropdown({
     setShowDropdown(false);
     setSortString('recency');
   };
+
   const handleHelpful = () => {
     const sortByHelp = (data) => data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
     const onPage = sortByHelp(reviews.slice(0, listIndex));
@@ -33,6 +36,7 @@ export default function RelevanceDropdown({
     setShowDropdown(false);
     setSortString('helpful');
   };
+
   const handleRelevant = () => {
     const sortByRelevancy = (data) => data.sort((a, b) => {
       if (b.helpfulness > 20) {
@@ -80,7 +84,6 @@ export default function RelevanceDropdown({
               onKeyPress={handleClick}
               tabIndex="0"
               role="button"
-              style={{ textDecoration: 'underline' }}
               className="review-close-dropdown"
             >
               {sortString}
@@ -95,7 +98,7 @@ export default function RelevanceDropdown({
             { sortString !== 'recency'
               ? (
                 <li>
-                  <div
+                  <p
                     className="review-li-1"
                     onClick={() => handleNew()}
                     onKeyPress={() => handleNew()}
@@ -103,14 +106,14 @@ export default function RelevanceDropdown({
                     role="button"
                   >
                     recency
-                  </div>
+                  </p>
                 </li>
               )
               : null }
             { sortString !== 'helpfulness'
               ? (
                 <li>
-                  <div
+                  <p
                     className="review-li-2"
                     onClick={() => handleHelpful()}
                     onKeyPress={() => handleHelpful()}
@@ -118,14 +121,14 @@ export default function RelevanceDropdown({
                     role="button"
                   >
                     helpfulness
-                  </div>
+                  </p>
                 </li>
               )
               : null }
             { sortString !== 'relevance'
               ? (
                 <li>
-                  <div
+                  <p
                     className="review-li-3"
                     onClick={() => handleRelevant()}
                     onKeyPress={() => handleRelevant()}
@@ -133,7 +136,7 @@ export default function RelevanceDropdown({
                     role="button"
                   >
                     relevance
-                  </div>
+                  </p>
                 </li>
               )
               : null }

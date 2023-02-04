@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 
-export default function WriteReviewStar({
+export default function ReviewModalStar({
   filled, onClick, onMouseEnter, onMouseLeave,
 }) {
   return (

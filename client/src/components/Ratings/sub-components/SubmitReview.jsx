@@ -1,27 +1,26 @@
 import React from 'react';
 import fetcher from '../../../fetchers';
 
-export default function SubmitReview({ submitReview }) {
-  // Fetcher fo
-  const funkyTown = (rvw) => {
-    console.log('this is review data obj: ', rvw);
-    fetcher.ratings.addReviews(rvw)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
+export default function SubmitReview({
+  newReview, chars, setChars, setNewReview, setReviewModal,
+}) {
+  // EVENT HANDLERS //
+  const addReview = () => {
+    const finalReview = {};
+    Object.assign(finalReview, newReview);
+    finalReview.characteristics = chars;
+    fetcher.addReviews(finalReview)
+      .then(() => {
+        setNewReview({ product_id: newReview.product_id, photos: [] });
+        setChars({});
+        setReviewModal(false);
+      })
+      .catch((err) => console.error('error adding a new review: ', err));
   };
+
   return (
-    <div>
-      <button type="button" onClick={() => funkyTown({
-    product_id: 40350,
-    rating: 1,
-    summary: 'this is a test summary',
-    body: 'this has to be at least 50 characters so ill keep typing for a while',
-    recommend: false,
-    name: 'erik',
-    email: 'erik1234@gmail.com',
-    photos: [],
-    characteristics: {135240: 1, 135241: 1, 135242: 1, 135243: 1},
-  })}>Submit your Review!</button>
+    <div className="submit-review-btn">
+      <button type="button" onClick={() => addReview()}>Submit Review</button>
     </div>
   );
 }

@@ -38,6 +38,7 @@ export default {
       method: 'get',
       params: {
         product_id: id,
+        count: 200,
       },
     };
 
@@ -58,7 +59,7 @@ export default {
 
   addReviews: (review) => {
     const options = {
-      url: SERVER_BASEURL,
+      url: `${SERVER_BASEURL}/reviews`,
       method: 'post',
       data: review,
     };

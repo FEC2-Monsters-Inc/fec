@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
-import fetcher from '../../fetchers';
 import './ratings.css';
 
 export default function Ratings({
@@ -13,12 +12,7 @@ export default function Ratings({
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
   const [listLength, setListLength] = useState(0);
-  const [listIndex, setListIndex] = useState(0);
-
-  // useEffect(() => {
-  //   fetcher.ratings.getAllReviews(40350)
-  //     .then(({ data }) => setLoadedReviews(data.results));
-  // });
+  const [listIndex, setListIndex] = useState(2);
 
   return (
     <div id="ratings-widget">

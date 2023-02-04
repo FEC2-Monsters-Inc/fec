@@ -5,6 +5,12 @@
   max-width: 1000px;
 }
 
+/* ///// TOP LEVEL COMPONTENT ///// */
+#ratings-widget {
+  margin: auto;
+  max-width: 1200px;
+}
+
 .ratings-parent {
   display: flex;
   justify-content: space-between;
@@ -79,6 +85,7 @@
 
 .review-main-star-container {
   display: flex;
+  flex-direction: row;
 }
 
 .review-header {
@@ -95,14 +102,15 @@
   display: flex;
   flex-direction: row;
   width: 20rem;
+
 }
 
-/* .hover {
+.review-hover-shell-container:hover {
   width: 120%;
-  transform: scale(1.15, 1.15);
-  background-color:#F3D8FF;
+  transform: scale(1.05, 1.05);
+
   filter: drop-shadow(0 0 1rem black);
-} */
+}
 
 .review-tracker-bar-parent {
   height: 20px;
@@ -244,7 +252,7 @@
 }
 
 .review-tile-body {
-  word-break: break-all;
+  word-break: keep-all;
 }
 
 .review-elipses-span:hover {
@@ -261,6 +269,7 @@
   font-size: 12px;
   text-decoration: underline;
   margin-bottom: .25em;
+  border: none;
 }
 
 .review-helpful-span {
@@ -273,7 +282,9 @@
   text-decoration: underline;
   cursor: pointer;
   margin-left: 25px;
+  margin-right: 20px;
   font-size: 12px;
+  border: none;
 }
 
 .review-list-dropdown-container {
@@ -313,17 +324,307 @@
   text-align: center;
 }
 
-.review-ul {
-
+.review-dash-main  {
+  display: block;
 }
+
+.test-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-review-list {
+  overflow-y: auto;
+  height: 25rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-review-list::-webkit-scrollbar {
+  display: none;
+}
+
+.write-review-modal {
+position: fixed;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.write-review-modal-parent {
+  background-color: white;
+  height: 25rem;
+  width: 40rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.test-test-test-test {
+  height:30px;
+  margin: 0;
+  clear: both;
+  width:100%;
+  position: relative;
+}
+
+.write-review-modal-parent::-webkit-scrollbar {
+  display: none;
+}
+
+.write-on {
+  color: gold;
+}
+.write-off {
+  color: lightgray;
+}
+
+.write-review-modal-label {
+  font-size: .7rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.radio-row-title {
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  width: 75px;
+}
+
+.write-review-characteristics-modal {
+  display: inline-block;
+  justify-content: center;
+}
+
+.review-characteristics-modal-container {
+  margin: auto;
+  text-align: center;
+  width: 75px;
+}
+
+.review-radio-row-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.write-review-summary {
+  height:auto;
+  max-width:400px;
+  color:#999;
+  font-weight:400;
+  font-size:24px;
+  font-family: 'Comic Sans MS';
+  width:100%;
+  background:#fff;
+  border-radius:3px;
+  line-height:2em;
+  border:none;
+  box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);
+  padding:30px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
+  margin: 0 auto;
+  margin-bottom: 0.25rem;
+}
+
+::-webkit-resizer {
+  display: none;
+}
+
+.write-review-character-count {
+  margin-left: 8rem;
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Comic Sans MS';
+}
+
+.write-review-thumbnail {
+  text-align: center;
+}
+
 
 /* .review-sort-dropdown-main {
   border: medium dashed black;
 } */
 
-.dashboard-main {
+/* ///// ACTIVE FILTER COMPONENT ///// */
+
+
+/* ///// EMAIL INPUT FOR WRITE REVIEW MODAL ///// */
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: black; /* FOR DEMO ONLY */
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #11998e;
+  font-weight: 700;
+}
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
+}
+
+.write-review-email-parent {
+  text-align: -webkit-center;
+}
+
+/* Upload Image Modal */
+
+::-webkit-file-upload-button { cursor: pointer; }
+
+.upload-image-progress-bar {
+  width: 50%;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.upload-image-progress-bar-value {
+  background-color: #FFA500;
+  height: 10px;
+  border-radius: 5px;
+}
+
+@keyframes progress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* ///// REMOVING INLINE STYLING ///// */
+.review-active-filter-container {
+  height: '37px';
+}
+
+.review-close-dropdown {
+  text-decoration: underline;
+}
+.write-review-modal-parent {
+  border-radius: 5px;
+  height: 85vh;
+  padding: 2em;
+  position: relative;
+  width: 60vw;
+}
+
+.review-summ-container {
   display: flex;
   flex-direction: column;
-  padding-right: 2em;
-  width: 50%;
+}
+
+.review-summ-label {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.email-disclaimer {
+  font-size: .75rem;
+  font-style: italic;
+}
+
+.submit-review-btn {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.close-review-modal {
+  margin: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.write-review-modal-back {
+  position: sticky;
+  top: 0;
+}
+
+.drap-and-drop {
+  position: absolute;
+  top: 0;
+  left: 86.4%;
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  border: inset black 0.25rem;
+}
+
+.review-image-main-upload-button{
+  position: absolute;
+  top: 0;
+  left: 86.4%;
+  cursor: none;
+}
+
+.close-img-modal {
+  position: sticky;
+  top: 0;
+}
+
+.drag-and-drop-text {
+  position: absolute;
+   bottom: 5px;
+   left: 5px;
+   right: 0px;
+   font-size: .8rem;
+}
+
+.set-selected-img {
+  margin-bottom: 2rem;
+}
+
+
+.upload-image-progress-bar-value {
+  width: 0%;
+  animation: progress 2s linear;
 }

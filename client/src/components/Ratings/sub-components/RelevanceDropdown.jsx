@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
-import fetcher from '../../../fetchers';
 
-export default function RelevanceDropdown({ setReviews, reviews }) {
+export default function RelevanceDropdown({
+  setReviews, reviews, listLength, listIndex, reviewRenderer,
+}) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -10,51 +11,83 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
 
   // EVENT HANDLERS //
   const handleClick = () => {
-    setShowDropdown(!showDropdown);
+    setShowDropdown(true);
   };
 
-  // HTTP REQUEST HANDLERS //
-  const handleNew = (id) => {
-    fetcher.getReviews(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('recency'))
-      .catch((error) => console.error('error fetching newest: ', error));
+  const handleClose = (e) => {
+    if (e.target.className !== 'review-close-dropdown') {
+      setShowDropdown(false);
+    }
   };
-  const handleHelpful = (id) => {
-    fetcher.getReviews(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('helpfulness'))
-      .catch((error) => console.error('error fetching helpful: ', error));
+
+  // SORT HELPER FUNCTIONS //
+  const handleNew = () => {
+    const sortByDate = (data) => data.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const onPage = sortByDate(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
+    setSortString('recency');
   };
-  const handleRelevant = (id) => {
-    fetcher.getReviews(40350) // productID - currently a placeholder
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setShowDropdown(false))
-      .then(() => setSortString('relevance'))
-      .catch((error) => console.error('error fetching relevant: ', error));
+
+  const handleHelpful = () => {
+    const sortByHelp = (data) => data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
+    const onPage = sortByHelp(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
+    setSortString('helpful');
+  };
+
+  const handleRelevant = () => {
+    const sortByRelevancy = (data) => data.sort((a, b) => {
+      if (b.helpfulness > 20) {
+        return (b.helpfulness) - (a.helpfulness);
+      }
+      if (new Date(b.date) - new Date(a.date) === 0) {
+        return (b.helpfulness) - (a.helpfulness);
+      }
+      return new Date(b.date) - new Date(a.date);
+    });
+    const onPage = sortByRelevancy(reviews.slice(0, listIndex));
+    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setShowDropdown(false);
+    setSortString('relevance');
+  };
+
+  // OTHER HELPER FUNCTIONS //
+  const reviewListLength = () => {
+    if (!listLength) {
+      return reviews.slice(0, listIndex).length;
+    }
+    return listLength;
   };
 
   // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
       setDisplay(true);
+      reviewRenderer(reviews);
     }
-  }, [reviews]);
-  // TO-DO: FIX Number of Reviews
+    document.addEventListener('click', handleClose);
+  }, [reviews, listLength]);
+
   return (
     <div className="review-sort-dropdown-main">
       {display
         ? (
           <p className="review-sort-title">
-            {reviews.length}
+            {reviewListLength()}
             {' '}
             reviews sorted by
             {' '}
-            <span onClick={handleClick} style={{ textDecoration: 'underline' }}>
+            <span
+              onClick={handleClick}
+              onKeyPress={handleClick}
+              tabIndex="0"
+              role="button"
+              className="review-close-dropdown"
+            >
               {sortString}
-              <VscTriangleDown style={{ display: 'inline-block', position: 'absolute' }} />
+              <VscTriangleDown onClick={handleClick} className="review-close-icon" />
             </span>
           </p>
         )
@@ -62,15 +95,51 @@ export default function RelevanceDropdown({ setReviews, reviews }) {
       {showDropdown && (
         <div className="review-sort-dropdown-child">
           <ul className="review-ul">
-            {sortString !== 'recency'
-              ? <li className="review-li-1" onClick={() => handleNew()}>recency</li>
-              : null}
-            {sortString !== 'helpfulness'
-              ? <li className="review-li-2" onClick={() => handleHelpful()}>helpfulness</li>
-              : null}
-            {sortString !== 'relevance'
-              ? <li className="review-li-3" onClick={() => handleRelevant()}>relevance</li>
-              : null}
+            { sortString !== 'recency'
+              ? (
+                <li>
+                  <p
+                    className="review-li-1"
+                    onClick={() => handleNew()}
+                    onKeyPress={() => handleNew()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    recency
+                  </p>
+                </li>
+              )
+              : null }
+            { sortString !== 'helpfulness'
+              ? (
+                <li>
+                  <p
+                    className="review-li-2"
+                    onClick={() => handleHelpful()}
+                    onKeyPress={() => handleHelpful()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    helpfulness
+                  </p>
+                </li>
+              )
+              : null }
+            { sortString !== 'relevance'
+              ? (
+                <li>
+                  <p
+                    className="review-li-3"
+                    onClick={() => handleRelevant()}
+                    onKeyPress={() => handleRelevant()}
+                    tabIndex="0"
+                    role="button"
+                  >
+                    relevance
+                  </p>
+                </li>
+              )
+              : null }
           </ul>
         </div>
       )}

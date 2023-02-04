@@ -102,7 +102,7 @@ export default function Question({
           <QandAModal
             type="answer"
             show={showAddA}
-            closeModal={setShowAddA}
+            setShowModal={setShowAddA}
             question_id={question_id}
           />
         </span>

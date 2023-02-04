@@ -55,11 +55,24 @@ test('should only render questions with answers', async () => {
   expect(questions.length).toEqual(answers.length);
 });
 
-test('renders modal on ADD button click', async () => {
+test('clicking add a question button renders a question modal', async () => {
   render(<div id="modal" />);
   render(<QuestionsList questions={proxyQList} filterText="" />);
-  const button = screen.getByRole('button', { name: /add a question \+/i });
-  await userEvent.click(button);
+  await userEvent.click(screen.getByText(/add a question \+/i));
 
-  expect(await screen.findByText('Ask your Question')).toBeInTheDocument();
+  expect(screen.getByText(/ask your question/i)).toBeInTheDocument();
+});
+
+// there isn't a good way to test this, since we remove styling and the
+// modal-bg thus has no dimensions and doesn't cover everything
+// test('clicking outside the question modal closes it');
+
+test('clicking cancel closes the question modal', async () => {
+  render(<div id="modal" />);
+  render(<QuestionsList questions={proxyQList} filterText="" />);
+
+  await userEvent.click(screen.getByText(/add a question \+/i));
+  await userEvent.click(screen.getByText(/cancel/i));
+
+  expect(screen.queryByText(/ask your question/i)).not.toBeInTheDocument();
 });

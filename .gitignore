@@ -5,8 +5,8 @@ node_modules/
 **/coverage
 
 # Ignores transpiled images
-client/dist/*.png
-client/dist/*.jpg
-client/dist/*.jpeg
-client/dist/*.svg
-client/dist/*.gif
+client/dist/assets/transpiled/*.png
+client/dist/assets/transpiled/*.jpg
+client/dist/assets/transpiled/*.jpeg
+client/dist/assets/transpiled/*.svg
+client/dist/assets/transpiled/*.gif

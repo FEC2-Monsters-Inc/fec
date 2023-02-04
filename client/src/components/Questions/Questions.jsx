@@ -17,11 +17,9 @@ export default function Questions({
     clearTimeout(timer);
   };
 
-  const putQuestions = () => {
-    fetcher.getQuestionsById(feature.id)
-      .then(({ data }) => setQuestions(data.results))
-      .catch((err) => console.error('Questions on feature change fetch: ', err));
-  };
+  const putQuestions = () => fetcher.getQuestionsById(feature.id)
+    .then(({ data }) => setQuestions(data.results))
+    .catch((err) => console.error('Questions on feature change fetch: ', err));
 
   // TODO: maybe want to search through answers too
   // const combineAnswerText = ()
@@ -43,9 +41,7 @@ export default function Questions({
   };
 
   const filterQuestionsBySearch = () => {
-    if (filterText.length >= 3) {
-      setFilteredQuestions(questions.filter(bySearchTerm));
-    } else filterQuestionsWithAnswers();
+    setFilteredQuestions(questions.filter(bySearchTerm));
   };
 
   // TODO: investigate react-hooks/exhaustive-deps
@@ -55,13 +51,20 @@ export default function Questions({
   }, [feature]);
 
   useEffect(() => {
-    setTimer(setTimeout(filterQuestionsBySearch, 500));
+    if (filterText.length >= 3) {
+      setTimer(setTimeout(filterQuestionsBySearch, 500));
+    }
   }, [filterText]);
 
   useEffect(() => {
-    filterQuestionsBySearch();
+    if (filterText.length < 3) {
+      filterQuestionsWithAnswers();
+    }
   }, [questions]);
 
+  // TODO: want to refactor the footer buttons in QuestionsList into this
+  // component since this component acts as a control for the questions list
+  // seeing as it already applies filters.
   return (
     <div id="questions-widget" className="qa qa-section">
       <h2>QUESTIONS & ANSWERS</h2>

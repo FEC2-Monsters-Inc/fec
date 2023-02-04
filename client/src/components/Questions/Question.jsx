@@ -41,9 +41,10 @@ export default function Question({
 
   const loadMoreAnswers = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      if (numAnswers + 2 > answers.length) {
-        if (numAnswers + 1 <= answers.length) setNumAnswers(numAnswers + 1);
-      } else setNumAnswers(numAnswers + 2);
+      const increment = numAnswers + 2 > Object.keys(answers).length
+        ? Object.keys(answers).length - numAnswers
+        : 2;
+      setNumAnswers(numAnswers + increment);
     }
   };
 
@@ -77,16 +78,17 @@ export default function Question({
         </h3>
         <span className="qa control">
           {'Helpful? '}
-          <span
-            className={'qa link'.concat(helpfulStatus ? '' : ' disabled')}
-            role="link"
-            tabIndex={0}
-            onKeyUp={markHelpfulQuestion}
-            onClick={markHelpfulQuestion}
-          >
-            {helpfulStatus ? 'Yes' : 'Marked!'}
-          </span>
-          {/* TODO: conditional rendering + 1 on yes click */}
+          {helpfulStatus ? (
+            <span
+              className="qa link"
+              role="link"
+              tabIndex={0}
+              onKeyUp={markHelpfulQuestion}
+              onClick={markHelpfulQuestion}
+            >
+              Yes
+            </span>
+          ) : <span>Marked!</span>}
           {` (${helpfulness}) | `}
           <span
             className="qa link"
@@ -105,36 +107,32 @@ export default function Question({
           />
         </span>
       </div>
-      {/* TODO: should only render 2 answers */}
-      {Object.keys(answers).length > 0
-        ? (
-          <div className="qa answers-section">
-            <h3>A: </h3>
-            <div className="qa answers-list">
-              {/* TODO: sort answers by helpfulness */}
-              {Object.keys(answers).slice(0, numAnswers).map((key) => (
-                <Answer
-                  key={key}
-                  answer={answers[key]}
-                  updateQuestions={updateQuestions}
-                  decrementAnswers={() => setNumAnswers(numAnswers - 1)}
-                />
-              ))}
-            </div>
+      {Object.keys(answers).length > 0 ? (
+        <div className="qa answers-section">
+          <h3>A: </h3>
+          <div className="qa answers-list">
+            {/* TODO: sort answers by helpfulness */}
+            {Object.keys(answers).slice(0, numAnswers).map((key) => (
+              <Answer
+                key={key}
+                answer={answers[key]}
+                updateQuestions={updateQuestions}
+              />
+            ))}
           </div>
-        ) : null}
-      {numAnswers + 1 < Object.keys(answers).length
-        ? (
-          <span
-            className="qa link link-bold"
-            role="link"
-            tabIndex={0}
-            onKeyUp={loadMoreAnswers}
-            onClick={loadMoreAnswers}
-          >
-            LOAD MORE ANSWERS
-          </span>
-        )
+        </div>
+      ) : null}
+      {numAnswers < Object.keys(answers).length ? (
+        <span
+          className="qa link link-bold"
+          role="link"
+          tabIndex={0}
+          onKeyUp={loadMoreAnswers}
+          onClick={loadMoreAnswers}
+        >
+          LOAD MORE ANSWERS
+        </span>
+      )
         : null}
     </div>
   );

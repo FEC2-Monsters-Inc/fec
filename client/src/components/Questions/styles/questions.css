@@ -47,11 +47,6 @@
   cursor: pointer;
 }
 
-.qa.link.disabled {
-  text-decoration: none;
-  cursor: text;
-}
-
 .qa.link-bold {
   text-decoration: none;
   font-weight: bold;
@@ -117,26 +112,24 @@
 .qa.search {
   border-width: 1px;
   border-style: solid;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
-.qa.search-input {
+.qa#question-search {
   border-style: none;
   flex: auto;
   height: 3rem;
   padding-left: 5px;
-  padding-right: 2rem;
+  padding-right: 3rem;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .qa.search-icon {
   position: absolute;
-  right: 0.5rem;
-  padding: 1rem;
-  cursor: pointer;
+  right: 1rem;
 }
 
 /* ADD QUESTION FORM MODAL */

@@ -130,9 +130,10 @@
 .qa.search-icon {
   position: absolute;
   right: 1rem;
+  cursor: pointer;
 }
 
-/* ADD QUESTION FORM MODAL */
+/* ADD MODAL */
 
 .qa.modal-bg {
   position: fixed;
@@ -170,4 +171,8 @@
 .qa.add-personal {
   display: flex;
   justify-content: space-between;
+}
+
+.qa label {
+  display: grid;
 }

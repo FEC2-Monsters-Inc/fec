@@ -1,14 +1,49 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import StyleThumbnails from './StyleThumbnails.jsx';
 
-export default function StyleSelect({ styles, currStyle, setCurrStyle }) {
+export default function StyleSelect({
+  styles,
+  currStyle,
+  setCurrStyle,
+  setHero,
+  setRightBtn,
+  setLeftBtn,
+}) {
   // HELPER FUNCTIONS //
+  const updateGalleryBtns = (index, images) => {
+    const leftBtn = document.getElementsByClassName('scroll-hero-left')[0];
+    const rightBtn = document.getElementsByClassName('scroll-hero-right')[0];
+    if (index === images.length - 1) {
+      setRightBtn(false);
+      rightBtn.className = 'scroll-hero-right btn-hidden';
+    }
+    if (!index) {
+      setLeftBtn(false);
+      leftBtn.className = 'scroll-hero-left btn-hidden';
+    }
+  };
+
   const toggleCheck = (newCheckId) => {
     const oldCheckWrap = document.getElementById(currStyle.style_id).parentElement;
-    oldCheckWrap.className = 'check-wrapper';
     const newCheckWrap = document.getElementById(newCheckId).parentElement;
-    if (newCheckWrap) {
-      newCheckWrap.className = 'checked';
+    oldCheckWrap.className = 'check-wrapper';
+    newCheckWrap.className = 'checked';
+  };
+
+  const heroImageChanger = (images) => {
+    const selected = document.getElementsByClassName('selected')[0];
+    if (selected) {
+      let index = Number(selected.childNodes[0].id.slice(0, 1));
+      if (index >= images.length) {
+        index = images.length - 1;
+        const newSelect = document.getElementById(`${index}a`).parentNode;
+        newSelect.className = 'selected';
+      }
+      setHero({
+        url: images[index].url,
+        index,
+      });
+      updateGalleryBtns(index, images);
     }
   };
 
@@ -22,16 +57,10 @@ export default function StyleSelect({ styles, currStyle, setCurrStyle }) {
     styles.results.forEach((style) => {
       if (style.style_id === Number(id)) {
         setCurrStyle(style);
+        heroImageChanger(style.photos);
       }
     });
   };
-
-  // INITIALIZATION //
-  useEffect(() => {
-    if (currStyle) {
-      toggleCheck(currStyle.style_id);
-    }
-  }, [currStyle]);
 
   return (
     <div id="style-select">

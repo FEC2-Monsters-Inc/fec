@@ -1,45 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import {
-  AiOutlineDoubleRight, AiOutlineDown, AiOutlineExpand, AiOutlineUp,
-} from 'react-icons/ai';
+import React from 'react';
+import { AiOutlineDoubleRight, AiOutlineExpand } from 'react-icons/ai';
 import GalleryThumbnails from './GalleryThumbnails.jsx';
 
-export default function Gallery({ currStyle, setCurrStyle }) {
-  // STATE DATA //
-  const [images, setImages] = useState([]);
-  const [heroImage, setHero] = useState('');
+export default function Gallery({
+  images,
+  heroImage,
+  setHero,
+  rightBtn,
+  leftBtn,
+  btnRenderCheck,
+}) {
+  // HELPER FUNCTION //
+  const toggleThumbSelect = (event) => {
+    const oldSelect = document.getElementsByClassName('selected')[0];
+    const newSelect = event.target.parentNode;
+    oldSelect.className = 'slide';
+    newSelect.className = 'selected';
+    btnRenderCheck();
+  };
 
   // EVENT HANDLERS //
   const toggleHero = (event) => {
-    setHero(event.target.src);
+    const index = Number(event.target.id.slice(0, 1));
+    setHero({
+      url: images[index].url,
+      index,
+    });
   };
 
-  // INITIALIZATION //
-  useEffect(() => {
-    if (currStyle) {
-      setHero(currStyle.photos[0].url);
-      setImages(currStyle.photos.map((photo, index) => ({
-        url: photo.url,
-        key: index,
-      }
-      )));
+  const toggleHeroLeft = () => {
+    const index = Number(heroImage.index);
+    if (index > 0) {
+      setHero({
+        url: images[index - 1].url,
+        index: index - 1,
+      });
     }
-  }, [currStyle]);
+    const oldSelect = document.getElementsByClassName('selected')[0];
+    const prevThumb = oldSelect.previousSibling;
+    if (prevThumb) {
+      oldSelect.className = 'slide';
+      prevThumb.className = 'selected';
+      btnRenderCheck();
+    }
+  };
+
+  const toggleHeroRight = () => {
+    const index = Number(heroImage.index);
+    if (index < images.length - 1) {
+      setHero({
+        url: images[index + 1].url,
+        index: index + 1,
+      });
+    }
+    const oldSelect = document.getElementsByClassName('selected')[0];
+    const nextThumb = oldSelect.nextSibling;
+    if (nextThumb) {
+      oldSelect.className = 'slide';
+      nextThumb.className = 'selected';
+      btnRenderCheck();
+    }
+  };
 
   return (
     <div id="gallery">
-      <div className="side-thumb-container">
-        <button className="scroll-images" type="button"><AiOutlineUp size="2em" /></button>
-        <div className="side-thumb-images">
-          { images.map((img) => <img className="side-thumb" src={img.url} key={img.key} alt="More product thumbs" onClick={(e) => toggleHero(e)} />)}
-        </div>
-        <button className="scroll-images" type="button"><AiOutlineDown size="2em" /></button>
-      </div>
+      <GalleryThumbnails
+        images={images}
+        toggleHero={toggleHero}
+        toggleThumbSelect={toggleThumbSelect}
+      />
       <div className="hero-image-container">
-        <button className="scroll-hero-left" type="button"><AiOutlineDoubleRight size="2em" /></button>
-        <img className="hero-image" src={heroImage} alt="product hero" />
-        <button className="expand-hero" type="button"><AiOutlineExpand size="1.5em" /></button>
-        <button className="scroll-hero-right" type="button"><AiOutlineDoubleRight size="2em" /></button>
+        <button
+          className={`scroll-hero-left ${!leftBtn ? 'btn-hidden' : ''}`}
+          type="button"
+          onClick={toggleHeroLeft}
+        >
+          <AiOutlineDoubleRight size="2em" />
+        </button>
+        { heroImage.url
+          ? <img className="hero-image" src={heroImage.url} alt="product hero" />
+          : null }
+        <button
+          className="expand-hero"
+          type="button"
+        >
+          <AiOutlineExpand size="1.5em" />
+        </button>
+        <button
+          className={`scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
+          type="button"
+          onClick={toggleHeroRight}
+        >
+          <AiOutlineDoubleRight size="2em" />
+        </button>
       </div>
     </div>
   );

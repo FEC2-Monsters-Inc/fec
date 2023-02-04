@@ -78,7 +78,7 @@ export default function Answer({
             Report
           </span>
         ) : <span>Reported</span>}
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }

@@ -69,7 +69,7 @@ export default function QuestionsList({
         <QandAModal
           type="question"
           show={showAddQ}
-          closeModal={setShowAddQ}
+          setShowModal={setShowAddQ}
           product_id={product_id}
         />
       </div>

@@ -55,25 +55,29 @@ export default function Answer({
       </div>
       <div className="qa answer-info">
         {`by ${name}, ${format(parseISO(date), 'MMMM d, yyyy')} | Helpful? `}
-        <span
-          className={'qa link'.concat(helpfulStatus ? '' : ' disabled')}
-          role="link"
-          tabIndex={0}
-          onKeyUp={markHelpfulAnswer}
-          onClick={markHelpfulAnswer}
-        >
-          {helpfulStatus ? 'Yes' : 'Marked!'}
-        </span>
+        {helpfulStatus ? (
+          <span
+            className="qa link"
+            role="link"
+            tabIndex={0}
+            onKeyUp={markHelpfulAnswer}
+            onClick={markHelpfulAnswer}
+          >
+            Yes
+          </span>
+        ) : <span>Marked!</span>}
         {` (${helpfulness}) | `}
-        <span
-          className={'qa link'.concat(reportStatus ? '' : ' disabled')}
-          role="link"
-          tabIndex={0}
-          onKeyUp={reportAnswer}
-          onClick={reportAnswer}
-        >
-          {reportStatus ? 'Report' : 'Reported'}
-        </span>
+        {reportStatus ? (
+          <span
+            className="qa link"
+            role="link"
+            tabIndex={0}
+            onKeyUp={reportAnswer}
+            onClick={reportAnswer}
+          >
+            Report
+          </span>
+        ) : <span>Reported</span>}
       </div>
     </div>
   );

@@ -9,12 +9,11 @@ import fetcherMock from '../../client/src/fetchers';
 
 jest.mock('../../client/src/fetchers');
 jest.useFakeTimers();
+beforeEach(jest.clearAllMocks);
 
 const proxyPID = 40356;
 const proxyProduct = exampleProducts[proxyPID];
 const proxyQList = exampleQuestions[proxyPID];
-
-beforeEach(jest.clearAllMocks);
 
 test('fetches questions once on load', () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });

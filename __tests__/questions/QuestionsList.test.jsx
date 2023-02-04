@@ -27,8 +27,7 @@ test('renders 2 more questions on button click', async () => {
 test('hides MORE button when there are no more questions to load', async () => {
   render(<QuestionsList questions={proxyQList} filterText="" />);
   const button = screen.getByRole('button', { name: /more answered questions/i });
-  const passedQuestions = proxyQList;
-  const numClicks = Math.ceil(passedQuestions.length / 2) - 1;
+  const numClicks = Math.ceil(proxyQList.length / 2) - 1;
 
   for (let i = 0; i < numClicks; i += 1) {
     await userEvent.click(button);
@@ -44,8 +43,7 @@ test('should only render questions with answers', async () => {
     .filter((question) => Object.keys(question.answers).length);
   render(<QuestionsList questions={questionsWithAnswers} filterText="" />);
   const button = screen.getByRole('button', { name: /more answered questions/i });
-  const passedQuestions = questionsWithAnswers;
-  const numClicks = Math.ceil(passedQuestions.length / 2) - 1;
+  const numClicks = Math.ceil(proxyQList.length / 2) - 1;
 
   for (let i = 0; i < numClicks; i += 1) {
     await userEvent.click(button);

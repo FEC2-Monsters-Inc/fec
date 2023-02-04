@@ -9,6 +9,8 @@ export default function UploadAndDisplayImage({
   submitReview,
   setSubmitReview,
 }) {
+  const [progress, setProgress] = useState(0);
+  const [progressBool, setProgressBool] = useState(false);
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
       setImageUploadModal(false);
@@ -38,6 +40,20 @@ export default function UploadAndDisplayImage({
     };
   };
 
+  useEffect(() => {
+    // const interval = setInterval(() => {
+    //   setProgress(prevProgress => prevProgress + (100 / 30));
+    // }, 100);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+    if (progressBool) {
+      console.log(selectedImage)
+      console.log('this should appear with each upload')
+    }
+  }, [selectedImage]);
+
+
   return ReactDOM.createPortal((
     <div className="write-review-modal">
       <div className="write-review-modal-parent" style={{position: 'relative', flexDirection: 'column'}}>
@@ -45,41 +61,59 @@ export default function UploadAndDisplayImage({
           <button type="button" onClick={(e) => closeModal(e)} style={{position: 'sticky', top: '0'}}>Back</button>
           {selectedImage.length < 5 && (
             <>
-            <div
-            style={{position: 'absolute', top: '0', left: '86.4%', height: '200px', width: '200px', backgroundColor: 'green', border: 'inset black 0.25rem',}}
-            className="drag-and-drop"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {
-              e.preventDefault()
-              let files = e.dataTransfer.files;
-              if (files.length) {
-                setSelectedImage([...selectedImage, files[0]]);
-                handleSubmit(files[0]);
-              }
-            }}
-            ><p style={{position: 'absolute', bottom: '5px', left: '5px', right: '0px', fontSize: '.8rem'}}>Drag-N-Drop!</p></div>
-            <input
-              style={{position: 'absolute', top: '0', left: '86.4%', cursor: 'none'}}
-              type="file"
-              name="myImage"
-              onChange={(event) => {
-                setSelectedImage([...selectedImage, event.target.files[0]]);
-                handleSubmit(event.target.files[0]);
-              }}
-            />
-          </>
+              <div
+                style={{position: 'absolute', top: '0', left: '86.4%', height: '200px', width: '200px', backgroundColor: 'green', border: 'inset black 0.25rem'}}
+                className="drag-and-drop"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const { files } = e.dataTransfer;
+                  // const files = e.dataTransfer.files;
+                  if (files.length) {
+                    setSelectedImage([...selectedImage, files[0]]);
+                    handleSubmit(files[0]);
+                  }
+                }}
+              >
+                <p
+                  style={{position: 'absolute', bottom: '5px', left: '5px', right: '0px', fontSize: '.8rem'}}
+                >
+                  Drag-N-Drop!
+                </p>
+              </div>
+              <input
+                style={{position: 'absolute', top: '0', left: '86.4%', cursor: 'none'}}
+                type="file"
+                name="myImage"
+                onChange={(event) => {
+                  setSelectedImage([...selectedImage, event.target.files[0]]);
+                  setProgressBool(true);
+                  handleSubmit(event.target.files[0]);
+                }}
+              />
+            </>
           )}
         </div>
         <h1 className="write-review-thumbnail">Show us your look!</h1>
-        {selectedImage.map((image, index) => (
-          <div key={index} className="write-review-thumbnail">
-            <img alt="not found" width={"250px"} src={URL.createObjectURL(image)} />
-            <br />
-            <button style={{marginBottom: '2rem'}} type="button" onClick={() => setSelectedImage(selectedImage.filter((_, i) => i !== index))}>
-              Remove
-            </button>
+        {selectedImage
+          ? selectedImage.map((image, index) => (
+            <div key={index} className="write-review-thumbnail">
+              <img alt="not found" width={"250px"} src={URL.createObjectURL(image)} />
+              <br />
+              <button style={{marginBottom: '2rem'}} type="button" onClick={() => setSelectedImage(selectedImage.filter((_, i) => i !== index))}>
+                Remove
+              </button>
+            </div>
+          ))
+          : null}
+        {progressBool ? (
+          <div className="upload-image-progress-bar">
+            <div
+              className="upload-image-progress-bar-value"
+              style={{ width: `${progress}%`, animation: 'progress 2s linear' }}
+            />
           </div>
-        ))}
+        ) : null}
         <br />
         <br />
         <div className="test-test-test-test">
@@ -98,14 +132,3 @@ export default function UploadAndDisplayImage({
       </div>
     </div>), document.getElementById('modal'));
 }
-
-// const handleSubmit = (file) => {
-//   const rf = new FileReader();
-//   rf.readAsDataURL(file); //file is from a useState() hook
-//   rf.onloadend = function (event) {
-//       const body = new FormData();
-//       body.append("image", event.target.result.split(",").pop()); //To delete 'data:image/png;base64,' otherwise imgbb won't process it.
-//       body.append("name", fileName);
-//       imageURLGenerator(body);
-//   }
-// }

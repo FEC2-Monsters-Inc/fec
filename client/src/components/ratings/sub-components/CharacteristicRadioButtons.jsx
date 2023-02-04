@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function characteristicRadioButtons({ reviewMeta }) {
+export default function characteristicRadioButtons({ reviewMeta, setSubmitReview, submitReview }) {
   const RadioButtonRow = () => Object.keys(reviewMeta.characteristics).map((characteristic) => (
     <div className="review-radio-row-container">
       <div className="radio-row-title">{characteristic}</div>
@@ -14,6 +14,7 @@ export default function characteristicRadioButtons({ reviewMeta }) {
               type="radio"
               name={characteristic}
               value={number}
+              onChange={()=>characteristicHandler(characteristic, number)}
               key={number}
               id={number + characteristic}
               className="write-review-characteristics-modal"
@@ -23,6 +24,16 @@ export default function characteristicRadioButtons({ reviewMeta }) {
       ))}
     </div>
   ));
+
+  const characteristicHandler = (char, val) => {
+    setSubmitReview({
+      ...submitReview,
+      characteristics: {
+        ...submitReview.characteristics,
+        [char]: val,
+      },
+    });
+  };
 
   const characteristicMapper = (x) => {
     if (x === 'Size') {
@@ -45,6 +56,7 @@ export default function characteristicRadioButtons({ reviewMeta }) {
     }
     return null;
   };
+
 
   return (
     <>

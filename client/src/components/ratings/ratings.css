@@ -524,3 +524,20 @@ justify-content: center;
 /* Upload Image Modal */
 
 ::-webkit-file-upload-button { cursor: pointer; }
+
+.upload-image-progress-bar {
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.upload-image-progress-bar-value {
+  background-color: #FFA500;
+  height: 10px;
+  border-radius: 5px;
+}
+
+@keyframes progress {
+    from { width: 0; }
+    to { width: 100%; }
+}

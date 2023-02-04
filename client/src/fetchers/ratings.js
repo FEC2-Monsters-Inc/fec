@@ -40,20 +40,11 @@ export default {
 
     return axios(options);
   },
-  getReviewsSortedNew: (id) => {
+  addReviews: (review) => {
     const options = {
       url: SERVER_BASEURL,
-      method: 'get',
-      params: { product_id: id, sort: 'newest', count: 200 },
-    };
-
-    return axios(options);
-  },
-  getReviewsSortedHelpful: (id) => {
-    const options = {
-      url: SERVER_BASEURL,
-      method: 'get',
-      params: { product_id: id, sort: 'helpful', count: 200 },
+      method: 'post',
+      data: review, //not sure if data or body
     };
 
     return axios(options);

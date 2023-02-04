@@ -4,6 +4,7 @@ import axios from 'axios';
 import WriteReviewStarRating from './WriteReviewStarRating.jsx';
 import CharacteristicRadioButtons from './CharacteristicRadioButtons.jsx';
 import UploadAndDisplayImage from './WriteReviewUploadImage.jsx';
+import SubmitReview from './SubmitReview.jsx';
 
 export default function WriteReviewModal({ setWriteModal, feature, reviewMeta }) {
   // STATE DATA
@@ -22,7 +23,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
     recommend: false, // done
     name: '', // done
     email: '', // done
-    photos: [], //
+    photos: [], // done
     characteristics: {},
   });
   const IMGBB_API_KEY = 'bdd59f30abcc14b4b7c13d1859a578da';
@@ -79,7 +80,7 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
   };
 
   return ReactDOM.createPortal((
-    <div className="write-review-modal">{console.log(submitReview)}
+    <div className="write-review-modal">
       <div className="write-review-modal-parent" style={{position: 'relative'}}>
         <p>Write your review</p>
         <p>About {feature.name}</p>
@@ -102,7 +103,14 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
         </div>
         <div>
           <p>Tell us more...</p>
-          {reviewMeta ? <CharacteristicRadioButtons reviewMeta={reviewMeta} /> : null}
+          {reviewMeta
+            ? (
+              <CharacteristicRadioButtons
+                reviewMeta={reviewMeta}
+                setSubmitReview={setSubmitReview}
+                submitReview={submitReview}
+              />
+            ) : null}
         </div>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <p style={{textAlign: 'center', marginBottom: '2rem'}}>Review Summary</p>
@@ -140,6 +148,9 @@ export default function WriteReviewModal({ setWriteModal, feature, reviewMeta })
             <label htmlFor="name" className="form__label">Email</label>
           </div>
           <p style={{fontSize: '0.75rem', fontStyle: 'italic'}}>For authentication reasons, you will not be emailed</p>
+        </div>
+        <div>
+          <SubmitReview submitReview={submitReview}/>
         </div>
         <button type="button" onClick={() => setImageUploadModal(true)} style={{position: 'sticky', bottom: '0', fontSize: ".7rem", borderRadius: "25%"}}>
           Upload

@@ -67,11 +67,21 @@ test('clicking LOAD MORE ANSWERS renders 1 more answer if less than 4 answers ex
   expect(answers.length).toBe(3);
 });
 
-test('clicking Add Answer will render an answer modal', async () => {
+test('clicking add answer link will render an answer modal', async () => {
   render(<div id="modal" />);
   render(<Question question={proxyQuestion} filterText="" />);
 
   await userEvent.click(screen.getByText(/add answer/i));
 
   expect(screen.getByText(/submit your answer/i)).toBeInTheDocument();
+});
+
+test('clicking outside the answer modal closes it', () => {
+  render(<div id="modal" />);
+  render(<Question question={proxyQuestion} filterText="" />);
+
+  userEvent.click(screen.getByText(/add answer/i));
+  userEvent.click(screen.getByText(/q: /i));
+
+  expect(screen.queryByText(/submit your answer/i)).not.toBeInTheDocument();
 });

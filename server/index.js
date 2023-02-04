@@ -10,7 +10,7 @@ const app = express();
 
 /* MIDDLEWARE */
 app.use(morgan('dev'));
-app.use(express.json()};
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 

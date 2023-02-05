@@ -79,26 +79,30 @@ export default function Question({
         <span className="qa control">
           {'Helpful? '}
           {helpfulStatus ? (
-            <span
-              className="qa link"
-              role="link"
+            <button
+              className="qa btn-link"
+              type="button"
               tabIndex={0}
               onKeyUp={markHelpfulQuestion}
               onClick={markHelpfulQuestion}
             >
               Yes
-            </span>
+            </button>
           ) : <span>Marked!</span>}
-          {` (${helpfulness}) | `}
-          <span
-            className="qa link"
-            role="link"
+          {' ('}
+          <span className="qa helpfulness">
+            {helpfulness}
+          </span>
+          {') | '}
+          <button
+            className="qa btn-link"
+            type="button"
             tabIndex={0}
             onKeyUp={showModal}
             onClick={showModal}
           >
             Add Answer
-          </span>
+          </button>
           <QandAModal
             type="answer"
             show={showAddA}

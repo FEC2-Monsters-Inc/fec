@@ -11,7 +11,7 @@ jest.mock('../../client/src/fetchers');
 beforeEach(jest.clearAllMocks);
 
 // proxyQuestion must have at least 4 answers
-const proxyQuestion = exampleQuestions[40356].results[0];
+const proxyQuestion = exampleQuestions.q_329075;
 const proxyUnanswered = exampleQuestions[40356].results[3];
 
 test('renders properly', () => {
@@ -57,9 +57,12 @@ test('clicking LOAD MORE ANSWERS renders 2 more answers if available', async () 
 });
 
 test('clicking LOAD MORE ANSWERS renders 1 more answer if less than 4 answers exist', async () => {
-  const proxyCopy = { ...proxyQuestion };
-  proxyCopy.answers = Object.fromEntries(Object.entries(proxyQuestion.answers).slice(0, 3));
-  render(<Question question={proxyCopy} filterText="" />);
+  let proxyCopy = null;
+  if (Object.keys(proxyQuestion.answers).length >= 4) {
+    proxyCopy = { ...proxyQuestion };
+    proxyCopy.answers = Object.fromEntries(Object.entries(proxyQuestion.answers).slice(0, 3));
+  }
+  render(<Question question={proxyCopy ?? proxyQuestion} filterText="" />);
 
   await userEvent.click(screen.getByText(/load more answers/i));
 
@@ -88,4 +91,22 @@ test('clicking cancel closes the answer modal', async () => {
   await userEvent.click(screen.getByText(/cancel/i));
 
   expect(screen.queryByText(/submit your answer/i)).not.toBeInTheDocument();
+});
+
+test('should render answers in order of helpfulness', async () => {
+  render(<Question question={proxyQuestion} filterText="" />);
+  const numAnswers = Object.keys(proxyQuestion.answers).length;
+  const numClicks = Math.ceil(numAnswers / 2) - 1;
+  for (let i = 0; i < numClicks; i += 1) {
+    await userEvent.click(screen.getByText(/load more answers/i));
+  }
+  const helpfulTexts = await screen.findAllByTestId('a-helpfulness');
+  const helpfulIndices = helpfulTexts.map((element) => Number.parseInt(element.textContent));
+  const sorted = [...helpfulIndices].sort((a, b) => {
+    if (a > b) return -1;
+    if (a < b) return 1;
+    return 0;
+  });
+
+  expect(helpfulIndices).toEqual(sorted);
 });

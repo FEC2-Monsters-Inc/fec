@@ -31,9 +31,8 @@ export default function ReviewList({
   // HELPER FUNCTIONS //
   const reviewMapper = (reviewArray) => reviewArray.map((review) => {
     if (review.body
-      .includes(searchTerm) || review.summary
-      .includes(searchTerm) || review.reviewer_name.includes(searchTerm)) {
-      // apply <b> tag to text in "review-tile-body" that matches search term
+      .includes((searchTerm.length >= 3 ? searchTerm : '')) || review.summary
+      .includes((searchTerm.length >= 3 ? searchTerm : '')) || review.reviewer_name.includes((searchTerm.length >= 3 ? searchTerm : ''))) {
       return (
         <ReviewTile
           review={review}

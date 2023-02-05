@@ -127,15 +127,15 @@ export default function Question({
         </div>
       ) : null}
       {numAnswers < Object.keys(answers).length ? (
-        <span
-          className="qa link link-bold"
-          role="link"
+        <button
+          className="qa btn-link-bold"
+          type="button"
           tabIndex={0}
           onKeyUp={loadMoreAnswers}
           onClick={loadMoreAnswers}
         >
           LOAD MORE ANSWERS
-        </span>
+        </button>
       )
         : null}
     </div>

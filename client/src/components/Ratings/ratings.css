@@ -717,6 +717,14 @@ justify-content: center;
   text-align: -webkit-center;
 }
 
-.highlighted {
-  background-color: blue;
+
+/* SEARCH BAR HIGHLIGHT FUNCTIONALITY  */
+.review-search-highlight {
+  border-radius: 1em 0 1em 0;
+  background-image: linear-gradient(
+    -100deg,
+    rgba(255, 224, 0, 0.2),
+    rgba(255, 224, 0, 0.7) 95%,
+    rgba(255, 224, 0, 0.1)
+  );
 }

@@ -27,25 +27,71 @@ export default function ReviewTile({
     const monthName = months[date.getMonth()];
     const day = date.getDate();
     const year = date.getFullYear();
-
     return `${monthName} ${day}, ${year}`;
   };
 
+  // Creates name and Date string for each tile.
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
 
+  // Highlights text that matches the searchTerm, set by ReviewSearchBar.jsx
   const highlightHandler = () => {
+    if (searchTerm.length < 3) return bodyLengthChecker();
+    if (review.body.includes(searchTerm) === false) return bodyLengthChecker();
     const regex = new RegExp(searchTerm, 'gi');
-    const parts = review.body.split(regex);
-    const highlightedText = parts.map((part, i) => {
-      const match = part.match(regex);
-      if (match) {
-        return (
-          <span key={i} className="highlighted">{match[0]}</span>
-        );
-      }
-      return part;
-    });
-    return <p className="review-tile-body" dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+    const parts = review.body.match(regex);
+    const beforeParts = review.body.slice(0, review.body.search(regex));
+    const restOfReview = review.body.slice(review.body.search(regex) + parts.join('').length);
+    return (
+      <span>
+        {beforeParts}
+        {parts.map((part, i) => (
+          part.toLowerCase() === searchTerm.toLowerCase()
+            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
+            : part
+        ))}
+        {restOfReview}
+      </span>
+    );
+  };
+
+  const testHandler = (text, fn) => {
+    if (searchTerm.length < 3) return fn ? fn() : text;
+    if (text.includes(searchTerm) === false) return fn ? fn() : text;
+    const regex = new RegExp(searchTerm, 'gi');
+    const parts = text.match(regex);
+    const beforeParts = text.slice(0, text.search(regex));
+    const restOfText = text.slice(text.search(regex) + parts.join('').length);
+    return (
+      <span>
+        {beforeParts}
+        {parts.map((part, i) => (
+          part.toLowerCase() === searchTerm.toLowerCase()
+            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
+            : part
+        ))}
+        {restOfText}
+      </span>
+    );
+  };
+
+  const testHandler2 = (text) => {
+    if (searchTerm.length < 3) return text;
+    if (text.includes(searchTerm) === false) return text;
+    const regex = new RegExp(searchTerm, 'gi');
+    const parts = text.match(regex);
+    const beforeParts = text.slice(0, text.search(regex));
+    const restOfText = text.slice(text.search(regex) + parts.join('').length);
+    return (
+      <span>
+        {beforeParts}
+        {parts.map((part, i) => (
+          part.toLowerCase() === searchTerm.toLowerCase()
+            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
+            : part
+        ))}
+        {restOfText}
+      </span>
+    );
   };
 
   // handles review summary
@@ -126,20 +172,22 @@ export default function ReviewTile({
     if (review.body.length < 250) {
       setShowFull(true);
     }
+
     roundedPercentage(0.25, review.rating);
   }, [review, review.helpfulness, reviews]);
 
   return (
     <div className="review-tile-main-container">
       <div className="review-tile-container-1">
-        <p className="review-tile-nameAndDate">{nameAndDate}</p>
+        <p className="review-tile-nameAndDate">{testHandler(nameAndDate, null)}</p>
         <div className="review-tile-stars">
           <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
         </div>
       </div>
-      <p className="review-tile-summary">{summaryLengthChecker()}</p>
+      <p className="review-tile-summary">{testHandler(review.summary, summaryLengthChecker)}</p>
+      <br />
       <p className="review-tile-body">
-        {bodyLengthChecker()}
+        {testHandler(review.body, bodyLengthChecker)}
         {showFull ? review.body.substring(250) : elipsesSpan()}
       </p>
       <p className="review-tile-recommendation">

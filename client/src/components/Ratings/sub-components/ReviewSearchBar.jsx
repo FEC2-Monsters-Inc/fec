@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function ReviewSearchBar({
   reviews, searchTerm, setSearchTerm, listIndex,
 }) {
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
 
   // set search term to the value of the search input
   const handleInputChange = (e) => {
@@ -11,20 +11,19 @@ export default function ReviewSearchBar({
   };
 
   // search through the reviews and add the search results to the state
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.length >= 3) {
-      const results = reviews.slice(0, listIndex).filter((review) => {
-        const { body, summary, reviewer_name } = review;
-        return body.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`) || summary.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`) || reviewer_name.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`);
-      });
-      setSearchResults(results);
-    }
-  };
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   if (searchTerm.length >= 3) {
+  //     const results = reviews.slice(0, listIndex).filter((review) => {
+  //       const { body, summary, reviewer_name } = review;
+  //       return body.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`) || summary.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`) || reviewer_name.replace(searchTerm, `<span class="highlight">${searchTerm}</span>`);
+  //     });
+  //     setSearchResults(results);
+  //   }
+  // };
 
   return (
-    <form onSubmit={handleSearch}>
-      {console.log('this is searchresults: ', searchResults)}
+    <form>
       <input
         type="text"
         value={searchTerm}
@@ -36,3 +35,5 @@ export default function ReviewSearchBar({
     </form>
   );
 }
+
+// <form onSubmit={handleSearch}>

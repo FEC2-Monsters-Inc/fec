@@ -75,7 +75,10 @@ export default function Answer({
           </button>
         ) : <span>Marked!</span>}
         {' ('}
-        <span className="qa helpfulness">
+        <span
+          className="qa helpfulness"
+          data-testid="a-helpfulness"
+        >
           {helpfulness}
         </span>
         {') | '}

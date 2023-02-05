@@ -16,6 +16,9 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
   // image modal state - currently out of order
   const [imageUploadModal, setImageUploadModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState([]);
+  const [imgProgress, setImgProgress] = useState({
+    0: false, 1: false, 2: false, 3: false, 4: false,
+  });
 
   // EVENT HANDLERS // Needs better functionality to exit Modal w/o Mouse - REFACTOR LATER
   const closeModalKeyPress = (e) => {
@@ -72,7 +75,6 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
-      {console.log(newReview)}
       <div className="write-review-modal-parent">
         <button className="close-review-modal" type="button" onClick={() => setReviewModal(false)}>X</button>
         <p>Write your review</p>
@@ -172,6 +174,8 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
               selectedImage={selectedImage}
               newReview={newReview}
               setNewReview={setNewReview}
+              imgProgress={imgProgress}
+              setImgProgress={setImgProgress}
             />
           ) : null}
       </div>

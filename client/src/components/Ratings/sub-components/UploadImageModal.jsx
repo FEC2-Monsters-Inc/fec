@@ -12,11 +12,11 @@ export default function UploadAndDisplayImage({
   setSelectedImage,
   newReview,
   setNewReview,
+  imgProgress,
+  setImgProgress,
 }) {
   // STATE DATA //
-  const [imgProgress, setImgProgress] = useState({
-    0: false, 1: false, 2: false, 3: false, 4: false,
-  });
+  const [numUploaded, setNumUploaded] = useState(0);
 
   // HELPER FUNCTIONS //
   const imageURLGenerator = (imgPath) => {
@@ -31,6 +31,16 @@ export default function UploadAndDisplayImage({
         photos: [...newReview.photos, data],
       }))
       .catch((err) => console.error(err));
+  };
+
+  const hideProgressBar = () => {
+    setImgProgress({ ...imgProgress, [numUploaded]: true });
+    setNumUploaded(numUploaded + 1);
+  };
+  const asyncHideProgressBar = () => {
+    setTimeout(() => {
+      hideProgressBar();
+    }, 5000);
   };
 
   // EVENT HANDLERS //
@@ -53,6 +63,7 @@ export default function UploadAndDisplayImage({
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
+      {console.log(imgProgress)}
       <div className="write-review-modal-parent">
         <div className="write-review-modal-back">
           <button className="close-img-modal" type="button" onClick={(e) => closeModal(e)}>Back</button>
@@ -101,22 +112,30 @@ export default function UploadAndDisplayImage({
         </div>
         <h1 className="write-review-thumbnail">Show us your look!</h1>
         {selectedImage
-          ? selectedImage.map((image, index) => (
-            <div key={index} className="write-review-thumbnail">
-              <img alt="not found" width="250px" src={URL.createObjectURL(image)} />
-              <br />
-              <button className="set-selected-img" type="button" onClick={() => setSelectedImage(selectedImage.filter((_, i) => i !== index))}>
-                Remove
-              </button>
-              {imgProgress[index] === false ? (
-                <div className="upload-image-progress-bar">
-                  <div className="upload-image-progress-bar-value" />
-                </div>
-              )
-                : null}
-            </div>
-          ),
-            // setImgProgress({ ...imgProgress, [index]: true });
+          ? selectedImage.map(
+            (image, index) => (
+              <div key={image} className="write-review-thumbnail">
+                <img alt="Thumbnail You Uploaded" width="250px" src={URL.createObjectURL(image)} />
+                <br />
+                <button
+                  className="set-selected-img"
+                  type="button"
+                  onClick={() => {
+                    setSelectedImage(selectedImage.filter((_, i) => i !== index));
+                    setImgProgress({ ...imgProgress, [index]: false });
+                  }}
+                >
+                  Remove
+                </button>
+                {imgProgress[index] === false ? (
+                  <div className="upload-image-progress-bar">
+                    {asyncHideProgressBar()}
+                    <div className="upload-image-progress-bar-value" />
+                  </div>
+                )
+                  : null}
+              </div>
+            ),
           )
           : null}
         {/* {progressBool ? (
@@ -129,3 +148,6 @@ export default function UploadAndDisplayImage({
       </div>
     </div>), document.getElementById('modal'));
 }
+
+// setImgProgress({ ...imgProgress, [numUploaded]: true });
+// setNumUploaded(numUploaded + 1);

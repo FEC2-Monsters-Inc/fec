@@ -29,10 +29,20 @@ export default function ReviewList({
   }, [reviews]);
 
   // HELPER FUNCTIONS //
+
+  const getDateString = (dateString) => {
+    const date = new Date(dateString);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthName = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${monthName} ${day}, ${year}`;
+  };
+
   const reviewMapper = (reviewArray) => reviewArray.map((review) => {
-    if (review.body
-      .includes((searchTerm.length >= 3 ? searchTerm : '')) || review.summary
-      .includes((searchTerm.length >= 3 ? searchTerm : '')) || review.reviewer_name.includes((searchTerm.length >= 3 ? searchTerm : ''))) {
+    if (review.body.toLowerCase()
+      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || review.summary.toLowerCase()
+      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || review.reviewer_name.toLowerCase().includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || (getDateString(review.date).toLowerCase().includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')))) {
       return (
         <ReviewTile
           review={review}
@@ -64,6 +74,8 @@ export default function ReviewList({
       setListIndex(listIndex + 2);
     }
   };
+
+  // EVENT HANDLERS //
 
   const handleScroll = (e) => {
     const bottom = Math.round(e.currentTarget.scrollHeight - e.currentTarget.scrollTop)

@@ -34,49 +34,9 @@ export default function ReviewTile({
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
 
   // Highlights text that matches the searchTerm, set by ReviewSearchBar.jsx
-  const highlightHandler = () => {
-    if (searchTerm.length < 3) return bodyLengthChecker();
-    if (review.body.includes(searchTerm) === false) return bodyLengthChecker();
-    const regex = new RegExp(searchTerm, 'gi');
-    const parts = review.body.match(regex);
-    const beforeParts = review.body.slice(0, review.body.search(regex));
-    const restOfReview = review.body.slice(review.body.search(regex) + parts.join('').length);
-    return (
-      <span>
-        {beforeParts}
-        {parts.map((part, i) => (
-          part.toLowerCase() === searchTerm.toLowerCase()
-            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
-            : part
-        ))}
-        {restOfReview}
-      </span>
-    );
-  };
-
-  const testHandler = (text, fn) => {
+  const highlightHandler = (text, fn) => {
     if (searchTerm.length < 3) return fn ? fn() : text;
-    if (text.includes(searchTerm) === false) return fn ? fn() : text;
-    const regex = new RegExp(searchTerm, 'gi');
-    const parts = text.match(regex);
-    const beforeParts = text.slice(0, text.search(regex));
-    const restOfText = text.slice(text.search(regex) + parts.join('').length);
-    return (
-      <span>
-        {beforeParts}
-        {parts.map((part, i) => (
-          part.toLowerCase() === searchTerm.toLowerCase()
-            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
-            : part
-        ))}
-        {restOfText}
-      </span>
-    );
-  };
-
-  const testHandler2 = (text) => {
-    if (searchTerm.length < 3) return text;
-    if (text.includes(searchTerm) === false) return text;
+    if (text.toLowerCase().includes(searchTerm.toLowerCase()) === false) return fn ? fn() : text;
     const regex = new RegExp(searchTerm, 'gi');
     const parts = text.match(regex);
     const beforeParts = text.slice(0, text.search(regex));
@@ -179,15 +139,15 @@ export default function ReviewTile({
   return (
     <div className="review-tile-main-container">
       <div className="review-tile-container-1">
-        <p className="review-tile-nameAndDate">{testHandler(nameAndDate, null)}</p>
+        <p className="review-tile-nameAndDate">{highlightHandler(nameAndDate, null)}</p>
         <div className="review-tile-stars">
           <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
         </div>
       </div>
-      <p className="review-tile-summary">{testHandler(review.summary, summaryLengthChecker)}</p>
+      <p className="review-tile-summary">{highlightHandler(review.summary, summaryLengthChecker)}</p>
       <br />
       <p className="review-tile-body">
-        {testHandler(review.body, bodyLengthChecker)}
+        {highlightHandler(review.body, bodyLengthChecker)}
         {showFull ? review.body.substring(250) : elipsesSpan()}
       </p>
       <p className="review-tile-recommendation">

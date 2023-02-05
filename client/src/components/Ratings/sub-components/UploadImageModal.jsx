@@ -63,7 +63,6 @@ export default function UploadAndDisplayImage({
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
-      {console.log(imgProgress)}
       <div className="write-review-modal-parent">
         <div className="write-review-modal-back">
           <button className="close-img-modal" type="button" onClick={(e) => closeModal(e)}>Back</button>
@@ -85,7 +84,7 @@ export default function UploadAndDisplayImage({
                 <p
                   className="drag-and-drop-text"
                 >
-                  Drag-N-Drop!
+                  Drag And Drop Or Click To Upload Your Image!
                   <FcUpload className="review-image-upload-icon" />
                   <input
                     className="xyz"
@@ -98,7 +97,7 @@ export default function UploadAndDisplayImage({
                   />
                 </p>
               </div>
-              <input
+              {/* <input
                 className="review-image-main-upload-button"
                 type="file"
                 name="myImage"
@@ -106,7 +105,7 @@ export default function UploadAndDisplayImage({
                   setSelectedImage([...selectedImage, event.target.files[0]]);
                   handleSubmit(event.target.files[0]);
                 }}
-              />
+              /> */}
             </>
           )}
         </div>
@@ -138,16 +137,8 @@ export default function UploadAndDisplayImage({
             ),
           )
           : null}
-        {/* {progressBool ? (
-          <div className="upload-image-progress-bar">
-            <div className="upload-image-progress-bar-value" />
-          </div>
-        ) : null} */}
         <br />
         <br />
       </div>
     </div>), document.getElementById('modal'));
 }
-
-// setImgProgress({ ...imgProgress, [numUploaded]: true });
-// setNumUploaded(numUploaded + 1);

@@ -115,7 +115,10 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         </div>
         <div className="review-summ-container">
           <p className="review-summ-label">Review Summary</p>
-          <textarea ref={useRef()} maxLength="60" placeholder="Example: Best purchase ever!" className="write-review-summary" onChange={handleSummaryChange} />
+          <div className="form__group1">
+            <textarea type="input" className="form__field1" placeholder="summary" name="summary" id="summary" maxLength="60" onChange={handleSummaryChange} ref={useRef()} required />
+            <label htmlFor="summary" className="form__label1">Give it a title (ex: OMG totes amazing)</label>
+          </div>
           {summaryCount
             ? (
               <p className="write-review-character-count">
@@ -127,7 +130,10 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         </div>
         <div className="review-summ-container">
           <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Write your review below</p>
-          <textarea ref={useRef()} maxLength="1000" placeholder="Why did you like the product?" className="write-review-summary" onChange={handleBodyChange} />
+          <div className="form__group1">
+            <textarea type="input" className="form__field1" placeholder="body" name="body" id="body" maxLength="1000" onChange={handleBodyChange} ref={useRef()} required />
+            <label htmlFor="body" className="form__label1">Tell us about your purchase! (ex: I loved it!)</label>
+          </div>
           <p className="write-review-character-count">
             {bodyCount >= 50
               ? 'Minimum Reached!'

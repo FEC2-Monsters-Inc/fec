@@ -66,7 +66,6 @@ test('clicking add a question button renders a question modal', async () => {
 // there isn't a good way to test this, since we remove styling and the
 // modal-bg thus has no dimensions and doesn't cover everything
 // test('clicking outside the question modal closes it');
-
 test('clicking cancel closes the question modal', async () => {
   render(<div id="modal" />);
   render(<QuestionsList questions={proxyQList} filterText="" />);
@@ -75,4 +74,22 @@ test('clicking cancel closes the question modal', async () => {
   await userEvent.click(screen.getByText(/cancel/i));
 
   expect(screen.queryByText(/ask your question/i)).not.toBeInTheDocument();
+});
+
+test('should render questions in order of helpfulness', async () => {
+  render(<QuestionsList questions={proxyQList} filterText="" />);
+  const button = screen.getByRole('button', { name: /more answered questions/i });
+  const numClicks = Math.ceil(proxyQList.length / 2) - 1;
+  for (let i = 0; i < numClicks; i += 1) {
+    await userEvent.click(button);
+  }
+  const helpfulTexts = await screen.findAllByTestId('q-helpfulness');
+  const helpfulIndices = helpfulTexts.map((element) => Number.parseInt(element.textContent));
+  const sorted = [...helpfulIndices].sort((a, b) => {
+    if (a > b) return -1;
+    if (a < b) return 1;
+    return 0;
+  });
+
+  expect(helpfulIndices).toEqual(sorted);
 });

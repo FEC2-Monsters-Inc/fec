@@ -5,7 +5,9 @@ import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import UploadAndDisplayImage from './UploadImageModal.jsx';
 
-export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
+export default function ReviewModal({
+  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews,
+}) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
   const [summaryCount, setSummaryCount] = useState(0);
@@ -170,6 +172,9 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
             setChars={setChars}
             setNewReview={setNewReview}
             setReviewModal={setReviewModal}
+            feature={feature}
+            setReviewMeta={setReviewMeta}
+            setReviews={setReviews}
           />
         </div>
         {imageUploadModal

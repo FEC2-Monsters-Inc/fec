@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
 import ReviewModal from './ReviewModal.jsx';
+import ReviewSearchBar from './ReviewSearchBar.jsx';
 
 export default function ReviewList({
   reviews,
@@ -13,22 +14,39 @@ export default function ReviewList({
   setListIndex,
   feature,
   reviewMeta,
+  setReviewMeta,
 }) {
   // STATE DATA //
   const [reviewExpander, setReviewExpander] = useState('25rem');
   const [expandedStatus, setExpandedStatus] = useState(false);
   const [reviewModal, setReviewModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    if (reviews) {
+      reviewRenderer();
+    }
+  }, [reviews]);
 
   // HELPER FUNCTIONS //
-  const reviewMapper = (reviewArray) => reviewArray.map((review) => (
-    <ReviewTile
-      review={review}
-      key={review.review_id}
-      reviews={reviews}
-      setReviews={setReviews}
-      feature={feature}
-    />
-  ));
+  const reviewMapper = (reviewArray) => reviewArray.map((review) => {
+    if (review.body
+      .includes(searchTerm) || review.summary
+      .includes(searchTerm) || review.reviewer_name.includes(searchTerm)) {
+      // apply <b> tag to text in "review-tile-body" that matches search term
+      return (
+        <ReviewTile
+          review={review}
+          key={review.review_id}
+          reviews={reviews}
+          setReviews={setReviews}
+          feature={feature}
+          searchTerm={searchTerm}
+        />
+      );
+    }
+    return null;
+  });
 
   const reviewRenderer = () => {
     if (!selectedRating) {
@@ -52,7 +70,7 @@ export default function ReviewList({
     const bottom = Math.round(e.currentTarget.scrollHeight - e.currentTarget.scrollTop)
      === Math.round(e.currentTarget.clientHeight);
     if (bottom) {
-      twoAtATime();
+      twoAtATime(); // investigate for proper GET after POST
     }
   };
 
@@ -99,10 +117,21 @@ export default function ReviewList({
                 setReviewModal={setReviewModal}
                 feature={feature}
                 reviewMeta={reviewMeta}
+                setReviewMeta={setReviewMeta}
+                reviews={reviews}
+                setReviews={setReviews}
               />
             )
             : null
         }
+      </div>
+      <div>
+        <ReviewSearchBar
+          reviews={reviews}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          listIndex={listIndex}
+        />
       </div>
     </div>
   );

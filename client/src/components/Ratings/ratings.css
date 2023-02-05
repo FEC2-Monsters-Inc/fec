@@ -716,3 +716,7 @@ justify-content: center;
 .write-review-email-parent {
   text-align: -webkit-center;
 }
+
+.highlighted {
+  background-color: blue;
+}

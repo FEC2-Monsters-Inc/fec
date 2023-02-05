@@ -6,7 +6,7 @@ import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function ReviewTile({
-  review, setReviews, reviews, feature,
+  review, setReviews, reviews, feature, searchTerm,
 }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -32,6 +32,21 @@ export default function ReviewTile({
   };
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
+
+  const highlightHandler = () => {
+    const regex = new RegExp(searchTerm, 'gi');
+    const parts = review.body.split(regex);
+    const highlightedText = parts.map((part, i) => {
+      const match = part.match(regex);
+      if (match) {
+        return (
+          <span key={i} className="highlighted">{match[0]}</span>
+        );
+      }
+      return part;
+    });
+    return <p className="review-tile-body" dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+  };
 
   // handles review summary
   const summaryLengthChecker = () => {

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReviewModalStars from './ReviewModalStars.jsx';
 import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
+import UploadAndDisplayImage from './UploadImageModal.jsx';
 
 export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
   // STATE DATA
@@ -13,8 +14,8 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
   const [newReview, setNewReview] = useState({ product_id: feature.id, photos: [] });
 
   // image modal state - currently out of order
-  // const [imageUploadModal, setImageUploadModal] = useState(false);
-  // const [selectedImage, setSelectedImage] = useState([]);
+  const [imageUploadModal, setImageUploadModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState([]);
 
   // EVENT HANDLERS // Needs better functionality to exit Modal w/o Mouse - REFACTOR LATER
   const closeModalKeyPress = (e) => {
@@ -71,6 +72,7 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
 
   return ReactDOM.createPortal((
     <div className="write-review-modal">
+      {console.log(newReview)}
       <div className="write-review-modal-parent">
         <button className="close-review-modal" type="button" onClick={() => setReviewModal(false)}>X</button>
         <p>Write your review</p>
@@ -133,13 +135,13 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         <br />
         <br />
         <div className="write-review-email-parent">
-          {/* <button
+          <button
             className="upload-photos-btn"
             type="button"
             onClick={() => setImageUploadModal(true)}
           >
             Upload Your Pics!
-          </button> */}
+          </button>
           <div className="form__group field">
             <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
             <label htmlFor="nickname" className="form__label">Nickname</label>
@@ -162,16 +164,16 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
             setReviewModal={setReviewModal}
           />
         </div>
-        {/* {imageUploadModal
+        {imageUploadModal
           ? (
-            <UploadImageModal
+            <UploadAndDisplayImage
               setImageUploadModal={setImageUploadModal}
               setSelectedImage={setSelectedImage}
               selectedImage={selectedImage}
-              setSubmitReview={setSubmitReview}
-              submitReview={submitReview}
+              newReview={newReview}
+              setNewReview={setNewReview}
             />
-          ) : null} */}
+          ) : null}
       </div>
     </div>), document.getElementById('modal'));
 }

@@ -612,11 +612,19 @@ justify-content: center;
 }
 
 .drag-and-drop-text {
-  position: absolute;
-   bottom: 5px;
-   left: 5px;
-   right: 0px;
+   background-color: whitesmoke;
+   height: 150px;
+   width: auto;
    font-size: .8rem;
+   border: 5px dashed black;
+   border-radius: 25px;
+   margin: auto;
+   text-align: center;
+   line-height: 50px;
+}
+
+.drag-and-drop {
+  margin: auto;
 }
 
 .set-selected-img {
@@ -627,4 +635,22 @@ justify-content: center;
 .upload-image-progress-bar-value {
   width: 0%;
   animation: progress 2s linear;
+}
+
+.review-image-upload-icon {
+  height: 5rem;
+  width: 5rem;
+  justify-content: center;
+  display: block;
+  margin: auto;
+}
+
+.xyz {
+  padding: 25px;
+  position: absolute;
+  height: 145px;
+  width: 350px;
+  top: 23px;
+  left: -1px;
+  opacity: 0;
 }

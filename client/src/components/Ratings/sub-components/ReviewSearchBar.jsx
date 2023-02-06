@@ -26,6 +26,8 @@ export default function ReviewSearchBar({
           placeholder="Search Reviews…"
           value={searchTerm}
           onChange={handleInputChange}
+          onMouseEnter={() => document.querySelector('.search-button').classList.add('hidden')}
+          onBlur={() => document.querySelector('.search-button').classList.remove('hidden')}
         />
       </div>
     </form>

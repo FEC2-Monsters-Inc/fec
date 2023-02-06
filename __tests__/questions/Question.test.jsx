@@ -70,7 +70,7 @@ test('clicking LOAD MORE ANSWERS renders 1 more answer if less than 4 answers ex
   expect(answers.length).toBe(3);
 });
 
-test('clicking add answer link will render an answer modal', async () => {
+test('clicking add answer button-link will render an answer modal', async () => {
   render(<div id="modal" />);
   render(<Question question={proxyQuestion} filterText="" />);
 

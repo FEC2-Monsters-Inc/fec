@@ -42,17 +42,27 @@
   font-style: bold;
 }
 
-.qa.link {
+.qa.btn-link {
+  background: none!important;
+  padding: 0!important;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
   text-decoration: underline;
-  cursor: pointer;
+  color: inherit;
 }
 
-.qa.link-bold {
-  text-decoration: none;
+.qa.btn-link-bold {
+  background: none!important;
+  padding: 0!important;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
   font-weight: bold;
 }
 
-.qa.link-bold:hover {
+.qa.btn-link-bold:hover {
   text-decoration: underline;
 }
 
@@ -176,4 +186,8 @@
 
 .qa label {
   display: grid;
+}
+
+.qa.required {
+  color: red;
 }

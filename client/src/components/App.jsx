@@ -47,7 +47,7 @@ export default function App() {
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
       />
-      <Questions feature={featureProduct} />
+      <Questions featureProduct={featureProduct} />
       <Ratings
         feature={featureProduct}
         reviews={reviews}

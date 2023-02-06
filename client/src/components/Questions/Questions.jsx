@@ -6,7 +6,7 @@ import QuestionsList from './QuestionsList.jsx';
 import './styles/questions.css';
 
 export default function Questions({
-  feature,
+  featureProduct,
 }) {
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
@@ -18,9 +18,9 @@ export default function Questions({
     clearTimeout(timer);
   };
 
-  const putQuestions = () => fetcher.getQuestionsById(feature.id)
+  const putQuestions = () => fetcher.getQuestionsById(featureProduct.id)
     .then(({ data }) => setQuestions(data.results))
-    .catch((err) => console.error('Questions on feature change fetch: ', err));
+    .catch((err) => console.error('Questions on featureProduct change fetch: ', err));
 
   // TODO: maybe want to search through answers too
   // const combineAnswerText = ()
@@ -49,7 +49,7 @@ export default function Questions({
   // TODO: probably some way to use less useEffects and condense the functions
   useEffect(() => {
     putQuestions();
-  }, [feature]);
+  }, [featureProduct]);
 
   useEffect(() => {
     if (filterText.length >= 3) {
@@ -74,7 +74,8 @@ export default function Questions({
         handleChange={onFilterTextChange}
       />
       <QuestionsList
-        product_id={feature.id}
+        product_id={featureProduct.id}
+        productName={featureProduct.name}
         questions={!filteredQuestions.length ? questions : filteredQuestions}
         updateQuestions={putQuestions}
         filterText={filterText}

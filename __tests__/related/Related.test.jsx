@@ -20,6 +20,23 @@ afterEach(() => {
 
 describe('Related & Outfit Component', () => {
   describe('Related Component', () => {
+    test('should render correctly even fail fatch data', async () => {
+      fetcherMock.getProductById
+        .mockRejectedValue(new Error('Failed'));
+      fetcherMock.getReviewMeta
+        .mockRejectedValue(new Error('Failed'));
+      fetcherMock.getProductStyle
+        .mockRejectedValue(new Error('Failed'));
+
+      render(<Related
+        feature={MockData.feature}
+        relatedIdList={[40344, 40346]}
+      />);
+
+      const allDivElement = await screen.findAllByRole('generic');
+      expect(allDivElement.length).toBe(6);
+    });
+
     test('should not render when fail fetch data', async () => {
       fetcherMock.getProductById
         .mockResolvedValueOnce(new Error('Error'))
@@ -60,6 +77,20 @@ describe('Related & Outfit Component', () => {
   });
 
   describe('Outfit Component', () => {
+    test('should catch error when fetch fails', () => {
+      fetcherMock.getProductById
+        .mockRejectedValueOnce(new Error('Failed'));
+      fetcherMock.getReviewMeta
+        .mockRejectedValueOnce(new Error('Failed'));
+      fetcherMock.getProductStyle
+        .mockRejectedValueOnce(new Error('Failed'));
+
+      render(<OutfitList
+        feature={MockData.feature}
+        outfitIdList={[40344]}
+      />);
+    });
+
     test('should correctly render with empty outfit list', () => {
       render(<OutfitList
         feature={MockData.feature}
@@ -90,11 +121,67 @@ describe('Related & Outfit Component', () => {
       />);
 
       expect(screen.queryByText(MockData.feature.name)).not.toBeInTheDocument();
-      const addElement = screen.getByTitle('outfit-add-icon');
-      await userEvent.click(addElement);
+      const addIcon = screen.getByTitle('outfit-add-icon');
+      await userEvent.click(addIcon);
 
       expect(await screen.findByText(MockData.rel_40346.name)).toBeInTheDocument();
       expect(await screen.findByText(MockData.feature.name)).toBeInTheDocument();
+
+      const deleteIcon = screen.getByTitle('outfit-delete-icon');
+      await userEvent.click(deleteIcon);
+
+      expect(await screen.queryByText(MockData.feature.name)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('RelatedList Component', () => {
+    test('should render relatedList after fail to fetch the data', async () => {
+      fetcherMock.getReviewMeta
+        .mockRejectedValue(new Error('Failed'));
+
+      render(<RelatedList
+        feature={MockData.feature}
+        relatedInfoList={[40344]}
+      />);
+
+      const allImage = await screen.queryAllByRole('img');
+      expect(allImage.length).toBe(0);
+    });
+
+    test('should render correctly', async () => {
+      fetcherMock.getProductStyle
+        .mockResolvedValueOnce({ data: MockData.style_40344 })
+        .mockResolvedValueOnce({ data: MockData.style_40345 })
+        .mockResolvedValueOnce({ data: MockData.style_40346 })
+        .mockResolvedValueOnce({ data: MockData.style_40347 })
+        .mockResolvedValueOnce({ data: MockData.style_40348 });
+
+      fetcherMock.getReviewMeta
+        .mockResolvedValueOnce({ data: MockData.featureMeta })
+        .mockResolvedValueOnce({ data: MockData.meta_40344 })
+        .mockResolvedValueOnce({ data: MockData.meta_40345 })
+        .mockResolvedValueOnce({ data: MockData.meta_40346 })
+        .mockResolvedValueOnce({ data: MockData.meta_40347 })
+        .mockResolvedValueOnce({ data: MockData.meta_40348 });
+
+      render(<RelatedList
+        feature={MockData.feature}
+        relatedInfoList={[
+          MockData.rel_40344,
+          MockData.rel_40345,
+          MockData.rel_40346,
+          MockData.rel_40347,
+          MockData.rel_40348,
+        ]}
+      />);
+
+      const leftArrowIcon = screen.getByTitle('related-left-arrow');
+      const rightArrowIcon = screen.getByTitle('related-right-arrow');
+      const allImage = await screen.findAllByRole('img');
+
+      userEvent.click(leftArrowIcon);
+      userEvent.click(rightArrowIcon);
+      expect(allImage.length).toBe(5);
     });
   });
 
@@ -141,15 +228,77 @@ describe('Related & Outfit Component', () => {
       expect(relatedImage).toBeInTheDocument();
     });
 
-    test('should be able to show image carousel onMouseEnter', async () => {
+    test('should function correctly on image carousel onMouseEnter/onMoustLeave', async () => {
       await screen.findByAltText('Not Available', { exact: false });
 
+      const mainImage = screen.getByRole('img');
+      const mainImageSrcBefore = Object.values(mainImage)[1].src;
+
+      expect(screen.queryAllByRole('img')).toHaveLength(1);
+
       act(() => {
-        fireEvent.mouseOver(screen.getByRole('img'));
+        fireEvent.mouseOver(mainImage);
       });
 
-      const allRelatedImages = await screen.findAllByRole('img');
-      expect(allRelatedImages).toHaveLength(7);
+      const allImageAfterMoustover = await screen.findAllByRole('img');
+      expect(allImageAfterMoustover).toHaveLength(7);
+
+      act(() => {
+        fireEvent.mouseOut(mainImage);
+      });
+
+      const allImageAfterMouseout = await screen.findAllByRole('img');
+      const mainImageSrcAfter = Object.values(allImageAfterMouseout[0])[1].src;
+
+      expect(allImageAfterMouseout).toHaveLength(1);
+      expect(mainImageSrcBefore).toBe(mainImageSrcAfter);
+    });
+
+    test('should replace the main image when click on other image shown in image carousel', async () => {
+      await screen.findByAltText('Not Available', { exact: false });
+      const mainImage = screen.getByRole('img');
+      const mainImageSrcBefore = Object.values(mainImage)[1].src;
+
+      expect(screen.getAllByRole('img')).toHaveLength(1);
+
+      await fireEvent.mouseOver(mainImage);
+
+      const allImageAfterMoustover = await screen.findAllByRole('img');
+
+      await userEvent.click(allImageAfterMoustover[2]);
+
+      await fireEvent.mouseOut(mainImage);
+
+      const allImageAfterMouseout = await screen.findAllByRole('img');
+      const mainImageSrcAfter = Object.values(allImageAfterMouseout[0])[1].src;
+      expect(allImageAfterMouseout).toHaveLength(1);
+
+      expect(mainImageSrcBefore).not.toBe(mainImageSrcAfter);
+    });
+
+    test('should replace main image when press key on other image shown in image carousel', async () => {
+      await screen.findByAltText('Not Available', { exact: false });
+      const mainImage = screen.getByRole('img');
+      const mainImageSrcBefore = Object.values(mainImage)[1].src;
+
+      expect(screen.getAllByRole('img')).toHaveLength(1);
+
+      await fireEvent.mouseOver(mainImage);
+
+      const allImageAfterMoustover = await screen.findAllByRole('img');
+
+      await fireEvent.keyDown(
+        allImageAfterMoustover[2],
+        { key: 'Enter', code: 'Enter', charCode: 13 },
+      );
+
+      await fireEvent.mouseOut(mainImage);
+
+      const allImageAfterMouseout = await screen.findAllByRole('img');
+      const mainImageSrcAfter = Object.values(allImageAfterMouseout[0])[1].src;
+      expect(allImageAfterMouseout).toHaveLength(1);
+
+      expect(mainImageSrcBefore).not.toBe(mainImageSrcAfter);
     });
 
     test('should be able to open and close comparison modal', async () => {

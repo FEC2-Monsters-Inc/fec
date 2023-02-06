@@ -29,7 +29,7 @@ export default function OutfitProduct({
       .catch((err) => console.error(err));
   }, [outfitId]);
 
-  if (!outfitStyle || !outfitStyle.photos[0].thumbnail_url) {
+  if (!outfitStyle) {
     return <div />;
   }
 
@@ -46,7 +46,11 @@ export default function OutfitProduct({
     <div>
       <div className="outfit-item">
         <div id="outfit-img-wrapper">
-          <MdRemoveCircleOutline className="outfit-delete-icon" onClick={handleDelete} />
+          <MdRemoveCircleOutline
+            className="outfit-delete-icon"
+            onClick={handleDelete}
+            title="outfit-delete-icon"
+          />
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
               id="outfit-img"

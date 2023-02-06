@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
 import fetcher from '../../fetchers';
@@ -15,19 +15,19 @@ export default function Question({
   },
   updateQuestions,
   filterText,
+  productName,
 }) {
+  const [sortedAnswers, setSortedAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
   const [helpfulStatus, setHelpfulStatus] = useState(true);
 
   // TODO: need to sort answers by helpfulness
-  // const byHelpfulness = (a, b) => {
-  //   if (a[1].helpfulness > b[1].helpfulness) return -1;
-  //   if (a[1].helpfulness < b[1].helpfulness) return 1;
-  //   return 0;
-  // };
-
-  // const sortedAnswers = () => Object.entries(answers).sort(byHelpfulness);
+  const byHelpfulness = (a, b) => {
+    if (a[1].helpfulness > b[1].helpfulness) return -1;
+    if (a[1].helpfulness < b[1].helpfulness) return 1;
+    return 0;
+  };
 
   const markHelpfulQuestion = (e) => {
     if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
@@ -69,6 +69,10 @@ export default function Question({
     );
   };
 
+  useEffect(() => {
+    setSortedAnswers(Object.entries(answers).sort(byHelpfulness));
+  }, [answers]);
+
   return (
     <div className="qa q&a">
       <div className="qa question">
@@ -79,31 +83,40 @@ export default function Question({
         <span className="qa control">
           {'Helpful? '}
           {helpfulStatus ? (
-            <span
-              className="qa link"
-              role="link"
+            <button
+              className="qa btn-link"
+              type="button"
               tabIndex={0}
               onKeyUp={markHelpfulQuestion}
               onClick={markHelpfulQuestion}
             >
               Yes
-            </span>
+            </button>
           ) : <span>Marked!</span>}
-          {` (${helpfulness}) | `}
+          {' ('}
           <span
-            className="qa link"
-            role="link"
+            className="qa helpfulness"
+            data-testid="q-helpfulness"
+          >
+            {helpfulness}
+          </span>
+          {') | '}
+          <button
+            className="qa btn-link"
+            type="button"
             tabIndex={0}
             onKeyUp={showModal}
             onClick={showModal}
           >
             Add Answer
-          </span>
+          </button>
           <QandAModal
             type="answer"
             show={showAddA}
             setShowModal={setShowAddA}
             question_id={question_id}
+            questionBody={body}
+            productName={productName}
           />
         </span>
       </div>
@@ -111,27 +124,28 @@ export default function Question({
         <div className="qa answers-section">
           <h3>A: </h3>
           <div className="qa answers-list">
-            {/* TODO: sort answers by helpfulness */}
-            {Object.keys(answers).slice(0, numAnswers).map((key) => (
-              <Answer
-                key={key}
-                answer={answers[key]}
-                updateQuestions={updateQuestions}
-              />
-            ))}
+            {sortedAnswers
+              .slice(0, numAnswers)
+              .map((answer) => (
+                <Answer
+                  key={answer[0]}
+                  answer={answer[1]}
+                  updateQuestions={updateQuestions}
+                />
+              ))}
           </div>
         </div>
       ) : null}
       {numAnswers < Object.keys(answers).length ? (
-        <span
-          className="qa link link-bold"
-          role="link"
+        <button
+          className="qa btn-link-bold"
+          type="button"
           tabIndex={0}
           onKeyUp={loadMoreAnswers}
           onClick={loadMoreAnswers}
         >
           LOAD MORE ANSWERS
-        </span>
+        </button>
       )
         : null}
     </div>

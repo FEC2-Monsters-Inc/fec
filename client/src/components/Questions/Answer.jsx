@@ -42,41 +42,56 @@ export default function Answer({
           {body}
         </div>
         {/* TODO: expand photo on click */}
-        {photos.length > 0
-          ? photos.map((photo, index) => (
-            <img
-              className="qa photo-sml"
-              src={photo}
-              key={photo}
-              alt={`Customer's image ${index + 1}`}
-            />
-          ))
-          : null}
+        <div className="qa photos">
+          {photos.length > 0
+            ? photos.map((photo, index) => (
+              <img
+                className="qa photo-sml"
+                src={photo}
+                key={photo}
+                alt={`Customer's image ${index + 1}`}
+              />
+            ))
+            : null}
+        </div>
       </div>
       <div className="qa answer-info">
-        {`by ${name}, ${format(parseISO(date), 'MMMM d, yyyy')} | Helpful? `}
+        {'by '}
+        <span className="qa answerer">{name}</span>
+        {', '}
+        <span className="qa answer-date">
+          {format(parseISO(date), 'MMMM d, yyyy')}
+        </span>
+        {' | Helpful? '}
         {helpfulStatus ? (
-          <span
-            className="qa link"
-            role="link"
+          <button
+            className="qa btn-link"
+            type="button"
             tabIndex={0}
             onKeyUp={markHelpfulAnswer}
             onClick={markHelpfulAnswer}
           >
             Yes
-          </span>
+          </button>
         ) : <span>Marked!</span>}
-        {` (${helpfulness}) | `}
+        {' ('}
+        <span
+          className="qa helpfulness"
+          data-testid="a-helpfulness"
+        >
+          {helpfulness}
+        </span>
+        {') | '}
         {reportStatus ? (
-          <span
-            className="qa link"
-            role="link"
+          <button
+            className="qa btn-link"
+            type="button"
             tabIndex={0}
             onKeyUp={reportAnswer}
             onClick={reportAnswer}
           >
             Report
-          </span>
+          </button>
         ) : <span>Reported</span>}
       </div>
     </div>

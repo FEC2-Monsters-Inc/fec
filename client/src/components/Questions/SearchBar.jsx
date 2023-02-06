@@ -10,12 +10,12 @@ export default function SearchBar({
       <input
         className="qa"
         id="question-search"
-        aria-label="Search Question"
         type="search"
         value={text}
         onChange={(e) => handleChange(e.target.value)}
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
       />
+      {/* TODO: onClick focus the searchbar */}
       <AiOutlineSearch className="qa search-icon" />
     </div>
   );

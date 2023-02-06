@@ -1,0 +1,15 @@
+const model = require('../models').thirdParty;
+
+module.exports = {
+  postImage: (req, res) => {
+    // console.log('req.file', req.file);
+    model.uploadImage(req.file)
+      .then((results) => {
+        res.status(200).send(results);
+      })
+      .catch((err) => {
+        console.error('err ctrl.postImage: ', err);
+        res.sendStatus(500);
+      });
+  },
+};

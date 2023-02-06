@@ -8,6 +8,7 @@ import exampleProducts from '../example_data/products/product';
 import exampleQuestions from '../example_data/questions/questions';
 
 jest.mock('../../client/src/fetchers');
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 beforeEach(jest.clearAllMocks);
 
 test('renders Q modal', () => {

@@ -85,6 +85,7 @@ export default function QandAModal({
         if (!isValid('name')) message += ' - Nickname\n';
         if (!isValid('email')) message += 'The email address provided is not in correct email format';
         alert(message);
+        return;
       }
       switch (type) {
         // TODO: also want to send signal to update q&a

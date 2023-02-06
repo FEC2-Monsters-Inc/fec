@@ -2,7 +2,7 @@ import React from 'react';
 import { BsSearch } from 'react-icons/bs';
 
 export default function ReviewSearchBar({
-  reviews, searchTerm, setSearchTerm, listIndex,
+  searchTerm, setSearchTerm,
 }) {
   // set search term to the value of the search input
   const handleInputChange = (e) => {
@@ -33,5 +33,3 @@ export default function ReviewSearchBar({
     </form>
   );
 }
-
-// <form onSubmit={handleSearch}>

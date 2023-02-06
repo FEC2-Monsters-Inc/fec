@@ -22,12 +22,6 @@ export default function ReviewList({
   const [reviewModal, setReviewModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    if (reviews) {
-      reviewRenderer();
-    }
-  }, [reviews]);
-
   // HELPER FUNCTIONS //
 
   const getDateString = (dateString) => {
@@ -90,6 +84,14 @@ export default function ReviewList({
     setReviewExpander('50rem');
     setExpandedStatus(true);
   };
+
+  // INITIALIZATION (dbl Check if useEffect Neccessary!)
+
+  useEffect(() => {
+    if (reviews) {
+      reviewRenderer();
+    }
+  }, [reviews]);
 
   return (
     <div className="review-list-container">

@@ -57,6 +57,28 @@ export default function QandAModal({
     }
   };
 
+  const validateEmail = (email) => {
+    if (email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) return true;
+    return false;
+  };
+
+  const isValid = (field) => {
+    switch (field) {
+      case 'body':
+        if (addForm.body.length) return true;
+        return false;
+      case 'name':
+        if (addForm.name.length) return true;
+        return false;
+      case 'email':
+        if (validateEmail(addForm.email)) return true;
+        return false;
+      default:
+        console.error('wrong field');
+        return false;
+    }
+  };
+
   useEffect(() => {
     if (show) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'visible';
@@ -85,7 +107,12 @@ export default function QandAModal({
           <form id={`add-${type}-form`} onSubmit={submitForm}>
             <div className="qa add-body">
               <label className="qa add-label" htmlFor={`${type}-bodybox`}>
-                {type === 'question' ? 'Question' : 'Answer'}
+                <div className="qa add-label-text">
+                  {type === 'question' ? 'Question' : 'Answer'}
+                  {!isValid('body') ? (
+                    <span className="qa required"> *</span>
+                  ) : null}
+                </div>
                 <textarea
                   type="text"
                   id={`${type}-bodybox`}
@@ -94,13 +121,19 @@ export default function QandAModal({
                   value={addForm.body}
                   onChange={handleChange}
                   maxLength="1000"
+                  required
                 />
               </label>
             </div>
             <div className="qa add-personal">
               <div className="qa add-nickname">
                 <label className="qa add-label" htmlFor="nicknamebox">
-                  Nickname
+                  <div className="qa add-label-text">
+                    Nickname
+                    {!isValid('name') ? (
+                      <span className="qa required"> *</span>
+                    ) : null}
+                  </div>
                   <input
                     type="text"
                     id="nicknamebox"
@@ -112,12 +145,18 @@ export default function QandAModal({
                     placeholder={type === 'question'
                       ? 'Example: jackson11!'
                       : 'Example: jack543!'}
+                    required
                   />
                 </label>
               </div>
               <div className="qa add-email">
                 <label className="qa add-label" htmlFor={`${type}-emailbox`}>
-                  Email
+                  <div className="qa add-label-text">
+                    Email
+                    {!isValid('email') ? (
+                      <span className="qa required"> *</span>
+                    ) : null}
+                  </div>
                   <input
                     type="text"
                     id={`${type}-emailbox`}
@@ -129,6 +168,7 @@ export default function QandAModal({
                     placeholder={type === 'question'
                       ? 'Why did you like the product or not?'
                       : 'Example: jack@email.com'}
+                    required
                   />
                 </label>
               </div>

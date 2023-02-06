@@ -187,3 +187,7 @@
 .qa label {
   display: grid;
 }
+
+.qa.required {
+  color: red;
+}

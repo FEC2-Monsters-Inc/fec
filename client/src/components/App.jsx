@@ -41,20 +41,20 @@ export default function App() {
 
   return (
     <div>
-      <Overview product={featureProduct} styles={styles} reviews={reviews} />
+      {/* <Overview product={featureProduct} styles={styles} reviews={reviews} /> */}
       <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
       />
-      <Questions feature={featureProduct} />
-      <Ratings
+      {/* <Questions feature={featureProduct} /> */}
+      {/* <Ratings
         feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
-      />
+      /> */}
     </div>
   );
 }

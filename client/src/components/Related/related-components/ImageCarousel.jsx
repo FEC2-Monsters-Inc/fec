@@ -2,9 +2,7 @@ import React from 'react';
 import imgUnavailable from '../assets/imgUnavailable.png';
 import './styles/imageCarousel.css';
 
-export default function ImageCarousel({
-  relStyle, setRelStyle, setShowImg,
-}) {
+export default function ImageCarousel({ relStyle, setRelStyle }) {
   const handlePhotoChange = (e, index) => {
     e.stopPropagation();
     const newStyle = {};
@@ -14,7 +12,7 @@ export default function ImageCarousel({
   };
 
   return (
-    <div className="img-carousel-outside" onMouseLeave={() => setShowImg(false)}>
+    <div className="img-carousel-outside">
       <div id="img-carousel-inside">
         {relStyle.photos.map((photo, index) => (
           /* eslint-disable

@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
 
 export default function Related({ feature, relatedIdList, setFeatureProduct }) {
-  const [relatedInfoList, setRelatedInfoList] = useState([]);
-  const [outfitIdList, setOutfitIdList] = useState([]);
+  const [relatedInfoList, setRelatedInfoList] = React.useState([]);
+  const [outfitIdList, setOutfitIdList] = React.useState([]);
 
   useEffect(() => {
     const data = window.localStorage.getItem('Outfit-List');

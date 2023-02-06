@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
 import fetcher from '../../fetchers';
@@ -16,18 +16,17 @@ export default function Question({
   updateQuestions,
   filterText,
 }) {
+  const [sortedAnswers, setSortedAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
   const [helpfulStatus, setHelpfulStatus] = useState(true);
 
   // TODO: need to sort answers by helpfulness
-  // const byHelpfulness = (a, b) => {
-  //   if (a[1].helpfulness > b[1].helpfulness) return -1;
-  //   if (a[1].helpfulness < b[1].helpfulness) return 1;
-  //   return 0;
-  // };
-
-  // const sortedAnswers = () => Object.entries(answers).sort(byHelpfulness);
+  const byHelpfulness = (a, b) => {
+    if (a[1].helpfulness > b[1].helpfulness) return -1;
+    if (a[1].helpfulness < b[1].helpfulness) return 1;
+    return 0;
+  };
 
   const markHelpfulQuestion = (e) => {
     if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
@@ -68,6 +67,10 @@ export default function Question({
       </span>
     );
   };
+
+  useEffect(() => {
+    setSortedAnswers(Object.entries(answers).sort(byHelpfulness));
+  }, [answers]);
 
   return (
     <div className="qa q&a">
@@ -118,14 +121,15 @@ export default function Question({
         <div className="qa answers-section">
           <h3>A: </h3>
           <div className="qa answers-list">
-            {/* TODO: sort answers by helpfulness */}
-            {Object.keys(answers).slice(0, numAnswers).map((key) => (
-              <Answer
-                key={key}
-                answer={answers[key]}
-                updateQuestions={updateQuestions}
-              />
-            ))}
+            {sortedAnswers
+              .slice(0, numAnswers)
+              .map((answer) => (
+                <Answer
+                  key={answer[0]}
+                  answer={answer[1]}
+                  updateQuestions={updateQuestions}
+                />
+              ))}
           </div>
         </div>
       ) : null}

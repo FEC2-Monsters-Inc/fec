@@ -101,7 +101,7 @@ test('should render answers in order of helpfulness', async () => {
     await userEvent.click(screen.getByText(/load more answers/i));
   }
   const helpfulTexts = await screen.findAllByTestId('a-helpfulness');
-  const helpfulIndices = helpfulTexts.map((element) => Number.parseInt(element.textContent));
+  const helpfulIndices = helpfulTexts.map((element) => Number.parseInt(element.textContent, 10));
   const sorted = [...helpfulIndices].sort((a, b) => {
     if (a > b) return -1;
     if (a < b) return 1;

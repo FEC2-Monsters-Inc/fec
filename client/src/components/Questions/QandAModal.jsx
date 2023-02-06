@@ -34,29 +34,6 @@ export default function QandAModal({
     });
   };
 
-  const submitForm = (e) => {
-    e.preventDefault();
-    if (e.type === 'click' || e.key === 'Enter') {
-      if (!product_id) {
-        // THROW ERROR, SOMEHOW DOESN'T HAVE PRODUCT_ID ON SUBMIT
-      }
-      switch (type) {
-        case 'question':
-          fetcher
-            .postQuestion({ ...addForm, product_id })
-            .catch((err) => console.error('postQuestion: ', err));
-          break;
-        case 'answer':
-          fetcher
-            .postAnswer({ ...addForm, question_id }, question_id)
-            .catch((err) => console.error('postAnswer: ', err));
-          break;
-        default:
-          break;
-      }
-    }
-  };
-
   const validateEmail = (email) => {
     if (email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) return true;
     return false;
@@ -76,6 +53,44 @@ export default function QandAModal({
       default:
         console.error('wrong field');
         return false;
+    }
+  };
+
+  const validateForm = () => {
+    if (type === 'question' && (
+      !isValid('body')
+      || !isValid('name')
+      || !isValid('email')
+      || !product_id
+    )) return false;
+
+    if (type === 'answer' && (
+      !isValid('body')
+      || !isValid('name')
+      || !isValid('email')
+      || !question_id
+    )) return false;
+
+    return true;
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if ((e.type === 'click' || e.key === 'Enter') && validateForm()) {
+      switch (type) {
+        case 'question':
+          fetcher
+            .postQuestion({ ...addForm, product_id })
+            .catch((err) => console.error('postQuestion: ', err));
+          break;
+        case 'answer':
+          fetcher
+            .postAnswer({ ...addForm, question_id }, question_id)
+            .catch((err) => console.error('postAnswer: ', err));
+          break;
+        default:
+          break;
+      }
     }
   };
 

@@ -36,7 +36,7 @@ test('text renders when user types', async () => {
 test('posts question on submit', async () => {
   fetcherMock.postQuestion.mockResolvedValueOnce();
   render(<div id="modal" />);
-  render(<QandAModal type="question" setShowModal={jest.fn()} show />);
+  render(<QandAModal type="question" product_id={12345} setShowModal={jest.fn()} show />);
 
   await userEvent.type(screen.getByRole('textbox', { name: /question/i }), 'Why, Jack?');
   await userEvent.type(screen.getByRole('textbox', { name: /nickname/i }), 'rosemary22');
@@ -46,7 +46,41 @@ test('posts question on submit', async () => {
   expect(fetcherMock.postQuestion).toHaveBeenCalledTimes(1);
 });
 
-// test('doesn\'t post question on submit when required fields aren\'t met');
+test('doesn\'t post on submit when body isn\'t filled', async () => {
+  fetcherMock.postQuestion.mockResolvedValue();
+  render(<div id="modal" />);
+  render(<QandAModal type="question" setShowModal={jest.fn()} show />);
+
+  await userEvent.type(screen.getByRole('textbox', { name: /nickname/i }), 'rosemary22');
+  await userEvent.type(screen.getByRole('textbox', { name: /email/i }), 'rose@mary.com');
+  await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(fetcherMock.postQuestion).not.toHaveBeenCalled();
+});
+
+test('doesn\'t post on submit when name isn\'t filled', async () => {
+  fetcherMock.postQuestion.mockResolvedValue();
+  render(<div id="modal" />);
+  render(<QandAModal type="question" setShowModal={jest.fn()} show />);
+
+  await userEvent.type(screen.getByRole('textbox', { name: /question/i }), 'Why, Jack?');
+  await userEvent.type(screen.getByRole('textbox', { name: /email/i }), 'rose@mary.com');
+  await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(fetcherMock.postQuestion).not.toHaveBeenCalled();
+});
+
+test('doesn\'t post on submit when email isn\'t filled', async () => {
+  fetcherMock.postQuestion.mockResolvedValue();
+  render(<div id="modal" />);
+  render(<QandAModal type="question" setShowModal={jest.fn()} show />);
+
+  await userEvent.type(screen.getByRole('textbox', { name: /question/i }), 'Why, Jack?');
+  await userEvent.type(screen.getByRole('textbox', { name: /nickname/i }), 'rosemary22');
+  await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  expect(fetcherMock.postQuestion).not.toHaveBeenCalled();
+});
 
 test('renders A modal', () => {
   const proxyProductName = exampleProducts[40356].name;
@@ -80,7 +114,7 @@ test('text renders when user types', async () => {
 test('posts answer on submit', async () => {
   fetcherMock.postAnswer.mockResolvedValueOnce();
   render(<div id="modal" />);
-  render(<QandAModal type="answer" setShowModal={jest.fn()} show />);
+  render(<QandAModal type="answer" question_id={123456} setShowModal={jest.fn()} show />);
 
   await userEvent.type(screen.getByRole('textbox', { name: /answer/i }), 'IDK');
   await userEvent.type(screen.getByRole('textbox', { name: /nickname/i }), 'jackson11!');

@@ -10,11 +10,17 @@ module.exports = {
       });
   },
 
-  postImage: (req, res) => {
-    model.uploadImage_2(req.file)
-      .then(({ data }) => res.status(200).send(data))
+  postPhotos: (req, res) => {
+    model.uploadPhotos(req.files)
+      .then((results) => {
+        res.status(200).send(
+          results
+            .filter((result) => result.status === 200)
+            .map(({ data }) => data.data),
+        );
+      })
       .catch((err) => {
-        console.error('err ctrl.postImage: ', err);
+        console.error('err ctrl.postPhotos: ', err);
         res.sendStatus(500);
       });
   },

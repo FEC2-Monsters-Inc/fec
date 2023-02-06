@@ -9,16 +9,18 @@ module.exports = {
     imgbbUploader({ apiKey: process.env.IMAGE_BB_APIKEY, base64string: imgPath })
   ),
 
-  uploadImage_2: (file) => {
-    const formData = new FormData();
-    formData.append('image', file.buffer.toString('base64'));
-    const options = {
-      url: endpoint,
-      method: 'post',
-      headers: { 'content-type': 'multipart/form-data' },
-      params: { key: process.env.IMGBB_KEY },
-      data: formData,
-    };
-    return axios(options);
+  uploadPhotos: (files) => {
+    const options = files.map((file) => {
+      const formData = new FormData();
+      formData.append('image', file.buffer.toString('base64'));
+      return {
+        url: endpoint,
+        method: 'post',
+        headers: { 'content-type': 'multipart/form-data' },
+        params: { key: process.env.IMGBB_KEY },
+        data: formData,
+      };
+    });
+    return axios.all(options.map((config) => axios(config)));
   },
 };

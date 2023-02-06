@@ -33,7 +33,7 @@ router.post('/cart', controllers.cart.addCartItem);
 router.post('/interactions', controllers.interactions.addInteraction);
 
 /* THIRD PARTY */
-router.post('/images', multer().single('file'), controllers.thirdParty.postImage);
+router.post('/photos', multer().array('files', 5), controllers.thirdParty.postPhotos);
 router.post('/image', controllers.thirdParty.uploadImage);
 
 module.exports = router;

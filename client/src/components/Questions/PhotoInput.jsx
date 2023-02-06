@@ -1,20 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import prettyBytes from 'pretty-bytes';
-import fetcher from '../../fetchers';
 
 function PhotoInput({
-  setPhotos,
+  files,
+  setFiles,
 }) {
   const MAX_PHOTOS = 5;
-  const photoInput = useRef([]);
+  const fileInput = useRef([]);
   const keyTracker = useRef(0);
-  const [files, setFiles] = useState([]);
 
-  const choosePhoto = (i) => {
+  const chooseFile = (i) => {
     keyTracker.current += 1;
-    photoInput.current[i].click();
+    fileInput.current[i].click();
   };
 
   const handleChange = (e, i) => {
@@ -31,14 +30,6 @@ function PhotoInput({
     const copy = [...files];
     copy.splice(i, 1);
     setFiles(copy);
-  };
-
-  const getImageUrls = () => {
-    console.log('files', files);
-    fetcher.fetchImageUrls(files)
-      .then((results) => {
-        console.log(results);
-      }).catch((err) => console.error(err));
   };
 
   return (
@@ -60,8 +51,8 @@ function PhotoInput({
           <div
             role="button"
             tabIndex={0}
-            onKeyUp={() => choosePhoto(i)}
-            onClick={() => choosePhoto(i)}
+            onKeyUp={() => chooseFile(i)}
+            onClick={() => chooseFile(i)}
           >
             <img
               className="qa photo-sml"
@@ -70,7 +61,7 @@ function PhotoInput({
             />
           </div>
           <input
-            ref={(element) => { photoInput.current[i] = element; }}
+            ref={(element) => { fileInput.current[i] = element; }}
             type="file"
             accept="image/*"
             onChange={(e) => handleChange(e, i)}
@@ -92,14 +83,14 @@ function PhotoInput({
             className="qa modal-btn"
             type="button"
             tabIndex={0}
-            onKeyUp={() => choosePhoto(files.length)}
-            onClick={() => choosePhoto(files.length)}
+            onKeyUp={() => chooseFile(files.length)}
+            onClick={() => chooseFile(files.length)}
           >
             <HiOutlinePhoto />
             <span className="qa modal-btn-text">Choose photo</span>
           </button>
           <input
-            ref={(element) => { photoInput.current[files.length] = element; }}
+            ref={(element) => { fileInput.current[files.length] = element; }}
             type="file"
             accept="image/*"
             onChange={(e) => handleChange(e, files.length)}
@@ -108,7 +99,6 @@ function PhotoInput({
           />
         </div>
       ) : null}
-      <button onClick={() => getImageUrls()}>test</button>
     </div>
   );
 }

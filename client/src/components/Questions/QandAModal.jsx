@@ -16,9 +16,9 @@ export default function QandAModal({
     name: '',
     body: '',
     email: '',
-    photos: [],
   };
   const [addForm, setAddForm] = useState(blankForm);
+  const [files, setFiles] = useState([]);
 
   const close = (e) => {
     if ((e.type === 'click' && e.target.classList.contains('modal-close'))
@@ -32,17 +32,6 @@ export default function QandAModal({
     setAddForm({
       ...addForm,
       [e.target.name]: e.target.value,
-    });
-  };
-
-  /**
-   * @param {string} photos - direct URLs of third-party hosted user images
-   */
-  const setPhotos = (photos) => {
-    // TODO: smth
-    setAddForm({
-      ...addForm,
-      photos,
     });
   };
 
@@ -108,8 +97,14 @@ export default function QandAModal({
             .catch((err) => console.error('postQuestion: ', err));
           break;
         case 'answer':
+        // TODO: want to send signal to update q&a, may also need to inc answers
           fetcher
-            .postAnswer({ ...addForm, question_id }, question_id)
+            .fetchPhotos(files)
+            .then((photos) => fetcher.postAnswer({
+              ...addForm,
+              photos,
+              question_id,
+            }, question_id))
             .then(() => (setShowModal(false)))
             .catch((err) => console.error('postAnswer: ', err));
           break;
@@ -219,7 +214,7 @@ export default function QandAModal({
               </div>
             </div>
             {type === 'answer' ? (
-              <PhotoInput setPhotos={setPhotos} />
+              <PhotoInput files={files} setFiles={setFiles} />
             ) : null}
           </form>
         </div>

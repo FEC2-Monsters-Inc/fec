@@ -141,4 +141,18 @@ export default {
 
     return axios(options);
   },
+
+  fetchImageUrls: (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    const options = {
+      url: `${SERVER_BASEURL}/images`,
+      method: 'post',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      data: formData,
+    };
+    return axios(options);
+  },
 };

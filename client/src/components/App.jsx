@@ -9,7 +9,7 @@ import fetcher from '../fetchers';
 
 export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40350, name: null };
+  const initFeature = { id: 40355, name: null };
 
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
@@ -41,20 +41,20 @@ export default function App() {
 
   return (
     <div>
-      <Overview product={featureProduct} styles={styles} reviews={reviews} />
+      {/* <Overview product={featureProduct} styles={styles} reviews={reviews} />
       <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
-      />
+      /> */}
       <Questions featureProduct={featureProduct} />
-      <Ratings
+      {/* <Ratings
         feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
-      />
+      /> */}
     </div>
   );
 }

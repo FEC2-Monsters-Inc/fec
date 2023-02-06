@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import fetcher from '../../fetchers';
+import PhotoInput from './PhotoInput.jsx';
 
 export default function QandAModal({
   type,
@@ -31,6 +32,17 @@ export default function QandAModal({
     setAddForm({
       ...addForm,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  /**
+   * @param {string} photos - direct URLs of third-party hosted user images
+   */
+  const setPhotos = (photos) => {
+    // TODO: smth
+    setAddForm({
+      ...addForm,
+      photos,
     });
   };
 
@@ -144,6 +156,7 @@ export default function QandAModal({
                 <textarea
                   type="text"
                   id={`${type}-bodybox`}
+                  className="qa text-input"
                   name="body"
                   form={`add-${type}-form`}
                   value={addForm.body}
@@ -165,6 +178,7 @@ export default function QandAModal({
                   <input
                     type="text"
                     id="nicknamebox"
+                    className="qa text-input"
                     name="name"
                     form={`add-${type}-form`}
                     value={addForm.name}
@@ -189,6 +203,7 @@ export default function QandAModal({
                   <input
                     type="text"
                     id={`${type}-emailbox`}
+                    className="qa text-input"
                     name="email"
                     form={`add-${type}-form`}
                     value={addForm.email}
@@ -204,18 +219,7 @@ export default function QandAModal({
               </div>
             </div>
             {type === 'answer' ? (
-              <div className="qa add-photos">
-                <button
-                  form="add-answer-form"
-                  className="qa modal-btn"
-                  type="button"
-                  tabIndex={0}
-                // onKeyUp={}
-                // onClick={}
-                >
-                  Choose Photo
-                </button>
-              </div>
+              <PhotoInput setPhotos={setPhotos} />
             ) : null}
           </form>
         </div>

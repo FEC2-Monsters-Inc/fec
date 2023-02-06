@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const multer = require('multer');
 const controllers = require('./controllers');
 
 /* PRODUCTS */
@@ -30,5 +31,8 @@ router.post('/cart', controllers.cart.addCartItem);
 
 /* INTERACTIONS */
 router.post('/interactions', controllers.interactions.addInteraction);
+
+/* THIRD PARTY */
+router.post('/images', multer().single('file'), controllers.thirdParty.postImage);
 
 module.exports = router;

@@ -76,16 +76,28 @@ export default function QandAModal({
 
   const submitForm = (e) => {
     e.preventDefault();
-    if ((e.type === 'click' || e.key === 'Enter') && validateForm()) {
+    if ((e.type === 'click' || e.key === 'Enter')) {
+      // TODO: make custom alert message
+      if (!validateForm()) {
+        let message = '';
+        if (!isValid('body') || !isValid('name')) message += 'Please fill the following:\n';
+        if (!isValid('body')) message += ` - ${type.charAt(0).toUpperCase()}${type.slice(1)}\n`;
+        if (!isValid('name')) message += ' - Nickname\n';
+        if (!isValid('email')) message += 'The email address provided is not in correct email format';
+        alert(message);
+      }
       switch (type) {
+        // TODO: also want to send signal to update q&a
         case 'question':
           fetcher
             .postQuestion({ ...addForm, product_id })
+            .then(() => (setShowModal(false)))
             .catch((err) => console.error('postQuestion: ', err));
           break;
         case 'answer':
           fetcher
             .postAnswer({ ...addForm, question_id }, question_id)
+            .then(() => (setShowModal(false)))
             .catch((err) => console.error('postAnswer: ', err));
           break;
         default:
@@ -163,6 +175,7 @@ export default function QandAModal({
                     required
                   />
                 </label>
+                <sub>For privacy reasons, do not use your full name or email address.</sub>
               </div>
               <div className="qa add-email">
                 <label className="qa add-label" htmlFor={`${type}-emailbox`}>
@@ -186,6 +199,7 @@ export default function QandAModal({
                     required
                   />
                 </label>
+                <sub>For authentication reasons, you will not be emailed</sub>
               </div>
             </div>
             {type === 'answer' ? (
@@ -207,7 +221,7 @@ export default function QandAModal({
         <div className="qa modal-footer">
           <button
             form={`add-${type}-form`}
-            className="qa modal-btn modal-close"
+            className="qa modal-btn"
             type="submit"
             tabIndex={0}
             onKeyUp={submitForm}

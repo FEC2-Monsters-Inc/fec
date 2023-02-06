@@ -8,6 +8,8 @@ export default function QandAModal({
   setShowModal,
   product_id,
   question_id,
+  productName,
+  questionBody,
 }) {
   const blankForm = {
     name: '',
@@ -70,11 +72,14 @@ export default function QandAModal({
       {/* TODO escape key */}
       <div className="qa modal-fg">
         <div className="qa modal-header">
-          <h4 className="qa modal-title">
+          <h3 className="qa modal-title">
             {type === 'question' ? 'Ask your Question' : 'Submit your Answer'}
-          </h4>
-          {/* TODO: add subtitle 'About the [Product Name Here]' */}
-          {/* TODO: add subtitle (for answer) '[Product Name]: [Question Body]' */}
+          </h3>
+          <sub>
+            {type === 'question'
+              ? `About the ${productName} here`
+              : `${productName}: ${questionBody}`}
+          </sub>
         </div>
         <div className="qa modal-body">
           <form id={`add-${type}-form`} onSubmit={submitForm}>

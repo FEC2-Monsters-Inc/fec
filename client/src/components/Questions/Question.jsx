@@ -15,6 +15,7 @@ export default function Question({
   },
   updateQuestions,
   filterText,
+  productName,
 }) {
   const [sortedAnswers, setSortedAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
@@ -114,6 +115,8 @@ export default function Question({
             show={showAddA}
             setShowModal={setShowAddA}
             question_id={question_id}
+            questionBody={body}
+            productName={productName}
           />
         </span>
       </div>

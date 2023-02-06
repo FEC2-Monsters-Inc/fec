@@ -5,6 +5,7 @@ import QandAModal from './QandAModal.jsx';
 export default function QuestionsList({
   questions,
   product_id,
+  productName,
   updateQuestions,
   filterText,
 }) {
@@ -40,6 +41,7 @@ export default function QuestionsList({
             question={question}
             updateQuestions={updateQuestions}
             filterText={filterText}
+            productName={productName}
           />
         ))
         : null}
@@ -71,6 +73,7 @@ export default function QuestionsList({
           show={showAddQ}
           setShowModal={setShowAddQ}
           product_id={product_id}
+          productName={productName}
         />
       </div>
     </div>

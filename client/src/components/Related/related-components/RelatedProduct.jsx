@@ -45,7 +45,7 @@ export default function RelatedProduct({
   return (
     <div>
       <div className="rel-item">
-        <div id="rel-img-wrapper">
+        <div id="rel-img-wrapper" onMouseLeave={() => setShowImg(false)}>
           <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} title="star-modal-icon" />
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
@@ -62,7 +62,6 @@ export default function RelatedProduct({
               <ImageCarousel
                 relStyle={relStyle}
                 setRelStyle={setRelStyle}
-                setShowImg={setShowImg}
               />
             )}
         </div>

@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import {
+  render, screen, act, waitFor,
+} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import Questions from '../../client/src/components/Questions/Questions.jsx';
@@ -15,15 +17,18 @@ const proxyPID = 40356;
 const proxyProduct = exampleProducts[proxyPID];
 const proxyQList = exampleQuestions[proxyPID];
 
-test('fetches questions once on load', () => {
+test('fetches questions once on load', async () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
-  render(<Questions feature={proxyProduct} />);
-  expect(fetcherMock.getQuestionsById).toHaveBeenCalledTimes(1);
+  render(<Questions featureProduct={proxyProduct} />);
+
+  await waitFor(() => {
+    expect(fetcherMock.getQuestionsById).toHaveBeenCalledTimes(1);
+  });
 });
 
 test('does not filter questions if typing less than 3 characters', async () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
-  render(<Questions feature={proxyProduct} />);
+  render(<Questions featureProduct={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
@@ -38,7 +43,7 @@ test('does not filter questions if typing less than 3 characters', async () => {
 
 test('does not filter questions before input is debounced', async () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
-  render(<Questions feature={proxyProduct} />);
+  render(<Questions featureProduct={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
@@ -53,7 +58,7 @@ test('does not filter questions before input is debounced', async () => {
 
 test('filters questions after typing 3 characters and waiting 500ms', async () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
-  render(<Questions feature={proxyProduct} />);
+  render(<Questions featureProduct={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
   await user.type(screen.getByRole('searchbox'), 'tem');

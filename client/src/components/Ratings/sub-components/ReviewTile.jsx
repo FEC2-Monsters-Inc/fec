@@ -6,7 +6,7 @@ import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 
 export default function ReviewTile({
-  review, setReviews, reviews, feature,
+  review, setReviews, reviews, feature, searchTerm,
 }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -27,11 +27,32 @@ export default function ReviewTile({
     const monthName = months[date.getMonth()];
     const day = date.getDate();
     const year = date.getFullYear();
-
     return `${monthName} ${day}, ${year}`;
   };
 
+  // Creates name and Date string for each tile.
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
+
+  // Highlights text that matches the searchTerm, set by ReviewSearchBar.jsx
+  const highlightHandler = (text, fn) => {
+    if (searchTerm.length < 3) return fn ? fn() : text;
+    if (text.toLowerCase().includes(searchTerm.toLowerCase()) === false) return fn ? fn() : text;
+    const regex = new RegExp(searchTerm, 'gi');
+    const parts = text.match(regex);
+    const beforeParts = text.slice(0, text.search(regex));
+    const restOfText = text.slice(text.search(regex) + parts.join('').length);
+    return (
+      <span>
+        {beforeParts}
+        {parts.map((part, i) => (
+          part.toLowerCase() === searchTerm.toLowerCase()
+            ? <span className="review-search-highlight" key={`${i + 1}_${part}`}>{part}</span>
+            : part
+        ))}
+        {restOfText}
+      </span>
+    );
+  };
 
   // handles review summary
   const summaryLengthChecker = () => {
@@ -111,20 +132,22 @@ export default function ReviewTile({
     if (review.body.length < 250) {
       setShowFull(true);
     }
+
     roundedPercentage(0.25, review.rating);
   }, [review, review.helpfulness, reviews]);
 
   return (
     <div className="review-tile-main-container">
       <div className="review-tile-container-1">
-        <p className="review-tile-nameAndDate">{nameAndDate}</p>
+        <p className="review-tile-nameAndDate">{highlightHandler(nameAndDate, null)}</p>
         <div className="review-tile-stars">
           <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
         </div>
       </div>
-      <p className="review-tile-summary">{summaryLengthChecker()}</p>
+      <p className="review-tile-summary">{highlightHandler(review.summary, summaryLengthChecker)}</p>
+      <br />
       <p className="review-tile-body">
-        {bodyLengthChecker()}
+        {highlightHandler(review.body, bodyLengthChecker)}
         {showFull ? review.body.substring(250) : elipsesSpan()}
       </p>
       <p className="review-tile-recommendation">

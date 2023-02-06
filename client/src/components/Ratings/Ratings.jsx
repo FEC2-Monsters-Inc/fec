@@ -8,6 +8,7 @@ export default function Ratings({
   setReviews,
   reviewMeta,
   feature,
+  setReviewMeta,
 }) {
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
@@ -38,6 +39,7 @@ export default function Ratings({
           setListIndex={setListIndex}
           feature={feature}
           reviewMeta={reviewMeta}
+          setReviewMeta={setReviewMeta}
         />
       </div>
     </div>

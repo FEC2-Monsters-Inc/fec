@@ -34,5 +34,6 @@ router.post('/interactions', controllers.interactions.addInteraction);
 
 /* THIRD PARTY */
 router.post('/images', multer().single('file'), controllers.thirdParty.postImage);
+router.post('/image', controllers.thirdParty.uploadImage);
 
 module.exports = router;

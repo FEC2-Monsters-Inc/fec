@@ -41,16 +41,12 @@ export default function App() {
 
   return (
     <div>
-<<<<<<< HEAD
-      {/* <Overview product={featureProduct} styles={styles} reviews={reviews} />
-=======
       {/* <Overview product={featureProduct} styles={styles} reviews={reviews} /> */}
->>>>>>> main
       <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
-      /> */}
+      />
       <Questions featureProduct={featureProduct} />
       {/* <Ratings
         feature={featureProduct}

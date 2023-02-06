@@ -14,7 +14,7 @@ test('renders 2 questions with answers on load', () => {
   expect(questions.length).toBe(2);
 });
 
-test('renders 2 more questions on button click', async () => {
+test('renders 2 more questions on MORE button click', async () => {
   render(<QuestionsList questions={proxyQList} filterText="" />);
   const button = screen.getByRole('button', { name: /more answered questions/i });
 
@@ -34,6 +34,16 @@ test('hides MORE button when there are no more questions to load', async () => {
   }
 
   expect(button).not.toBeInTheDocument();
+});
+
+test('MORE button should not appear if there are less than 2 questions to start', async () => {
+  let proxyCopy = null;
+  if (proxyQList.length > 1) {
+    proxyCopy = proxyQList.slice(0, 1);
+  }
+  render(<QuestionsList questions={proxyCopy ?? proxyQList} filterText="" />);
+
+  expect(screen.queryByRole('button', { name: /more answered questions/i })).not.toBeInTheDocument();
 });
 
 // TODO: this test should belong to Questions.test.jsx after I refactor

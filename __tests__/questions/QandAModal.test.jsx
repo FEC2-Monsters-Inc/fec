@@ -4,14 +4,20 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import QandAModal from '../../client/src/components/Questions/QandAModal.jsx';
 import fetcherMock from '../../client/src/fetchers';
+import exampleProducts from '../example_data/products/product';
+import exampleQuestions from '../example_data/questions/questions';
 
 jest.mock('../../client/src/fetchers');
 beforeEach(jest.clearAllMocks);
 
 test('renders Q modal', () => {
+  const proxyProductName = exampleProducts[40356].name;
   render(<div id="modal" />);
-  render(<QandAModal type="question" show />);
+  render(<QandAModal productName={proxyProductName} type="question" show />);
+  const subtitleRegex = new RegExp(`about the ${proxyProductName} here`, 'i');
+
   expect(screen.getByText(/ask your question/i)).toBeInTheDocument();
+  expect(screen.getByText(subtitleRegex)).toBeInTheDocument();
 });
 
 test('text renders when user types', async () => {
@@ -43,9 +49,19 @@ test('posts question on submit', async () => {
 // test('doesn\'t post question on submit when required fields aren\'t met');
 
 test('renders A modal', () => {
+  const proxyProductName = exampleProducts[40356].name;
+  const proxyQuestionBody = exampleQuestions[40356].results[0].question_body;
   render(<div id="modal" />);
-  render(<QandAModal type="answer" show />);
+  render(<QandAModal
+    productName={proxyProductName}
+    questionBody={proxyQuestionBody}
+    type="answer"
+    show
+  />);
+  const subtitleRegex = new RegExp(`${proxyProductName}: ${proxyQuestionBody}`, 'i');
+
   expect(screen.getByText(/submit your answer/i)).toBeInTheDocument();
+  expect(screen.getByText(subtitleRegex)).toBeInTheDocument();
 });
 
 test('text renders when user types', async () => {

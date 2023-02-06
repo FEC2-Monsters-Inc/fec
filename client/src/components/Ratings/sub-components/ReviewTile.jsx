@@ -5,12 +5,20 @@ import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 
-export default function ReviewTile({ review, setReviews, reviews }) {
+export default function ReviewTile({
+  review, setReviews, reviews, feature,
+}) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
   const [imgString, setImgString] = useState('');
   const [showFull, setShowFull] = useState(false);
   const [helpfulClick, setHelpfulClick] = useState(false);
+
+  // EVENT HANDLERS //
+  const imgToggler = (pic) => {
+    setModalToggle(!modalToggle);
+    setImgString(pic);
+  };
 
   // HELPER FUNCTIIONS //
   const getDateString = (dateString) => {
@@ -24,6 +32,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
   };
 
   const nameAndDate = `${getDateString(review.date)}, ${review.reviewer_name}`;
+
   // handles review summary
   const summaryLengthChecker = () => {
     if (review.summary.length > 60) {
@@ -34,7 +43,13 @@ export default function ReviewTile({ review, setReviews, reviews }) {
 
   // elipses function that works with bodyLengthChecker
   const elipsesSpan = () => (
-    <span className="review-elipses-span" onClick={() => setShowFull(true)}>
+    <span
+      className="review-elipses-span"
+      onClick={() => setShowFull(true)}
+      onKeyPress={() => setShowFull(true)}
+      role="button"
+      tabIndex="0"
+    >
       {showFull ? review.body : '...'}
     </span>
   );
@@ -52,44 +67,51 @@ export default function ReviewTile({ review, setReviews, reviews }) {
     if (review.photos.length > 0) {
       const photoAltTxt = `Image for review titled ${review.summary}`;
       return review.photos.map((element) => (
-        <img
+        <input
+          type="image"
           src={element.url}
           alt={photoAltTxt}
           key={element.id}
           className="review-tile-individual-photo"
           onClick={() => imgToggler(element.url)}
+          onKeyPress={() => imgToggler(element.url)}
+          tabIndex="0"
         />
       ));
     }
+    return null;
   };
 
-  // EVENT HANDLERS //
-  const imgToggler = (pic) => {
-    setModalToggle(!modalToggle);
-    setImgString(pic);
+  // Rounds star rating to 5 intervals on a 1-100 scale
+  const roundedPercentage = (rounder, num) => {
+    const roundsByFive = (num + ((((rounder - num) % rounder)) % rounder));
+    const result = (roundsByFive / 5) * 100;
+    return result;
   };
 
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
     fetcher.updateUseful(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
+      .then(() => fetcher.getReviews(feature.id))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
-      .catch((error) => console.log(error));
-  };
-  const reportHandler = () => {
-    fetcher.updateReport(review.review_id)
-      .then(() => fetcher.ratings.getReviews(40350))// needs id from App.jsx
-      .then(({ data }) => setReviews(data.results))
-      .then(() => setHelpfulClick(true))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error('Error updating helpful in reviewtile: ', error));
   };
 
-  // INITIALIZATION //
+  const reportHandler = () => {
+    fetcher.updateReport(review.review_id)
+      .then(() => fetcher.getReviews(feature.id))
+      .then(({ data }) => setReviews(data.results))
+      .then(() => setHelpfulClick(true))
+      .catch((error) => console.error('Error updating reported in reviewtile: ', error));
+  };
+
+  // INITIALIZATION // Consider Refactor
   useEffect(() => {
     if (review.body.length < 250) {
       setShowFull(true);
     }
+    roundedPercentage(0.25, review.rating);
   }, [review, review.helpfulness, reviews]);
 
   return (
@@ -97,7 +119,7 @@ export default function ReviewTile({ review, setReviews, reviews }) {
       <div className="review-tile-container-1">
         <p className="review-tile-nameAndDate">{nameAndDate}</p>
         <div className="review-tile-stars">
-          <StarRating ratingPercentage={`${(review.rating / 5) * 100}%`} />
+          <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
         </div>
       </div>
       <p className="review-tile-summary">{summaryLengthChecker()}</p>
@@ -110,35 +132,47 @@ export default function ReviewTile({ review, setReviews, reviews }) {
         {review.recommend ? 'I recommend this product' : null}
       </p>
       <p className="review-tile-response">
-        {review.response
+        { review.response
           ? `Response from seller: ${review.response}`
-          : null}
+          : null }
       </p>
       <div className="review-tile-photos-container">{photoHandler()}</div>
       <div className="review-tile-container-2">
         <p className="review-tile-name">Was this review helpful?</p>
-        <p
+        <button
           className="review-tile-helpful"
           onClick={() => (!helpfulClick ? helpfulHandler() : null)}
-          style={helpfulClick ? { cursor: 'default' } : {}}
+          onKeyPress={() => (!helpfulClick ? helpfulHandler() : null)}
+          type="button"
         >
           Yes
-          <span className="review-helpful-span">{review.helpfulness}</span>
-        </p>
+          <span className="review-helpful-span">
+            (
+            {
+                review.helpfulness
+            }
+            )
+          </span>
+        </button>
         <RxDividerVertical />
-        <p className="review-tile-report" onClick={() => (!helpfulClick ? reportHandler() : null)}>Report</p>
-        {modalToggle
-          ? <ReviewImageModal imgString={imgString} setModalToggle={setModalToggle} />
-          : null}
+        <button
+          className="review-tile-report"
+          onClick={() => (!helpfulClick ? reportHandler() : null)}
+          onKeyPress={() => (!helpfulClick ? reportHandler() : null)}
+          type="button"
+        >
+          Report
+        </button>
+        { modalToggle
+          ? (
+            <ReviewImageModal
+              imgString={imgString}
+              setModalToggle={setModalToggle}
+              name={review.reviewer_name}
+            />
+          )
+          : null }
       </div>
     </div>
   );
 }
-
-// TO-DO:
-// Combine username and date into 1 string.
-// place this new string where summary is
-// move summary to its own container below container-1
-// Check to see what "recommended" means for review tile
-// check to see what "response" means for tile...likely both from metadata
-// add helpful? Yes(numHelpful) | report buttons

@@ -46,7 +46,7 @@ export default function RelatedProduct({
     <div>
       <div className="rel-item">
         <div id="rel-img-wrapper">
-          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} />
+          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} title="star-modal-icon" />
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
               id="rel-img"

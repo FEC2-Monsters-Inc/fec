@@ -50,22 +50,22 @@ export default function ProdInfo({ product, currStyle, reviews }) {
     <div id="prod-info">
       <div className="reviews-stars">
         <h3 className="stars">
-          { reviews
+          {reviews
             ? <StarRating ratingPercentage={starAverager(reviews)} className="star-icons" />
-            : null }
+            : null}
         </h3>
         <a className="gray-text reviews-link" href="#ratings-widget">Read all reviews</a>
       </div>
-      { product
+      {product
         ? (
           <>
             <h3 className="gray-text category">{product.category}</h3>
             <h1 className="prod-title">{product.name}</h1>
           </>
         )
-        : null }
+        : null}
       <div className="price-holder">
-        { price
+        {price
           ? (
             <h3 id="price" className="prod-price">
               $
@@ -73,7 +73,7 @@ export default function ProdInfo({ product, currStyle, reviews }) {
             </h3>
           )
           : null}
-        { sale
+        {sale
           ? (
             <h3 className="sale-price">
               SALE:
@@ -82,7 +82,7 @@ export default function ProdInfo({ product, currStyle, reviews }) {
               {sale}
             </h3>
           )
-          : null }
+          : null}
       </div>
     </div>
   );

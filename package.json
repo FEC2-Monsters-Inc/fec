@@ -26,8 +26,13 @@
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     },
     "testEnvironment": "jsdom",
-    "testPathIgnorePatterns": ["/example_data", "setup.js"],
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/setup.js"]
+    "testPathIgnorePatterns": [
+      "/example_data",
+      "setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/setup.js"
+    ]
   },
   "repository": {
     "type": "git",

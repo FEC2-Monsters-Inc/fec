@@ -38,6 +38,7 @@ export default {
       method: 'get',
       params: {
         product_id: id,
+        count: 200,
       },
     };
 
@@ -51,6 +52,16 @@ export default {
       params: {
         product_id: id,
       },
+    };
+
+    return axios(options);
+  },
+
+  addReviews: (review) => {
+    const options = {
+      url: `${SERVER_BASEURL}/reviews`,
+      method: 'post',
+      data: review,
     };
 
     return axios(options);
@@ -130,5 +141,4 @@ export default {
 
     return axios(options);
   },
-
 };

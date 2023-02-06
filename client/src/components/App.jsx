@@ -11,7 +11,7 @@ export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
   const initFeature = { id: 40350, name: null };
 
-  // STATE
+  // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
   const [styles, setStyles] = useState(null);
   const [reviews, setReviews] = useState(null);

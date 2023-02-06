@@ -67,9 +67,9 @@ export default function StyleSelect({
       <h3 className="style-pointer">
         STYLE &gt;
         {' '}
-        { currStyle
+        {currStyle
           ? <span className="selected-style">{currStyle.name}</span>
-          : null }
+          : null}
       </h3>
       <StyleThumbnails styles={styles} toggleStyle={toggleStyle} />
     </div>

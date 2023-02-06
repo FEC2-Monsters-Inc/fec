@@ -145,7 +145,7 @@ li {
 .scroll-hero-left,
 .scroll-hero-right {
   align-items: center;
-  border: 2px solid #E60023;
+  /* border: 2px solid #E60023; */
   border-radius: 100px;
   display: flex;
   justify-content: center;

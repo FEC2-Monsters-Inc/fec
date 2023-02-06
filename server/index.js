@@ -10,7 +10,9 @@ const app = express();
 
 /* MIDDLEWARE */
 app.use(morgan('dev'));
-app.use(express.json());
+app.use(express.json({
+  limit: '20mb',
+}));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 

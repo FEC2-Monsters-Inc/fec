@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import ReviewModalStars from './ReviewModalStars.jsx';
 import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
+import UploadAndDisplayImage from './UploadImageModal.jsx';
 
-export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
+export default function ReviewModal({
+  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews,
+}) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
   const [summaryCount, setSummaryCount] = useState(0);
@@ -13,8 +16,11 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
   const [newReview, setNewReview] = useState({ product_id: feature.id, photos: [] });
 
   // image modal state - currently out of order
-  // const [imageUploadModal, setImageUploadModal] = useState(false);
-  // const [selectedImage, setSelectedImage] = useState([]);
+  const [imageUploadModal, setImageUploadModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState([]);
+  const [imgProgress, setImgProgress] = useState({
+    0: false, 1: false, 2: false, 3: false, 4: false,
+  });
 
   // EVENT HANDLERS // Needs better functionality to exit Modal w/o Mouse - REFACTOR LATER
   const closeModalKeyPress = (e) => {
@@ -111,7 +117,10 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         </div>
         <div className="review-summ-container">
           <p className="review-summ-label">Review Summary</p>
-          <textarea ref={useRef()} maxLength="60" placeholder="Example: Best purchase ever!" className="write-review-summary" onChange={handleSummaryChange} />
+          <div className="form__group1">
+            <textarea type="input" className="form__field1" placeholder="summary" name="summary" id="summary" maxLength="60" onChange={handleSummaryChange} ref={useRef()} required />
+            <label htmlFor="summary" className="form__label1">Give it a title (ex: OMG totes amazing)</label>
+          </div>
           {summaryCount
             ? (
               <p className="write-review-character-count">
@@ -123,7 +132,10 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         </div>
         <div className="review-summ-container">
           <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Write your review below</p>
-          <textarea ref={useRef()} maxLength="1000" placeholder="Why did you like the product?" className="write-review-summary" onChange={handleBodyChange} />
+          <div className="form__group1">
+            <textarea type="input" className="form__field1" placeholder="body" name="body" id="body" maxLength="1000" onChange={handleBodyChange} ref={useRef()} required />
+            <label htmlFor="body" className="form__label1">Tell us about your purchase! (ex: I loved it!)</label>
+          </div>
           <p className="write-review-character-count">
             {bodyCount >= 50
               ? 'Minimum Reached!'
@@ -133,16 +145,19 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
         <br />
         <br />
         <div className="write-review-email-parent">
-          {/* <button
+          <button
             className="upload-photos-btn"
             type="button"
             onClick={() => setImageUploadModal(true)}
           >
             Upload Your Pics!
-          </button> */}
+          </button>
           <div className="form__group field">
             <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
-            <label htmlFor="nickname" className="form__label">Nickname</label>
+            <label htmlFor="nickname" className="form__label">
+              Nickname
+              <span className="review-asterisk">*</span>
+            </label>
           </div>
           <p className="email-disclaimer">For privacy reasons, do not use your full name or email address</p>
         </div>
@@ -160,18 +175,23 @@ export default function ReviewModal({ setReviewModal, feature, reviewMeta }) {
             setChars={setChars}
             setNewReview={setNewReview}
             setReviewModal={setReviewModal}
+            feature={feature}
+            setReviewMeta={setReviewMeta}
+            setReviews={setReviews}
           />
         </div>
-        {/* {imageUploadModal
+        {imageUploadModal
           ? (
-            <UploadImageModal
+            <UploadAndDisplayImage
               setImageUploadModal={setImageUploadModal}
               setSelectedImage={setSelectedImage}
               selectedImage={selectedImage}
-              setSubmitReview={setSubmitReview}
-              submitReview={submitReview}
+              newReview={newReview}
+              setNewReview={setNewReview}
+              imgProgress={imgProgress}
+              setImgProgress={setImgProgress}
             />
-          ) : null} */}
+          ) : null}
       </div>
     </div>), document.getElementById('modal'));
 }

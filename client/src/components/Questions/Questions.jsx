@@ -46,7 +46,7 @@ export default function Questions({
   };
 
   // TODO: investigate react-hooks/exhaustive-deps
-  // TODO: probably some way to use less useEffects and condense the functions
+  // TODO: make custom react hooks in place of useEffects
   useEffect(() => {
     putQuestions();
   }, [featureProduct]);

@@ -154,7 +154,10 @@ export default function ReviewModal({
           </button>
           <div className="form__group field">
             <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
-            <label htmlFor="nickname" className="form__label">Nickname</label>
+            <label htmlFor="nickname" className="form__label">
+              Nickname
+              <span className="review-asterisk">*</span>
+            </label>
           </div>
           <p className="email-disclaimer">For privacy reasons, do not use your full name or email address</p>
         </div>

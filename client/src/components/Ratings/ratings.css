@@ -784,6 +784,10 @@ justify-content: center;
   opacity: 1;
 }
 
+.search-container.active .search-button {
+  display: none;
+}
+
 .search-button.hidden {
   display: none;
 }
@@ -799,4 +803,12 @@ justify-content: center;
   100% {
     opacity: 1;
   }
+}
+
+.review-asterisk {
+  display: none;
+}
+input:required .review-asterik {
+  display: default;
+  color: red;
 }

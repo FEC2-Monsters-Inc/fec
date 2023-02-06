@@ -124,5 +124,3 @@ test('posts answer on submit', async () => {
 
   expect(fetcherMock.postAnswer).toHaveBeenCalledTimes(1);
 });
-
-// test('doesn\'t post answer on submit when required fields aren\'t met');

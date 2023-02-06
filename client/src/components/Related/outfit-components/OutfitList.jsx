@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { useState, useRef } from 'react';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
 import { GrAdd } from 'react-icons/gr';
@@ -14,12 +13,16 @@ export default function OutfitList({
   const endOfOutfit = outfitIdList.length !== undefined ? outfitIdList.length - 4 : 0;
 
   const scrollLeft = () => {
-    posIndex > 0 ? setPosIndex(posIndex - 1) : null;
+    if (posIndex > 0) {
+      setPosIndex(posIndex - 1);
+    }
     ref.current.scrollLeft -= 15 * 16;
   };
 
   const scrollRight = () => {
-    posIndex < endOfOutfit ? setPosIndex(posIndex + 1) : null;
+    if (posIndex < endOfOutfit) {
+      setPosIndex(posIndex + 1);
+    }
     ref.current.scrollLeft += 15 * 16;
   };
 

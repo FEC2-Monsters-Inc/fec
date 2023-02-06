@@ -41,7 +41,7 @@ export default function App() {
 
   return (
     <div>
-      <Overview product={featureProduct} styles={styles} reviews={reviews} />
+      {/* <Overview product={featureProduct} styles={styles} reviews={reviews} /> */}
       <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}

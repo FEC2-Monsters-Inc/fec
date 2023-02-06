@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
 import RelatedProduct from './RelatedProduct.jsx';
@@ -13,12 +12,16 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
   const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length - 4 : 0;
 
   const scrollLeft = () => {
-    posIndex > 0 ? setPosIndex(posIndex - 1) : null;
+    if (posIndex > 0) {
+      setPosIndex(posIndex - 1);
+    }
     ref.current.scrollLeft -= 15 * 16;
   };
 
   const scrollRight = () => {
-    posIndex < endOfRelatedList ? setPosIndex(posIndex + 1) : null;
+    if (posIndex < endOfRelatedList) {
+      setPosIndex(posIndex + 1);
+    }
     ref.current.scrollLeft += 15 * 16;
   };
 
@@ -34,6 +37,7 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
         className="related-carousel-rel-scrollBtn"
         style={{ opacity: posIndex === 0 ? 0 : 1 }}
         onClick={scrollLeft}
+        title="related-left-arrow" // For testing
       />
       <div className="related-carousel-inside" ref={ref}>
         {relatedInfoList.map((relProd) => (
@@ -50,6 +54,7 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
         className="related-carousel-rel-scrollBtn"
         style={{ opacity: posIndex === endOfRelatedList ? 0 : 1 }}
         onClick={scrollRight}
+        title="related-right-arrow" // For testing
       />
     </div>
   );

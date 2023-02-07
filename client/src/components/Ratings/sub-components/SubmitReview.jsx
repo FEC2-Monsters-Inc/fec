@@ -17,6 +17,7 @@ export default function SubmitReview({
   handleRequiredBody,
   reviewMeta,
   handleRequiredChars,
+  setShowThankyou,
 
 }) {
   // STATE DATA //
@@ -54,13 +55,26 @@ export default function SubmitReview({
         setReviewModal(false);
         setValidReview(true);
       })
-      .catch((err) => invalidReview()); /* console.error('error adding a new review: ', err)); */
+      .catch((err) => invalidReview());
     fetcher.getReviewMeta(feature.id)
       .then(({ data }) => setReviewMeta(data))
       .catch((err) => console.err('Error getting Review Meta after submit: ', err));
     fetcher.getReviews(feature.id)
       .then(({ data }) => setReviews(data.results))
       .catch((err) => console.err('Error getting Reviews after submit: ', err));
+    setShowThankyou(true);
+  };
+
+  // HELPER FUNCTIONS//
+
+  const ThankYouWindow = () => {
+    const x = window.open('', '', 'width=400, height=200');
+    x.document.open();
+    x.document.write('<h1>Thanks for submitting your review!</h1>');
+    x.document.close();
+    setTimeout(() => {
+      x.close();
+    }, 2000);
   };
 
   return (

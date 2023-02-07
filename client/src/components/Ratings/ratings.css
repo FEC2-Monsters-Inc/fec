@@ -1121,3 +1121,38 @@ input[type='radio']:checked:before {
   transform: scale(1.1);
 }
 
+.thank-you-review-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-name: modalFade;
+  animation-duration: .5s;
+  }
+
+  .thank-you-modal-parent {
+    background-color: white;
+    height: 15rem;
+    width: 25rem;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .thank-you-text {
+    background-color: white;
+    border-radius: 15px;
+    height: 15rem;
+    width: 25rem;
+    font-size: 32px;
+    text-align: center;
+    margin: auto;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

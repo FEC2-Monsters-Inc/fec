@@ -6,7 +6,7 @@ import SubmitReview from './SubmitReview.jsx';
 import UploadAndDisplayImage from './UploadImageModal.jsx';
 
 export default function ReviewModal({
-  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews,
+  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews, setShowThankyou,
 }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
@@ -279,6 +279,7 @@ export default function ReviewModal({
             handleRequiredRecommend={handleRequiredRecommend}
             reviewMeta={reviewMeta}
             handleRequiredChars={handleRequiredChars}
+            setShowThankyou={setShowThankyou}
           />
         </div>
         {imageUploadModal

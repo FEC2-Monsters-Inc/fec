@@ -56,7 +56,8 @@ export default function RelevanceDropdown({
   // OTHER HELPER FUNCTIONS //
   const reviewListLength = () => {
     if (!listLength) {
-      return reviews.slice(0, listIndex).length;
+      // return reviews.slice(0, listIndex).length; // Logic to show number of reviews displayed
+      return reviews.length; // Logic to show total number of reviews
     }
     return listLength;
   };

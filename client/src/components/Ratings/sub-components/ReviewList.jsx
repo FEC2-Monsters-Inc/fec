@@ -95,7 +95,6 @@ export default function ReviewList({
 
   return (
     <div className="review-list-container">
-      {console.log(listIndex)}
       <div className="review-list-dropdown-container">
         <div className="searchbar-dropdown-container">
           <RelevanceDropdown

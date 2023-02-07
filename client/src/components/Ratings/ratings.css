@@ -256,7 +256,8 @@
 }
 
 .review-elipses-span:hover {
-  cursor: context-menu
+  cursor: context-menu;
+  font-weight: bold;
 }
 
 .review-tile-recommendation {
@@ -294,23 +295,20 @@
 
 .review-li-1 {
   font-size: 16px;
-  border: 1px solid #ebebeb;
-  border-radius: 25px;
   animation: fadeIn 1s;
+  border-bottom: 2px solid black;
 }
 .review-li-2 {
   font-size: 16px;
-  border: 1px solid #ebebeb;
-  border-radius: 25px;
   animation: fadeIn 1s 1s forwards;
   opacity: 0;
+  border-bottom: 2px solid black;
 }
 .review-li-3 {
   font-size: 16px;
-  border: 1px solid #ebebeb;
-  border-radius: 25px;
   animation: fadeIn 1s 2s forwards;
   opacity: 0;
+  border-bottom: 2px solid black;
 }
 
 @keyframes fadeIn {
@@ -636,6 +634,7 @@ animation-duration: .5s;
   border-style: none;
   box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.3);
 }
+
 .submit-review-btn:hover {
   transform: scale(1.2)
 }
@@ -688,7 +687,7 @@ animation-duration: .5s;
 
 .drag-and-drop-text {
    background-color: whitesmoke;
-   height: 150px;
+   height: 250px;
    width: auto;
    font-size: .8rem;
    border: 5px dashed black;
@@ -702,6 +701,20 @@ animation-duration: .5s;
 .drag-and-drop {
   margin: auto;
   position:relative;
+}
+
+.review-image-upload-button {
+  background-color: #0080FF; /*-linear-gradient(#11998e, #38ef7d);*/
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 20px;
+  border-style: none;
+  box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.3);
+}
+
+.review-image-upload-button:hover {
+  transform: scale(1.2)
 }
 
 .set-selected-img {
@@ -725,8 +738,8 @@ animation-duration: .5s;
 .xyz {
   padding: 25px;
   position: absolute;
-  height: 145px;
-  width: 500px;
+  height: 250px;
+  width: 5437px;
   top: 23px;
   left: -1px;
   opacity: 0;
@@ -1099,4 +1112,12 @@ input[type='radio']:checked:before {
 .review-li-container {
   justify-content: center;
   align-items: center;
+  outline: none;
+  border: 0;
+  margin-top: .1rem;
+  margin-bottom: .1rem;
 }
+.review-li-container:hover {
+  transform: scale(1.1);
+}
+

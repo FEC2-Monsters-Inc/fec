@@ -4,19 +4,19 @@ import { BsSearch } from 'react-icons/bs';
 export default function ReviewSearchBar({
   searchTerm, setSearchTerm,
 }) {
-  // set search term to the value of the search input
+  // EVENT HANDLERS //
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-    if (e.target.value === '') {
-      document.querySelector('.search-container').classList.remove('active');
-    } else {
-      document.querySelector('.search-container').classList.add('active');
-    }
+  };
+
+  const animationHandler = () => {
+    document.querySelector('.search-button').classList.add('hidden');
+    document.querySelector('.search-container').classList.add('active');
   };
 
   return (
-    <form className="review-search-container">
-      <div className="search-container">
+    <form className="review-search-container" onFocus={() => document.querySelector('.search-button').classList.add('hidden')} onBlur={() => document.querySelector('.search-button').classList.remove('hidden')}>
+      <div className="search-container" onFocus={() => animationHandler()} onBlur={() => document.querySelector('.search-container').classList.remove('active')}>
         <button className="search-button" type="button">
           <BsSearch />
         </button>
@@ -27,6 +27,7 @@ export default function ReviewSearchBar({
           value={searchTerm}
           onChange={handleInputChange}
           onMouseEnter={() => document.querySelector('.search-button').classList.add('hidden')}
+          onMouseLeave={() => document.querySelector('.search-button').classList.remove('hidden')}
           onBlur={() => document.querySelector('.search-button').classList.remove('hidden')}
         />
       </div>

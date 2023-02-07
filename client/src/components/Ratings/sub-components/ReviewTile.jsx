@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { RxDividerVertical } from 'react-icons/rx';
+import { BsFillHandThumbsUpFill } from 'react-icons/bs';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
@@ -168,6 +169,9 @@ export default function ReviewTile({
           onKeyPress={() => (!helpfulClick ? helpfulHandler() : null)}
           type="button"
         >
+          {
+            helpfulClick ? <BsFillHandThumbsUpFill style={{ color: 'green' }} /> : null
+          }
           Yes
           <span className="review-helpful-span">
             (

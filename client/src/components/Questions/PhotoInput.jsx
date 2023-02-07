@@ -17,13 +17,14 @@ function PhotoInput({
   };
 
   const handleChange = (e, i) => {
+    if (!e.target.files[0]) return;
     if (files.length) {
       const copy = [...files];
       copy.splice(i, 1, e.target.files[0]);
       setFiles(copy);
-    } else {
-      setFiles([...files, ...e.target.files]);
+      return;
     }
+    setFiles([...files, ...e.target.files]);
   };
 
   const removeFile = (i) => {

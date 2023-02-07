@@ -155,4 +155,14 @@ export default {
     };
     return axios(options).then(({ data }) => (data.map((result) => result.url)));
   },
+
+  postInteraction: (data) => {
+    const options = {
+      url: `${SERVER_BASEURL}/interactions`,
+      method: 'post',
+      data,
+    };
+    return axios(options)
+      .catch((err) => console.error('postInteraction - ', err));
+  },
 };

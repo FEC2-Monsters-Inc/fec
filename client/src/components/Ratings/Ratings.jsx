@@ -9,6 +9,7 @@ export default function Ratings({
   reviewMeta,
   feature,
   setReviewMeta,
+  recordClick,
 }) {
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
@@ -16,7 +17,8 @@ export default function Ratings({
   const [listIndex, setListIndex] = useState(2);
 
   return (
-    <div id="ratings-widget">
+    // eslint-disable-next-line -- not meant to be interactive
+    <div id="ratings-widget" onClick={(e) => recordClick(e, 'Ratings & Reviews')}>
       <h1 className="review-header">Ratings and Reviews</h1>
       <div className="ratings-parent">
         <ReviewDashboard

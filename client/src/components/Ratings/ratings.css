@@ -796,6 +796,11 @@ justify-content: center;
   display: none;
 }
 
+.search-input:focus .search-button{
+  display: none;
+}
+
+
 @keyframes easeIn {
   0% {
     opacity: 0;
@@ -805,10 +810,102 @@ justify-content: center;
   }
 }
 
-.review-asterisk {
+/* Styling to make 'required' fields in ReviewModal.jsx more noticeable */
+
+.review-asterisk-name {
   display: none;
 }
-input:required .review-asterik {
-  display: default;
+.review-asterisk-name.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-email {
+  display: none;
+}
+
+.review-asterisk-email.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-body {
+  display: none;
+}
+
+.review-asterisk-body.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-recommend {
+  display: none;
+}
+
+.review-asterisk-recommend.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-stars {
+  display: none;
+}
+
+.review-asterisk-stars.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Comfort {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Comfort.red {
+  display: inline;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Size {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Size.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Width {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Width.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Quality {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Quality.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Fit {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Fit.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Length {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Length.red {
+  display: inline-block;
   color: red;
 }

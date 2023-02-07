@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function ModalCharRadioBtns({ reviewMeta, setChars, characteristics }) {
+export default function ModalCharRadioBtns({
+  reviewMeta, setChars, characteristics, handleRequiredChars,
+}) {
   // EVENT HANDLERS //
   const setCharacteristicHandler = (char, val) => {
     const key = reviewMeta.characteristics[char].id;
@@ -32,23 +34,6 @@ export default function ModalCharRadioBtns({ reviewMeta, setChars, characteristi
       return ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
     }
     return null;
-  };
-
-  const handleRequiredChars = (characteristic) => {
-    const asterisk = document.querySelector(`.review-asterisk-radiobtns-${characteristic}`);
-    const radioBtnRow = document.querySelector('.review-radio-row-container');
-    const radioBtns = document.querySelectorAll('.write-review-characteristics-modal');
-    let isChecked = false;
-    radioBtns.forEach((radioBtn) => {
-      if (radioBtn.checked) {
-        isChecked = true;
-      }
-    });
-    if (!isChecked) {
-      asterisk.classList.add('red');
-    } else {
-      asterisk.classList.remove('red');
-    }
   };
 
   const RadioButtonRow = () => Object.keys(reviewMeta.characteristics).map((characteristic) => (

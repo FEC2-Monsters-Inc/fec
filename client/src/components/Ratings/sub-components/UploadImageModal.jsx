@@ -46,9 +46,17 @@ export default function UploadAndDisplayImage({
   // EVENT HANDLERS //
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
-      setImageUploadModal(false);
+      document.querySelector('.write-review-modal').classList.add('exiting');
+      setTimeout(() => {
+        setImageUploadModal(false);
+        document.querySelector('.write-review-modal').classList.remove('exiting');
+      }, 200);
     }
-    setImageUploadModal(false);
+    document.querySelector('.write-review-modal').classList.add('exiting');
+    setTimeout(() => {
+      setImageUploadModal(false);
+      document.querySelector('.write-review-modal').classList.remove('exiting');
+    }, 200);
   };
 
   const handleSubmit = (file) => {

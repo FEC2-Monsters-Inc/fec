@@ -29,6 +29,14 @@ export default function ReviewModal({
     }
   };
 
+  const closeModal = () => {
+    document.querySelector('.write-review-modal').classList.remove('denial');
+    document.querySelector('.write-review-modal').classList.add('exiting');
+    setTimeout(() => {
+      setReviewModal(false);
+    }, 200);
+  };
+
   const starRatingTextHandler = (value) => {
     if (value === 1) {
       setStarRatingText('Poor');
@@ -90,24 +98,24 @@ export default function ReviewModal({
     }
   };
 
-  const handleRequiredName = (e) => {
-    if (!e.target.value) {
+  const handleRequiredName = () => {
+    if (!newReview.name) {
       document.querySelector('.review-asterisk-name').classList.add('red');
     } else {
       document.querySelector('.review-asterisk-name').classList.remove('red');
     }
   };
 
-  const handleRequiredEmail = (e) => {
-    if (!e.target.value.match((/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/))) {
+  const handleRequiredEmail = () => {
+    if (!newReview.email || !newReview.email.match((/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/))) {
       document.querySelector('.review-asterisk-email').classList.add('red');
     } else {
       document.querySelector('.review-asterisk-email').classList.remove('red');
     }
   };
 
-  const handleRequiredBody = (e) => {
-    if (e.target.value.length <= 50) {
+  const handleRequiredBody = () => {
+    if (!newReview.body || newReview.body.length <= 50) {
       document.querySelector('.review-asterisk-body').classList.add('red');
     } else {
       document.querySelector('.review-asterisk-body').classList.remove('red');
@@ -130,10 +138,26 @@ export default function ReviewModal({
     }
   };
 
+  const handleRequiredChars = (characteristic) => {
+    const asterisk = document.querySelector(`.review-asterisk-radiobtns-${characteristic}`);
+    const radioBtns = document.querySelectorAll('.write-review-characteristics-modal');
+    let isChecked = false;
+    radioBtns.forEach((radioBtn) => {
+      if (radioBtn.checked) {
+        isChecked = true;
+      }
+    });
+    if (!isChecked) {
+      asterisk.classList.add('red');
+    } else {
+      asterisk.classList.remove('red');
+    }
+  };
+
   return ReactDOM.createPortal((
     <div className="write-review-modal">
       <div className="write-review-modal-parent">
-        <button className="close-review-modal" type="button" onClick={() => setReviewModal(false)}>X</button>
+        <button className="close-review-modal" type="button" onClick={() => closeModal()}>&times;</button>
         <p>Write your review</p>
         <p>
           About
@@ -172,6 +196,7 @@ export default function ReviewModal({
                 reviewMeta={reviewMeta}
                 characteristics={characteristics}
                 setChars={setChars}
+                handleRequiredChars={handleRequiredChars}
               />
             ) : null}
         </div>
@@ -215,7 +240,7 @@ export default function ReviewModal({
           >
             Upload Your Pics!
           </button>
-          <div className="form__group field" onBlur={(e) => handleRequiredName(e)}>
+          <div className="form__group field" onBlur={() => handleRequiredName()}>
             <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
             <label htmlFor="nickname" className="form__label">
               Nickname
@@ -244,6 +269,13 @@ export default function ReviewModal({
             feature={feature}
             setReviewMeta={setReviewMeta}
             setReviews={setReviews}
+            handleRequiredName={handleRequiredName}
+            handleRequiredBody={handleRequiredBody}
+            handleRequiredEmail={handleRequiredEmail}
+            handleRequiredStars={handleRequiredStars}
+            handleRequiredRecommend={handleRequiredRecommend}
+            reviewMeta={reviewMeta}
+            handleRequiredChars={handleRequiredChars}
           />
         </div>
         {imageUploadModal

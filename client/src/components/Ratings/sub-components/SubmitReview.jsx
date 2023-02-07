@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import fetcher from '../../../fetchers';
 
 export default function SubmitReview({
-  newReview, chars, setChars, setNewReview, setReviewModal, feature, setReviews, setReviewMeta,
+  newReview,
+  chars,
+  setChars,
+  setNewReview,
+  setReviewModal,
+  feature,
+  setReviews,
+  setReviewMeta,
+  handleRequiredRecommend,
+  handleRequiredStars,
+  handleRequiredName,
+  handleRequiredEmail,
+  handleRequiredBody,
+  reviewMeta,
+  handleRequiredChars,
+
 }) {
+  // STATE DATA //
+  const [validReview, setValidReview] = useState(true);
+
+  // HELPER FUNCTIONS //
+
+  const handleRequiredCharsHelper = () => {
+    Object.keys(reviewMeta.characteristics).forEach((characteristic) => {
+      handleRequiredChars(characteristic);
+    });
+  };
+
+  const invalidReview = () => {
+    setValidReview(false);
+    document.querySelector('.write-review-modal').classList.add('denial');
+    handleRequiredRecommend();
+    handleRequiredStars();
+    handleRequiredName();
+    handleRequiredEmail();
+    handleRequiredBody();
+    handleRequiredCharsHelper();
+  };
+
   // EVENT HANDLERS //
+
   const addReview = () => {
     const finalReview = {};
     Object.assign(finalReview, newReview);
@@ -14,8 +52,9 @@ export default function SubmitReview({
         setNewReview({ product_id: newReview.product_id, photos: [] });
         setChars({});
         setReviewModal(false);
+        setValidReview(true);
       })
-      .catch((err) => console.error('error adding a new review: ', err));
+      .catch((err) => invalidReview()); /* console.error('error adding a new review: ', err)); */
     fetcher.getReviewMeta(feature.id)
       .then(({ data }) => setReviewMeta(data))
       .catch((err) => console.err('Error getting Review Meta after submit: ', err));
@@ -27,6 +66,7 @@ export default function SubmitReview({
   return (
     <div className="submit-review-btn">
       <button type="button" onClick={() => addReview()}>Submit Review</button>
+      {validReview ? null : <p className="submit-bad-review">Please Complete All Mandatory*Fields</p>}
     </div>
   );
 }

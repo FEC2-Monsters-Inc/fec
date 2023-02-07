@@ -354,6 +354,53 @@ background-color: rgba(0, 0, 0, 0.5);
 display: flex;
 align-items: center;
 justify-content: center;
+animation-name: modalFade;
+animation-duration: .5s;
+}
+
+/* Animations for Modal */
+
+@keyframes modalFade {
+  from {transform: translateY(-50%);opacity: 0;}
+  to {transform: translateY(0);opacity: 1;}
+}
+
+@keyframes modalFadeReverse {
+  from {transform: translateY(0);opacity: 1;}
+  to {transform: translateY(-50%);opacity: 0;}
+}
+
+.write-review-modal.exiting {
+  animation-name: modalFadeReverse;
+  animation-duration: .5s;
+}
+
+.write-review-modal.denial {
+  animation-name: shake;
+  animation-duration: 2s;
+}
+
+@keyframes shake {
+  0% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(-20px);
+  }
+  50% {
+      transform: translateX(20px);
+  }
+  75% {
+      transform: translateX(-20px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+.write-review-modal-parent.denial {
+  animation-name: shake;
+  animation-duration: 1s;
 }
 
 .write-review-modal-parent {
@@ -578,11 +625,23 @@ justify-content: center;
   text-align: center;
 }
 
+.submit-bad-review {
+  color: red;
+}
+
 .close-review-modal {
   margin: 1em;
   position: absolute;
   top: 0;
   right: 0;
+  background-color: #ccc;
+  border: none;
+  color: whitesmoke;
+  padding: 0.4em .8em;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px #444;
 }
 
 .write-review-modal-back {

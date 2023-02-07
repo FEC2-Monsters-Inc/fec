@@ -9,7 +9,9 @@ import StyleSelect from './sub-comps/StyleSelect.jsx';
 import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
 
-export default function Overview({ product, styles, reviews }) {
+export default function Overview({
+  product, styles, reviews, recordClick,
+}) {
   // STATE DATA //
   const [currStyle, setCurrStyle] = useState(null);
   const [heroImage, setHero] = useState({ url: null, index: 0 });
@@ -60,7 +62,8 @@ export default function Overview({ product, styles, reviews }) {
   }, [styles]);
 
   return (
-    <>
+    // eslint-disable-next-line -- not meant to be interactive
+    <div onClick={(e) => recordClick(e, 'Overview')}>
       <div id="header">
         <h1 className="temp-logo">FEC Project</h1>
         <Search />
@@ -103,6 +106,6 @@ export default function Overview({ product, styles, reviews }) {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -37,24 +37,51 @@ export default function App() {
       .catch((err) => console.error(err));
   }, [featureProduct.id]);
 
-  if (!featureProduct.name) return <div />;
+  const recordClick = (e, widget) => {
+    let { target } = e;
+    let className = target.classList.value;
+    while (!className.length) {
+      target = e.target.closest('div');
+      className = target.classList.value;
+    }
+    const interaction = {
+      element: className,
+      widget,
+      time: new Date(Date.now()).toUTCString(),
+    };
+    console.log(interaction);
+    fetcher.postInteraction(interaction);
+  };
 
+  // const recordClick = createContext(handleClick);
+
+  if (!featureProduct.name) return <div />;
   return (
     <div>
-      {/* <Overview product={featureProduct} styles={styles} reviews={reviews} /> */}
-      <Related
+      {/* <Overview
+        product={featureProduct}
+        styles={styles}
+        reviews={reviews}
+        recordClick={recordClick}
+      /> */}
+      {/* <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
-      />
-      {/* <Questions featureProduct={featureProduct} />
+        recordClick={recordClick}
+      /> */}
+      {/* <Questions
+        featureProduct={featureProduct}
+        recordClick={recordClick}
+      /> */}
       <Ratings
         feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
-      /> */}
+        recordClick={recordClick}
+      />
     </div>
   );
 }

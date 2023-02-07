@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function ModalCharRadioBtns({ reviewMeta, setChars, characteristics }) {
+export default function ModalCharRadioBtns({
+  reviewMeta, setChars, characteristics, handleRequiredChars,
+}) {
   // EVENT HANDLERS //
   const setCharacteristicHandler = (char, val) => {
     const key = reviewMeta.characteristics[char].id;
@@ -8,6 +10,7 @@ export default function ModalCharRadioBtns({ reviewMeta, setChars, characteristi
     Object.assign(newChar, characteristics);
     newChar[key] = val;
     setChars(newChar);
+    document.querySelector(`.review-asterisk-radiobtns-${char}`).classList.remove('red');
   };
 
   // HELPER FUNCTIONS //
@@ -34,8 +37,11 @@ export default function ModalCharRadioBtns({ reviewMeta, setChars, characteristi
   };
 
   const RadioButtonRow = () => Object.keys(reviewMeta.characteristics).map((characteristic) => (
-    <div className="review-radio-row-container" key={`${characteristic}a`}>
-      <div className="radio-row-title">{characteristic}</div>
+    <div className="review-radio-row-container" key={`${characteristic}a`} onBlur={() => handleRequiredChars(characteristic)}>
+      <div className="radio-row-title">
+        {characteristic}
+        <span className={`review-asterisk-radiobtns-${characteristic}`}>*</span>
+      </div>
       {[1, 2, 3, 4, 5].map((number) => (
         <div className="review-characteristics-modal-container" key={`${number}a`}>
           <label className="write-review-modal-label" htmlFor={characteristic}>

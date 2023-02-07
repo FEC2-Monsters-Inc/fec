@@ -19,7 +19,7 @@ const proxyQList = exampleQuestions[proxyPID];
 
 test('fetches questions once on load', async () => {
   fetcherMock.getQuestionsById.mockResolvedValueOnce({ data: proxyQList });
-  render(<Questions featureProduct={proxyProduct} />);
+  render(<Questions recordClick={jest.fn()} featureProduct={proxyProduct} />);
 
   await waitFor(() => {
     expect(fetcherMock.getQuestionsById).toHaveBeenCalledTimes(1);

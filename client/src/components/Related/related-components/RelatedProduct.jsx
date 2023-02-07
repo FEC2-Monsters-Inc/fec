@@ -10,7 +10,7 @@ import imgUnavailable from '../assets/imgUnavailable.png';
 import './styles/compareModal.css';
 
 export default function RelatedProduct({
-  feature, featureMeta, setFeatureProduct, relProd,
+  feature, featureMeta, setFeatureProduct, relProd, index,
 }) {
   const [relStyle, setRelStyle] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,7 @@ export default function RelatedProduct({
   const ratingPercentage = Math.floor((actualPts / totalPts) * 100).toString();
 
   return (
-    <div>
+    <div id={`relatedProduct${index}`}>
       <div className="rel-item">
         <div id="rel-img-wrapper" onMouseLeave={() => setShowImg(false)}>
           <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} title="star-modal-icon" />

@@ -2,7 +2,6 @@
 /// DEPENDENT ON AN EXTERNAL API -CAUSING LOCALISSUES /////
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { FcUpload } from 'react-icons/fc';
 
@@ -44,72 +43,57 @@ export default function UploadAndDisplayImage({
   };
 
   // EVENT HANDLERS //
-  const closeModal = (e) => {
-    if (e.key === 'Escape' || e.type === 'Click') {
-      setImageUploadModal(false);
-    }
-    setImageUploadModal(false);
-  };
 
   const handleSubmit = (file) => {
-    const rf = new FileReader();
-    rf.readAsDataURL(file);
-    rf.onloadend = function (event) {
-      const body = new FormData();
-      body.append('image', event.target.result.split(',').pop());
-      imageURLGenerator(event.target.result.split(',').pop());
-    };
+    if (file) {
+      const rf = new FileReader();
+      rf.readAsDataURL(file);
+      rf.onloadend = function (event) {
+        const body = new FormData();
+        body.append('image', event.target.result.split(',').pop());
+        imageURLGenerator(event.target.result.split(',').pop());
+      };
+    }
   };
 
-  return ReactDOM.createPortal((
-    <div className="write-review-modal">
-      <div className="write-review-modal-parent">
-        <div className="write-review-modal-back">
-          <button className="close-img-modal" type="button" onClick={(e) => closeModal(e)}>Back</button>
+  return (
+    <div>
+      <div>
+        <div>
           {selectedImage.length < 5 && (
-            <>
-              <div
-                className="drag-and-drop"
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  const { files } = e.dataTransfer;
-                  // const files = e.dataTransfer.files;
-                  if (files.length) {
-                    setSelectedImage([...selectedImage, files[0]]);
-                    handleSubmit(files[0]);
-                  }
-                }}
+            <div
+              className="drag-and-drop"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                const { files } = e.dataTransfer;
+                if (files.length) {
+                  setSelectedImage([...selectedImage, files[0]]);
+                  handleSubmit(files[0]);
+                }
+              }}
+            >
+              <p
+                className="drag-and-drop-text"
               >
-                <p
-                  className="drag-and-drop-text"
-                >
-                  Drag And Drop Or Click To Upload Your Image!
-                  <FcUpload className="review-image-upload-icon" />
-                  <input
-                    className="xyz"
-                    type="file"
-                    name="myImage"
-                    onChange={(event) => {
+                Drag And Drop Or Click To Upload Your Image!
+                <FcUpload className="review-image-upload-icon" />
+                <input
+                  className="xyz"
+                  type="file"
+                  name="myImage"
+                  onChange={(event) => {
+                    if (event.target.files[0]) {
                       setSelectedImage([...selectedImage, event.target.files[0]]);
                       handleSubmit(event.target.files[0]);
-                    }}
-                  />
-                </p>
-              </div>
-              {/* <input
-                className="review-image-main-upload-button"
-                type="file"
-                name="myImage"
-                onChange={(event) => {
-                  setSelectedImage([...selectedImage, event.target.files[0]]);
-                  handleSubmit(event.target.files[0]);
-                }}
-              /> */}
-            </>
+                    }
+                  }}
+                />
+              </p>
+            </div>
           )}
         </div>
-        <h1 className="write-review-thumbnail">Show us your look!</h1>
+        <h1 className="write-review-thumbnail" />
         {selectedImage
           ? selectedImage.map(
             (image, index) => (
@@ -140,5 +124,6 @@ export default function UploadAndDisplayImage({
         <br />
         <br />
       </div>
-    </div>), document.getElementById('modal'));
+    </div>
+  );
 }

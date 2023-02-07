@@ -97,7 +97,7 @@ export default function RelevanceDropdown({
           <ul className="review-ul">
             { sortString !== 'recency'
               ? (
-                <li>
+                <li className="review-li-container">
                   <p
                     className="review-li-1"
                     onClick={() => handleNew()}
@@ -112,7 +112,7 @@ export default function RelevanceDropdown({
               : null }
             { sortString !== 'helpfulness'
               ? (
-                <li>
+                <li className="review-li-container">
                   <p
                     className="review-li-2"
                     onClick={() => handleHelpful()}
@@ -127,7 +127,7 @@ export default function RelevanceDropdown({
               : null }
             { sortString !== 'relevance'
               ? (
-                <li>
+                <li className="review-li-container">
                   <p
                     className="review-li-3"
                     onClick={() => handleRelevant()}

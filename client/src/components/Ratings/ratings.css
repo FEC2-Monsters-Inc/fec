@@ -322,6 +322,7 @@
   margin-left: 12rem;
   width: 115px;
   text-align: center;
+  position: absolute;
 }
 
 .review-dash-main  {
@@ -354,6 +355,53 @@ background-color: rgba(0, 0, 0, 0.5);
 display: flex;
 align-items: center;
 justify-content: center;
+animation-name: modalFade;
+animation-duration: .5s;
+}
+
+/* Animations for Modal */
+
+@keyframes modalFade {
+  from {transform: translateY(-50%);opacity: 0;}
+  to {transform: translateY(0);opacity: 1;}
+}
+
+@keyframes modalFadeReverse {
+  from {transform: translateY(0);opacity: 1;}
+  to {transform: translateY(-50%);opacity: 0;}
+}
+
+.write-review-modal.exiting {
+  animation-name: modalFadeReverse;
+  animation-duration: .5s;
+}
+
+.write-review-modal.denial {
+  animation-name: shake;
+  animation-duration: 2s;
+}
+
+.write-review-modal.return {
+  animation-name: modalFade;
+  animation-duration: .5s;
+}
+
+@keyframes shake {
+  0% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(-20px);
+  }
+  50% {
+      transform: translateX(20px);
+  }
+  75% {
+      transform: translateX(-20px);
+  }
+  100% {
+      transform: translateX(0);
+  }
 }
 
 .write-review-modal-parent {
@@ -441,7 +489,6 @@ justify-content: center;
 }
 
 .write-review-character-count {
-  margin-left: 8rem;
   font-size: 12px;
   font-weight: 300;
   font-family: 'Comic Sans MS';
@@ -449,6 +496,8 @@ justify-content: center;
 
 .write-review-thumbnail {
   text-align: center;
+  display: inline-block;
+  height: 250px;
 }
 
 
@@ -566,6 +615,7 @@ justify-content: center;
 .review-summ-label {
   margin-bottom: 2rem;
   text-align: center;
+  font-size: 24px;
 }
 
 .email-disclaimer {
@@ -573,9 +623,25 @@ justify-content: center;
   font-style: italic;
 }
 
-.submit-review-btn {
+.submit-review-btn-container {
   margin: 2em 0;
   text-align: center;
+}
+.submit-review-btn {
+  background-color: #0080FF; /*-linear-gradient(#11998e, #38ef7d);*/
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 20px;
+  border-style: none;
+  box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.3);
+}
+.submit-review-btn:hover {
+  transform: scale(1.2)
+}
+
+.submit-bad-review {
+  color: red;
 }
 
 .close-review-modal {
@@ -583,6 +649,14 @@ justify-content: center;
   position: absolute;
   top: 0;
   right: 0;
+  background-color: #ccc;
+  border: none;
+  color: whitesmoke;
+  padding: 0.4em .8em;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px #444;
 }
 
 .write-review-modal-back {
@@ -627,6 +701,7 @@ justify-content: center;
 
 .drag-and-drop {
   margin: auto;
+  position:relative;
 }
 
 .set-selected-img {
@@ -651,10 +726,11 @@ justify-content: center;
   padding: 25px;
   position: absolute;
   height: 145px;
-  width: 350px;
+  width: 500px;
   top: 23px;
   left: -1px;
   opacity: 0;
+  top: 0;
 }
 
 /* // TESTING // */
@@ -741,8 +817,8 @@ justify-content: center;
   background: none;
   border: none;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -23px;
+  left: 10px;
   display: block;
   padding: 0;
   cursor: pointer;
@@ -754,8 +830,8 @@ justify-content: center;
   width: 0;
   opacity: 0;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -23px;
+  left: 10px;
   transition: all 2s ease;
   padding: 0 0 0 20px;
   font-size: 24px;
@@ -796,6 +872,11 @@ justify-content: center;
   display: none;
 }
 
+.search-input:focus .search-button{
+  display: none;
+}
+
+
 @keyframes easeIn {
   0% {
     opacity: 0;
@@ -805,10 +886,217 @@ justify-content: center;
   }
 }
 
-.review-asterisk {
+/* Styling to make 'required' fields in ReviewModal.jsx more noticeable */
+
+.review-asterisk-name {
   display: none;
 }
-input:required .review-asterik {
-  display: default;
+.review-asterisk-name.red {
+  display: inline-block;
   color: red;
+}
+
+.review-asterisk-email {
+  display: none;
+}
+
+.review-asterisk-email.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-body {
+  display: none;
+}
+
+.review-asterisk-body.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-recommend {
+  display: none;
+}
+
+.review-asterisk-recommend.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-stars {
+  display: none;
+}
+
+.review-asterisk-stars.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Comfort {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Comfort.red {
+  display: inline;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Size {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Size.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Width {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Width.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Quality {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Quality.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Fit {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Fit.red {
+  display: inline-block;
+  color: red;
+}
+
+.review-asterisk-radiobtns-Length {
+  display: none;
+}
+
+.review-asterisk-radiobtns-Length.red {
+  display: inline-block;
+  color: red;
+}
+
+.write-review-modal-title {
+  text-align: center;
+  margin: auto;
+  font-size: 2rem;
+}
+
+.review-modal-star-container {
+  justify-content: center;
+  display: flex;
+  font-size: 32px;
+  margin: 1rem;
+}
+
+.review-modal-recommendation-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem;
+}
+
+.review-modal-characteristics-title {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-body-title{
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 24px;
+}
+
+/* Write Review Body text counter */
+
+.review-body-minimum-reached {
+  background: -webkit-linear-gradient(#11998e, #38ef7d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Write Review Custom Radio Buttons  */
+
+input[type='radio'] {
+  -webkit-appearance:none;
+  width:20px;
+  height:20px;
+  border:1px solid darkgray;
+  border-radius:50%;
+  outline:none;
+  box-shadow:0 0 5px 0px gray inset;
+}
+input[type='radio']:hover {
+  box-shadow:0 0 5px 0px orange inset;
+}
+input[type='radio']:before {
+  content:'';
+  display:block;
+  width:100%;
+  height:100%;
+  /*margin: 20% auto;    */
+  border-radius:50%;
+  transform: scale(0)
+}
+input[type='radio']:checked:before {
+  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+  transform: scale(1.1);
+  transition: .3s;
+}
+
+.expanded-reviews {
+    background-color: #0080FF; /*-linear-gradient(#11998e, #38ef7d);*/
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 20px;
+    border-style: none;
+    box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.3);
+}
+.expanded-reviews:hover {
+    transform: scale(1.2)
+}
+
+.write-new-review {
+  background-color: #0080FF; /*-linear-gradient(#11998e, #38ef7d);*/
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 20px;
+  border-style: none;
+  box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.3);
+}
+.write-new-review:hover {
+  transform: scale(1.2)
+}
+
+.review-list-button-container {
+  display: flex;
+  margin-top: '2rem'
+}
+
+.searchbar-dropdown-container{
+  display: flex;
+  margin-bottom: 4rem;
+}
+
+.review-ul {
+  position: relative;
+  list-style: none;
+  top: 2px;
+  left: 22px;
+}
+
+.review-li-container {
+  justify-content: center;
+  align-items: center;
 }

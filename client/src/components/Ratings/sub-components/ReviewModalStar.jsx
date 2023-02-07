@@ -10,6 +10,7 @@ export default function ReviewModalStar({
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      className="testxyzxyz"
     />
   );
 }

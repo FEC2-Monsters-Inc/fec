@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import fetcher from '../../fetchers';
+import PhotoInput from './PhotoInput.jsx';
 
 export default function QandAModal({
   type,
@@ -15,14 +16,15 @@ export default function QandAModal({
     name: '',
     body: '',
     email: '',
-    photos: [],
   };
   const [addForm, setAddForm] = useState(blankForm);
+  const [files, setFiles] = useState([]);
 
   const close = (e) => {
     if ((e.type === 'click' && e.target.classList.contains('modal-close'))
       || e.key === 'Enter') {
       setAddForm(blankForm);
+      setFiles([]);
       setShowModal(false);
     }
   };
@@ -74,18 +76,38 @@ export default function QandAModal({
     return true;
   };
 
+  const makeAddForm = () => new Promise((resolve) => {
+    if (!files.length) resolve({ ...addForm, question_id });
+    fetcher.fetchPhotos(files)
+      .then((photos) => resolve({ ...addForm, photos, question_id }));
+  });
+
   const submitForm = (e) => {
     e.preventDefault();
-    if ((e.type === 'click' || e.key === 'Enter') && validateForm()) {
+    if ((e.type === 'click' || e.key === 'Enter')) {
+      // TODO: make custom alert message
+      if (!validateForm()) {
+        let message = '';
+        if (!isValid('body') || !isValid('name')) message += 'Please fill the following:\n';
+        if (!isValid('body')) message += ` - ${type.charAt(0).toUpperCase()}${type.slice(1)}\n`;
+        if (!isValid('name')) message += ' - Nickname\n';
+        if (!isValid('email')) message += 'The email address provided is not in correct email format';
+        alert(message);
+        return;
+      }
       switch (type) {
+        // TODO: also want to send signal to update q&a
         case 'question':
           fetcher
             .postQuestion({ ...addForm, product_id })
+            .then(() => (setShowModal(false)))
             .catch((err) => console.error('postQuestion: ', err));
           break;
         case 'answer':
-          fetcher
-            .postAnswer({ ...addForm, question_id }, question_id)
+        // TODO: want to send signal to update q&a, may also need to inc answers
+          makeAddForm()
+            .then((form) => fetcher.postAnswer(form, question_id))
+            .then(() => (setShowModal(false)))
             .catch((err) => console.error('postAnswer: ', err));
           break;
         default:
@@ -131,6 +153,7 @@ export default function QandAModal({
                 <textarea
                   type="text"
                   id={`${type}-bodybox`}
+                  className="qa text-input"
                   name="body"
                   form={`add-${type}-form`}
                   value={addForm.body}
@@ -152,6 +175,7 @@ export default function QandAModal({
                   <input
                     type="text"
                     id="nicknamebox"
+                    className="qa text-input"
                     name="name"
                     form={`add-${type}-form`}
                     value={addForm.name}
@@ -163,6 +187,7 @@ export default function QandAModal({
                     required
                   />
                 </label>
+                <sub>For privacy reasons, do not use your full name or email address.</sub>
               </div>
               <div className="qa add-email">
                 <label className="qa add-label" htmlFor={`${type}-emailbox`}>
@@ -175,6 +200,7 @@ export default function QandAModal({
                   <input
                     type="text"
                     id={`${type}-emailbox`}
+                    className="qa text-input"
                     name="email"
                     form={`add-${type}-form`}
                     value={addForm.email}
@@ -186,28 +212,18 @@ export default function QandAModal({
                     required
                   />
                 </label>
+                <sub>For authentication reasons, you will not be emailed</sub>
               </div>
             </div>
             {type === 'answer' ? (
-              <div className="qa add-photos">
-                <button
-                  form="add-answer-form"
-                  className="qa modal-btn"
-                  type="button"
-                  tabIndex={0}
-                // onKeyUp={}
-                // onClick={}
-                >
-                  Choose Photo
-                </button>
-              </div>
+              <PhotoInput files={files} setFiles={setFiles} />
             ) : null}
           </form>
         </div>
         <div className="qa modal-footer">
           <button
             form={`add-${type}-form`}
-            className="qa modal-btn modal-close"
+            className="qa modal-btn"
             type="submit"
             tabIndex={0}
             onKeyUp={submitForm}

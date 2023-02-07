@@ -4,7 +4,7 @@ import { BsSearch } from 'react-icons/bs';
 export default function ReviewSearchBar({
   searchTerm, setSearchTerm,
 }) {
-  // set search term to the value of the search input
+  // EVENT HANDLERS //
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };

@@ -36,7 +36,7 @@ export default function ReviewModal({
       setReviewModal(false);
     }, 200);
   };
-
+  // Handler Series sets newReview with value of input fields //
   const starRatingTextHandler = (value) => {
     if (value === 1) {
       setStarRatingText('Poor');
@@ -98,6 +98,8 @@ export default function ReviewModal({
     }
   };
 
+  // Required series manages red asterisk for required fields //
+
   const handleRequiredName = () => {
     if (!newReview.name) {
       document.querySelector('.review-asterisk-name').classList.add('red');
@@ -122,7 +124,7 @@ export default function ReviewModal({
     }
   };
 
-  const handleRequiredRecommend = () => { // Will only be called with handleSubmit.
+  const handleRequiredRecommend = () => {
     if (newReview.recommend === undefined) {
       document.querySelector('.review-asterisk-recommend').classList.add('red');
     } else {
@@ -130,7 +132,7 @@ export default function ReviewModal({
     }
   };
 
-  const handleRequiredStars = () => { // Will only be called with handleSubmit.
+  const handleRequiredStars = () => {
     if (!newReview.rating) {
       document.querySelector('.review-asterisk-stars').classList.add('red');
     } else {

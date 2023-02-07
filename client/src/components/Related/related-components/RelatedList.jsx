@@ -14,15 +14,19 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
   const scrollLeft = () => {
     if (posIndex > 0) {
       setPosIndex(posIndex - 1);
+      document.querySelector(`#relatedProduct${posIndex - 1}`)
+        .scrollIntoView({ inline: 'start' });
     }
-    ref.current.scrollLeft -= 15 * 16;
+    // ref.current.scrollLeft -= 15 * 16; // Hardcode move in px
   };
 
   const scrollRight = () => {
     if (posIndex < endOfRelatedList) {
       setPosIndex(posIndex + 1);
+      document.querySelector(`#relatedProduct${posIndex + 1}`)
+        .scrollIntoView({ inline: 'start' });
     }
-    ref.current.scrollLeft += 15 * 16;
+    // ref.current.scrollLeft += 15 * 16; // Hardcode move in px
   };
 
   useEffect(() => {
@@ -40,19 +44,23 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
         title="related-left-arrow" // For testing
       />
       <div className="related-carousel-inside" ref={ref}>
-        {relatedInfoList.map((relProd) => (
+        {relatedInfoList.map((relProd, index) => (
           <RelatedProduct
             key={relProd.id}
             feature={feature}
             featureMeta={featureMeta}
             setFeatureProduct={setFeatureProduct}
             relProd={relProd}
+            index={index}
           />
         ))}
       </div>
       <AiOutlineRightSquare
         className="related-carousel-rel-scrollBtn"
-        style={{ opacity: posIndex === endOfRelatedList ? 0 : 1 }}
+        style={{
+          opacity:
+            (posIndex === endOfRelatedList || endOfRelatedList <= 0) ? 0 : 1,
+        }}
         onClick={scrollRight}
         title="related-right-arrow" // For testing
       />

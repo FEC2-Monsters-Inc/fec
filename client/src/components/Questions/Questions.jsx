@@ -7,6 +7,7 @@ import './styles/questions.css';
 
 export default function Questions({
   featureProduct,
+  recordClick,
 }) {
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
@@ -46,7 +47,7 @@ export default function Questions({
   };
 
   // TODO: investigate react-hooks/exhaustive-deps
-  // TODO: probably some way to use less useEffects and condense the functions
+  // TODO: make custom react hooks in place of useEffects
   useEffect(() => {
     putQuestions();
   }, [featureProduct]);
@@ -67,7 +68,12 @@ export default function Questions({
   // component since this component acts as a control for the questions list
   // seeing as it already applies filters.
   return (
-    <div id="questions-widget" className="qa qa-section">
+    // eslint-disable-next-line -- not meant to be interactive
+    <div
+      id="questions-widget"
+      className="qa"
+      onClick={(e) => recordClick(e, 'Questions & Answers')}
+    >
       <h2>QUESTIONS & ANSWERS</h2>
       <SearchBar
         text={filterText}

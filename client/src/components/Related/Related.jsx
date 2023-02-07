@@ -5,7 +5,9 @@ import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
 
-export default function Related({ feature, relatedIdList, setFeatureProduct }) {
+export default function Related({
+  feature, relatedIdList, setFeatureProduct, recordClick,
+}) {
   // RELATED PRODUCT w/ API CALL
   const [relatedInfoList, setRelatedInfoList] = React.useState([]);
 
@@ -32,7 +34,8 @@ export default function Related({ feature, relatedIdList, setFeatureProduct }) {
   }, [outfitIdList]);
 
   return (
-    <div id="related-widget">
+    // eslint-disable-next-line -- not meant to be interactive
+    <div id="related-widget" onClick={(e) => recordClick(e, 'Related Items & Comparison')}>
       <h2>RELATED PRODUCTS</h2>
       <br />
       <RelatedList

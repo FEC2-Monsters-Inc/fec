@@ -95,6 +95,7 @@ export default function ReviewList({
 
   return (
     <div className="review-list-container">
+      {console.log(listIndex)}
       <div className="review-list-dropdown-container">
         <div className="searchbar-dropdown-container">
           <RelevanceDropdown
@@ -144,14 +145,6 @@ export default function ReviewList({
             )
             : null
         }
-      </div>
-      <div>
-        {/* <ReviewSearchBar
-          reviews={reviews}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          listIndex={listIndex}
-        /> */}
       </div>
     </div>
   );

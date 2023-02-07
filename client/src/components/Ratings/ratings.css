@@ -322,6 +322,7 @@
   margin-left: 12rem;
   width: 115px;
   text-align: center;
+  position: absolute;
 }
 
 .review-dash-main  {
@@ -496,6 +497,7 @@ animation-duration: .5s;
 .write-review-thumbnail {
   text-align: center;
   display: inline-block;
+  height: 250px;
 }
 
 
@@ -815,8 +817,8 @@ animation-duration: .5s;
   background: none;
   border: none;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -23px;
+  left: 10px;
   display: block;
   padding: 0;
   cursor: pointer;
@@ -828,8 +830,8 @@ animation-duration: .5s;
   width: 0;
   opacity: 0;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -23px;
+  left: 10px;
   transition: all 2s ease;
   padding: 0 0 0 20px;
   font-size: 24px;
@@ -1085,4 +1087,16 @@ input[type='radio']:checked:before {
 .searchbar-dropdown-container{
   display: flex;
   margin-bottom: 4rem;
+}
+
+.review-ul {
+  position: relative;
+  list-style: none;
+  top: 2px;
+  left: 22px;
+}
+
+.review-li-container {
+  justify-content: center;
+  align-items: center;
 }

@@ -43,16 +43,6 @@ export default function UploadAndDisplayImage({
   };
 
   // EVENT HANDLERS //
-  const closeModal = () => {
-    document.querySelector('.write-review-modal').classList.add('return');
-    setTimeout(() => {
-      setImageUploadModal(false);
-    }, 200);
-    // setTimeout(() => {
-    // setImageUploadModal(false);
-    // document.querySelector('.write-review-modal').classList.remove('exiting');
-    // }, 200);
-  };
 
   const handleSubmit = (file) => {
     if (file) {
@@ -77,7 +67,6 @@ export default function UploadAndDisplayImage({
               onDrop={(e) => {
                 e.preventDefault();
                 const { files } = e.dataTransfer;
-                // const files = e.dataTransfer.files;
                 if (files.length) {
                   setSelectedImage([...selectedImage, files[0]]);
                   handleSubmit(files[0]);
@@ -108,7 +97,7 @@ export default function UploadAndDisplayImage({
         {selectedImage
           ? selectedImage.map(
             (image, index) => (
-              <div key={image} className="write-review-thumbnail" style={{ height: '250px' }}>
+              <div key={image} className="write-review-thumbnail">
                 <img alt="Thumbnail You Uploaded" width="250px" src={URL.createObjectURL(image)} />
                 <br />
                 <button

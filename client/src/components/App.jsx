@@ -47,14 +47,14 @@ export default function App() {
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
       />
-      {/* <Questions featureProduct={featureProduct} />
+      <Questions featureProduct={featureProduct} />
       <Ratings
         feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
-      /> */}
+      />
     </div>
   );
 }

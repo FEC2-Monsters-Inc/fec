@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { IoCloseCircleSharp } from 'react-icons/io5';
-import prettyBytes from 'pretty-bytes';
+import { filesize } from 'filesize';
 
 function PhotoInput({
   files,
@@ -71,7 +71,7 @@ function PhotoInput({
           {/* TODO: truncate long file names but keep extension */}
           <span className="qa photo-info">
             <span>{`${file.name} `}</span>
-            <span>{prettyBytes(file.size, { space: false })}</span>
+            <span>{filesize(file.size, { spacer: '' })}</span>
           </span>
         </div>
       ))}

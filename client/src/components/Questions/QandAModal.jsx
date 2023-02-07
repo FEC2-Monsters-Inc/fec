@@ -24,6 +24,7 @@ export default function QandAModal({
     if ((e.type === 'click' && e.target.classList.contains('modal-close'))
       || e.key === 'Enter') {
       setAddForm(blankForm);
+      setFiles([]);
       setShowModal(false);
     }
   };
@@ -75,6 +76,12 @@ export default function QandAModal({
     return true;
   };
 
+  const makeAddForm = () => new Promise((resolve) => {
+    if (!files.length) resolve({ ...addForm, question_id });
+    fetcher.fetchPhotos(files)
+      .then((photos) => resolve({ ...addForm, photos, question_id }));
+  });
+
   const submitForm = (e) => {
     e.preventDefault();
     if ((e.type === 'click' || e.key === 'Enter')) {
@@ -98,13 +105,8 @@ export default function QandAModal({
           break;
         case 'answer':
         // TODO: want to send signal to update q&a, may also need to inc answers
-          fetcher
-            .fetchPhotos(files)
-            .then((photos) => fetcher.postAnswer({
-              ...addForm,
-              photos,
-              question_id,
-            }, question_id))
+          makeAddForm()
+            .then((form) => fetcher.postAnswer(form, question_id))
             .then(() => (setShowModal(false)))
             .catch((err) => console.error('postAnswer: ', err));
           break;

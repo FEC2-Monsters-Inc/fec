@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MdRemoveCircleOutline } from 'react-icons/md';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
+import imgUnavailable from '../assets/imgUnavailable.png';
 
 export default function OutfitProduct({
   outfitId, outfitIdList, setOutfitIdList, setFeatureProduct,
@@ -54,7 +55,7 @@ export default function OutfitProduct({
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
               id="outfit-img"
-              src={outfitStyle.photos[0].thumbnail_url}
+              src={outfitStyle.photos[0].thumbnail_url || imgUnavailable}
               alt={outfitProd.description}
               onKeyDown={() => setFeatureProduct(outfitProd)}
               onClick={() => setFeatureProduct(outfitProd)}

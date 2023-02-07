@@ -46,7 +46,7 @@ export default function Answer({
           {photos.length > 0
             ? photos.map((photo, index) => (
               <img
-                className="qa photo-sml"
+                className="qa photo-sml expandable"
                 src={photo}
                 key={photo}
                 alt={`Customer's image ${index + 1}`}

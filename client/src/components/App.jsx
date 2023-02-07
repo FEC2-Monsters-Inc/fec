@@ -9,7 +9,7 @@ import fetcher from '../fetchers';
 
 export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40350, name: null };
+  const initFeature = { id: 40355, name: null };
 
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);

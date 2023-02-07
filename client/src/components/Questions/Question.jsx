@@ -22,7 +22,6 @@ export default function Question({
   const [showAddA, setShowAddA] = useState(false);
   const [helpfulStatus, setHelpfulStatus] = useState(true);
 
-  // TODO: need to sort answers by helpfulness
   const byHelpfulness = (a, b) => {
     if (a[1].helpfulness > b[1].helpfulness) return -1;
     if (a[1].helpfulness < b[1].helpfulness) return 1;
@@ -48,7 +47,7 @@ export default function Question({
     }
   };
 
-  // TODO: same function in QuestionsList.jsx
+  // TODO: dupe function in QuestionsList.jsx
   const showModal = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
       setShowAddA(true);

@@ -20,20 +20,10 @@ export default function GalleryThumbnails({
   );
 
   return (
-    <div className="side-thumb-container">
-      {/* <button className="scroll-images pre-btn" type="button">
-            <AiOutlineUp className="scroll-arrow" size="2em" />
-          </button> */}
-      <div className="scroll-placeholder" />
-      <div id="slider">
-        {images
-          ? images.map((image, index) => imageMapper(image, index))
-          : null}
-      </div>
-      {/* <button className="scroll-images nxt-btn" type="button">
-            <AiOutlineDown className="scroll-arrow" size="2em" />
-          </button> */}
-      <div className="scroll-placeholder" />
+    <div id="slider">
+      {images
+        ? images.map((image, index) => imageMapper(image, index))
+        : null}
     </div>
   );
 }

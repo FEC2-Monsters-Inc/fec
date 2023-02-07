@@ -158,13 +158,12 @@ export default function ReviewModal({
     <div className="write-review-modal">
       <div className="write-review-modal-parent">
         <button className="close-review-modal" type="button" onClick={() => closeModal()}>&times;</button>
-        <p>Write your review</p>
-        <p>
-          About
+        <p className="write-review-modal-title">
+          Write your review about
           {' '}
           {feature.name}
         </p>
-        <div style={{ display: 'flex' }} onBlur={() => handleRequiredStars()}>
+        <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
           {' '}
           {/* Rename and Refactor */}
           <ReviewModalStars
@@ -173,7 +172,7 @@ export default function ReviewModal({
           <span className="review-asterisk-stars">*</span>
           <p>{starRatingText}</p>
         </div>
-        <div onBlur={() => handleRequiredRecommend()}>
+        <div className="review-modal-recommendation-container" onBlur={() => handleRequiredRecommend()}>
           <p>
             Do you recommend this product?
             {' '}
@@ -189,7 +188,7 @@ export default function ReviewModal({
           </label>
         </div>
         <div>
-          <p>Tell us more...</p>
+          <p className="review-modal-characteristics-title">How did you like the...</p>
           {reviewMeta
             ? (
               <ModalCharRadioBtns
@@ -216,7 +215,7 @@ export default function ReviewModal({
             : <br />}
         </div>
         <div className="review-summ-container">
-          <p style={{ textAlign: 'center', marginBottom: '2rem' }}>Write your review below</p>
+          <p className="review-body-title">Write your review below</p>
           <div className="form__group1" onBlur={(e) => handleRequiredBody(e)}>
             <textarea type="input" className="form__field1" placeholder="body" name="body" id="body" maxLength="1000" onChange={handleBodyChange} ref={useRef()} required />
             <label htmlFor="body" className="form__label1">
@@ -226,20 +225,22 @@ export default function ReviewModal({
           </div>
           <p className="write-review-character-count">
             {bodyCount > 50
-              ? 'Minimum Reached!'
+              ? <span className="review-body-minimum-reached">Minimum Reached!</span>
               : `Minimum required characters left: ${51 - bodyCount}`}
           </p>
         </div>
         <br />
         <br />
         <div className="write-review-email-parent">
-          <button
-            className="upload-photos-btn"
-            type="button"
-            onClick={() => setImageUploadModal(true)}
-          >
-            Upload Your Pics!
-          </button>
+          <UploadAndDisplayImage
+            setImageUploadModal={setImageUploadModal}
+            setSelectedImage={setSelectedImage}
+            selectedImage={selectedImage}
+            newReview={newReview}
+            setNewReview={setNewReview}
+            imgProgress={imgProgress}
+            setImgProgress={setImgProgress}
+          />
           <div className="form__group field" onBlur={() => handleRequiredName()}>
             <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
             <label htmlFor="nickname" className="form__label">

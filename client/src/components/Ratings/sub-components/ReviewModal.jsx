@@ -123,7 +123,7 @@ export default function ReviewModal({
   };
 
   const handleRequiredRecommend = () => { // Will only be called with handleSubmit.
-    if (!newReview.recommend) {
+    if (newReview.recommend === undefined) {
       document.querySelector('.review-asterisk-recommend').classList.add('red');
     } else {
       document.querySelector('.review-asterisk-recommend').classList.remove('red');

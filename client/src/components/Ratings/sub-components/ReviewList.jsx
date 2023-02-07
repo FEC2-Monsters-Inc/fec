@@ -96,14 +96,23 @@ export default function ReviewList({
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">
-        <RelevanceDropdown
-          setReviews={setReviews}
-          reviews={reviews}
-          listLength={listLength}
-          setListLength={setListLength}
-          listIndex={listIndex}
-          reviewRenderer={reviewRenderer}
-        />
+        <div className="searchbar-dropdown-container">
+          <RelevanceDropdown
+            setReviews={setReviews}
+            reviews={reviews}
+            listLength={listLength}
+            setListLength={setListLength}
+            listIndex={listIndex}
+            reviewRenderer={reviewRenderer}
+          />
+          <ReviewSearchBar
+            reviews={reviews}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            listIndex={listIndex}
+          />
+
+        </div>
       </div>
       <div
         className="scroll-review-list"
@@ -114,15 +123,13 @@ export default function ReviewList({
           ? reviewRenderer()
           : null }
       </div>
-      <div>
+      <div className="review-list-button-container">
         {
           !expandedStatus
-            ? <button type="button" onClick={() => handleClick()}>Expand Reviews</button>
+            ? <button className="expanded-reviews" type="button" onClick={() => handleClick()}>Expand Reviews</button>
             : null
         }
-      </div>
-      <div>
-        <button type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
+        <button className="write-new-review" type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
         {
           reviewModal
             ? (
@@ -139,12 +146,12 @@ export default function ReviewList({
         }
       </div>
       <div>
-        <ReviewSearchBar
+        {/* <ReviewSearchBar
           reviews={reviews}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           listIndex={listIndex}
-        />
+        /> */}
       </div>
     </div>
   );

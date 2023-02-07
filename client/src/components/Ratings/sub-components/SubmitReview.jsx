@@ -64,8 +64,8 @@ export default function SubmitReview({
   };
 
   return (
-    <div className="submit-review-btn">
-      <button type="button" onClick={() => addReview()}>Submit Review</button>
+    <div className="submit-review-btn-container">
+      <button className="submit-review-btn" type="button" onClick={() => addReview()}>Submit Review</button>
       {validReview ? null : <p className="submit-bad-review">Please Complete All Mandatory*Fields</p>}
     </div>
   );

@@ -49,7 +49,6 @@ export default function App() {
       widget,
       time: new Date(Date.now()).toUTCString(),
     };
-    console.log(interaction);
     fetcher.postInteraction(interaction);
   };
 

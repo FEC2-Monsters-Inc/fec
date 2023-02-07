@@ -43,6 +43,7 @@ export default function Gallery({
       prevThumb.className = 'selected';
       btnRenderCheck();
     }
+    prevThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
   const toggleHeroRight = () => {
@@ -60,6 +61,7 @@ export default function Gallery({
       nextThumb.className = 'selected';
       btnRenderCheck();
     }
+    nextThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
   return (

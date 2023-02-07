@@ -1,22 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
 
 export default function Related({ feature, relatedIdList, setFeatureProduct }) {
+  // RELATED PRODUCT w/ API CALL
   const [relatedInfoList, setRelatedInfoList] = React.useState([]);
-  const [outfitIdList, setOutfitIdList] = React.useState([]);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem('Outfit-List');
-    if (data) { setOutfitIdList(JSON.parse(data)); }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('Outfit-List', JSON.stringify(outfitIdList));
-  }, [outfitIdList]);
 
   useEffect(() => {
     axios.all(
@@ -27,6 +18,18 @@ export default function Related({ feature, relatedIdList, setFeatureProduct }) {
       }))
       .catch((err) => console.error(err));
   }, [relatedIdList]);
+
+  // OUTFIT PRODUCT w/ LOCALSTORAGE
+  const [outfitIdList, setOutfitIdList] = React.useState([]);
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('Outfit-List');
+    if (data) { setOutfitIdList(JSON.parse(data)); }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('Outfit-List', JSON.stringify(outfitIdList));
+  }, [outfitIdList]);
 
   return (
     <div id="related-widget">

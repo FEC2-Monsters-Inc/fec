@@ -39,13 +39,13 @@ export default function App() {
 
   const recordClick = (e, widget) => {
     let { target } = e;
-    let className = target.classList.value;
-    while (!className.length) {
-      target = e.target.closest('div');
-      className = target.classList.value;
+    let element = target.classList.value;
+    while (!element.length) {
+      target = target.closest('div');
+      element = target.classList.value || target.id;
     }
     const interaction = {
-      element: className,
+      element,
       widget,
       time: new Date(Date.now()).toUTCString(),
     };
@@ -53,27 +53,25 @@ export default function App() {
     fetcher.postInteraction(interaction);
   };
 
-  // const recordClick = createContext(handleClick);
-
   if (!featureProduct.name) return <div />;
   return (
     <div>
-      {/* <Overview
+      <Overview
         product={featureProduct}
         styles={styles}
         reviews={reviews}
         recordClick={recordClick}
-      /> */}
-      {/* <Related
+      />
+      <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
         recordClick={recordClick}
-      /> */}
-      {/* <Questions
+      />
+      <Questions
         featureProduct={featureProduct}
         recordClick={recordClick}
-      /> */}
+      />
       <Ratings
         feature={featureProduct}
         reviews={reviews}

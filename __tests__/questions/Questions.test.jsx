@@ -31,12 +31,12 @@ test('does not filter questions if typing less than 3 characters', async () => {
   render(<Questions recordClick={jest.fn()} featureProduct={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
-  const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
+  const questionsBefore = await screen.findAllByRole('button', { name: /q:/i });
   await user.type(screen.getByRole('searchbox'), 'te');
   act(() => {
     jest.advanceTimersByTime(500);
   });
-  const questionsAfter = await screen.findAllByRole('heading', { name: /q:/i });
+  const questionsAfter = await screen.findAllByRole('button', { name: /q:/i });
 
   expect(questionsBefore).toEqual(questionsAfter);
 });
@@ -46,12 +46,12 @@ test('does not filter questions before input is debounced', async () => {
   render(<Questions recordClick={jest.fn()} featureProduct={proxyProduct} />);
   const user = userEvent.setup({ delay: null });
 
-  const questionsBefore = await screen.findAllByRole('heading', { name: /q:/i });
+  const questionsBefore = await screen.findAllByRole('button', { name: /q:/i });
   await user.type(screen.getByRole('searchbox'), 'tem');
   act(() => {
     jest.advanceTimersByTime(499);
   });
-  const questionsAfter = await screen.findAllByRole('heading', { name: /q:/i });
+  const questionsAfter = await screen.findAllByRole('button', { name: /q:/i });
 
   expect(questionsBefore).toEqual(questionsAfter);
 });
@@ -65,7 +65,7 @@ test('filters questions after typing 3 characters and waiting 500ms', async () =
   act(() => {
     jest.advanceTimersByTime(500);
   });
-  const questions = await screen.findAllByRole('heading', { name: /q:/i });
+  const questions = await screen.findAllByRole('button', { name: /q:/i });
 
   questions.map((question) => expect(question).toHaveTextContent(/tem/i));
 });

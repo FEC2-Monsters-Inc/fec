@@ -55,7 +55,7 @@ export default function Questions({
   useEffect(() => {
     if (filterText.length >= 3) {
       setTimer(setTimeout(filterQuestionsBySearch, 500));
-    }
+    } else filterQuestionsWithAnswers();
   }, [filterText]);
 
   useEffect(() => {

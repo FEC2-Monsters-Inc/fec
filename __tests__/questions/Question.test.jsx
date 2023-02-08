@@ -93,7 +93,7 @@ test('clicking cancel closes the answer modal', async () => {
   expect(screen.queryByText(/submit your answer/i)).not.toBeInTheDocument();
 });
 
-test('should render answers in order of helpfulness', async () => {
+test('renders answers in order of helpfulness', async () => {
   render(<Question question={proxyQuestion} filterText="" />);
   const numAnswers = Object.keys(proxyQuestion.answers).length;
   const numClicks = Math.ceil(numAnswers / 2) - 1;

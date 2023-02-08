@@ -31,12 +31,8 @@
 
 /* QUESTIONS & ANSWERS + GENERALS */
 
-.qa.q\&a {
-  margin-bottom: 0.5rem;
-}
-
 .qa.footer-btn {
-  margin: 1rem;
+  margin: 0 1rem;
   padding: 1rem;
   cursor: pointer;
   font-style: bold;
@@ -60,6 +56,7 @@
   font-size: inherit;
   font-family: inherit;
   font-weight: bold;
+  align-self: flex-start;
 }
 
 .qa.btn-link-bold:hover {
@@ -74,19 +71,113 @@
 
 .qa.question {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+}
+
+.qa.accord {
+  background-color: #eee;
+  text-align: left;
+  border-radius: 0;
+  outline: none;
+  border-width: 0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.qa.question-body {
-  max-width: 70%;
-  margin-bottom: 0rem;
+.qa.accord.active, .qa.accord:hover {
+  background-color: #ccc;
+  transition: background-color 250ms;
 }
 
-.qa.control {
-  font-size: 1rem;
-  font-weight: normal;
-  align-self: flex-end;
+.qa.expand-btn {
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-left: 1rem;
+  border-radius: 2rem;
+  transform: rotate(0deg);
+  transition: transform 250ms;
+}
+
+.qa.expand-btn:hover {
+  background-color:#aaa;
+  transform: rotate(0deg);
+  transition: background-color 250ms, transform 250ms;
+}
+
+.qa.expand-btn.active {
+  transform: rotate(180deg);
+  transition: background-color 250ms, transform 250ms;
+}
+
+.qa.q\&a:first-child .qa.accord {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.qa.q\&a:not(:first-child):not(:last-child) .qa.accord {
+  border-radius: 0;
+}
+
+.qa.q\&a:last-child .qa.accord {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.qa.q\&a:only-child .qa.accord {
+  border-radius: 0.5rem;
+}
+
+.qa.q\&a:last-child .qa.accord.active{
+  border-radius: 0;
+}
+
+.qa.q-body {
+  display:  block;
+  font-size: 1.25rem;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.qa.panel-footer-ctrl {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* PANEL ANIMATIONS */
+
+.qa.panel {
+  padding: 0 0.5rem;
+  overflow: hidden;
+  max-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.qa.panel.panel-enter {
+  max-height: 0;
+}
+
+.qa.panel.panel-enter-active {
+  max-height: 50vh;
+  overflow-y: auto;
+  transition: max-height 750ms ease-out;
+}
+
+.qa.panel.panel-enter-done {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.qa.panel.panel-exit {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.qa.panel.panel-exit-active {
+  max-height: 0;
+  overflow-y: auto;
+  transition: max-height 750ms ease-out;
 }
 
 /* ANSWERS SECTION */

@@ -10,7 +10,7 @@ const proxyQList = exampleQuestions[40356].results;
 
 test('renders 2 questions with answers on load', () => {
   render(<QuestionsList questions={proxyQList} filterText="" />);
-  const questions = screen.getAllByRole('heading', { name: /q:/i });
+  const questions = screen.getAllByRole('button', { name: /q:/i });
   expect(questions.length).toBe(2);
 });
 
@@ -19,7 +19,7 @@ test('renders 2 more questions on MORE button click', async () => {
   const button = screen.getByRole('button', { name: /more answered questions/i });
 
   await userEvent.click(button);
-  const questions = await screen.findAllByRole('heading', { name: /q:/i });
+  const questions = await screen.findAllByRole('button', { name: /q:/i });
 
   expect(questions.length).toBe(4);
 });
@@ -58,7 +58,7 @@ test('should only render questions with answers', async () => {
   for (let i = 0; i < numClicks; i += 1) {
     await userEvent.click(button);
   }
-  const questions = await screen.findAllByRole('heading', { name: /q:/i });
+  const questions = await screen.findAllByRole('button', { name: /q:/i });
   const answers = await screen.findAllByRole('heading', { name: /a:/i });
 
   expect(button).not.toBeInTheDocument();
@@ -86,7 +86,7 @@ test('clicking cancel closes the question modal', async () => {
   expect(screen.queryByText(/ask your question/i)).not.toBeInTheDocument();
 });
 
-test('should render questions in order of helpfulness', async () => {
+test('renders questions in order of helpfulness', async () => {
   render(<QuestionsList questions={proxyQList} filterText="" />);
   const button = screen.getByRole('button', { name: /more answered questions/i });
   const numClicks = Math.ceil(proxyQList.length / 2) - 1;

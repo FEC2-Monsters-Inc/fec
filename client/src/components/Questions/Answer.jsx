@@ -89,7 +89,7 @@ export default function Answer({
         <span className="qa answer-date">
           {format(parseISO(date), 'MMMM d, yyyy')}
         </span>
-        {' | Helpful? '}
+        {' | Is this answer helpful? '}
         {helpfulStatus ? (
           <button
             className="qa btn-link"

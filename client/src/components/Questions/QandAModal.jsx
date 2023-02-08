@@ -121,6 +121,15 @@ export default function QandAModal({
     else document.body.style.overflow = 'visible';
   }, [show]);
 
+  useEffect(() => {
+    if (files.length) {
+      if (!files[files.length - 1].type.includes('image')) {
+        alert('Invalid file type, please choose only images.');
+        setFiles(files.slice(0, files.length - 1));
+      }
+    }
+  }, [files]);
+
   if (!show) return null;
   return ReactDOM.createPortal((
     // Reason: There exists an accessible button to close the modal.

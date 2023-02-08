@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { MdExpandMore } from 'react-icons/md';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
 import fetcher from '../../fetchers';
@@ -16,11 +18,15 @@ export default function Question({
   updateQuestions,
   filterText,
   productName,
+  active,
+  setActive,
 }) {
   const [sortedAnswers, setSortedAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [showAddA, setShowAddA] = useState(false);
   const [helpfulStatus, setHelpfulStatus] = useState(true);
+  const [expandStatus, setExpandStatus] = useState(false);
+  const panelRef = useRef(null);
 
   const byHelpfulness = (a, b) => {
     if (a[1].helpfulness > b[1].helpfulness) return -1;
@@ -47,6 +53,12 @@ export default function Question({
     }
   };
 
+  const collapseAnswers = (e) => {
+    if (e.type === 'click' || e.key === 'Enter') {
+      setNumAnswers(Object.keys(answers).length < 2 ? Object.keys(answers).length : 2);
+    }
+  };
+
   // TODO: dupe function in QuestionsList.jsx
   const showModal = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -68,76 +80,16 @@ export default function Question({
     );
   };
 
-  useEffect(() => {
-    setSortedAnswers(Object.entries(answers).sort(byHelpfulness));
-  }, [answers]);
+  const expand = () => {
+    if (!active)setActive(question_id);
+    else setActive(null);
+  };
 
-  return (
-    <div className="qa q&a">
-      <div className="qa question">
-        <h3 className="qa question-body">
-          {'Q: '}
-          {formatBody()}
-        </h3>
-        <span className="qa control">
-          {'Helpful? '}
-          {helpfulStatus ? (
-            <button
-              className="qa btn-link"
-              type="button"
-              tabIndex={0}
-              onKeyUp={markHelpfulQuestion}
-              onClick={markHelpfulQuestion}
-            >
-              Yes
-            </button>
-          ) : <span>Marked!</span>}
-          {' ('}
-          <span
-            className="qa helpfulness"
-            data-testid="q-helpfulness"
-          >
-            {helpfulness}
-          </span>
-          {') | '}
-          <button
-            className="qa btn-link"
-            type="button"
-            tabIndex={0}
-            onKeyUp={showModal}
-            onClick={showModal}
-          >
-            Add Answer
-          </button>
-          <QandAModal
-            type="answer"
-            show={showAddA}
-            setShowModal={setShowAddA}
-            question_id={question_id}
-            questionBody={body}
-            productName={productName}
-          />
-        </span>
-      </div>
-      {Object.keys(answers).length > 0 ? (
-        <div className="qa answers-section">
-          <h3>A: </h3>
-          <div className="qa answers-list">
-            {sortedAnswers
-              .slice(0, numAnswers)
-              .map((answer) => (
-                <Answer
-                  key={answer[0]}
-                  answer={answer[1]}
-                  updateQuestions={updateQuestions}
-                />
-              ))}
-          </div>
-        </div>
-      ) : null}
-      {numAnswers < Object.keys(answers).length ? (
+  const renderFooter = () => {
+    if (numAnswers < Object.keys(answers).length) {
+      return (
         <button
-          className="qa btn-link-bold"
+          className="qa btn-link-bold left-ctrl"
           type="button"
           tabIndex={0}
           onKeyUp={loadMoreAnswers}
@@ -145,8 +97,119 @@ export default function Question({
         >
           LOAD MORE ANSWERS
         </button>
-      )
-        : null}
+      );
+    }
+    if (numAnswers === Object.keys(answers).length
+      && Object.keys(answers).length >= 2) {
+      return (
+        <button
+          className="qa btn-link-bold left-ctrl"
+          type="button"
+          tabIndex={0}
+          onKeyUp={collapseAnswers}
+          onClick={collapseAnswers}
+        >
+          COLLAPSE ANSWERS
+        </button>
+      );
+    }
+    return <div />;
+  };
+
+  useEffect(() => {
+    if (Object.keys(answers).length < 2) {
+      setNumAnswers(Object.keys(answers).length);
+    }
+    setSortedAnswers(Object.entries(answers).sort(byHelpfulness));
+  }, [answers]);
+
+  return (
+    <div className="qa q&a">
+      <div className="qa question">
+        <button
+          type="button"
+          className={`qa accord${active ? ' active' : ''}`}
+          onClick={expand}
+        >
+          <div className="qa q-body">
+            {'Q: '}
+            {formatBody()}
+          </div>
+          <MdExpandMore
+            className={`qa expand-btn${active ? ' active' : ''}`}
+          />
+        </button>
+        <CSSTransition
+          in={active}
+          nodeRef={panelRef}
+          timeout={750}
+          classNames="panel"
+        >
+          <div
+            ref={panelRef}
+            className="qa panel"
+          >
+            {Object.keys(answers).length > 0 ? (
+              <div className="qa answers-section">
+                <h3>A: </h3>
+                <div className="qa answers-list">
+                  {sortedAnswers
+                    .slice(0, numAnswers)
+                    .map((answer) => (
+                      <Answer
+                        key={answer[0]}
+                        answer={answer[1]}
+                        updateQuestions={updateQuestions}
+                      />
+                    ))}
+                </div>
+              </div>
+            ) : null}
+            <div className="qa panel-footer-ctrl">
+              {renderFooter()}
+              <span className="qa right-ctrl">
+                {'Is this question helpful? '}
+                {helpfulStatus ? (
+                  <button
+                    className="qa btn-link"
+                    type="button"
+                    tabIndex={0}
+                    onKeyUp={markHelpfulQuestion}
+                    onClick={markHelpfulQuestion}
+                  >
+                    Yes
+                  </button>
+                ) : <span>Marked!</span>}
+                {' ('}
+                <span
+                  className="qa helpfulness"
+                  data-testid="q-helpfulness"
+                >
+                  {helpfulness}
+                </span>
+                {') | '}
+                <button
+                  className="qa btn-link"
+                  type="button"
+                  tabIndex={0}
+                  onKeyUp={showModal}
+                  onClick={showModal}
+                >
+                  Add Answer
+                </button>
+                <QandAModal
+                  type="answer"
+                  show={showAddA}
+                  setShowModal={setShowAddA}
+                  question_id={question_id}
+                  questionBody={body}
+                  productName={productName}
+                />
+              </span>
+            </div>
+          </div>
+        </CSSTransition>
+      </div>
     </div>
   );
 }

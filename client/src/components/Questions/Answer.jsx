@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
+import { createPortal } from 'react-dom';
 import fetcher from '../../fetchers';
+import PhotoModal from './PhotoModal.jsx';
 
 export default function Answer({
   answer: {
@@ -15,6 +17,8 @@ export default function Answer({
 }) {
   const [helpfulStatus, setHelpfulStatus] = useState(true);
   const [reportStatus, setReportStatus] = useState(true);
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalPhoto, setModalPhoto] = useState('');
 
   const markHelpfulAnswer = (e) => {
     if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
@@ -35,6 +39,13 @@ export default function Answer({
     }
   };
 
+  const showModal = (e, photo) => {
+    if (e.type === 'click' || e.key === 'Enter') {
+      setModalStatus(true);
+      setModalPhoto(photo);
+    }
+  };
+
   return (
     <div className="qa answer">
       <div className="qa answer-body">
@@ -45,15 +56,31 @@ export default function Answer({
         <div className="qa photos">
           {photos.length > 0
             ? photos.map((photo, index) => (
+              // Image is meant to be interactable
+              /* eslint-disable */
               <img
                 className="qa photo-sml expandable"
                 src={photo}
                 key={photo}
-                alt={`Customer's image ${index + 1}`}
+                alt={`Customer's photo ${index + 1}`}
+                tabIndex={0}
+                onClick={(e) => showModal(e, photo)}
+                onKeyUp={(e) => showModal(e, photo)}
               />
+              /* eslint-enable */
             ))
             : null}
         </div>
+        {modalStatus && createPortal(
+          (
+            <PhotoModal
+              show={modalStatus}
+              setShow={() => setModalStatus(false)}
+              src={modalPhoto}
+              alt={'Customer\'s expanded photo'}
+            />
+          ), document.getElementById('modal'),
+        )}
       </div>
       <div className="qa answer-info">
         {'by '}

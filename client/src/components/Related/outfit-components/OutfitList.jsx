@@ -15,20 +15,24 @@ export default function OutfitList({
   const [posIndex, setPosIndex] = useState(0);
 
   // CHECK HOW MANY CLICKS NEED TO REACH END OF THE LAST RELATED IMAGE
-  const endOfOutfit = outfitIdList.length !== undefined ? outfitIdList.length - 4 : 0;
+  const endOfOutfitList = outfitIdList.length !== undefined ? outfitIdList.length - 4 : 0;
 
   const scrollLeft = () => {
     if (posIndex > 0) {
       setPosIndex(posIndex - 1);
+      document.querySelector(`#outfitProduct${posIndex - 1}`)
+        .scrollIntoView({ inline: 'start' });
     }
-    ref.current.scrollLeft -= 15 * 16;
+    // ref.current.scrollLeft -= 15 * 16;
   };
 
   const scrollRight = () => {
-    if (posIndex < endOfOutfit) {
+    if (posIndex < endOfOutfitList) {
       setPosIndex(posIndex + 1);
+      document.querySelector(`#outfitProduct${posIndex + 1}`)
+        .scrollIntoView({ inline: 'start' });
     }
-    ref.current.scrollLeft += 15 * 16;
+    // ref.current.scrollLeft += 15 * 16;
   };
 
   // ADD FEATURE PRODUCT TO OUTFIT LIST
@@ -82,6 +86,7 @@ export default function OutfitList({
                             outfitIdList={outfitIdList}
                             setOutfitIdList={setOutfitIdList}
                             setFeatureProduct={setFeatureProduct}
+                            index={index}
                           />
                         </div>
                       )}
@@ -96,7 +101,10 @@ export default function OutfitList({
         </Droppable>
         <AiOutlineRightSquare
           className="outfit-carousel-rel-scrollBtn"
-          style={{ opacity: posIndex === endOfOutfit || 0 ? 0 : 1 }}
+          style={{
+            opacity:
+              (posIndex === endOfOutfitList || endOfOutfitList <= 0) ? 0 : 1,
+          }}
           onClick={scrollRight}
         />
       </div>

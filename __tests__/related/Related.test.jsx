@@ -31,10 +31,11 @@ describe('Related & Outfit Component', () => {
       render(<Related
         feature={MockData.feature}
         relatedIdList={[40344, 40346]}
+        recordClick={jest.fn()}
       />);
 
       const allDivElement = await screen.findAllByRole('generic');
-      expect(allDivElement.length).toBe(6);
+      expect(allDivElement.length).toBe(8);
     });
 
     test('should not render when fail fetch data', async () => {
@@ -49,6 +50,7 @@ describe('Related & Outfit Component', () => {
         render(<Related
           feature={MockData.feature}
           relatedIdList={[40344, 40346]}
+          recordClick={jest.fn()}
         />);
       });
 
@@ -67,6 +69,7 @@ describe('Related & Outfit Component', () => {
         render(<Related
           feature={MockData.feature}
           relatedIdList={[40344, 40346]}
+          recordClick={jest.fn()}
         />);
       });
 
@@ -88,6 +91,7 @@ describe('Related & Outfit Component', () => {
       render(<OutfitList
         feature={MockData.feature}
         outfitIdList={[40344]}
+        recordClick={jest.fn()}
       />);
     });
 
@@ -95,6 +99,7 @@ describe('Related & Outfit Component', () => {
       render(<OutfitList
         feature={MockData.feature}
         outfitIdList={[]}
+        recordClick={jest.fn()}
       />);
 
       const imgElement = screen.queryByRole('img');
@@ -118,6 +123,7 @@ describe('Related & Outfit Component', () => {
       render(<Related
         feature={MockData.feature}
         relatedIdList={[40346]}
+        recordClick={jest.fn()}
       />);
 
       expect(screen.queryByText(MockData.feature.name)).not.toBeInTheDocument();
@@ -142,6 +148,7 @@ describe('Related & Outfit Component', () => {
       render(<RelatedList
         feature={MockData.feature}
         relatedInfoList={[40344]}
+        recordClick={jest.fn()}
       />);
 
       const allImage = await screen.queryAllByRole('img');
@@ -173,6 +180,7 @@ describe('Related & Outfit Component', () => {
           MockData.rel_40347,
           MockData.rel_40348,
         ]}
+        recordClick={jest.fn()}
       />);
 
       const leftArrowIcon = screen.getByTitle('related-left-arrow');
@@ -198,6 +206,7 @@ describe('Related & Outfit Component', () => {
           feature={MockData.feature}
           featureMeta={MockData.featureMeta}
           relProd={MockData.rel_40344}
+          recordClick={jest.fn()}
         />);
       });
 
@@ -219,6 +228,7 @@ describe('Related & Outfit Component', () => {
           feature={MockData.feature}
           featureMeta={MockData.featureMeta}
           relProd={MockData.rel_40344}
+          recordClick={jest.fn()}
         />);
       });
     });

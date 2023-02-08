@@ -6,7 +6,7 @@ import StarRating from '../../shared/StarRating/StarRating.jsx';
 import imgUnavailable from '../assets/imgUnavailable.png';
 
 export default function OutfitProduct({
-  outfitId, outfitIdList, setOutfitIdList, setFeatureProduct,
+  outfitId, outfitIdList, setOutfitIdList, setFeatureProduct, index,
 }) {
   const [outfitProd, setOutfitProd] = useState();
   const [outfitStyle, setOutfitStyle] = useState();
@@ -44,7 +44,7 @@ export default function OutfitProduct({
   const ratingPercentage = Math.floor((actualPts / totalPts) * 100).toString();
 
   return (
-    <div>
+    <div id={`outfitProduct${index}`}>
       <div className="outfit-item">
         <div id="outfit-img-wrapper">
           <MdRemoveCircleOutline

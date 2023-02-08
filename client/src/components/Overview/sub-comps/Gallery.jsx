@@ -16,10 +16,13 @@ export default function Gallery({
 
   // HELPER FUNCTION //
   const toggleThumbSelect = (event) => {
+    let { id } = event.target;
+    id = id.slice(0, id.length - 1);
     const oldSelect = document.getElementsByClassName('selected')[0];
-    const newSelect = event.target.parentNode;
+    const newSelect = document.getElementById(`${id}a`).parentNode;
     oldSelect.className = 'slide';
     newSelect.className = 'selected';
+    newSelect.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     btnRenderCheck();
   };
 
@@ -118,6 +121,7 @@ export default function Gallery({
         toggleHeroLeft={toggleHeroLeft}
         toggleHeroRight={toggleHeroRight}
         toggleThumbSelect={toggleThumbSelect}
+        toggleHero={toggleHero}
       />
     </div>
   );

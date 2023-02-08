@@ -6,7 +6,6 @@ import axios from 'axios';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 
 export default function UploadAndDisplayImage({
-  setImageUploadModal,
   selectedImage,
   setSelectedImage,
   newReview,

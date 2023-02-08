@@ -65,18 +65,6 @@ export default function SubmitReview({
     setShowThankyou(true);
   };
 
-  // HELPER FUNCTIONS//
-
-  const ThankYouWindow = () => {
-    const x = window.open('', '', 'width=400, height=200');
-    x.document.open();
-    x.document.write('<h1>Thanks for submitting your review!</h1>');
-    x.document.close();
-    setTimeout(() => {
-      x.close();
-    }, 2000);
-  };
-
   return (
     <div className="submit-review-btn-container">
       <button className="submit-review-btn" type="button" onClick={() => addReview()}>Submit Review</button>

@@ -22,10 +22,13 @@ export default function ReviewTracker({
       4: 0,
       5: 0,
     };
-    for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
+    for (let i = 0; i < reviews.length; i += 1) { // logic to display breakdown of total reviews
+      // !! slice(0, listIndex) will show review breakdown for displayed reviews !!
       ratingTotals[reviews[i].rating] += 1;
     }
-    const total = reviews.slice(0, listIndex).length;
+    // !! const total = reviews.slice(0, listIndex).length; !!
+    // !! logic to display breakdown of reviews relative to current number of displayed reviews !!
+    const total = reviews.length; // logic to display breakdown of total reviews
     setNumReviews(ratingTotals);
     setPercentages({
       1: (ratingTotals[1] / total) * 100,

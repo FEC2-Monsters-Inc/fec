@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
+import ThankYouModal from './sub-components/ThankYouModal.jsx';
 import './ratings.css';
 
 export default function Ratings({
@@ -15,6 +16,7 @@ export default function Ratings({
   const [selectedRating, setSelectedRating] = useState(null);
   const [listLength, setListLength] = useState(0);
   const [listIndex, setListIndex] = useState(2);
+  const [showThankyou, setShowThankyou] = useState(false);
 
   return (
     // eslint-disable-next-line -- not meant to be interactive
@@ -42,6 +44,11 @@ export default function Ratings({
           feature={feature}
           reviewMeta={reviewMeta}
           setReviewMeta={setReviewMeta}
+          setShowThankyou={setShowThankyou}
+        />
+        <ThankYouModal
+          showThankyou={showThankyou}
+          setShowThankyou={setShowThankyou}
         />
       </div>
     </div>

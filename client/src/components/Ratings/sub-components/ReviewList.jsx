@@ -15,6 +15,7 @@ export default function ReviewList({
   feature,
   reviewMeta,
   setReviewMeta,
+  setShowThankyou,
 }) {
   // STATE DATA //
   const [reviewExpander, setReviewExpander] = useState('25rem');
@@ -95,7 +96,6 @@ export default function ReviewList({
 
   return (
     <div className="review-list-container">
-      {console.log(listIndex)}
       <div className="review-list-dropdown-container">
         <div className="searchbar-dropdown-container">
           <RelevanceDropdown
@@ -141,6 +141,7 @@ export default function ReviewList({
                 setReviewMeta={setReviewMeta}
                 reviews={reviews}
                 setReviews={setReviews}
+                setShowThankyou={setShowThankyou}
               />
             )
             : null

@@ -152,8 +152,9 @@ export default function ReviewTile({
         {showFull ? review.body.substring(250) : elipsesSpan()}
       </p>
       <p className="review-tile-recommendation">
-        {review.recommend ? <AiFillCheckCircle /> : null}
-        {review.recommend ? 'I recommend this product' : null}
+        {review.recommend ? <AiFillCheckCircle style={{ color: 'green' }} /> : null}
+        {' '}
+        {review.recommend ? <span className="review-tile-recommendation-status">I recommend this product</span> : null}
       </p>
       <p className="review-tile-response">
         { review.response

@@ -17,6 +17,8 @@ export default function Question({
   updateQuestions,
   filterText,
   productName,
+  active,
+  setActive,
 }) {
   const [sortedAnswers, setSortedAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
@@ -77,6 +79,11 @@ export default function Question({
     );
   };
 
+  const expand = () => {
+    if (!active)setActive(question_id);
+    else setActive(null);
+  };
+
   useEffect(() => {
     if (Object.keys(answers).length < 2) {
       setNumAnswers(Object.keys(answers).length);
@@ -89,8 +96,8 @@ export default function Question({
       <div className="qa question">
         <button
           type="button"
-          className={`qa accord${expandStatus ? ' active' : ''}`}
-          onClick={() => setExpandStatus(!expandStatus)}
+          className={`qa accord${active ? ' active' : ''}`}
+          onClick={expand}
         >
           <div className="qa q-body">
             {'Q: '}
@@ -98,7 +105,7 @@ export default function Question({
           </div>
         </button>
         <CSSTransition
-          in={expandStatus}
+          in={active}
           nodeRef={panelRef}
           timeout={500}
           classNames="panel"

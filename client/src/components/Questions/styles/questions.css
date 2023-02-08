@@ -79,8 +79,8 @@
   text-align: left;
   border-radius: 0;
   outline: none;
-  transition: 0.4s;
   border-width: 0;
+  padding: 0.5rem 1rem;
 }
 
 .qa.q\&a:first-child .qa.accord {

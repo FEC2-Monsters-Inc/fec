@@ -11,6 +11,7 @@ export default function QuestionsList({
 }) {
   const [numQuestions, setNumQuestions] = useState(2);
   const [showAddQ, setShowAddQ] = useState(false);
+  const [activeQ, setActiveQ] = useState(null);
 
   const loadMoreQuestions = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
@@ -43,6 +44,8 @@ export default function QuestionsList({
               updateQuestions={updateQuestions}
               filterText={filterText}
               productName={productName}
+              active={activeQ === question.question_id}
+              setActive={setActiveQ}
             />
           ))
           : null}

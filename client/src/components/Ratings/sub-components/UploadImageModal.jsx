@@ -3,10 +3,9 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FcUpload } from 'react-icons/fc';
+import { AiOutlineCloudUpload } from 'react-icons/ai';
 
 export default function UploadAndDisplayImage({
-  setImageUploadModal,
   selectedImage,
   setSelectedImage,
   newReview,
@@ -73,11 +72,13 @@ export default function UploadAndDisplayImage({
                 }
               }}
             >
-              <p
+              <div
                 className="drag-and-drop-text"
               >
-                Drag And Drop Or Click To Upload Your Image!
-                <FcUpload className="review-image-upload-icon" />
+                <AiOutlineCloudUpload className="review-image-upload-icon" />
+                <div>Drag And Drop Files</div>
+                <div>or</div>
+                <button type="button" className="review-image-upload-button">Click To Upload Your Image!</button>
                 <input
                   className="xyz"
                   type="file"
@@ -89,7 +90,7 @@ export default function UploadAndDisplayImage({
                     }
                   }}
                 />
-              </p>
+              </div>
             </div>
           )}
         </div>

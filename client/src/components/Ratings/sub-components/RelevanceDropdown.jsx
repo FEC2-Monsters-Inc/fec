@@ -24,7 +24,7 @@ export default function RelevanceDropdown({
   const handleNew = () => {
     const sortByDate = (data) => data.sort((a, b) => new Date(b.date) - new Date(a.date));
     const onPage = sortByDate(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setReviews(onPage.concat(sortByDate(reviews.slice(listIndex))));
     setShowDropdown(false);
     setSortString('recency');
   };
@@ -32,7 +32,7 @@ export default function RelevanceDropdown({
   const handleHelpful = () => {
     const sortByHelp = (data) => data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
     const onPage = sortByHelp(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setReviews(onPage.concat(sortByHelp(reviews.slice(listIndex))));
     setShowDropdown(false);
     setSortString('helpful');
   };
@@ -48,7 +48,7 @@ export default function RelevanceDropdown({
       return new Date(b.date) - new Date(a.date);
     });
     const onPage = sortByRelevancy(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(reviews.slice(listIndex)));
+    setReviews(onPage.concat(sortByRelevancy(reviews.slice(listIndex))));
     setShowDropdown(false);
     setSortString('relevance');
   };

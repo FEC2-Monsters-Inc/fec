@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './overview.css';
 
-/// // SUB-COMPONENETS /////
+// SUB-COMPONENETS //
 import Search from './sub-comps/Search.jsx';
 import Gallery from './sub-comps/Gallery.jsx';
 import ProdInfo from './sub-comps/ProdInfo.jsx';

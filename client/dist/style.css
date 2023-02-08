@@ -61,4 +61,7 @@ table {
 	margin: auto;
 }
 
+#modal {
+	z-index: 1000;
+}
 /* ///// MAKE CSS CHANGES IN YOUR RELEVANT COMPONENT CSS FOLDER ///// */

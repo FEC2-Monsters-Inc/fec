@@ -59,9 +59,9 @@ export default function Questions({
   }, [filterText]);
 
   useEffect(() => {
-    // if (filterText.length < 3) {
-    //   filterQuestionsWithAnswers();
-    // }
+    if (filterText.length < 3) {
+      filterQuestionsWithAnswers();
+    }
   }, [questions]);
 
   // TODO: want to refactor the footer buttons in QuestionsList into this

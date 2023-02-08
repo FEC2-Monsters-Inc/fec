@@ -170,6 +170,7 @@
 
 .qa.panel.panel-exit {
   max-height: 50vh;
+  overflow-y: auto;
 }
 
 .qa.panel.panel-exit-active {

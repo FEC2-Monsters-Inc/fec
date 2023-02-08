@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineDoubleRight, AiOutlineExpand } from 'react-icons/ai';
 import GalleryThumbnails from './GalleryThumbnails.jsx';
+import HeroModal from './HeroModal.jsx';
 
 export default function Gallery({
   images,
@@ -10,12 +11,18 @@ export default function Gallery({
   leftBtn,
   btnRenderCheck,
 }) {
+  // STATE DATA //
+  const [heroModal, setHeroModal] = useState(false);
+
   // HELPER FUNCTION //
   const toggleThumbSelect = (event) => {
+    let { id } = event.target;
+    id = id.slice(0, id.length - 1);
     const oldSelect = document.getElementsByClassName('selected')[0];
-    const newSelect = event.target.parentNode;
+    const newSelect = document.getElementById(`${id}a`).parentNode;
     oldSelect.className = 'slide';
     newSelect.className = 'selected';
+    newSelect.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     btnRenderCheck();
   };
 
@@ -43,6 +50,7 @@ export default function Gallery({
       prevThumb.className = 'selected';
       btnRenderCheck();
     }
+    prevThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
   const toggleHeroRight = () => {
@@ -60,6 +68,7 @@ export default function Gallery({
       nextThumb.className = 'selected';
       btnRenderCheck();
     }
+    nextThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
   return (
@@ -78,13 +87,20 @@ export default function Gallery({
           <AiOutlineDoubleRight size="2em" />
         </button>
         {heroImage.url
-          ? <img className="hero-image" src={heroImage.url} alt="product hero" />
+          ? (
+            <img
+              className="hero-image"
+              src={heroImage.url}
+              onClick={() => setHeroModal(true)}
+              alt="product hero"
+            />
+          )
           : null}
         <button
           className="expand-hero"
           type="button"
         >
-          <AiOutlineExpand size="1.5em" />
+          <AiOutlineExpand size="1.5em" onClick={() => setHeroModal(true)} />
         </button>
         <button
           className={`scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
@@ -94,6 +110,19 @@ export default function Gallery({
           <AiOutlineDoubleRight size="2em" />
         </button>
       </div>
+      <HeroModal
+        heroModal={heroModal}
+        setHeroModal={setHeroModal}
+        heroImage={heroImage}
+        setHero={setHero}
+        images={images}
+        leftBtn={leftBtn}
+        rightBtn={rightBtn}
+        toggleHeroLeft={toggleHeroLeft}
+        toggleHeroRight={toggleHeroRight}
+        toggleThumbSelect={toggleThumbSelect}
+        toggleHero={toggleHero}
+      />
     </div>
   );
 }

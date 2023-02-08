@@ -81,6 +81,33 @@
   outline: none;
   border-width: 0;
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa.accord.active, .qa.accord:hover {
+  background-color: #ccc;
+  transition: background-color 250ms;
+}
+
+.qa.expand-btn {
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: 2rem;
+  transform: rotate(0deg);
+  transition: transform 250ms;
+}
+
+.qa.expand-btn:hover {
+  background-color:#aaa;
+  transform: rotate(0deg);
+  transition: background-color 250ms transform 250ms;
+}
+
+.qa.expand-btn.active {
+  transform: rotate(180deg);
+  transition: transform 250ms;
 }
 
 .qa.q\&a:first-child .qa.accord {
@@ -97,10 +124,6 @@
 
 .qa.q\&a:only-child .qa.accord {
   border-radius: 0.5rem;
-}
-
-.qa.accord.active, .qa.accord:hover {
-  background-color: #ccc;
 }
 
 .qa.q\&a:last-child .qa.accord.active{

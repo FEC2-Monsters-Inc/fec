@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { MdExpandMore } from 'react-icons/md';
 import Answer from './Answer.jsx';
 import QandAModal from './QandAModal.jsx';
 import fetcher from '../../fetchers';
@@ -103,6 +104,9 @@ export default function Question({
             {'Q: '}
             {formatBody()}
           </div>
+          <MdExpandMore
+            className={`qa expand-btn${active ? ' active' : ''}`}
+          />
         </button>
         <CSSTransition
           in={active}

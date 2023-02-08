@@ -161,7 +161,7 @@
 .qa.panel.panel-enter-active {
   max-height: 50vh;
   overflow-y: auto;
-  transition: max-height 500ms ease-out;
+  transition: max-height 750ms ease-out;
 }
 
 .qa.panel.panel-enter-done {
@@ -177,7 +177,7 @@
 .qa.panel.panel-exit-active {
   max-height: 0;
   overflow-y: auto;
-  transition: max-height 500ms ease-out;
+  transition: max-height 750ms ease-out;
 }
 
 /* ANSWERS SECTION */

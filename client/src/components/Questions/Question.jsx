@@ -142,7 +142,7 @@ export default function Question({
         <CSSTransition
           in={active}
           nodeRef={panelRef}
-          timeout={500}
+          timeout={750}
           classNames="panel"
         >
           <div

@@ -55,13 +55,13 @@ export default function Questions({
   useEffect(() => {
     if (filterText.length >= 3) {
       setTimer(setTimeout(filterQuestionsBySearch, 500));
-    }
+    } else filterQuestionsWithAnswers();
   }, [filterText]);
 
   useEffect(() => {
-    if (filterText.length < 3) {
-      filterQuestionsWithAnswers();
-    }
+    // if (filterText.length < 3) {
+    //   filterQuestionsWithAnswers();
+    // }
   }, [questions]);
 
   // TODO: want to refactor the footer buttons in QuestionsList into this

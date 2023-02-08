@@ -33,18 +33,21 @@ export default function QuestionsList({
   }, [questions]);
 
   return (
-    <div className="qa list">
-      {questions.length > 0
-        ? questions.slice(0, numQuestions).map((question) => (
-          <Question
-            key={question.question_id}
-            question={question}
-            updateQuestions={updateQuestions}
-            filterText={filterText}
-            productName={productName}
-          />
-        ))
-        : null}
+    <>
+      <div className="qa list accordion">
+        {questions.length > 0
+          ? questions.slice(0, numQuestions).map((question) => (
+            <Question
+              key={question.question_id}
+              question={question}
+              updateQuestions={updateQuestions}
+              filterText={filterText}
+              productName={productName}
+            />
+          ))
+          : null}
+      </div>
+      {/* TODO: extract this and logic to Questions.jsx */}
       <div className="qa footer-control">
         <button
           className="qa footer-btn"
@@ -67,7 +70,6 @@ export default function QuestionsList({
           </button>
         )
           : null}
-
         <QandAModal
           type="question"
           show={showAddQ}
@@ -76,6 +78,6 @@ export default function QuestionsList({
           productName={productName}
         />
       </div>
-    </div>
+    </>
   );
 }

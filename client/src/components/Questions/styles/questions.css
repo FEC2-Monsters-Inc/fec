@@ -102,12 +102,12 @@
 .qa.expand-btn:hover {
   background-color:#aaa;
   transform: rotate(0deg);
-  transition: background-color 250ms transform 250ms;
+  transition: background-color 250ms, transform 250ms;
 }
 
 .qa.expand-btn.active {
   transform: rotate(180deg);
-  transition: transform 250ms;
+  transition: background-color 250ms, transform 250ms;
 }
 
 .qa.q\&a:first-child .qa.accord {

@@ -55,7 +55,7 @@ export default function Question({
 
   const collapseAnswers = (e) => {
     if (e.type === 'click' || e.key === 'Enter') {
-      setNumAnswers(Object.keys(answers).length < 2 ? answers.length : 2);
+      setNumAnswers(Object.keys(answers).length < 2 ? Object.keys(answers).length : 2);
     }
   };
 
@@ -83,6 +83,37 @@ export default function Question({
   const expand = () => {
     if (!active)setActive(question_id);
     else setActive(null);
+  };
+
+  const renderFooter = () => {
+    if (numAnswers < Object.keys(answers).length) {
+      return (
+        <button
+          className="qa btn-link-bold left-ctrl"
+          type="button"
+          tabIndex={0}
+          onKeyUp={loadMoreAnswers}
+          onClick={loadMoreAnswers}
+        >
+          LOAD MORE ANSWERS
+        </button>
+      );
+    }
+    if (numAnswers === Object.keys(answers).length
+      && Object.keys(answers).length >= 2) {
+      return (
+        <button
+          className="qa btn-link-bold left-ctrl"
+          type="button"
+          tabIndex={0}
+          onKeyUp={collapseAnswers}
+          onClick={collapseAnswers}
+        >
+          COLLAPSE ANSWERS
+        </button>
+      );
+    }
+    return <div />;
   };
 
   useEffect(() => {
@@ -135,27 +166,7 @@ export default function Question({
               </div>
             ) : null}
             <div className="qa panel-footer-ctrl">
-              {numAnswers < Object.keys(answers).length ? (
-                <button
-                  className="qa btn-link-bold left-ctrl"
-                  type="button"
-                  tabIndex={0}
-                  onKeyUp={loadMoreAnswers}
-                  onClick={loadMoreAnswers}
-                >
-                  LOAD MORE ANSWERS
-                </button>
-              ) : (
-                <button
-                  className="qa btn-link-bold left-ctrl"
-                  type="button"
-                  tabIndex={0}
-                  onKeyUp={collapseAnswers}
-                  onClick={collapseAnswers}
-                >
-                  COLLAPSE ANSWERS
-                </button>
-              )}
+              {renderFooter()}
               <span className="qa right-ctrl">
                 {'Is this question helpful? '}
                 {helpfulStatus ? (

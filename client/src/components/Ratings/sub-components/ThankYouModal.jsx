@@ -9,7 +9,7 @@ export default function ThankYouModal({ showThankyou, setShowThankyou }) {
 
   setTimeout(() => {
     setShowThankyou(false);
-  }, 300000);
+  }, 3000);
 
   return ReactDOM.createPortal((
     <div>

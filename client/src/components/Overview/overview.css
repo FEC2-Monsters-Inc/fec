@@ -8,7 +8,8 @@ p, h1, h3, li  {
 
 button, select {
   background-color: white;
-  border-radius: 3px;
+  border: 1px solid #746F72;
+  border-radius: 0;
 }
 
 button:hover,
@@ -25,38 +26,6 @@ li {
   display: flex;
   list-style: none;
 }
-
-/* ///// HEADER ///// */
-#header {
-  align-items: center;
-  background-color: #F7F4F3;
-  border-bottom: 1px solid #D4D2D1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  color: #DDE2C6;
-  display: flex;
-  font-family: 'Open Sans', sans-serif;
-  height: 80px;
-  justify-content: space-between;
-  margin-bottom: 2em;
-  padding: 0 2em;
-  z-index: 10;
-}
-
-.temp-logo {
-  color: #E60023;
-  font-size: 1.5em;
-  font-style: italic;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-/*  ///// SEARCH COMPONENT ///// */
-#search {
-  align-items: flex-end;
-  display: flex;
-  color: #E60023;
-}
-
 
 /* ///// OVERVIEW COMPONENT ///// */
 #overview {

@@ -1,8 +1,8 @@
 /* REVIEW HEADER AND STARS */
 #ratings-widget {
-  max-width: 800px;
+  max-width: 1200px;
   padding-bottom: 2em;
-  margin: 3em 0 2em 2em;
+  margin: auto;
 }
 
 .review-header {
@@ -453,11 +453,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%;
-  max-height: 90vh;
-  max-width: 1200px;
+  height: 85vh;
+  max-height: 85vh;
+  max-width: 800px;
   overflow: scroll;
-  padding: 2em 2em 1em;
+  padding: 4em 3em;
   position: relative;
   width: 90%;
 }
@@ -508,8 +508,9 @@
 
 .modal-top {
   align-items: center;
+  border-bottom: 2px solid #D4D2D1;
   display: flex;
-  justify-content: center;
+  margin-bottom: 1.5em;
 }
 
 .review-modal-star-container {
@@ -520,6 +521,7 @@
 }
 
 .leave-stars {
+  font-size: 1.15em;
   margin-right: 1em;
 }
 
@@ -538,5 +540,338 @@
 }
 
 .review-modal-recommendation-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   width: 50%;
+}
+
+.rvw-modal-rccmnd {
+  font-size: 1.15em;
+  width: fit-content;
+}
+
+.review-asterisk-recommend {
+  color: #E60023;
+  margin-right: 10px;
+}
+
+.reco-label {
+  color: #746F72;
+  margin-right: 10px;
+}
+
+.reco-label input:hover {
+  cursor: pointer;
+}
+
+.reco-label input {
+  accent-color: #E60023;
+}
+
+/* MODAL CHARACTERISTIC RADIO BUTTONS */
+.modal-chars-container {
+  border-bottom: 2px solid #D4D2D1;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.review-modal-characteristics-title {
+  font-size: 1.15em;
+  margin-bottom: 10px;
+}
+
+.modal-chars {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1.5em;
+}
+
+.modal-char-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-char-row {
+  width: 100%;
+}
+
+.radio-row-title {
+  color: #746F72;
+  margin-bottom: 7px;
+}
+
+.radio-row-title span {
+  color: #E60023;
+}
+
+.modal-char-col {
+  color: #746F72;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-char-radio {
+  accent-color: #E60023;
+  margin-bottom: 5px;
+}
+
+.modal-char-radio:hover {
+  cursor: pointer;
+}
+
+/* REVIEW SUMMARY AND BODY */
+.rvw-text-container {
+  border-bottom: 2px solid #D4D2D1;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.review-summ-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.review-summ-label,
+.review-body-title {
+  font-size: 1.15em;
+}
+
+.rvw-summ {
+  accent-color: #E60023;
+  border: 1px solid #746F72;
+  border-radius: 0;
+  color: #746F72;
+  padding: 5px;
+  width: 75%;
+}
+
+.rvw-summ:focus {
+  outline: none !important;
+  border:1px solid #E60023;
+}
+
+.review-body-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.rvw-body-container {
+  position: relative;
+  width: 75%;
+}
+
+.review-asterisk-body {
+  color: #E60023;
+}
+
+.rvw-body-text-container {
+  width: 75%;
+}
+
+.rvw-body {
+  accent-color: #E60023;
+  border: 1px solid #746F72;
+  border-radius: 0;
+  color: #746F72;
+  padding: 5px;
+  width: 100%;
+}
+
+.rvw-body:focus {
+  outline: none !important;
+  border: 1px solid #E60023;
+}
+
+.write-review-character-count {
+  bottom: -12px;
+  color: #746F72;
+  font-size: .75em;
+  left: 0;
+  position: absolute;
+}
+
+.review-body-minimum-reached {
+  align-items: center;
+  display: flex;
+  color: #E60023;
+}
+
+/* IMAGE UPLOAD  */
+.image-upload {
+  align-items: center;
+  border-bottom: 2px solid #D4D2D1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.drag-and-drop {
+  align-items: center;
+  background-color: #D4D2D14D;
+  border: 2px solid #D4D2D1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5em;
+  min-height: 150px;
+  height: 90%;
+  width: 50%
+}
+
+.drag-and-drop-text {
+  font-size: 1.15em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.drag-file {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.img-btn {
+  width: fit-content
+}
+
+.uploaded-imgs {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5em;
+  width: 50%;
+}
+
+.img-container {
+  border: 1px solid #D4D2D1;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  margin: 10px;
+  max-height: 30%;
+  max-width: 30%;
+  padding: 10px;
+  position: relative;
+}
+
+.uploaded-img {
+  width: 100%;
+}
+
+.rmv-img {
+  background-color: #EEEEEE00;
+  border: none;
+  color: #E60023;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+/* EMAIL AND NAME */
+.email-name {
+  align-items: center;
+  border-bottom: 2px solid #D4D2D1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.form__label {
+  font-size: 1.15em;
+  margin-right: 10px;
+}
+
+.review-asterisk-name {
+  color: #E60023;
+}
+
+.email-name-container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5em;
+  width: 50%;
+}
+
+.form-field {
+  border: 1px solid #746F72;
+  border-radius: 0;
+  color: #746F72;
+  padding: 10px;
+  width: 60%;
+}
+
+.form-field:focus {
+  outline: none !important;
+  border: 1px solid #E60023;
+}
+
+.email-disclaimer {
+  color: #746F72;
+  font-size: .75em;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.write-review-email-parent {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5em;
+  width: 50%;
+}
+
+.review-asterisk-email {
+  color: #E60023;
+}
+
+/*  SUBMIT REVIEW  */
+.submit-review-btn-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 1em 0 2em;
+}
+
+.submit-review-btn {
+  background-color: #E60023;
+  border: 2px solid #E60023;
+  color: #D4D2D1;
+  font-size: 1.15em;
+  font-weight: 600;
+  height: 75px;
+  width: 85%;
+}
+
+.submit-review-btn:hover {
+  background-color: #F7F4F3;
+  color: #E60023;
+}
+
+.submit-bad-review {
+  border: 1px solid #0C1B33;
+  font-size: 1.15em;
+  margin: 1.5em;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 85%;
+}
+
+.submit-asterik {
+  color: #E60023;
 }

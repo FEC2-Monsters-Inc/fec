@@ -55,12 +55,18 @@ export default function App() {
   if (!featureProduct.name) return <div />;
   return (
     <>
-      <Overview
+      {/* <Overview
         product={featureProduct}
         styles={styles}
         reviews={reviews}
         recordClick={recordClick}
       />
+      <Related
+        feature={featureProduct}
+        relatedIdList={relatedIdList}
+        setFeatureProduct={setFeatureProduct}
+        recordClick={recordClick}
+      /> */}
       <Ratings
         feature={featureProduct}
         reviews={reviews}
@@ -69,16 +75,10 @@ export default function App() {
         setReviewMeta={setReviewMeta}
         recordClick={recordClick}
       />
-      <Related
-        feature={featureProduct}
-        relatedIdList={relatedIdList}
-        setFeatureProduct={setFeatureProduct}
-        recordClick={recordClick}
-      />
-      <Questions
+      {/* <Questions
         featureProduct={featureProduct}
         recordClick={recordClick}
-      />
+      /> */}
     </>
   );
 }

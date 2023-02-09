@@ -37,32 +37,34 @@ export default function ModalCharRadioBtns({
   };
 
   const RadioButtonRow = () => Object.keys(reviewMeta.characteristics).map((characteristic) => (
-    <div className="review-radio-row-container" key={`${characteristic}a`} onBlur={() => handleRequiredChars(characteristic)}>
-      <div className="radio-row-title">
+    <div className="modal-char-col" key={`${characteristic}a`}>
+      <p className="radio-row-title">
         {characteristic}
         <span className={`review-asterisk-radiobtns-${characteristic}`}>*</span>
+      </p>
+      <div className="modal-char-row" onBlur={() => handleRequiredChars(characteristic)}>
+        {[1, 2, 3, 4, 5].map((number) => (
+          <div className="review-characteristics-modal-container" key={`${number}a`}>
+            <input
+              type="radio"
+              name={characteristic}
+              value={number}
+              onChange={() => setCharacteristicHandler(characteristic, number)}
+              id={number + characteristic}
+              className="modal-char-radio"
+            />
+            <label className="write-review-modal-label" htmlFor={characteristic}>
+              {characteristicMapper(characteristic)[number - 1]}
+            </label>
+          </div>
+        ))}
       </div>
-      {[1, 2, 3, 4, 5].map((number) => (
-        <div className="review-characteristics-modal-container" key={`${number}a`}>
-          <label className="write-review-modal-label" htmlFor={characteristic}>
-            {characteristicMapper(characteristic)[number - 1]}
-          </label>
-          <input
-            type="radio"
-            name={characteristic}
-            value={number}
-            onChange={() => setCharacteristicHandler(characteristic, number)}
-            id={number + characteristic}
-            className="write-review-characteristics-modal"
-          />
-        </div>
-      ))}
     </div>
   ));
 
   return (
-    <>
+    <div className="modal-chars">
       {RadioButtonRow()}
-    </>
+    </div>
   );
 }

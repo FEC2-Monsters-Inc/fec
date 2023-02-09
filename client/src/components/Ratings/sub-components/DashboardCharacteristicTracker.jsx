@@ -9,7 +9,7 @@ export default function CharacteristicTracker({ reviewMeta }) {
   const renderSlider = () => Object.keys(reviewMeta.characteristics).map((key) => {
     const keyVal = reviewMeta.characteristics[key].id;
     return (
-      <div key={keyVal}>
+      <div className="characteristic-parent" key={keyVal}>
         <p>{key}</p>
         <CharacteristicBar reviewMeta={reviewMeta.characteristics[key].value} charName={key} />
       </div>
@@ -24,7 +24,7 @@ export default function CharacteristicTracker({ reviewMeta }) {
   }, [reviewMeta]);
 
   return (
-    <div>
+    <div className="characteristic-container">
       { components
         ? renderSlider()
         : null}

@@ -55,20 +55,30 @@ export default function SubmitReview({
         setReviewModal(false);
         setValidReview(true);
       })
-      .catch((err) => invalidReview());
+      .catch(() => invalidReview());
     fetcher.getReviewMeta(feature.id)
       .then(({ data }) => setReviewMeta(data))
-      .catch((err) => console.err('Error getting Review Meta after submit: ', err));
+      .catch((err) => console.error('Error getting Review Meta after submit: ', err));
     fetcher.getReviews(feature.id)
       .then(({ data }) => setReviews(data.results))
-      .catch((err) => console.err('Error getting Reviews after submit: ', err));
-    setShowThankyou(true);
+      .catch((err) => console.error('Error getting Reviews after submit: ', err));
+    // setShowThankyou(true);
   };
 
   return (
     <div className="submit-review-btn-container">
+      {validReview ? null : (
+        <p className="submit-bad-review">
+          Please Complete All
+          <span className="submit-asterik">
+            {'  '}
+            REQUIRED*
+          </span>
+          {'  '}
+          Fields
+        </p>
+      )}
       <button className="submit-review-btn" type="button" onClick={() => addReview()}>Submit Review</button>
-      {validReview ? null : <p className="submit-bad-review">Please Complete All Mandatory*Fields</p>}
     </div>
   );
 }

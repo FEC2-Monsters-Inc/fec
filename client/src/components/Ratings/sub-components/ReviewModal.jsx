@@ -1,12 +1,18 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { AiOutlineClose, AiFillCheckSquare } from 'react-icons/ai';
 import ReviewModalStars from './ReviewModalStars.jsx';
 import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import UploadAndDisplayImage from './UploadImageModal.jsx';
 
 export default function ReviewModal({
-  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews, setShowThankyou,
+  setReviewModal,
+  feature,
+  reviewMeta,
+  setReviewMeta,
+  setReviews,
+  setShowThankyou,
 }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
@@ -31,7 +37,7 @@ export default function ReviewModal({
 
   const closeModal = () => {
     document.querySelector('.write-review-modal').classList.remove('denial');
-    document.querySelector('.write-review-modal').classList.add('exiting');
+    document.querySelector('.write-review-modal-container').classList.add('hide-modal');
     setTimeout(() => {
       setReviewModal(false);
     }, 200);
@@ -157,40 +163,48 @@ export default function ReviewModal({
   };
 
   return ReactDOM.createPortal((
-    <div className="write-review-modal">
-      <div className="write-review-modal-parent">
-        <button className="close-review-modal" type="button" onClick={() => closeModal()}>&times;</button>
-        <p className="write-review-modal-title">
-          Write your review about
-          {' '}
-          {feature.name}
-        </p>
-        <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
-          {' '}
-          {/* Rename and Refactor */}
-          <ReviewModalStars
-            onChange={starRatingTextHandler}
-          />
-          <span className="review-asterisk-stars">*</span>
-          <p>{starRatingText}</p>
-        </div>
-        <div className="review-modal-recommendation-container" onBlur={() => handleRequiredRecommend()}>
-          <p>
-            Do you recommend this product?
+    <div className="write-review-modal-container">
+      <div className="write-review-modal">
+        <button className="close-review-modal" type="button" onClick={() => closeModal()}>
+          <AiOutlineClose size="1.5em" />
+        </button>
+        <div className="rvw-modal-title">
+          <p className="write-review-modal-title">
+            Leaving A Review For:
             {' '}
-            <span className="review-asterisk-recommend">*</span>
+            <span className="rvw-prod">
+              {feature.name}
+            </span>
           </p>
-          <label htmlFor="recommendation-yes">
-            <input type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
-            Yes
-          </label>
-          <label htmlFor="recommendation-no">
-            <input type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
-            No
-          </label>
+          <div className="modal-top">
+            <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
+              <p className="leave-stars">Your Rating:</p>
+              {' '}
+              {/* Rename and Refactor */}
+              <ReviewModalStars
+                onChange={starRatingTextHandler}
+              />
+              <p className="star-rting">{starRatingText}</p>
+            </div>
+            <div className="review-modal-recommendation-container" onBlur={() => handleRequiredRecommend()}>
+              <p className="rvw-modal-rccmnd">
+                Recommended:
+                {' '}
+                <span className="review-asterisk-recommend">*</span>
+              </p>
+              <label className="reco-label" htmlFor="recommendation-yes">
+                <input type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
+                Yes
+              </label>
+              <label className="reco-label" htmlFor="recommendation-no">
+                <input type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
+                No
+              </label>
+            </div>
+          </div>
         </div>
-        <div>
-          <p className="review-modal-characteristics-title">How did you like the...</p>
+        <div className="modal-chars-container">
+          <p className="review-modal-characteristics-title">Fit Characteristics:</p>
           {reviewMeta
             ? (
               <ModalCharRadioBtns
@@ -201,87 +215,82 @@ export default function ReviewModal({
               />
             ) : null}
         </div>
-        <div className="review-summ-container">
-          <p className="review-summ-label">Review Summary</p>
-          <div className="form__group1">
-            <textarea type="input" className="form__field1" placeholder="summary" name="summary" id="summary" maxLength="60" onChange={handleSummaryChange} ref={useRef()} required />
-            <label htmlFor="summary" className="form__label1">Give it a title (ex: OMG totes amazing)</label>
+        <div className="rvw-text-container">
+          <div className="review-summ-container">
+            <p className="review-summ-label">Review Summary:</p>
+            <textarea type="input" className="rvw-summ" placeholder="Example: Best purchase ever!" name="summary" id="summary" maxLength="60" onChange={handleSummaryChange} ref={useRef()} required />
+            {/* <p className="write-review-character-count">
+              60 Character Max:
+              {' '}
+              {summaryCount}
+            </p> */}
           </div>
-          {summaryCount
-            ? (
-              <p className="write-review-character-count">
-                Character Count:
-                {summaryCount}
-              </p>
-            )
-            : <br />}
-        </div>
-        <div className="review-summ-container">
-          <p className="review-body-title">Write your review below</p>
-          <div className="form__group1" onBlur={(e) => handleRequiredBody(e)}>
-            <textarea type="input" className="form__field1" placeholder="body" name="body" id="body" maxLength="1000" onChange={handleBodyChange} ref={useRef()} required />
-            <label htmlFor="body" className="form__label1">
-              Tell us about your purchase! (ex: I loved it!)
+          <div className="review-body-container">
+            <p className="review-body-title">
+              Write Your Review:
               <span className="review-asterisk-body">*</span>
-            </label>
+            </p>
+            <div className="rvw-body-container" onBlur={(e) => handleRequiredBody(e)}>
+              <textarea type="input" className="rvw-body" placeholder="Why did you like the product or not?" name="body" id="body" maxLength="1000" onChange={handleBodyChange} ref={useRef()} required />
+              <p className="write-review-character-count">
+                {bodyCount > 50
+                  ? (
+                    <span className="review-body-minimum-reached">
+                      <AiFillCheckSquare />
+                      {' '}
+                      Minimum Reached
+                    </span>
+                  )
+                  : `Minimum required characters left: ${50 - bodyCount}`}
+              </p>
+            </div>
           </div>
-          <p className="write-review-character-count">
-            {bodyCount > 50
-              ? <span className="review-body-minimum-reached">Minimum Reached!</span>
-              : `Minimum required characters left: ${51 - bodyCount}`}
-          </p>
         </div>
-        <br />
-        <br />
-        <div className="write-review-email-parent">
-          <UploadAndDisplayImage
-            setImageUploadModal={setImageUploadModal}
-            setSelectedImage={setSelectedImage}
-            selectedImage={selectedImage}
-            newReview={newReview}
-            setNewReview={setNewReview}
-            imgProgress={imgProgress}
-            setImgProgress={setImgProgress}
-          />
-          <div className="form__group field" onBlur={() => handleRequiredName()}>
-            <input type="input" className="form__field" placeholder="nickname" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
-            <label htmlFor="nickname" className="form__label">
-              Nickname
+        <UploadAndDisplayImage
+          setImageUploadModal={setImageUploadModal}
+          setSelectedImage={setSelectedImage}
+          selectedImage={selectedImage}
+          newReview={newReview}
+          setNewReview={setNewReview}
+          imgProgress={imgProgress}
+          setImgProgress={setImgProgress}
+        />
+        <div className="email-name">
+          <div className="email-name-container" onBlur={() => handleRequiredName()}>
+            <p className="form__label">
+              Nickname:
               <span className="review-asterisk-name">*</span>
-            </label>
+            </p>
+            <input type="input" className="form-field" placeholder="Example: jackson11!" name="nickname" id="nickname" maxLength="60" onChange={handleNameChange} required />
+            <p className="email-disclaimer">For privacy reasons, do not use your full name or email address.</p>
           </div>
-          <p className="email-disclaimer">For privacy reasons, do not use your full name or email address</p>
-        </div>
-        <div className="write-review-email-parent" onBlur={(e) => handleRequiredEmail(e)}>
-          <div className="form__group field">
-            <input type="input" className="form__field" placeholder="Name" name="name" id="name" maxLength="60" onChange={handleEmailChange} required />
-            <label htmlFor="name" className="form__label">
-              Email
+          <div className="write-review-email-parent" onBlur={(e) => handleRequiredEmail(e)}>
+            <p className="form__label">
+              Email:
               <span className="review-asterisk-email">*</span>
-            </label>
+            </p>
+            <input type="input" className="form-field" placeholder="Example: jackson11@email.com" name="name" id="name" maxLength="60" onChange={handleEmailChange} required />
+            <p className="email-disclaimer">For authentication reasons, you will not be emailed.</p>
           </div>
-          <p className="email-disclaimer">For authentication reasons, you will not be emailed</p>
         </div>
-        <div>
-          <SubmitReview
-            newReview={newReview}
-            chars={characteristics}
-            setChars={setChars}
-            setNewReview={setNewReview}
-            setReviewModal={setReviewModal}
-            feature={feature}
-            setReviewMeta={setReviewMeta}
-            setReviews={setReviews}
-            handleRequiredName={handleRequiredName}
-            handleRequiredBody={handleRequiredBody}
-            handleRequiredEmail={handleRequiredEmail}
-            handleRequiredStars={handleRequiredStars}
-            handleRequiredRecommend={handleRequiredRecommend}
-            reviewMeta={reviewMeta}
-            handleRequiredChars={handleRequiredChars}
-            setShowThankyou={setShowThankyou}
-          />
-        </div>
+        <SubmitReview
+          newReview={newReview}
+          chars={characteristics}
+          setChars={setChars}
+          setNewReview={setNewReview}
+          setReviewModal={setReviewModal}
+          feature={feature}
+          setReviewMeta={setReviewMeta}
+          setReviews={setReviews}
+          handleRequiredName={handleRequiredName}
+          handleRequiredBody={handleRequiredBody}
+          handleRequiredEmail={handleRequiredEmail}
+          handleRequiredStars={handleRequiredStars}
+          handleRequiredRecommend={handleRequiredRecommend}
+          reviewMeta={reviewMeta}
+          handleRequiredChars={handleRequiredChars}
+          setShowThankyou={setShowThankyou}
+        />
         {imageUploadModal
           ? (
             <UploadAndDisplayImage

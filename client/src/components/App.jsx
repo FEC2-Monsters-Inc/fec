@@ -11,6 +11,7 @@ export default function App({ product_id }) {
   // PRE-FETCH EMPTY INITIAL VALUE //
   const initFeature = { id: product_id, name: null };
 
+
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
   const [styles, setStyles] = useState(null);
@@ -56,7 +57,7 @@ export default function App({ product_id }) {
 
   if (!featureProduct.name) return <div />;
   return (
-    <div>
+    <>
       <Overview
         product={featureProduct}
         styles={styles}
@@ -81,6 +82,6 @@ export default function App({ product_id }) {
         featureProduct={featureProduct}
         recordClick={recordClick}
       />
-    </div>
+    </>
   );
 }

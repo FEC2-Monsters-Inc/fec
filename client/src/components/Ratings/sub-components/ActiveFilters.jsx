@@ -34,11 +34,14 @@ export default function ActiveFilters({ filter, setSelectedRating, setFilter }) 
 
   return (
     <div className="review-active-filter-container">
-      { filterStrings
-        ? `Reviews Displayed: ${filterStrings}`
-        : null }
+      <p className="filter-par-strings">
+        { filterStrings
+          ? `Filtered By: ${filterStrings}`
+          : null }
+
+      </p>
       { Object.keys(filter).length
-        ? <button type="button" onClick={() => filterReset()}>Reset Filters</button>
+        ? <button type="button" className="filter-btn" onClick={() => filterReset()}>Reset Filters</button>
         : null }
     </div>
   );

@@ -37,7 +37,7 @@ export default function ReviewModal({
 
   const closeModal = () => {
     document.querySelector('.write-review-modal').classList.remove('denial');
-    document.querySelector('.write-review-modal').classList.add('exiting');
+    document.querySelector('.write-review-modal-container').classList.add('hide-modal');
     setTimeout(() => {
       setReviewModal(false);
     }, 200);

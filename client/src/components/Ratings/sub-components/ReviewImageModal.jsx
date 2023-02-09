@@ -5,11 +5,11 @@ export default function ReviewImageModal({
   modalToggle, imgString, setModalToggle, name,
 }) {
   // EVENT HANDLERS // Needs better functionality to exit Modal w/o Mouse - REFACTOR LATER
-  const closeModal = (e) => {
-    if (e.key === 'Escape' || e.type === 'Click') {
+  const closeModal = () => {
+    document.querySelector('.review-image-modal-full-container').classList.add('hide-modal');
+    setTimeout(() => {
       setModalToggle(false);
-    }
-    setModalToggle(false);
+    }, 200);
   };
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export default function ReviewImageModal({
   return ReactDOM.createPortal((
     <div
       className="review-image-modal-full-container"
-      onClick={(e) => closeModal(e)}
-      onKeyPress={(e) => closeModal(e)}
+      onClick={closeModal}
+      onKeyPress={closeModal}
       role="button"
       tabIndex={0}
     >

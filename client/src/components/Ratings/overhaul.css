@@ -1,3 +1,14 @@
+/* ANIMATIONS */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* REVIEW HEADER AND STARS */
 #ratings-widget {
   max-width: 1200px;
@@ -226,6 +237,7 @@
 }
 
 .review-sort-dropdown-child {
+  animation: fadeIn .5s;
   color: #746F72;
   position: absolute;
   right: 5px;
@@ -411,6 +423,7 @@
 /*  REVIEW TILE IMAGE MODAL */
 .review-image-modal-full-container {
   align-items: center;
+  animation: fadeIn .5s;
   background-color: #0C1B3380;
   display: flex;
   justify-content: center;
@@ -434,6 +447,7 @@
 /*  WRITE REVIEW MODAL  */
 .write-review-modal-container {
   align-items: center;
+  animation: fadeIn .5s;
   background-color: #0C1B3380;
   display: flex;
   justify-content: center;
@@ -443,6 +457,10 @@
   top: 0;
   width: 100vw;
   z-index: 10;
+}
+
+.hide-modal {
+  animation: fadeOut .5s;
 }
 
 .write-review-modal {

@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 import ReviewModalStars from './ReviewModalStars.jsx';
 import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import UploadAndDisplayImage from './UploadImageModal.jsx';
 
 export default function ReviewModal({
-  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews, setShowThankyou,
+  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews, setShowThankyou, reviewModal,
 }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
@@ -14,6 +15,7 @@ export default function ReviewModal({
   const [bodyCount, setBodyCount] = useState(0);
   const [characteristics, setChars] = useState({});
   const [newReview, setNewReview] = useState({ product_id: feature.id, photos: [] });
+  const nodeRef = useRef(null);
 
   // image modal state - currently out of order
   const [imageUploadModal, setImageUploadModal] = useState(false);
@@ -30,11 +32,9 @@ export default function ReviewModal({
   };
 
   const closeModal = () => {
-    document.querySelector('.write-review-modal').classList.remove('denial');
-    document.querySelector('.write-review-modal').classList.add('exiting');
-    setTimeout(() => {
-      setReviewModal(false);
-    }, 200);
+    // document.querySelector('.write-review-modal').classList.remove('denial');
+    // document.querySelector('.write-review-modal').classList.add('exiting');
+    setReviewModal(false);
   };
   // Handler Series sets newReview with value of input fields //
   const starRatingTextHandler = (value) => {

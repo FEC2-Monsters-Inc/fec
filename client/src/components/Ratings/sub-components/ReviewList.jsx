@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import ReviewTile from './ReviewTile.jsx';
 import RelevanceDropdown from './RelevanceDropdown.jsx';
 import ReviewModal from './ReviewModal.jsx';
@@ -22,6 +23,7 @@ export default function ReviewList({
   const [expandedStatus, setExpandedStatus] = useState(false);
   const [reviewModal, setReviewModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const modalRef = useRef(null);
 
   // HELPER FUNCTIONS //
 
@@ -131,21 +133,20 @@ export default function ReviewList({
             : null
         }
         <button className="write-new-review" type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
-        {
-          reviewModal
-            ? (
-              <ReviewModal
-                setReviewModal={setReviewModal}
-                feature={feature}
-                reviewMeta={reviewMeta}
-                setReviewMeta={setReviewMeta}
-                reviews={reviews}
-                setReviews={setReviews}
-                setShowThankyou={setShowThankyou}
-              />
-            )
-            : null
-        }
+        {/* <CSSTransition nodeRef={nodeRef} in={reviewModal} timeout={5000} classNames="my-node" unmountOnExit key={reviewModal}> */}
+        <CSSTransition in={reviewModal} timeout={5000} classNames="my-node" unmountOnExit>
+          <ReviewModal
+            setReviewModal={setReviewModal}
+            feature={feature}
+            reviewMeta={reviewMeta}
+            setReviewMeta={setReviewMeta}
+            reviews={reviews}
+            setReviews={setReviews}
+            setShowThankyou={setShowThankyou}
+            reviewModal={reviewModal}
+          />
+        </CSSTransition>
+        {/* </CSSTransition> */}
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ export default function App() {
   if (!featureProduct.name) return <div />;
   return (
     <>
-      {/* <Overview
+      <Overview
         product={featureProduct}
         styles={styles}
         reviews={reviews}
@@ -81,6 +81,6 @@ export default function App() {
         featureProduct={featureProduct}
         recordClick={recordClick}
       />
-    </div>
+    </>
   );
 }

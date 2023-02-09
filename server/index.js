@@ -4,7 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const router = require('./routes');
 
-const { PORT } = process.env;
+const { LOCAL_URL, PORT } = process.env;
 
 const app = express();
 
@@ -18,4 +18,4 @@ app.use('/api', router);
 
 app.listen(PORT);
 // eslint-disable-next-line
-console.log(`Server listening at http://localhost:${PORT}`);
+console.log(`Server listening at ${LOCAL_URL}:${PORT}`);

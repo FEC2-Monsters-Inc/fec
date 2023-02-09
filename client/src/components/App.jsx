@@ -38,18 +38,20 @@ export default function App() {
   }, [featureProduct.id]);
 
   const recordClick = (e, widget) => {
-    // let { target } = e;
-    // let element = target.classList.value;
-    // while (!element.length) {
-    //   target = target.closest('div');
-    //   element = target.classList.value || target.id;
-    // }
-    // const interaction = {
-    //   element,
-    //   widget,
-    //   time: new Date(Date.now()).toUTCString(),
-    // };
-    // fetcher.postInteraction(interaction);
+    let { target } = e;
+    let element = target.classList.value;
+    let count = 0;
+    while (!element.length && count < 100) {
+      target = target.closest('div');
+      element = target.classList.value || target.id;
+      count += 1;
+    }
+    const interaction = {
+      element,
+      widget,
+      time: new Date(Date.now()).toUTCString(),
+    };
+    fetcher.postInteraction(interaction);
   };
 
   if (!featureProduct.name) return <div />;
@@ -66,7 +68,7 @@ export default function App() {
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
         recordClick={recordClick}
-      /> */}
+      />
       <Ratings
         feature={featureProduct}
         reviews={reviews}
@@ -75,10 +77,10 @@ export default function App() {
         setReviewMeta={setReviewMeta}
         recordClick={recordClick}
       />
-      {/* <Questions
+      <Questions
         featureProduct={featureProduct}
         recordClick={recordClick}
-      /> */}
-    </>
+      />
+    </div>
   );
 }

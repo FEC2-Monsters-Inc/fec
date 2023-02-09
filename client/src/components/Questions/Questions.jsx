@@ -74,7 +74,7 @@ export default function Questions({
       className="qa"
       onClick={(e) => recordClick(e, 'Questions & Answers')}
     >
-      <h2>QUESTIONS & ANSWERS</h2>
+      <h2>Customer Questions & Answers</h2>
       <SearchBar
         text={filterText}
         handleChange={onFilterTextChange}

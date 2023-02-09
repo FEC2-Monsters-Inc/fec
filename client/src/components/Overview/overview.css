@@ -29,24 +29,22 @@ li {
 /* ///// HEADER ///// */
 #header {
   align-items: center;
-  background-color: #0C1B33;
-  border-bottom: 2px solid #2C394B;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  background-color: #F7F4F3;
+  border-bottom: 1px solid #D4D2D1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: #DDE2C6;
   display: flex;
   font-family: 'Open Sans', sans-serif;
-  height: 100px;
+  height: 80px;
   justify-content: space-between;
   margin-bottom: 2em;
   padding: 0 2em;
-  position: sticky;
-  top: 0;
   z-index: 10;
 }
 
 .temp-logo {
   color: #E60023;
-  font-size: 2em;
+  font-size: 1.5em;
   font-style: italic;
   font-weight: bold;
   text-decoration: underline;
@@ -57,10 +55,6 @@ li {
   align-items: flex-end;
   display: flex;
   color: #E60023;
-}
-
-.search-icon {
-
 }
 
 
@@ -81,7 +75,7 @@ li {
 
 .right-main {
   height: 650px;
-  width: 33.33%
+  width: 33.33%;
 }
 
 .bottom-main {

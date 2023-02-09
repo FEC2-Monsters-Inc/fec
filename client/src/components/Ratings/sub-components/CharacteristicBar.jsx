@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { GoTriangleDown } from 'react-icons/go';
 
 export default function CharacteristicBar({ reviewMeta, charName }) {
   // STATE DATA //
@@ -30,14 +31,11 @@ export default function CharacteristicBar({ reviewMeta, charName }) {
 
   return (
     <div className="review-slide-container">
-      <input
-        type="range"
-        min="1"
-        max="100"
-        value={chars ? (((chars - 1) / 4) * 100).toString() : '0'}
-        className="review-slider"
-        readOnly
-      />
+      <div className="review-slider">
+        <div style={{ width: chars ? `${(((chars - 1) / 4) * 100).toString()}%` : '0%' }} className="progress">
+          <GoTriangleDown size="2em" className="rvw-pointer" />
+        </div>
+      </div>
       <div className="reivew-slider-label-container">
         <p className="review-slider-label-1">{sliderText.small}</p>
         <p className="review-slider-label-2">{sliderText.perf}</p>

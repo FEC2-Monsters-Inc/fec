@@ -88,70 +88,60 @@ export default function ReviewTracker({
 
   return (
     <div className="review-tracker-main">
-      <div className="review-hover-shell-container">
-        <div
-          className="review-tracker-bar-container"
-          onClick={() => toggleRating(5)}
-          onKeyPress={() => toggleRating(5)}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="rvw-txt">5 star</p>
-          <TrackerBar progress={percentages[5]} />
-          <p className="rvw-txt">{numReviews[5] ? numReviews[5] : null}</p>
-        </div>
+      <div
+        className="review-tracker-bar-container"
+        onClick={() => toggleRating(5)}
+        onKeyPress={() => toggleRating(5)}
+        role="button"
+        tabIndex="0"
+      >
+        <p className="rvw-txt">5 star</p>
+        <TrackerBar progress={percentages[5]} />
+        <p className="rvw-txt-num">{numReviews[5] ? numReviews[5] : null}</p>
       </div>
-      <div className="review-hover-shell-container">
-        <div
-          className="review-tracker-bar-container"
-          onClick={() => toggleRating(4)}
-          onKeyPress={() => toggleRating(4)}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="rvw-txt">4 star</p>
-          <TrackerBar progress={percentages[4]} />
-          <p className="rvw-txt">{numReviews[4] ? numReviews[4] : null}</p>
-        </div>
+      <div
+        className="review-tracker-bar-container"
+        onClick={() => toggleRating(4)}
+        onKeyPress={() => toggleRating(4)}
+        role="button"
+        tabIndex="0"
+      >
+        <p className="rvw-txt">4 star</p>
+        <TrackerBar progress={percentages[4]} />
+        <p className="rvw-txt-num">{numReviews[4] ? numReviews[4] : null}</p>
       </div>
-      <div className="review-hover-shell-container">
-        <div
-          className="review-tracker-bar-container"
-          onClick={() => toggleRating(3)}
-          onKeyPress={() => toggleRating(3)}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="rvw-txt">3 star</p>
-          <TrackerBar progress={percentages[3]} />
-          <p className="rvw-txt">{numReviews[3] ? numReviews[3] : null}</p>
-        </div>
+      <div
+        className="review-tracker-bar-container"
+        onClick={() => toggleRating(3)}
+        onKeyPress={() => toggleRating(3)}
+        role="button"
+        tabIndex="0"
+      >
+        <p className="rvw-txt">3 star</p>
+        <TrackerBar progress={percentages[3]} />
+        <p className="rvw-txt-num">{numReviews[3] ? numReviews[3] : null}</p>
       </div>
-      <div className="review-hover-shell-container">
-        <div
-          className="review-tracker-bar-container"
-          onClick={() => toggleRating(2)}
-          onKeyPress={() => toggleRating(2)}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="rvw-txt">2 star</p>
-          <TrackerBar progress={percentages[2]} />
-          <p className="rvw-txt">{numReviews[2] ? numReviews[2] : null}</p>
-        </div>
+      <div
+        className="review-tracker-bar-container"
+        onClick={() => toggleRating(2)}
+        onKeyPress={() => toggleRating(2)}
+        role="button"
+        tabIndex="0"
+      >
+        <p className="rvw-txt">2 star</p>
+        <TrackerBar progress={percentages[2]} />
+        <p className="rvw-txt-num">{numReviews[2] ? numReviews[2] : null}</p>
       </div>
-      <div className="review-hover-shell-container">
-        <div
-          className="review-tracker-bar-container"
-          onClick={() => toggleRating(1)}
-          onKeyPress={() => toggleRating(1)}
-          role="button"
-          tabIndex="0"
-        >
-          <p className="rvw-txt">1 star</p>
-          <TrackerBar progress={percentages[1]} />
-          <p className="rvw-txt">{numReviews[1] ? numReviews[1] : null}</p>
-        </div>
+      <div
+        className="review-tracker-bar-container"
+        onClick={() => toggleRating(1)}
+        onKeyPress={() => toggleRating(1)}
+        role="button"
+        tabIndex="0"
+      >
+        <p className="rvw-txt">1 star</p>
+        <TrackerBar progress={percentages[1]} />
+        <p className="rvw-txt-num">{numReviews[1] ? numReviews[1] : null}</p>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
 import ThankYouModal from './sub-components/ThankYouModal.jsx';
-import './ratings.css';
+// import './ratings.css';
+import './overhaul.css';
 
 export default function Ratings({
   reviews,
@@ -21,7 +22,7 @@ export default function Ratings({
   return (
     // eslint-disable-next-line -- not meant to be interactive
     <div id="ratings-widget" onClick={(e) => recordClick(e, 'Ratings & Reviews')}>
-      <h1 className="review-header">Ratings and Reviews</h1>
+      <h1 id="review-top" className="review-header">Reviews</h1>
       <div className="ratings-parent">
         <ReviewDashboard
           reviews={reviews}
@@ -33,6 +34,7 @@ export default function Ratings({
           listIndex={listIndex}
           setListIndex={setListIndex}
         />
+        <div className="review-break" />
         <ReviewList
           reviews={reviews}
           selectedRating={selectedRating}

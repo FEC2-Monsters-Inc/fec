@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export default function ReviewImageModal({ imgString, setModalToggle, name }) {
+export default function ReviewImageModal({
+  modalToggle, imgString, setModalToggle, name,
+}) {
   // EVENT HANDLERS // Needs better functionality to exit Modal w/o Mouse - REFACTOR LATER
   const closeModal = (e) => {
     if (e.key === 'Escape' || e.type === 'Click') {
@@ -10,6 +12,13 @@ export default function ReviewImageModal({ imgString, setModalToggle, name }) {
     setModalToggle(false);
   };
 
+  useEffect(() => {
+    if (modalToggle) {
+      document.body.style.overflow = 'hidden';
+    } else document.body.style.overflow = 'visible';
+  }, [modalToggle]);
+
+  if (!modalToggle) return null;
   return ReactDOM.createPortal((
     <div
       className="review-image-modal-full-container"
@@ -18,10 +27,10 @@ export default function ReviewImageModal({ imgString, setModalToggle, name }) {
       role="button"
       tabIndex={0}
     >
-      <div className="review-image-modal-full-parent">
-        <div className="review-image-modal-thumbnail">
-          <img src={imgString} alt={`${name}'s picture`} />
-        </div>
-      </div>
+      <img
+        className="review-image-modal"
+        src={imgString}
+        alt={`${name}'s picture`}
+      />
     </div>), document.getElementById('modal'));
 }

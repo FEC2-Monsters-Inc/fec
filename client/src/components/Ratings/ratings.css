@@ -1,4 +1,4 @@
-/* ///// TOP LEVEL COMPONTENT ///// */
+/* ///// TOP LEVEL COMPONTENT /////
 #ratings-widget {
   margin: auto;
   margin-bottom: 5em;
@@ -1216,4 +1216,24 @@ input[type='radio']:checked:before {
     font-weight: bold;
     border-radius: 4px;
     align-self: flex-end;
+  } */
+
+  /* ///// GROUP RESTRUCTURE ///// */
+
+  #ratings-widget {
+    margin: 2em;
+  }
+
+  .review-header {
+    font-size: 1.5em;
+    text-decoration: none;
+  }
+
+  .review-main-star-container {
+    width: 150px;
+  }
+
+  .review-stars-main {
+    height:  100%;
+    max-width: 10;
   }

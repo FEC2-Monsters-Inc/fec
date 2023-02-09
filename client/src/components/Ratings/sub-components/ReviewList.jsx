@@ -82,43 +82,51 @@ export default function ReviewList({
 
   const handleClick = () => {
     twoAtATime();
-    setReviewExpander('50rem');
-    setExpandedStatus(true);
+    // setReviewExpander('50rem');
+    // setExpandedStatus(true);
   };
 
-  // INITIALIZATION (dbl Check if useEffect Neccessary!)
+  // MODAL FUNCTIONS //
+  const renderModal = () => {
+    document.body.style.overflow = 'hidden';
+    return (
+      <ReviewModal
+        setReviewModal={setReviewModal}
+        feature={feature}
+        reviewMeta={reviewMeta}
+        setReviewMeta={setReviewMeta}
+        reviews={reviews}
+        setReviews={setReviews}
+        setShowThankyou={setShowThankyou}
+      />
+    );
+  };
 
-  useEffect(() => {
-    if (reviews) {
-      reviewRenderer();
-    }
-  }, [reviews]);
+  const hideModal = () => {
+    document.body.style.overflow = 'visible';
+  };
 
   return (
     <div className="review-list-container">
       <div className="review-list-dropdown-container">
-        <div className="searchbar-dropdown-container">
-          <RelevanceDropdown
-            setReviews={setReviews}
-            reviews={reviews}
-            listLength={listLength}
-            setListLength={setListLength}
-            listIndex={listIndex}
-            reviewRenderer={reviewRenderer}
-          />
-          <ReviewSearchBar
-            reviews={reviews}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            listIndex={listIndex}
-          />
-
-        </div>
+        <RelevanceDropdown
+          setReviews={setReviews}
+          reviews={reviews}
+          listLength={listLength}
+          setListLength={setListLength}
+          listIndex={listIndex}
+          reviewRenderer={reviewRenderer}
+        />
+        <ReviewSearchBar
+          reviews={reviews}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          listIndex={listIndex}
+        />
       </div>
       <div
         className="scroll-review-list"
         onScroll={(e) => handleScroll(e)}
-        style={{ height: reviewExpander }}
       >
         { reviews
           ? reviewRenderer()
@@ -127,25 +135,13 @@ export default function ReviewList({
       <div className="review-list-button-container">
         {
           !expandedStatus
-            ? <button className="expanded-reviews" type="button" onClick={() => handleClick()}>Expand Reviews</button>
+            ? <button className="expanded-reviews" type="button" onClick={() => handleClick()}>More Reviews</button>
             : null
         }
         <button className="write-new-review" type="button" onClick={() => setReviewModal(true)}>Write a Review</button>
-        {
-          reviewModal
-            ? (
-              <ReviewModal
-                setReviewModal={setReviewModal}
-                feature={feature}
-                reviewMeta={reviewMeta}
-                setReviewMeta={setReviewMeta}
-                reviews={reviews}
-                setReviews={setReviews}
-                setShowThankyou={setShowThankyou}
-              />
-            )
-            : null
-        }
+        {reviewModal
+          ? renderModal()
+          : hideModal()}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { VscTriangleDown } from 'react-icons/vsc';
+import { AiOutlineDown } from 'react-icons/ai';
 
 export default function RelevanceDropdown({
   setReviews, reviews, listLength, listIndex, reviewRenderer,
@@ -11,7 +11,8 @@ export default function RelevanceDropdown({
 
   // EVENT HANDLERS //
   const handleClick = () => {
-    setShowDropdown(true);
+    if (showDropdown) setShowDropdown(false);
+    else setShowDropdown(true);
   };
 
   const handleClose = (e) => {
@@ -75,12 +76,12 @@ export default function RelevanceDropdown({
     <div className="review-sort-dropdown-main">
       {display
         ? (
-          <p className="review-sort-title">
+          <div className="review-sort-title">
             {reviewListLength()}
             {' '}
             reviews sorted by
             {' '}
-            <span
+            <p
               onClick={handleClick}
               onKeyPress={handleClick}
               tabIndex="0"
@@ -88,62 +89,55 @@ export default function RelevanceDropdown({
               className="review-close-dropdown"
             >
               {sortString}
-              <VscTriangleDown onClick={handleClick} className="review-close-icon" />
-            </span>
-          </p>
-        )
-        : null}
-      {showDropdown && (
-        <div className="review-sort-dropdown-child">
-          <ul className="review-ul">
-            { sortString !== 'recency'
-              ? (
-                <li className="review-li-container">
-                  <p
-                    className="review-li-1"
+              <AiOutlineDown className="review-close-icon" />
+            </p>
+
+            {showDropdown && (
+            <div className="review-sort-dropdown-child">
+              { sortString !== 'recency'
+                ? (
+                  <li
+                    className="review-li"
                     onClick={() => handleNew()}
                     onKeyPress={() => handleNew()}
                     tabIndex="0"
                     role="button"
                   >
                     recency
-                  </p>
-                </li>
-              )
-              : null }
-            { sortString !== 'helpfulness'
-              ? (
-                <li className="review-li-container">
-                  <p
-                    className="review-li-2"
+                  </li>
+                )
+                : null }
+              { sortString !== 'helpfulness'
+                ? (
+                  <li
+                    className="review-li"
                     onClick={() => handleHelpful()}
                     onKeyPress={() => handleHelpful()}
                     tabIndex="0"
                     role="button"
                   >
                     helpfulness
-                  </p>
-                </li>
-              )
-              : null }
-            { sortString !== 'relevance'
-              ? (
-                <li className="review-li-container">
-                  <p
-                    className="review-li-3"
+                  </li>
+                )
+                : null }
+              { sortString !== 'relevance'
+                ? (
+                  <li
+                    className="review-li"
                     onClick={() => handleRelevant()}
                     onKeyPress={() => handleRelevant()}
                     tabIndex="0"
                     role="button"
                   >
                     relevance
-                  </p>
-                </li>
-              )
-              : null }
-          </ul>
-        </div>
-      )}
+                  </li>
+                )
+                : null }
+            </div>
+            )}
+          </div>
+        )
+        : null}
     </div>
   );
 }

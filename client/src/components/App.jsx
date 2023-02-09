@@ -9,7 +9,7 @@ import fetcher from '../fetchers';
 
 export default function App() {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40355, name: null };
+  const initFeature = { id: 40351, name: null };
 
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
@@ -38,27 +38,35 @@ export default function App() {
   }, [featureProduct.id]);
 
   const recordClick = (e, widget) => {
-    let { target } = e;
-    let element = target.classList.value;
-    while (!element.length) {
-      target = target.closest('div');
-      element = target.classList.value || target.id;
-    }
-    const interaction = {
-      element,
-      widget,
-      time: new Date(Date.now()).toUTCString(),
-    };
-    fetcher.postInteraction(interaction);
+    // let { target } = e;
+    // let element = target.classList.value;
+    // while (!element.length) {
+    //   target = target.closest('div');
+    //   element = target.classList.value || target.id;
+    // }
+    // const interaction = {
+    //   element,
+    //   widget,
+    //   time: new Date(Date.now()).toUTCString(),
+    // };
+    // fetcher.postInteraction(interaction);
   };
 
   if (!featureProduct.name) return <div />;
   return (
-    <div>
+    <>
       <Overview
         product={featureProduct}
         styles={styles}
         reviews={reviews}
+        recordClick={recordClick}
+      />
+      <Ratings
+        feature={featureProduct}
+        reviews={reviews}
+        setReviews={setReviews}
+        reviewMeta={reviewMeta}
+        setReviewMeta={setReviewMeta}
         recordClick={recordClick}
       />
       <Related
@@ -71,14 +79,6 @@ export default function App() {
         featureProduct={featureProduct}
         recordClick={recordClick}
       />
-      <Ratings
-        feature={featureProduct}
-        reviews={reviews}
-        setReviews={setReviews}
-        reviewMeta={reviewMeta}
-        setReviewMeta={setReviewMeta}
-        recordClick={recordClick}
-      />
-    </div>
+    </>
   );
 }

@@ -1,12 +1,18 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 import ReviewModalStars from './ReviewModalStars.jsx';
 import ModalCharRadioBtns from './ModalCharRadioBtns.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import UploadAndDisplayImage from './UploadImageModal.jsx';
 
 export default function ReviewModal({
-  setReviewModal, feature, reviewMeta, setReviewMeta, setReviews, setShowThankyou,
+  setReviewModal,
+  feature,
+  reviewMeta,
+  setReviewMeta,
+  setReviews,
+  setShowThankyou,
 }) {
   // STATE DATA
   const [starRatingText, setStarRatingText] = useState('');
@@ -157,37 +163,45 @@ export default function ReviewModal({
   };
 
   return ReactDOM.createPortal((
-    <div className="write-review-modal">
-      <div className="write-review-modal-parent">
-        <button className="close-review-modal" type="button" onClick={() => closeModal()}>&times;</button>
-        <p className="write-review-modal-title">
-          Write your review about
-          {' '}
-          {feature.name}
-        </p>
-        <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
-          {' '}
-          {/* Rename and Refactor */}
-          <ReviewModalStars
-            onChange={starRatingTextHandler}
-          />
-          <span className="review-asterisk-stars">*</span>
-          <p>{starRatingText}</p>
-        </div>
-        <div className="review-modal-recommendation-container" onBlur={() => handleRequiredRecommend()}>
-          <p>
-            Do you recommend this product?
+    <div className="write-review-modal-container">
+      <div className="write-review-modal">
+        <button className="close-review-modal" type="button" onClick={() => closeModal()}>
+          <AiOutlineClose size="1.5em" />
+        </button>
+        <div className="rvw-modal-title">
+          <p className="write-review-modal-title">
+            Leaving A Review For:
             {' '}
-            <span className="review-asterisk-recommend">*</span>
+            <span className="rvw-prod">
+              {feature.name}
+            </span>
           </p>
-          <label htmlFor="recommendation-yes">
-            <input type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
-            Yes
-          </label>
-          <label htmlFor="recommendation-no">
-            <input type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
-            No
-          </label>
+          <div className="modal-top">
+            <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
+              <p className="leave-stars">Your Rating:</p>
+              {' '}
+              {/* Rename and Refactor */}
+              <ReviewModalStars
+                onChange={starRatingTextHandler}
+              />
+              <p className="star-rting">{starRatingText}</p>
+            </div>
+            <div className="review-modal-recommendation-container" onBlur={() => handleRequiredRecommend()}>
+              <p>
+                Do you recommend this product?
+                {' '}
+                <span className="review-asterisk-recommend">*</span>
+              </p>
+              <label htmlFor="recommendation-yes">
+                <input type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
+                Yes
+              </label>
+              <label htmlFor="recommendation-no">
+                <input type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
+                No
+              </label>
+            </div>
+          </div>
         </div>
         <div>
           <p className="review-modal-characteristics-title">How did you like the...</p>

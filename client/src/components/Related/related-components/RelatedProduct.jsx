@@ -44,7 +44,7 @@ export default function RelatedProduct({
 
   const changeProduct = () => {
     setFeatureProduct(relProd);
-    window.history.pushState({}, null, `${window.location.origin}/?pid=${relProd.id}`);
+    window.location.href = `${window.location.origin}/?pid=${relProd.id}`;
   };
 
   return (

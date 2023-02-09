@@ -7,9 +7,10 @@ import Ratings from './Ratings/Ratings.jsx';
 import Related from './Related/Related.jsx';
 import fetcher from '../fetchers';
 
-export default function App() {
+export default function App({ product_id }) {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40351, name: null };
+  const initFeature = { id: product_id, name: null };
+
 
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);

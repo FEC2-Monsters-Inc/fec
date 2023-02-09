@@ -12,8 +12,11 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json({ limit: '32mb' }));
 
+app.use((req, res, next) => {
+  if (req.url === '/') res.redirect('/?pid=40344');
+  next();
+});
 app.use(express.static(path.join(__dirname, '../client/dist')));
-
 app.use('/api', router);
 
 app.listen(PORT);

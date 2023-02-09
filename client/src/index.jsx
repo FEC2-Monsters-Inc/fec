@@ -5,4 +5,6 @@ import App from './components/App.jsx';
 const container = document.getElementById('app');
 const root = createRoot(container);
 
-root.render(<App />);
+const params = new URLSearchParams(window.location.search);
+
+root.render(<App product_id={params.get('pid')} />);

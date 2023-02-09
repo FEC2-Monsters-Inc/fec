@@ -1,6 +1,6 @@
 /// REVISIT LATER ///////
 /// DEPENDENT ON AN EXTERNAL API -CAUSING LOCALISSUES /////
-
+/* global env */
 import React, { useState } from 'react';
 import axios from 'axios';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
@@ -19,7 +19,7 @@ export default function UploadAndDisplayImage({
   // HELPER FUNCTIONS //
   const imageURLGenerator = (imgPath) => {
     const options = {
-      url: 'http://localhost:3000/api/image',
+      url: `${env.LOCAL_URL}:3000/api/image`,
       method: 'post',
       data: { imgPath },
     };

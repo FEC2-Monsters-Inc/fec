@@ -40,9 +40,11 @@ export default function App() {
   const recordClick = (e, widget) => {
     let { target } = e;
     let element = target.classList.value;
-    while (!element.length) {
+    let count = 0;
+    while (!element.length && count < 100) {
       target = target.closest('div');
       element = target.classList.value || target.id;
+      count += 1;
     }
     const interaction = {
       element,
@@ -67,16 +69,16 @@ export default function App() {
         setFeatureProduct={setFeatureProduct}
         recordClick={recordClick}
       />
-      <Questions
-        featureProduct={featureProduct}
-        recordClick={recordClick}
-      />
       <Ratings
         feature={featureProduct}
         reviews={reviews}
         setReviews={setReviews}
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
+        recordClick={recordClick}
+      />
+      <Questions
+        featureProduct={featureProduct}
         recordClick={recordClick}
       />
     </div>

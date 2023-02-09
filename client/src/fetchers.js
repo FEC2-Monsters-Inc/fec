@@ -1,8 +1,9 @@
+/* global env */
 import axios from 'axios';
 
-const SERVER_BASEURL = 'http://localhost:3000/api';
-const BASEURL_QUESTIONS = 'http://localhost:3000/api/qa/questions';
-const BASEURL_ANSWERS = 'http://localhost:3000/api/qa/answers';
+const SERVER_BASEURL = `${env.LOCAL_URL}:${env.PORT}/api`;
+const BASEURL_QUESTIONS = `${SERVER_BASEURL}/qa/questions`;
+const BASEURL_ANSWERS = `${SERVER_BASEURL}/qa/answers`;
 
 export default {
   getProductById: (id) => {

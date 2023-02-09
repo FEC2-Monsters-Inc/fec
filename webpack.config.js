@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+require('dotenv').config();
 
 module.exports = {
   entry: path.join(__dirname, 'client/src/index.jsx'),
@@ -7,7 +9,7 @@ module.exports = {
     publicPath: '',
     filename: 'bundle.js',
   },
-  mode: 'development',
+  mode: process.env.MODE,
   module: {
     rules: [
       {
@@ -31,4 +33,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'env.LOCAL_URL': JSON.stringify(process.env.LOCAL_URL),
+      'env.PORT': process.env.PORT,
+    }),
+  ],
 };

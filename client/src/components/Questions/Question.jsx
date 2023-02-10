@@ -100,7 +100,7 @@ export default function Question({
       );
     }
     if (numAnswers === Object.keys(answers).length
-      && Object.keys(answers).length >= 2) {
+      && Object.keys(answers).length > 2) {
       return (
         <button
           className="qa btn-link-bold left-ctrl"

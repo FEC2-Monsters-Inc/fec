@@ -8,6 +8,8 @@ export default function StyleSelect({
   setHero,
   setRightBtn,
   setLeftBtn,
+  setShowSku,
+  setQuantity,
 }) {
   // HELPER FUNCTIONS //
   const updateGalleryBtns = (index, images) => {
@@ -60,6 +62,8 @@ export default function StyleSelect({
         heroImageChanger(style.photos);
       }
     });
+    setShowSku('');
+    setQuantity('');
   };
 
   return (

@@ -42,6 +42,11 @@ export default function RelatedProduct({
   }
   const ratingPercentage = Math.floor((actualPts / totalPts) * 100).toString();
 
+  const changeProduct = () => {
+    setFeatureProduct(relProd);
+    window.location.href = `${window.location.origin}/?pid=${relProd.id}`;
+  };
+
   return (
     <div id={`relatedProduct${index}`}>
       <div className="rel-item">
@@ -53,8 +58,8 @@ export default function RelatedProduct({
               src={relStyle.photos[0].url || imgUnavailable}
               alt="Not Available"
               onMouseEnter={() => setShowImg(true)}
-              onKeyDown={() => setFeatureProduct(relProd)}
-              onClick={() => setFeatureProduct(relProd)}
+              onKeyDown={() => changeProduct()}
+              onClick={() => changeProduct()}
             />
           }
           {showImg

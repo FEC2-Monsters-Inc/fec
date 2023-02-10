@@ -7,9 +7,10 @@ import Ratings from './Ratings/Ratings.jsx';
 import Related from './Related/Related.jsx';
 import fetcher from '../fetchers';
 
-export default function App() {
+export default function App({ product_id }) {
   // PRE-FETCH EMPTY INITIAL VALUE //
-  const initFeature = { id: 40355, name: null };
+  const initFeature = { id: product_id, name: null };
+
 
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
@@ -40,9 +41,11 @@ export default function App() {
   const recordClick = (e, widget) => {
     let { target } = e;
     let element = target.classList.value;
-    while (!element.length) {
+    let count = 0;
+    while (!element.length && count < 100) {
       target = target.closest('div');
       element = target.classList.value || target.id;
+      count += 1;
     }
     const interaction = {
       element,
@@ -54,7 +57,7 @@ export default function App() {
 
   if (!featureProduct.name) return <div />;
   return (
-    <div>
+    <>
       <Overview
         product={featureProduct}
         styles={styles}
@@ -67,10 +70,6 @@ export default function App() {
         setFeatureProduct={setFeatureProduct}
         recordClick={recordClick}
       />
-      <Questions
-        featureProduct={featureProduct}
-        recordClick={recordClick}
-      />
       <Ratings
         feature={featureProduct}
         reviews={reviews}
@@ -79,6 +78,10 @@ export default function App() {
         setReviewMeta={setReviewMeta}
         recordClick={recordClick}
       />
-    </div>
+      <Questions
+        featureProduct={featureProduct}
+        recordClick={recordClick}
+      />
+    </>
   );
 }

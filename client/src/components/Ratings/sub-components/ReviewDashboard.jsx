@@ -3,6 +3,8 @@ import ReviewTracker from './ReviewTracker.jsx';
 import CharacteristicTracker from './DashboardCharacteristicTracker.jsx';
 import ActiveFilters from './ActiveFilters.jsx';
 import StarImg from '../../../../dist/assets/star.png';
+import StarRating from '../../shared/StarRating/StarRating.jsx';
+import ReviewStarRating from '../../shared/StarRating/ReviewStarRating.jsx';
 
 export default function ReviewDashboard({
   reviews,
@@ -11,8 +13,8 @@ export default function ReviewDashboard({
   reviewMeta,
   listLength,
   setListLength,
-  listIndex,
-  setListIndex,
+  // listIndex,
+  // setListIndex,
 }) {
   // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
@@ -86,52 +88,68 @@ export default function ReviewDashboard({
     }
   };
 
-  const starMapper = stars.map((e) => (
-    <div className="review-single-star-container" key={`star key-${Math.random()}`}>
-      <div className="review-single-star-fill" style={{ width: `${parseInt((e * 31), 10)}px` }}>
-        <img className="review-single-star-outline" src={StarImg} alt="stars alt" />
-      </div>
-    </div>
-  ));
+  // const starMapper = stars.map((e) => (
+  //   <div className="review-single-star-container" key={`star key-${Math.random()}`}>
+  //     {/* <div className="review-single-star-fill" style={{ width: `${parseInt((e * 31), 10)}px` }}> */}
+  //     <img className="review-single-star-outline" src={StarImg} alt="stars alt" />
+  //     {/* </div> */}
+  //   </div>
+  // ));
 
+  const starAverager = (reviewData) => {
+    let total = 0;
+    reviewData.forEach((review) => {
+      total += review.rating;
+    });
+    total /= reviews.length;
+    total = (Math.round(total * 4) / 4).toFixed(2);
+    return `${total * 20}%`;
+  };
   // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
       ratingSetter();
       recommendedSetter();
     }
-  }, [reviews, listIndex]);
+  }, [reviews]);
 
   return (
-    <div className="test-container">
+    <>
       <div className="review-main-star-container">
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
-          {starMapper}
+          {reviews
+            ? <ReviewStarRating ratingPercentage={starAverager(reviews)} className="star-icons" />
+            : null}
         </div>
       </div>
-      <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
       <div className="review-dash-main">
-        <h3 className="review-rating-breakdown-title">Review Breakdown</h3>
-        <ActiveFilters
-          reviews={reviews}
-          selectedRating={selectedRating}
-          setSelectedRating={setSelectedRating}
-          filter={filter}
-          setFilter={setFilter}
-        />
-        <ReviewTracker
-          reviews={reviews}
-          setSelectedRating={setSelectedRating}
-          filter={filter}
-          setFilter={setFilter}
-          listLength={listLength}
-          setListLength={setListLength}
-          listIndex={listIndex}
-          setListIndex={setListIndex}
-        />
-        <CharacteristicTracker reviewMeta={reviewMeta} />
+        <div className="review-dash-left">
+          {/* <h3 className="review-rating-breakdown-title">Review Breakdown</h3> */}
+          <ActiveFilters
+            reviews={reviews}
+            selectedRating={selectedRating}
+            setSelectedRating={setSelectedRating}
+            filter={filter}
+            setFilter={setFilter}
+          />
+          <p className="people-recommended-reviews-par">{`${recommended} of reviewers recommend this product.`}</p>
+          <ReviewTracker
+            reviews={reviews}
+            setSelectedRating={setSelectedRating}
+            filter={filter}
+            setFilter={setFilter}
+            listLength={listLength}
+            setListLength={setListLength}
+            // listIndex={listIndex}
+            // setListIndex={setListIndex}
+          />
+        </div>
+        <div className="review-dash-right">
+          <h1 className="prod-chars-title">Product Characteristics</h1>
+          <CharacteristicTracker reviewMeta={reviewMeta} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -6,11 +6,12 @@ export default function ReviewModalStar({
 }) {
   return (
     <FaStar
-      color={filled ? 'gold' : 'lightgray'}
+      color={filled ? '#E60023' : 'lightgray'}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="testxyzxyz"
+      className="rvw-modal-single-star"
+      size="2em"
     />
   );
 }

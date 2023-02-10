@@ -13,7 +13,7 @@ export default function WriteReviewStarRating({ onChange }) {
   };
 
   return (
-    <span>
+    <span className="rvw-modal-stars">
       {[1, 2, 3, 4, 5].map((_, index) => (
         <ReviewModalStar
           key={Math.random()}
@@ -24,6 +24,7 @@ export default function WriteReviewStarRating({ onChange }) {
           onMouseLeave={() => setHover(rating)}
         />
       ))}
+      <span className="review-asterisk-stars">*</span>
     </span>
   );
 }

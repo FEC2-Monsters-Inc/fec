@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { AiFillCheckCircle } from 'react-icons/ai';
-import { RxDividerVertical } from 'react-icons/rx';
+import { AiFillCheckSquare } from 'react-icons/ai';
 import { BsFillHandThumbsUpFill } from 'react-icons/bs';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
+import ReviewStarRating from '../../shared/StarRating/ReviewStarRating.jsx';
 
 export default function ReviewTile({
-  review, setReviews, reviews, feature, searchTerm,
+  review, setReviews, reviews, feature, searchTerm, sortString, setSortString,
 }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -114,7 +114,7 @@ export default function ReviewTile({
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
     fetcher.updateUseful(review.review_id)
-      .then(() => fetcher.getReviews(feature.id))
+      .then(() => fetcher.getReviews(feature.id, sortString))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.error('Error updating helpful in reviewtile: ', error));
@@ -122,7 +122,7 @@ export default function ReviewTile({
 
   const reportHandler = () => {
     fetcher.updateReport(review.review_id)
-      .then(() => fetcher.getReviews(feature.id))
+      .then(() => fetcher.getReviews(feature.id, sortString))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.error('Error updating reported in reviewtile: ', error));
@@ -140,21 +140,22 @@ export default function ReviewTile({
   return (
     <div className="review-tile-main-container">
       <div className="review-tile-container-1">
-        <p className="review-tile-nameAndDate">{highlightHandler(nameAndDate, null)}</p>
-        <div className="review-tile-stars">
-          <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
+        <div className="rvw-title-container">
+          <p className="review-tile-summary">{highlightHandler(review.summary, summaryLengthChecker)}</p>
+          <div className="review-tile-stars">
+            <ReviewStarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
+          </div>
         </div>
+        <p className="review-tile-nameAndDate">{highlightHandler(nameAndDate, null)}</p>
       </div>
-      <p className="review-tile-summary">{highlightHandler(review.summary, summaryLengthChecker)}</p>
-      <br />
+      <p className="review-tile-recommendation">
+        {review.recommend ? <AiFillCheckSquare className="rvw-chk" /> : null}
+        {' '}
+        {review.recommend ? <span className="review-tile-recommendation-status">I Recommend This </span> : null}
+      </p>
       <p className="review-tile-body">
         {highlightHandler(review.body, bodyLengthChecker)}
         {showFull ? review.body.substring(250) : elipsesSpan()}
-      </p>
-      <p className="review-tile-recommendation">
-        {review.recommend ? <AiFillCheckCircle style={{ color: 'green' }} /> : null}
-        {' '}
-        {review.recommend ? <span className="review-tile-recommendation-status">I recommend this product</span> : null}
       </p>
       <p className="review-tile-response">
         { review.response
@@ -163,7 +164,6 @@ export default function ReviewTile({
       </p>
       <div className="review-tile-photos-container">{photoHandler()}</div>
       <div className="review-tile-container-2">
-        <p className="review-tile-name">Was this review helpful?</p>
         <button
           className="review-tile-helpful"
           onClick={() => (!helpfulClick ? helpfulHandler() : null)}
@@ -171,18 +171,18 @@ export default function ReviewTile({
           type="button"
         >
           {
-            helpfulClick ? <BsFillHandThumbsUpFill style={{ color: 'green' }} /> : null
+            helpfulClick ? <BsFillHandThumbsUpFill size=".9em" style={{ color: '#E60023' }} className="help-thmb" /> : null
           }
-          Yes
+          Helpful
+
+          {' '}
           <span className="review-helpful-span">
-            (
             {
                 review.helpfulness
             }
-            )
           </span>
         </button>
-        <RxDividerVertical />
+        <div className="rvw-btn-brk" />
         <button
           className="review-tile-report"
           onClick={() => (!helpfulClick ? reportHandler() : null)}
@@ -191,15 +191,12 @@ export default function ReviewTile({
         >
           Report
         </button>
-        { modalToggle
-          ? (
-            <ReviewImageModal
-              imgString={imgString}
-              setModalToggle={setModalToggle}
-              name={review.reviewer_name}
-            />
-          )
-          : null }
+        <ReviewImageModal
+          modalToggle={modalToggle}
+          imgString={imgString}
+          setModalToggle={setModalToggle}
+          name={review.reviewer_name}
+        />
       </div>
     </div>
   );

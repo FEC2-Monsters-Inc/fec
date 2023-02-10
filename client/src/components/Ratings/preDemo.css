@@ -167,7 +167,7 @@ input[type="radio"]:not(:checked) + label::after {
     align-self: flex-end;
   }
 
-  .my-node-enter {
+  /* .my-node-enter {
     opacity: 0;
   }
 
@@ -183,4 +183,4 @@ input[type="radio"]:not(:checked) + label::after {
   .my-node-exit-active {
     opacity: 0;
     transition: opacity 5000ms;
-  }
+  } */

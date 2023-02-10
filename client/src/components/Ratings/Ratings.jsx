@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
 import ReviewDashboard from './sub-components/ReviewDashboard.jsx';
 import ReviewList from './sub-components/ReviewList.jsx';
 import ThankYouModal from './sub-components/ThankYouModal.jsx';
@@ -50,12 +49,11 @@ export default function Ratings({
           setReviewMeta={setReviewMeta}
           setShowThankyou={setShowThankyou}
         />
-        <CSSTransition in={showThankyou} timeout={5000} className="my-node" unmountOnExit>
-          <ThankYouModal
-            showThankyou={showThankyou}
-            setShowThankyou={setShowThankyou}
-          />
-        </CSSTransition>
+        <ThankYouModal
+          showThankyou={showThankyou}
+          setShowThankyou={setShowThankyou}
+        />
+
       </div>
     </div>
   );

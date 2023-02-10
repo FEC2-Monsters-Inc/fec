@@ -1,32 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
+import { GoTriangleRight } from 'react-icons/go';
 import RelatedProduct from './RelatedProduct.jsx';
 import fetcher from '../../../fetchers';
 import './styles/relatedList.css';
 
 export default function RelatedList({ feature, relatedInfoList, setFeatureProduct }) {
   const ref = useRef(null);
-  const [posIndex, setPosIndex] = useState(0);
+  const [posIndex, setPosIndex] = useState(3);
   const [featureMeta, setFeatureMeta] = useState(0);
 
-  const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length - 4 : 0;
+  const endOfRelatedList = relatedInfoList.length ? relatedInfoList.length : 0;
 
   const scrollLeft = () => {
-    if (posIndex > 0) {
+    if (posIndex > -1) {
+      document.querySelector(`#relatedProduct${posIndex - 4}`)
+        .scrollIntoView({ behvaior: 'smooth', block: 'nearest' });
       setPosIndex(posIndex - 1);
-      document.querySelector(`#relatedProduct${posIndex - 1}`)
-        .scrollIntoView({ inline: 'start' });
     }
-    // ref.current.scrollLeft -= 15 * 16; // Hardcode move in px
   };
 
   const scrollRight = () => {
-    if (posIndex < endOfRelatedList) {
-      setPosIndex(posIndex + 1);
+    if (posIndex < endOfRelatedList - 1) {
       document.querySelector(`#relatedProduct${posIndex + 1}`)
-        .scrollIntoView({ inline: 'start' });
+        .scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setPosIndex(posIndex + 1);
     }
-    // ref.current.scrollLeft += 15 * 16; // Hardcode move in px
   };
 
   useEffect(() => {
@@ -37,12 +35,19 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
 
   return (
     <div className="related-carousel-outside">
-      <AiOutlineLeftSquare
-        className="related-carousel-rel-scrollBtn"
-        style={{ opacity: posIndex === 0 ? 0 : 1 }}
+      <div
+        className="scroll-btns-left"
         onClick={scrollLeft}
-        title="related-left-arrow" // For testing
-      />
+        style={{ backgroundColor: posIndex === 3 ? '#EEEEEE00' : null }}
+      >
+        <GoTriangleRight
+          size="3em"
+          className="rel-scroll scrll-left"
+          style={{ opacity: posIndex === 3 ? 0 : 1 }}
+          onClick={scrollLeft}
+          title="related-left-arrow"
+        />
+      </div>
       <div className="related-carousel-inside" ref={ref}>
         {relatedInfoList.map((relProd, index) => (
           <RelatedProduct
@@ -55,15 +60,22 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
           />
         ))}
       </div>
-      <AiOutlineRightSquare
-        className="related-carousel-rel-scrollBtn"
-        style={{
-          opacity:
-            (posIndex === endOfRelatedList || endOfRelatedList <= 0) ? 0 : 1,
-        }}
+      <div
+        className="scroll-btns-right"
         onClick={scrollRight}
-        title="related-right-arrow" // For testing
-      />
+        style={{ backgroundColor: (posIndex === endOfRelatedList - 1 || endOfRelatedList <= 0) ? '#EEEEEE00' : null }}
+      >
+        <GoTriangleRight
+          className="rel-scroll"
+          size="3em"
+          style={{
+            opacity:
+            (posIndex === endOfRelatedList - 1 || endOfRelatedList <= 0) ? 0 : 1,
+          }}
+          onClick={scrollRight}
+          title="related-right-arrow"
+        />
+      </div>
     </div>
   );
 }

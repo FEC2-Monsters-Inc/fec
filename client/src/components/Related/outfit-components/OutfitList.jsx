@@ -21,7 +21,7 @@ export default function OutfitList({
     if (posIndex > 0) {
       setPosIndex(posIndex - 1);
       document.querySelector(`#outfitProduct${posIndex - 1}`)
-        .scrollIntoView({ inline: 'start' });
+        .scrollIntoView({ inline: 'start', block: 'nearest' });
     }
     // ref.current.scrollLeft -= 15 * 16;
   };
@@ -30,7 +30,7 @@ export default function OutfitList({
     if (posIndex < endOfOutfitList) {
       setPosIndex(posIndex + 1);
       document.querySelector(`#outfitProduct${posIndex + 1}`)
-        .scrollIntoView({ inline: 'start' });
+        .scrollIntoView({ inline: 'start', block: 'nearest' });
     }
     // ref.current.scrollLeft += 15 * 16;
   };

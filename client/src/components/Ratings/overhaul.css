@@ -298,12 +298,23 @@
   padding: 1em 0 2em;
 }
 
+.review-tile-photos-container {
+  display: flex;
+}
+
 .review-tile-individual-photo {
-  max-width: 10%;
+  border-radius: 0.25rem;
+  height: 5rem;
+  width: 7.11rem;
+  margin: 0 0.25rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .review-tile-individual-photo:hover {
-  cursor: zoom-in;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+  cursor: pointer;
+  transition: box-shadow 200ms;
 }
 
 .review-tile-container-1 {

@@ -4,6 +4,7 @@ import CharacteristicTracker from './DashboardCharacteristicTracker.jsx';
 import ActiveFilters from './ActiveFilters.jsx';
 import StarImg from '../../../../dist/assets/star.png';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
+import ReviewStarRating from '../../shared/StarRating/ReviewStarRating.jsx';
 
 export default function ReviewDashboard({
   reviews,
@@ -12,8 +13,8 @@ export default function ReviewDashboard({
   reviewMeta,
   listLength,
   setListLength,
-  listIndex,
-  setListIndex,
+  // listIndex,
+  // setListIndex,
 }) {
   // STATE DATA //
   const [avgRating, setAvgRating] = useState(0);
@@ -110,7 +111,7 @@ export default function ReviewDashboard({
       ratingSetter();
       recommendedSetter();
     }
-  }, [reviews, listIndex]);
+  }, [reviews]);
 
   return (
     <>
@@ -140,8 +141,8 @@ export default function ReviewDashboard({
             setFilter={setFilter}
             listLength={listLength}
             setListLength={setListLength}
-            listIndex={listIndex}
-            setListIndex={setListIndex}
+            // listIndex={listIndex}
+            // setListIndex={setListIndex}
           />
         </div>
         <div className="review-dash-right">

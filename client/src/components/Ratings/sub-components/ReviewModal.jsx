@@ -20,6 +20,7 @@ export default function ReviewModal({
   const [bodyCount, setBodyCount] = useState(0);
   const [characteristics, setChars] = useState({});
   const [newReview, setNewReview] = useState({ product_id: feature.id, photos: [] });
+  const nodeRef = useRef(null);
 
   // image modal state - currently out of order
   const [imageUploadModal, setImageUploadModal] = useState(false);
@@ -178,7 +179,7 @@ export default function ReviewModal({
           </p>
           <div className="modal-top">
             <div className="review-modal-star-container" onBlur={() => handleRequiredStars()}>
-              <p className="leave-stars">Your Rating:</p>
+              <p className="leave-stars">Rating:</p>
               {' '}
               {/* Rename and Refactor */}
               <ReviewModalStars
@@ -193,12 +194,14 @@ export default function ReviewModal({
                 <span className="review-asterisk-recommend">*</span>
               </p>
               <label className="reco-label" htmlFor="recommendation-yes">
-                <input type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
-                Yes
+                <input id="yes-id" type="radio" name="recommendation" value="yes" onChange={handleRecommendation} />
+                <label htmlFor="yes-id">Yes</label>
+                {/* Yes */}
               </label>
               <label className="reco-label" htmlFor="recommendation-no">
-                <input type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
-                No
+                <input id="no-id" type="radio" name="recommendation" value="no" onChange={handleRecommendation} />
+                <label htmlFor="no-id">No</label>
+                {/* No */}
               </label>
             </div>
           </div>
@@ -236,7 +239,7 @@ export default function ReviewModal({
                 {bodyCount > 50
                   ? (
                     <span className="review-body-minimum-reached">
-                      <AiFillCheckSquare />
+                      <span className="min-check"><AiFillCheckSquare /></span>
                       {' '}
                       Minimum Reached
                     </span>

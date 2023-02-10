@@ -33,13 +33,14 @@ export default {
     return axios(options);
   },
 
-  getReviews: (id) => {
+  getReviews: (id, string) => {
     const options = {
       url: `${SERVER_BASEURL}/reviews`,
       method: 'get',
       params: {
         product_id: id,
         count: 200,
+        sort: string || 'relevant',
       },
     };
 

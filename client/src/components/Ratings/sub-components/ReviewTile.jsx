@@ -4,9 +4,10 @@ import { BsFillHandThumbsUpFill } from 'react-icons/bs';
 import ReviewImageModal from './ReviewImageModal.jsx';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
+import ReviewStarRating from '../../shared/StarRating/ReviewStarRating.jsx';
 
 export default function ReviewTile({
-  review, setReviews, reviews, feature, searchTerm,
+  review, setReviews, reviews, feature, searchTerm, sortString, setSortString,
 }) {
   // STATE DATA //
   const [modalToggle, setModalToggle] = useState(false);
@@ -113,7 +114,7 @@ export default function ReviewTile({
   // HTTP REQUEST HANDLERS //
   const helpfulHandler = () => {
     fetcher.updateUseful(review.review_id)
-      .then(() => fetcher.getReviews(feature.id))
+      .then(() => fetcher.getReviews(feature.id, sortString))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.error('Error updating helpful in reviewtile: ', error));
@@ -121,7 +122,7 @@ export default function ReviewTile({
 
   const reportHandler = () => {
     fetcher.updateReport(review.review_id)
-      .then(() => fetcher.getReviews(feature.id))
+      .then(() => fetcher.getReviews(feature.id, sortString))
       .then(({ data }) => setReviews(data.results))
       .then(() => setHelpfulClick(true))
       .catch((error) => console.error('Error updating reported in reviewtile: ', error));
@@ -142,7 +143,7 @@ export default function ReviewTile({
         <div className="rvw-title-container">
           <p className="review-tile-summary">{highlightHandler(review.summary, summaryLengthChecker)}</p>
           <div className="review-tile-stars">
-            <StarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
+            <ReviewStarRating ratingPercentage={`${roundedPercentage(0.25, review.rating)}%`} />
           </div>
         </div>
         <p className="review-tile-nameAndDate">{highlightHandler(nameAndDate, null)}</p>

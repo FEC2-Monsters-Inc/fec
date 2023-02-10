@@ -53,7 +53,7 @@ export default function ModalCharRadioBtns({
               id={number + characteristic}
               className="modal-char-radio"
             />
-            <label className="write-review-modal-label" htmlFor={characteristic}>
+            <label className="write-review-modal-label" htmlFor={number + characteristic}>
               {characteristicMapper(characteristic)[number - 1]}
             </label>
           </div>

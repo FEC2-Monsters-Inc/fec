@@ -46,15 +46,6 @@ export default function RelevanceDropdown({
     setSortString('relevant');
   };
 
-  // OTHER HELPER FUNCTIONS //
-  const reviewListLength = () => {
-    if (!listLength) {
-      // return reviews.slice(0, listIndex).length; // Logic to show number of reviews displayed
-      return reviews.length; // Logic to show total number of reviews
-    }
-    return listLength;
-  };
-
   // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
@@ -69,10 +60,7 @@ export default function RelevanceDropdown({
       {display
         ? (
           <div className="review-sort-title">
-            {reviewListLength()}
-            {' '}
-            reviews sorted by
-            {' '}
+            {`${reviews.length} reviews sorted by`}
             <p
               onClick={handleClick}
               onKeyPress={handleClick}

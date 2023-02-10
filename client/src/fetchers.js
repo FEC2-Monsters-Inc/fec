@@ -167,4 +167,13 @@ export default {
     return axios(options)
       .catch((err) => console.error('postInteraction - ', err));
   },
+
+  addToCart: (sku_id) => {
+    const options = {
+      url: `${SERVER_BASEURL}/cart`,
+      method: 'post',
+      data: { sku_id },
+    };
+    return axios(options);
+  },
 };

@@ -649,3 +649,56 @@ li {
     width: 50px;
   }
 }
+
+/* CART */
+
+#header-right {
+  display: flex;
+  align-items: center;
+}
+
+.session-btn-container {
+  display: block;
+  position: relative;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.session-icon {
+  color: #E60023;
+  width: 2rem;
+  height: 2rem;
+}
+
+#wishlist-icon{
+  stroke-width: 1.5px;
+  transform: translateY(-1);
+}
+
+.btn-qty {
+  position: absolute;
+  color: white;
+  background-color: #E60023;
+  font-size: 0.65rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  line-height: 1rem;
+  right: 0;
+  top: 1.25rem;
+}
+
+#session-info {
+  display: flex;
+  align-items: center;
+}
+
+.star-cart-btn {
+  transition: color 300ms, background-color 300ms;
+}
+
+.star-cart-btn:hover, .star-cart-btn.active {
+  background-color: #E60023;
+  color: white;
+}

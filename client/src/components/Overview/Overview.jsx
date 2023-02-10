@@ -8,6 +8,7 @@ import ProdInfo from './sub-comps/ProdInfo.jsx';
 import StyleSelect from './sub-comps/StyleSelect.jsx';
 import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
+import SessionInfo from './sub-comps/SessionInfo.jsx';
 
 export default function Overview({
   product, styles, reviews, recordClick,
@@ -18,6 +19,10 @@ export default function Overview({
   const [images, setImages] = useState([]);
   const [rightBtn, setRightBtn] = useState(true);
   const [leftBtn, setLeftBtn] = useState(false);
+  const [showSku, setShowSku] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState({});
+  const [wishlist, setWishlist] = useState({});
 
   // HELPER FUNCTIONS //
   const btnRenderCheck = () => {
@@ -66,7 +71,13 @@ export default function Overview({
     <div onClick={(e) => recordClick(e, 'Overview')}>
       <div id="header">
         <h1 className="temp-logo">FEC Project</h1>
-        <Search />
+        <div id="header-right">
+          <SessionInfo
+            cart={cart}
+            wishlist={wishlist}
+          />
+          <Search />
+        </div>
       </div>
       <div id="overview">
         <div className="left-main">
@@ -95,9 +106,19 @@ export default function Overview({
             btnRenderCheck={btnRenderCheck}
             setLeftBtn={setLeftBtn}
             setRightBtn={setRightBtn}
+            setShowSku={setShowSku}
+            setQuantity={setQuantity}
           />
           <Cart
+            showSku={showSku}
+            setShowSku={setShowSku}
             currStyle={currStyle}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            cart={cart}
+            addToCart={setCart}
+            wishlist={wishlist}
+            setWishlist={setWishlist}
           />
         </div>
         <div className="bottom-main">

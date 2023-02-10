@@ -467,17 +467,17 @@
   align-items: center;
   background-color: #F7F4F3;
   border-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  box-shadow: rgb(0 0 0 / 56%) 0px 22px 70px 4px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 85vh;
   max-height: 85vh;
-  max-width: 800px;
-  overflow: scroll;
+  max-width: 835px;
   padding: 4em 3em;
   position: relative;
   width: 90%;
+  overflow: auto;
 }
 
 .close-review-modal {

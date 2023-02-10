@@ -30,22 +30,25 @@ export default function HeroModal({
     toggleHero(event);
   };
 
-  const handlePan = (event) => {
-    if (zoom) {
-      const hero = document.getElementById('hero-modal-image');
-      const x = event.clientX - event.target.offsetLeft;
-      const y = event.clientY - event.target.offsetTop;
-      hero.style.transformOrigin = `${x}px ${y}px`;
-      hero.style.transform = 'scale(2.5)';
-    }
-  };
-
   const handleMouseOut = () => {
     const hero = document.getElementById('hero-modal-image');
     hero.classList = 'zoom-in';
     hero.style.transformOrigin = 'center';
     hero.style.transform = 'scale(1)';
     zoom = false;
+  };
+
+  const handlePan = (event) => {
+    const hero = document.getElementById('hero-modal-image');
+    if (event.target !== hero) {
+      handleMouseOut();
+    }
+    if (zoom && event.target === hero) {
+      const x = event.clientX - event.target.offsetLeft;
+      const y = event.clientY - event.target.offsetTop;
+      hero.style.transformOrigin = `${x}px ${y}px`;
+      hero.style.transform = 'scale(2.5)';
+    }
   };
 
   const imageMapper = (img, index, id) => (
@@ -110,14 +113,14 @@ export default function HeroModal({
           </div>
           <div className="modal-btns">
             <button
-              className={`modal-left scroll-hero-left ${!leftBtn ? 'btn-hidden' : ''}`}
+              className={`modal-left scroll-modal ${!leftBtn ? 'btn-hidden' : ''}`}
               type="button"
               onClick={toggleHeroLeft}
             >
               <AiOutlineDoubleRight size="2em" />
             </button>
             <button
-              className={`modal-right scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
+              className={`modal-right scroll-modal ${!rightBtn ? 'btn-hidden' : ''}`}
               type="button"
               onClick={toggleHeroRight}
             >

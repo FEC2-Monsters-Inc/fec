@@ -13,7 +13,7 @@
 #ratings-widget {
   max-width: 1400px;
   padding: 3em;
-  margin: 3em auto;
+  margin: 0 auto;
 }
 
 .review-header {
@@ -410,14 +410,14 @@
 }
 
 .expanded-reviews:hover {
-  background-color: #D4D2D14D;
+  background-color: #F7F4F3;
   border-color: #E60023;
   color: #E60023;
 }
 
 .write-new-review:hover {
   background-color: #E60023;
-  color: #D4D2D1;
+  color: #fff;
 }
 
 /*  REVIEW TILE IMAGE MODAL */

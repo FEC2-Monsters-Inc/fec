@@ -1,6 +1,6 @@
 import React from 'react';
 import imgUnavailable from '../assets/imgUnavailable.png';
-import './styles/imageCarousel.css';
+import './styles/related.css';
 
 export default function ImageCarousel({ relStyle, setRelStyle }) {
   const handlePhotoChange = (e, index) => {

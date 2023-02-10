@@ -79,13 +79,13 @@ export default function Gallery({
         toggleThumbSelect={toggleThumbSelect}
       />
       <div className="hero-image-container">
-        <button
+        <div
           className={`scroll-hero-left ${!leftBtn ? 'btn-hidden' : ''}`}
           type="button"
           onClick={toggleHeroLeft}
         >
           <AiOutlineDoubleRight size="2em" />
-        </button>
+        </div>
         {heroImage.url
           ? (
             <img
@@ -102,13 +102,15 @@ export default function Gallery({
         >
           <AiOutlineExpand size="1.5em" onClick={() => setHeroModal(true)} />
         </button>
-        <button
+        <div
+          className="hero-left"
+          onClick={toggleHeroRight}
           className={`scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
           type="button"
-          onClick={toggleHeroRight}
         >
+
           <AiOutlineDoubleRight size="2em" />
-        </button>
+        </div>
       </div>
       <HeroModal
         heroModal={heroModal}

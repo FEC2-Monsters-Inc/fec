@@ -1,9 +1,10 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useRef } from 'react';
-import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
-import { GrAdd } from 'react-icons/gr';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { GoTriangleRight } from 'react-icons/go';
+// import { GrAdd } from 'react-icons/gr';
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import OutfitProduct from './OutfitProduct.jsx';
 import './styles/outfitList.css';
 
@@ -12,27 +13,25 @@ export default function OutfitList({
 }) {
   // CAROUSEL COMPONENT
   const ref = useRef(null);
-  const [posIndex, setPosIndex] = useState(0);
+  const [posIndex, setPosIndex] = useState(3);
 
   // CHECK HOW MANY CLICKS NEED TO REACH END OF THE LAST RELATED IMAGE
-  const endOfOutfitList = outfitIdList.length !== undefined ? outfitIdList.length - 4 : 0;
+  const endOfOutfitList = outfitIdList.length !== undefined ? outfitIdList.length : 0;
 
   const scrollLeft = () => {
-    if (posIndex > 0) {
+    if (posIndex > -1) {
+      document.querySelector(`#outfitProduct${posIndex - 4}`)
+        .scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       setPosIndex(posIndex - 1);
-      document.querySelector(`#outfitProduct${posIndex - 1}`)
-        .scrollIntoView({ inline: 'start', block: 'nearest' });
     }
-    // ref.current.scrollLeft -= 15 * 16;
   };
 
   const scrollRight = () => {
     if (posIndex < endOfOutfitList) {
-      setPosIndex(posIndex + 1);
       document.querySelector(`#outfitProduct${posIndex + 1}`)
-        .scrollIntoView({ inline: 'start', block: 'nearest' });
+        .scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setPosIndex(posIndex + 1);
     }
-    // ref.current.scrollLeft += 15 * 16;
   };
 
   // ADD FEATURE PRODUCT TO OUTFIT LIST
@@ -60,54 +59,58 @@ export default function OutfitList({
   };
 
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="outfit-carousel-outside">
-        <AiOutlineLeftSquare
-          className="outfit-carousel-rel-scrollBtn"
-          style={{ opacity: posIndex === 0 ? 0 : 1 }}
+    <div className="outfit-carousel-outside">
+      <div
+        className="scroll-btns-left"
+        onClick={scrollLeft}
+        style={{ backgroundColor: posIndex === 3 ? '#EEEEEE00' : null }}
+      >
+        <GoTriangleRight
+          size="3em"
+          className="rel-scroll scrll-left"
+          style={{ opacity: posIndex === 3 ? 0 : 1 }}
           onClick={scrollLeft}
-        />
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              <div className="outfit-carousel-inside" ref={ref}>
-                {outfitIdList.length !== 0
-                  ? outfitIdList.map((outfitId, index) => (
-                    <Draggable key={outfitId} draggableId={outfitId.toString()} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <OutfitProduct
-                            key={outfitId}
-                            outfitId={outfitId}
-                            outfitIdList={outfitIdList}
-                            setOutfitIdList={setOutfitIdList}
-                            setFeatureProduct={setFeatureProduct}
-                            index={index}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))
-                  : null}
-                <GrAdd className="outfit-add" onClick={addOutfit} title="outfit-add-icon" />
-              </div>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <AiOutlineRightSquare
-          className="outfit-carousel-rel-scrollBtn"
-          style={{
-            opacity:
-              (posIndex === endOfOutfitList || endOfOutfitList <= 0) ? 0 : 1,
-          }}
-          onClick={scrollRight}
+          title="related-left-arrow"
         />
       </div>
-    </DragDropContext>
+      <div className="outfit-carousel-inside" ref={ref}>
+        {outfitIdList
+          ? outfitIdList.map((outfitId, index) => (
+            <OutfitProduct
+              key={outfitId}
+              outfitId={outfitId}
+              outfitIdList={outfitIdList}
+              setOutfitIdList={setOutfitIdList}
+              setFeatureProduct={setFeatureProduct}
+              index={index}
+            />
+          ))
+          : null}
+        <div className="add-card" onClick={addOutfit}>
+          <AiOutlinePlus className="outfit-add" onClick={addOutfit} size="10em" title="outfit-add-icon" />
+        </div>
+      </div>
+      {outfitIdList.length > 4
+        ? (
+          <div
+            className="scroll-btns-right"
+            onClick={scrollRight}
+            style={{ backgroundColor: (posIndex === endOfOutfitList - 1 || endOfOutfitList <= 0) ? '#EEEEEE00' : null }}
+          >
+            <GoTriangleRight
+              className="rel-scroll"
+              size="3em"
+              style={{
+                opacity:
+            (posIndex <= endOfOutfitList - 1 || endOfOutfitList <= 0) ? 0 : 1,
+              }}
+              onClick={scrollRight}
+              title="related-right-arrow"
+            />
+          </div>
+        )
+        : null}
+
+    </div>
   );
 }

@@ -8,6 +8,7 @@ import ProdInfo from './sub-comps/ProdInfo.jsx';
 import StyleSelect from './sub-comps/StyleSelect.jsx';
 import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
+import logo from '../../../dist/assets/logo.png';
 
 export default function Overview({
   product, styles, reviews, recordClick,
@@ -67,7 +68,8 @@ export default function Overview({
     // eslint-disable-next-line -- not meant to be interactive
     <div onClick={(e) => recordClick(e, 'Overview')}>
       <div id="header">
-        <h1 className="temp-logo">FEC Project</h1>
+        {/* <h1 className="temp-logo">Superior</h1> */}
+        <img src={logo} className="logo" alt="site-logo" />
         <Search />
       </div>
       <div id="overview">

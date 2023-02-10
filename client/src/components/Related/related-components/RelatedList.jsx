@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { GoTriangleRight } from 'react-icons/go';
 import RelatedProduct from './RelatedProduct.jsx';
 import fetcher from '../../../fetchers';
-import './styles/relatedList.css';
+import './styles/related.css';
 
 export default function RelatedList({ feature, relatedInfoList, setFeatureProduct }) {
   const ref = useRef(null);

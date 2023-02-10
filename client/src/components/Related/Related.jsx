@@ -4,6 +4,7 @@ import axios from 'axios';
 import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
+import './related-components/styles/related.css';
 
 export default function Related({
   feature, relatedIdList, setFeatureProduct, recordClick,
@@ -42,13 +43,13 @@ export default function Related({
         relatedInfoList={relatedInfoList}
         setFeatureProduct={setFeatureProduct}
       />
-      {/* <h2 className="outfit-title">Your Outfit</h2>
+      <h2 className="outfit-title">Your Outfit</h2>
       <OutfitList
         feature={feature}
         setFeatureProduct={setFeatureProduct}
         outfitIdList={outfitIdList}
         setOutfitIdList={setOutfitIdList}
-      /> */}
+      />
     </div>
   );
 }

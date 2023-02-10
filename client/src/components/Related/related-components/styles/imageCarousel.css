@@ -1,14 +1,13 @@
-.img-carousel-outside {
+/* .img-carousel-outside {
   align-items: center;
   background-color: #0C1B33CC;
   bottom: 0;
   display: flex;
-  flex-wrap: wrap;
-  height: 100%;
-  justify-content: center;
+  height: 40%;
+  justify-content: flex-start;
   overflow: scroll;
   position: absolute;
-  padding: 5px;
+  padding: 0 2%;
   width: 100%;
 }
 
@@ -18,14 +17,15 @@
 
 .img-carousel-container {
   border: 1px solid #E60023;
-  height: 30%;
-  margin: 3px;
-  max-height: 30%;
-  max-width: 30%;
-  width: 30%;
+  margin: 0 3%;
+  height: 90%;
+  min-width: 20%;
+  overflow: hidden;
+  width: 20%;
 }
 
 .img-carousel-container img {
-  height: 100%;
-  width: 100%;
-}
+  object-fit: cover;
+  transform: translateX(-50%);
+  max-width: 200%;
+} */

@@ -6,7 +6,7 @@ import CompareModal from './CompareModal.jsx';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 import ImageCarousel from './ImageCarousel.jsx';
 import imgUnavailable from '../assets/imgUnavailable.png';
-import './styles/compareModal.css';
+import './styles/related.css';
 
 export default function RelatedProduct({
   feature, featureMeta, setFeatureProduct, relProd, index,

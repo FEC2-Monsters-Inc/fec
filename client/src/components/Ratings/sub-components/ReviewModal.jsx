@@ -239,7 +239,7 @@ export default function ReviewModal({
                 {bodyCount > 50
                   ? (
                     <span className="review-body-minimum-reached">
-                      <AiFillCheckSquare />
+                      <span className="min-check"><AiFillCheckSquare /></span>
                       {' '}
                       Minimum Reached
                     </span>

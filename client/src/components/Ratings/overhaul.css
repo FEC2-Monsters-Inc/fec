@@ -721,6 +721,10 @@
 .review-body-minimum-reached {
   align-items: center;
   display: flex;
+  /* color: #367E18; */
+}
+
+.min-check {
   color: #E60023;
 }
 
@@ -838,7 +842,7 @@
 
 .email-disclaimer {
   color: #746F72;
-  font-size: .75em;
+  font-size: .5em;
   margin-top: 10px;
   width: 100%;
 }

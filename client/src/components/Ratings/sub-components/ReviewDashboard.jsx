@@ -119,7 +119,7 @@ export default function ReviewDashboard({
         <p className="review-avg-rating">{avgRating}</p>
         <div className="review-stars-main">
           {reviews
-            ? <ReviewStarRating ratingPercentage={starAverager(reviews)} className="star-icons" />
+            ? <StarRating ratingPercentage={starAverager(reviews)} className="star-icons" />
             : null}
         </div>
       </div>

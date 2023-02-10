@@ -41,9 +41,9 @@ input[type="radio"]:checked + label::after {
   top: 1px;
   width: 15px;
   height: 15px;
+  background: linear-gradient(to right bottom, rgba(230,0,35,1) 0%, rgba(230,0,35,1) 49%, rgba(238,115,115,1) 93%);
   border-radius: 100%;
-  background: radial-gradient(circle, hsla(351, 100%, 45%, 1) 0%, hsla(254, 74%, 65%, 1) 100%);;
-  transform: scale(1.1);
+  transform: scale(1);
   opacity: 1;
   transition: all .3s ease;
 }
@@ -55,8 +55,8 @@ input[type="radio"]:not(:checked) + label::after {
   top: 2px;
   width: 13px;
   height: 13px;
+  background: linear-gradient(to right bottom, rgba(230,0,35,1) 0%, rgba(230,0,35,1) 49%, rgba(238,115,115,1) 93%);
   border-radius: 100%;
-  background: radial-gradient(circle, hsla(351, 100%, 45%, 1) 0%, hsla(254, 74%, 65%, 1) 100%);
   opacity: 0;
   transition: all .3s ease;
   transform: scale(0);

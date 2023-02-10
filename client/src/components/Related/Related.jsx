@@ -4,6 +4,7 @@ import axios from 'axios';
 import fetcher from '../../fetchers';
 import RelatedList from './related-components/RelatedList.jsx';
 import OutfitList from './outfit-components/OutfitList.jsx';
+import './related-components/styles/related.css';
 
 export default function Related({
   feature, relatedIdList, setFeatureProduct, recordClick,
@@ -36,17 +37,13 @@ export default function Related({
   return (
     // eslint-disable-next-line -- not meant to be interactive
     <div id="related-widget" onClick={(e) => recordClick(e, 'Related Items & Comparison')}>
-      <h2>RELATED PRODUCTS</h2>
-      <br />
+      <h2 className="related-title">More Like This</h2>
       <RelatedList
         feature={feature}
         relatedInfoList={relatedInfoList}
         setFeatureProduct={setFeatureProduct}
       />
-      <br />
-      <br />
-      <h2>OUTFIT PRODUCTS</h2>
-      <br />
+      <h2 className="outfit-title">Your Outfit</h2>
       <OutfitList
         feature={feature}
         setFeatureProduct={setFeatureProduct}

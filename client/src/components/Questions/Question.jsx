@@ -180,14 +180,14 @@ export default function Question({
                     Yes
                   </button>
                 ) : <span>Marked!</span>}
-                {' ('}
                 <span
                   className="qa helpfulness"
                   data-testid="q-helpfulness"
                 >
+                  {' ('}
                   {helpfulness}
+                  {') | '}
                 </span>
-                {') | '}
                 <button
                   className="qa btn-link"
                   type="button"

@@ -53,17 +53,17 @@ export default function QuestionsList({
       {/* TODO: extract this and logic to Questions.jsx */}
       <div className="qa footer-control">
         <button
-          className="qa footer-btn"
+          className="footer-add-btn"
           type="button"
           tabIndex={0}
           onKeyUp={showModal}
           onClick={showModal}
         >
-          {'ADD A QUESTION \t +'}
+          {'ASK A QUESTION \t +'}
         </button>
         {numQuestions !== questions.length ? (
           <button
-            className="qa footer-btn"
+            className="footer-more-btn"
             type="button"
             tabIndex={0}
             onKeyUp={loadMoreQuestions}

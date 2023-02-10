@@ -11,7 +11,6 @@ export default function App({ product_id }) {
   // PRE-FETCH EMPTY INITIAL VALUE //
   const initFeature = { id: product_id, name: null };
 
-
   // STATE DATA //
   const [featureProduct, setFeatureProduct] = useState(initFeature);
   const [styles, setStyles] = useState(null);
@@ -64,12 +63,6 @@ export default function App({ product_id }) {
         reviews={reviews}
         recordClick={recordClick}
       />
-      <Related
-        feature={featureProduct}
-        relatedIdList={relatedIdList}
-        setFeatureProduct={setFeatureProduct}
-        recordClick={recordClick}
-      />
       <Ratings
         feature={featureProduct}
         reviews={reviews}
@@ -78,10 +71,33 @@ export default function App({ product_id }) {
         setReviewMeta={setReviewMeta}
         recordClick={recordClick}
       />
+      <Related
+        feature={featureProduct}
+        relatedIdList={relatedIdList}
+        setFeatureProduct={setFeatureProduct}
+        recordClick={recordClick}
+      />
       <Questions
         featureProduct={featureProduct}
         recordClick={recordClick}
       />
+      <div id="footer">
+        <h1 className="useful-text">Useful Links</h1>
+        <div className="useful">
+          <a href="#header" className="footer-text">
+            <h1>Scroll To Top</h1>
+          </a>
+          <a href="#related-widget" className="footer-text">
+            <h1>Similar Items</h1>
+          </a>
+          <a href="#ratings-widget" className="footer-text">
+            <h1>Reviews</h1>
+          </a>
+          <a href="#questions-widget" className="footer-text">
+            <h1>Questions</h1>
+          </a>
+        </div>
+      </div>
     </>
   );
 }

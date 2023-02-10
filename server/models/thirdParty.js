@@ -6,7 +6,7 @@ const endpoint = 'https://api.imgbb.com/1/upload';
 
 module.exports = {
   uploadImage: (imgPath) => (
-    imgbbUploader({ apiKey: process.env.IMAGE_BB_APIKEY, base64string: imgPath })
+    imgbbUploader({ apiKey: process.env.IMGBB_KEY, base64string: imgPath })
   ),
 
   uploadPhotos: (files) => {

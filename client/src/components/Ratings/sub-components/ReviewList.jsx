@@ -37,7 +37,9 @@ export default function ReviewList({
   const reviewMapper = (reviewArray) => reviewArray.map((review) => {
     if (review.body.toLowerCase()
       .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || review.summary.toLowerCase()
-      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || review.reviewer_name.toLowerCase().includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || (getDateString(review.date).toLowerCase().includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')))) {
+      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || review.reviewer_name.toLowerCase()
+      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')) || (getDateString(review.date).toLowerCase()
+      .includes((searchTerm.length >= 3 ? searchTerm.toLowerCase() : '')))) {
       return (
         <ReviewTile
           review={review}
@@ -57,7 +59,8 @@ export default function ReviewList({
       return reviewMapper(reviews.slice(0, listIndex));
     }
     const filteredReviews = reviews
-      .slice(0, listIndex).filter((review) => selectedRating[review.rating] === true);
+      .filter((review) => selectedRating[review.rating] === true)
+      .slice(0, listIndex);
     return reviewMapper(filteredReviews);
   };
 

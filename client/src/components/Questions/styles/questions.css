@@ -3,7 +3,7 @@
 #questions-widget {
   width: 90%;
   max-width: 1300px;
-  margin: auto;
+  margin: 2em auto;
   line-height: 120%;
   font-size: 100%;
 }

@@ -167,20 +167,9 @@ input[type="radio"]:not(:checked) + label::after {
     align-self: flex-end;
   }
 
-  /* .my-node-enter {
-    opacity: 0;
+  .review-tracker-bar-container:hover {
+    transform: scale(1.1, 1.1);
+    filter: drop-shadow(0 0 1rem black);
+    border: none;
   }
 
-  .my-node-enter-active {
-    opacity: 1;
-    transition: opacity 5000ms;
-  }
-
-  .my-node-exit {
-    opacity: 1;
-  }
-
-  .my-node-exit-active {
-    opacity: 0;
-    transition: opacity 5000ms;
-  } */

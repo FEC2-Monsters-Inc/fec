@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import ReactDOM from 'react-dom';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 export default function HeroModal({
   heroModal,
@@ -28,24 +29,6 @@ export default function HeroModal({
   const imgClickHandler = (event) => {
     toggleThumbSelect(event);
     toggleHero(event);
-  };
-
-  const handlePan = (event) => {
-    if (zoom) {
-      const hero = document.getElementById('hero-modal-image');
-      const x = event.clientX - event.target.offsetLeft;
-      const y = event.clientY - event.target.offsetTop;
-      hero.style.transformOrigin = `${x}px ${y}px`;
-      hero.style.transform = 'scale(2.5)';
-    }
-  };
-
-  const handleMouseOut = () => {
-    const hero = document.getElementById('hero-modal-image');
-    hero.classList = 'zoom-in';
-    hero.style.transformOrigin = 'center';
-    hero.style.transform = 'scale(1)';
-    zoom = false;
   };
 
   const imageMapper = (img, index, id) => (
@@ -97,16 +80,22 @@ export default function HeroModal({
         <div className="modal-bottom">
           <div
             className="hero-modal-image-container"
-            onMouseMove={handlePan}
-            onMouseLeave={handleMouseOut}
           >
-            <img
-              id="hero-modal-image"
-              src={heroImage.url}
-              alt="product hero"
-              onClick={handleZoom}
-              className="zoom-in"
-            />
+            <TransformWrapper
+              defaultScale={1}
+              defaultPositionX={100}
+              defaultPositionY={200}
+            >
+              <TransformComponent>
+                <img
+                  id="hero-modal-image"
+                  src={heroImage.url}
+                  alt="product hero"
+                  onClick={handleZoom}
+                  className="zoom-in"
+                />
+              </TransformComponent>
+            </TransformWrapper>
           </div>
           <div className="modal-btns">
             <button

@@ -18,6 +18,8 @@ export default function Overview({
   const [images, setImages] = useState([]);
   const [rightBtn, setRightBtn] = useState(true);
   const [leftBtn, setLeftBtn] = useState(false);
+  const [showSku, setShowSku] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   // HELPER FUNCTIONS //
   const btnRenderCheck = () => {
@@ -95,9 +97,15 @@ export default function Overview({
             btnRenderCheck={btnRenderCheck}
             setLeftBtn={setLeftBtn}
             setRightBtn={setRightBtn}
+            setShowSku={setShowSku}
+            setQuantity={setQuantity}
           />
           <Cart
+            showSku={showSku}
+            setShowSku={setShowSku}
             currStyle={currStyle}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
         </div>
         <div className="bottom-main">

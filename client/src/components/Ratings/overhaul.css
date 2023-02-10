@@ -434,7 +434,7 @@
 /*  REVIEW TILE IMAGE MODAL */
 .review-image-modal-full-container {
   align-items: center;
-  animation: fadeIn .5s;
+  animation: fadeIn .25s;
   background-color: #0C1B3380;
   display: flex;
   justify-content: center;
@@ -451,8 +451,10 @@
 }
 
 .review-image-modal {
-  max-height: 75%;
-  max-width: 75%;
+  max-height: 95%;
+  max-width: 95%;
+  border-radius: 0.25rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 /*  WRITE REVIEW MODAL  */

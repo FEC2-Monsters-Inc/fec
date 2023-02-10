@@ -45,15 +45,15 @@ export default function UploadAndDisplayImage({
 
   // EVENT HANDLERS //
   const handleSubmit = (file) => {
-    // if (file) {
-    //   const rf = new FileReader();
-    //   rf.readAsDataURL(file);
-    //   rf.onloadend = function (event) {
-    //     const body = new FormData();
-    //     body.append('image', event.target.result.split(',').pop());
-    //     imageURLGenerator(event.target.result.split(',').pop());
-    //   };
-    // }
+    if (file) {
+      const rf = new FileReader();
+      rf.readAsDataURL(file);
+      rf.onloadend = function (event) {
+        const body = new FormData();
+        body.append('image', event.target.result.split(',').pop());
+        imageURLGenerator(event.target.result.split(',').pop());
+      };
+    }
   };
 
   return (

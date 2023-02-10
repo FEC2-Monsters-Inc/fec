@@ -26,12 +26,10 @@ export default function UploadAndDisplayImage({
       data: { imgPath },
     };
     axios(options)
-      .then(({ data }) => console.log(data),
-      // setNewReview({
-      //   ...newReview,
-      //   photos: [...newReview.photos, data],
-      // })
-      )
+      .then(({ data }) => setNewReview({
+        ...newReview,
+        photos: [...newReview.photos, data],
+      }))
       .catch((err) => console.error(err));
   };
 
@@ -53,7 +51,7 @@ export default function UploadAndDisplayImage({
       rf.onloadend = function (event) {
         const body = new FormData();
         body.append('image', event.target.result.split(',').pop());
-        return imageURLGenerator(event.target.result.split(',').pop());
+        imageURLGenerator(event.target.result.split(',').pop());
       };
     }
   };

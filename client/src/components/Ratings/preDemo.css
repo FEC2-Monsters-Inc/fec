@@ -184,7 +184,3 @@ input[type="radio"]:not(:checked) + label::after {
     opacity: 0;
     transition: opacity 5000ms;
   }
-
-  .rvw-modal-stars:hover {
-    color: #f1c40f
-  }

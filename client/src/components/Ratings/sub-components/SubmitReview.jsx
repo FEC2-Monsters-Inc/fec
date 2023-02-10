@@ -55,6 +55,7 @@ export default function SubmitReview({
         setChars({});
         setReviewModal(false);
         setValidReview(true);
+        setShowThankyou(true);
       })
       .catch(() => invalidReview());
     fetcher.getReviewMeta(feature.id)

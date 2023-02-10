@@ -53,7 +53,6 @@ export default function Ratings({
           showThankyou={showThankyou}
           setShowThankyou={setShowThankyou}
         />
-
       </div>
     </div>
   );

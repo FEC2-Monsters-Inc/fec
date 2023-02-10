@@ -45,15 +45,15 @@ export default function UploadAndDisplayImage({
 
   // EVENT HANDLERS //
   const handleSubmit = (file) => {
-    // if (file) {
-    //   const rf = new FileReader();
-    //   rf.readAsDataURL(file);
-    //   rf.onloadend = function (event) {
-    //     const body = new FormData();
-    //     body.append('image', event.target.result.split(',').pop());
-    //     imageURLGenerator(event.target.result.split(',').pop());
-    //   };
-    // }
+    if (file) {
+      const rf = new FileReader();
+      rf.readAsDataURL(file);
+      rf.onloadend = function (event) {
+        const body = new FormData();
+        body.append('image', event.target.result.split(',').pop());
+        imageURLGenerator(event.target.result.split(',').pop());
+      };
+    }
   };
 
   return (
@@ -73,7 +73,7 @@ export default function UploadAndDisplayImage({
           }}
         >
           <div className="drag-file">
-            <p className="drag-and-drop-text">Drag and Drop to Upload Images</p>
+            <p className="drag-and-drop-text">Click or Drop to Upload Images</p>
             <input
               className="img-btn"
               type="file"

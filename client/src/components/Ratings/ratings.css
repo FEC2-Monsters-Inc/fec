@@ -353,8 +353,8 @@ background-color: rgba(0, 0, 0, 0.5);
 display: flex;
 align-items: center;
 justify-content: center;
-animation-name: modalFade;
-animation-duration: .5s;
+/* animation-name: modalFade;
+animation-duration: .5s; */
 }
 
 /* Animations for Modal */
@@ -369,7 +369,7 @@ animation-duration: .5s;
   to {transform: translateY(-50%);opacity: 0;}
 }
 
-.write-review-modal.exiting {
+/* .write-review-modal.exiting {
   animation-name: modalFadeReverse;
   animation-duration: .5s;
 }
@@ -382,7 +382,7 @@ animation-duration: .5s;
 .write-review-modal.return {
   animation-name: modalFade;
   animation-duration: .5s;
-}
+} */
 
 @keyframes shake {
   0% {
@@ -1145,8 +1145,6 @@ input[type='radio']:checked:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation-name: modalFade;
-  animation-duration: .5s;
   }
 
   .thank-you-modal-parent {

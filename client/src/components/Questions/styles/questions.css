@@ -198,17 +198,24 @@
   margin: 1rem 0;
 }
 
+.qa.photos {
+  display: flex;
+  align-items: flex-end;
+}
+
 .qa.photo-sml {
-  max-width: 7.08rem;
-  max-height: 4rem;
   border-radius: 0.25rem;
-  margin: 0.25rem;
-  padding: 0.25rem;
-  cursor: pointer;
+  height: 5rem;
+  width: 7.11rem;
+  margin: 0 0.25rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .qa.photo-sml:hover {
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+  cursor: pointer;
+  transition: box-shadow 200ms;
 }
 
 .qa.answer-info {
@@ -339,8 +346,8 @@
 }
 
 .image-modal {
-  max-height: 90%;
-  max-width: 90%;
+  max-height: 95%;
+  max-width: 95%;
   border-radius: 0.25rem;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }

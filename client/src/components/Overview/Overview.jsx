@@ -8,6 +8,7 @@ import ProdInfo from './sub-comps/ProdInfo.jsx';
 import StyleSelect from './sub-comps/StyleSelect.jsx';
 import Cart from './sub-comps/Cart.jsx';
 import Description from './sub-comps/Description.jsx';
+import SessionInfo from './sub-comps/SessionInfo.jsx';
 import logo from '../../../dist/assets/logo.png';
 
 export default function Overview({
@@ -21,6 +22,8 @@ export default function Overview({
   const [leftBtn, setLeftBtn] = useState(false);
   const [showSku, setShowSku] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState({});
+  const [wishlist, setWishlist] = useState({});
 
   // HELPER FUNCTIONS //
   const btnRenderCheck = () => {
@@ -70,7 +73,13 @@ export default function Overview({
       <div id="header">
         {/* <h1 className="temp-logo">Superior</h1> */}
         <img src={logo} className="logo" alt="site-logo" />
-        <Search />
+        <div id="header-right">
+          <SessionInfo
+            cart={cart}
+            wishlist={wishlist}
+          />
+          <Search />
+        </div>
       </div>
       <div id="overview">
         <div className="left-main">
@@ -108,6 +117,10 @@ export default function Overview({
             currStyle={currStyle}
             quantity={quantity}
             setQuantity={setQuantity}
+            cart={cart}
+            addToCart={setCart}
+            wishlist={wishlist}
+            setWishlist={setWishlist}
           />
         </div>
         <div className="bottom-main">

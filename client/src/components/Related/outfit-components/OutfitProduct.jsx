@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AiFillCloseSquare } from 'react-icons/ai';
 import fetcher from '../../../fetchers';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 import imgUnavailable from '../assets/imgUnavailable.png';
@@ -48,15 +47,18 @@ export default function OutfitProduct({
     <div id={`outfitProduct${index}`} className="outfit-item">
       <div className="rel-item">
         <div className="outfit-img-wrapper">
-          {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+          <button
+            className="outfit-img-btn"
+            type="button"
+            onKeyDown={() => setFeatureProduct(outfitProd)}
+            onClick={() => setFeatureProduct(outfitProd)}
+          >
             <img
               className="outfit-img"
               src={outfitStyle.photos[0].thumbnail_url || imgUnavailable}
               alt={outfitProd.description}
-              onKeyDown={() => setFeatureProduct(outfitProd)}
-              onClick={() => setFeatureProduct(outfitProd)}
             />
-          }
+          </button>
         </div>
         <div className="outfit-card-text">
           <h3 className="outfit-category rel-text">{outfitProd.category}</h3>

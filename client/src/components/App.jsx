@@ -57,7 +57,7 @@ export default function App({ product_id }) {
   if (!featureProduct.name) return <div />;
   return (
     <>
-      <Overview
+      {/* <Overview
         product={featureProduct}
         styles={styles}
         reviews={reviews}
@@ -70,17 +70,17 @@ export default function App({ product_id }) {
         reviewMeta={reviewMeta}
         setReviewMeta={setReviewMeta}
         recordClick={recordClick}
-      />
+      /> */}
       <Related
         feature={featureProduct}
         relatedIdList={relatedIdList}
         setFeatureProduct={setFeatureProduct}
         recordClick={recordClick}
       />
-      <Questions
+      {/* <Questions
         featureProduct={featureProduct}
         recordClick={recordClick}
-      />
+      /> */}
       <footer id="footer">
         <h3 className="useful-text">Useful Links</h3>
         <div className="useful">

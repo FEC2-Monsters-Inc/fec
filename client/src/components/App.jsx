@@ -81,23 +81,23 @@ export default function App({ product_id }) {
         featureProduct={featureProduct}
         recordClick={recordClick}
       />
-      <div id="footer">
-        <h1 className="useful-text">Useful Links</h1>
+      <footer id="footer">
+        <h3 className="useful-text">Useful Links</h3>
         <div className="useful">
           <a href="#header" className="footer-text">
-            <h1>Scroll To Top</h1>
+            <h3>Scroll To Top</h3>
           </a>
           <a href="#related-widget" className="footer-text">
-            <h1>Similar Items</h1>
+            <h3>Similar Items</h3>
           </a>
           <a href="#ratings-widget" className="footer-text">
-            <h1>Reviews</h1>
+            <h3>Reviews</h3>
           </a>
           <a href="#questions-widget" className="footer-text">
-            <h1>Questions</h1>
+            <h3>Questions</h3>
           </a>
         </div>
-      </div>
+      </footer>
     </>
   );
 }

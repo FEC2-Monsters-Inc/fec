@@ -136,7 +136,8 @@ body {
   text-decoration: underline;
 }
 
-#footer h1 {
+#footer h3,
+#footer h2 {
   color: #FFF;
   font-size: 1em;
   font-weight: 600;
@@ -146,4 +147,8 @@ body {
 #footer .useful-text {
   border-bottom: 2px solid #D4D2D1;
   font-size: 2em;
+}
+
+.reported {
+  color: #E60023;
 }

@@ -189,7 +189,7 @@ export default function ReviewTile({
           onKeyPress={() => (!helpfulClick ? reportHandler() : null)}
           type="button"
         >
-          Report
+          <span className="report">Report</span>
         </button>
         <ReviewImageModal
           modalToggle={modalToggle}

@@ -69,8 +69,8 @@ export default function RelatedProduct({
             )}
         </div>
         <div className="rel-card-text">
-          <div className="rel-category rel-text">{relProd.category}</div>
-          <div className="rel-name rel-text">{relProd.name}</div>
+          <h3 className="rel-category rel-text">{relProd.category}</h3>
+          <h3 className="rel-name rel-text">{relProd.name}</h3>
           <div className="rel-stars">
             <StarRating ratingPercentage={`${ratingPercentage}%`} />
           </div>

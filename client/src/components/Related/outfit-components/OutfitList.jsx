@@ -70,7 +70,6 @@ export default function OutfitList({
           className="rel-scroll scrll-left"
           style={{ opacity: posIndex === 3 ? 0 : 1 }}
           onClick={scrollLeft}
-          title="related-left-arrow"
         />
       </div>
       <div className="outfit-carousel-inside" ref={ref}>
@@ -86,8 +85,8 @@ export default function OutfitList({
             />
           ))
           : null}
-        <div className="add-card" onClick={addOutfit}>
-          <AiOutlinePlus className="outfit-add" onClick={addOutfit} size="10em" title="outfit-add-icon" />
+        <div className="add-card" onClick={addOutfit} onKeyPress={addOutfit} tabIndex={0}>
+          <AiOutlinePlus className="outfit-add" onClick={addOutfit} size="10em" />
         </div>
       </div>
       {outfitIdList.length > 4
@@ -105,7 +104,6 @@ export default function OutfitList({
             (posIndex <= endOfOutfitList - 1 || endOfOutfitList <= 0) ? 0 : 1,
               }}
               onClick={scrollRight}
-              title="related-right-arrow"
             />
           </div>
         )

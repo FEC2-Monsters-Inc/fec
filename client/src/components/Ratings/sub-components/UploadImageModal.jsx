@@ -73,7 +73,7 @@ export default function UploadAndDisplayImage({
           }}
         >
           <div className="drag-file">
-            <p className="drag-and-drop-text">Drag and Drop to Upload Images</p>
+            <p className="drag-and-drop-text">Click or Drop to Upload Images</p>
             <input
               className="img-btn"
               type="file"

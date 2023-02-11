@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { AiOutlineDoubleRight } from 'react-icons/ai';
 import ReactDOM from 'react-dom';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 export default function HeroModal({
   heroModal,
@@ -29,6 +28,27 @@ export default function HeroModal({
   const imgClickHandler = (event) => {
     toggleThumbSelect(event);
     toggleHero(event);
+  };
+
+  const handleMouseOut = () => {
+    const hero = document.getElementById('hero-modal-image');
+    hero.classList = 'zoom-in';
+    hero.style.transformOrigin = 'center';
+    hero.style.transform = 'scale(1)';
+    zoom = false;
+  };
+
+  const handlePan = (event) => {
+    const hero = document.getElementById('hero-modal-image');
+    if (event.target !== hero) {
+      handleMouseOut();
+    }
+    if (zoom && event.target === hero) {
+      const x = event.clientX - event.target.offsetLeft;
+      const y = event.clientY - event.target.offsetTop;
+      hero.style.transformOrigin = `${x}px ${y}px`;
+      hero.style.transform = 'scale(2.5)';
+    }
   };
 
   const imageMapper = (img, index, id) => (
@@ -80,33 +100,27 @@ export default function HeroModal({
         <div className="modal-bottom">
           <div
             className="hero-modal-image-container"
+            onMouseMove={handlePan}
+            onMouseLeave={handleMouseOut}
           >
-            <TransformWrapper
-              defaultScale={1}
-              defaultPositionX={100}
-              defaultPositionY={200}
-            >
-              <TransformComponent>
-                <img
-                  id="hero-modal-image"
-                  src={heroImage.url}
-                  alt="product hero"
-                  onClick={handleZoom}
-                  className="zoom-in"
-                />
-              </TransformComponent>
-            </TransformWrapper>
+            <img
+              id="hero-modal-image"
+              src={heroImage.url}
+              alt="product hero"
+              onClick={handleZoom}
+              className="zoom-in"
+            />
           </div>
           <div className="modal-btns">
             <button
-              className={`modal-left scroll-hero-left ${!leftBtn ? 'btn-hidden' : ''}`}
+              className={`modal-left scroll-modal ${!leftBtn ? 'btn-hidden' : ''}`}
               type="button"
               onClick={toggleHeroLeft}
             >
               <AiOutlineDoubleRight size="2em" />
             </button>
             <button
-              className={`modal-right scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
+              className={`modal-right scroll-modal ${!rightBtn ? 'btn-hidden' : ''}`}
               type="button"
               onClick={toggleHeroRight}
             >

@@ -7,7 +7,7 @@ export default function ReviewTracker({
   filter,
   setFilter,
   setListLength,
-  listIndex,
+  // listIndex,
 }) {
   // STATE DATA //
   const [percentages, setPercentages] = useState({});
@@ -75,7 +75,7 @@ export default function ReviewTracker({
       const trueKeys = (Object.keys(filter).map(Number));
       const getReviewLength = () => {
         let counter = 0;
-        for (let i = 0; i < reviews.slice(0, listIndex).length; i += 1) {
+        for (let i = 0; i < reviews.length; i += 1) {
           if (trueKeys.includes(reviews[i].rating)) {
             counter += 1;
           }
@@ -84,7 +84,7 @@ export default function ReviewTracker({
       };
       getReviewLength();
     }
-  }, [reviews, filter, listIndex]);
+  }, [reviews, filter]);
 
   return (
     <div className="review-tracker-main">

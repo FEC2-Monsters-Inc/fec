@@ -11,9 +11,9 @@
 
 /* REVIEW HEADER AND STARS */
 #ratings-widget {
-  max-width: 1200px;
+  max-width: 1400px;
   padding: 3em;
-  margin: 3em auto;
+  margin: 0 auto;
 }
 
 .review-header {
@@ -298,12 +298,23 @@
   padding: 1em 0 2em;
 }
 
+.review-tile-photos-container {
+  display: flex;
+}
+
 .review-tile-individual-photo {
-  max-width: 10%;
+  border-radius: 0.25rem;
+  height: 5rem;
+  width: 7.11rem;
+  margin: 0 0.25rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .review-tile-individual-photo:hover {
-  cursor: zoom-in;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+  cursor: pointer;
+  transition: box-shadow 200ms;
 }
 
 .review-tile-container-1 {
@@ -410,20 +421,20 @@
 }
 
 .expanded-reviews:hover {
-  background-color: #D4D2D14D;
+  background-color: #F7F4F3;
   border-color: #E60023;
   color: #E60023;
 }
 
 .write-new-review:hover {
   background-color: #E60023;
-  color: #D4D2D1;
+  color: #fff;
 }
 
 /*  REVIEW TILE IMAGE MODAL */
 .review-image-modal-full-container {
   align-items: center;
-  animation: fadeIn .5s;
+  animation: fadeIn .25s;
   background-color: #0C1B3380;
   display: flex;
   justify-content: center;
@@ -440,8 +451,10 @@
 }
 
 .review-image-modal {
-  max-height: 75%;
-  max-width: 75%;
+  max-height: 95%;
+  max-width: 95%;
+  border-radius: 0.25rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 /*  WRITE REVIEW MODAL  */
@@ -467,17 +480,17 @@
   align-items: center;
   background-color: #F7F4F3;
   border-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  box-shadow: rgb(0 0 0 / 56%) 0px 22px 70px 4px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 85vh;
   max-height: 85vh;
-  max-width: 800px;
-  overflow: scroll;
+  max-width: 835px;
   padding: 4em 3em;
   position: relative;
   width: 90%;
+  overflow: auto;
 }
 
 .close-review-modal {
@@ -721,6 +734,10 @@
 .review-body-minimum-reached {
   align-items: center;
   display: flex;
+  /* color: #367E18; */
+}
+
+.min-check {
   color: #E60023;
 }
 
@@ -838,7 +855,7 @@
 
 .email-disclaimer {
   color: #746F72;
-  font-size: .75em;
+  font-size: .5em;
   margin-top: 10px;
   width: 100%;
 }

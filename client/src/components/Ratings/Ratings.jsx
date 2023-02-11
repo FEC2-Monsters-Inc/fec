@@ -4,6 +4,7 @@ import ReviewList from './sub-components/ReviewList.jsx';
 import ThankYouModal from './sub-components/ThankYouModal.jsx';
 // import './ratings.css';
 import './overhaul.css';
+import './preDemo.css';
 
 export default function Ratings({
   reviews,
@@ -16,7 +17,7 @@ export default function Ratings({
   // STATE DATA //
   const [selectedRating, setSelectedRating] = useState(null);
   const [listLength, setListLength] = useState(0);
-  const [listIndex, setListIndex] = useState(2);
+  // const [listIndex, setListIndex] = useState(2);
   const [showThankyou, setShowThankyou] = useState(false);
 
   return (
@@ -31,8 +32,8 @@ export default function Ratings({
           reviewMeta={reviewMeta}
           listLength={listLength}
           setListLength={setListLength}
-          listIndex={listIndex}
-          setListIndex={setListIndex}
+          // listIndex={listIndex}
+          // setListIndex={setListIndex}
         />
         <div className="review-break" />
         <ReviewList
@@ -41,8 +42,8 @@ export default function Ratings({
           setReviews={setReviews}
           listLength={listLength}
           setListLength={setListLength}
-          listIndex={listIndex}
-          setListIndex={setListIndex}
+          // listIndex={listIndex}
+          // setListIndex={setListIndex}
           feature={feature}
           reviewMeta={reviewMeta}
           setReviewMeta={setReviewMeta}

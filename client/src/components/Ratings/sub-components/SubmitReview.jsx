@@ -48,12 +48,14 @@ export default function SubmitReview({
     const finalReview = {};
     Object.assign(finalReview, newReview);
     finalReview.characteristics = chars;
+    console.log(finalReview);
     fetcher.addReviews(finalReview)
       .then(() => {
         setNewReview({ product_id: newReview.product_id, photos: [] });
         setChars({});
         setReviewModal(false);
         setValidReview(true);
+        setShowThankyou(true);
       })
       .catch(() => invalidReview());
     fetcher.getReviewMeta(feature.id)

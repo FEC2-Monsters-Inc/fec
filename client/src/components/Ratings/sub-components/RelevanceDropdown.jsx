@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineDown } from 'react-icons/ai';
+import fetcher from '../../../fetchers';
 
 export default function RelevanceDropdown({
-  setReviews, reviews, listLength, listIndex, reviewRenderer,
+  setReviews, reviews, listLength, reviewRenderer, setSortString, sortString, feature,
 }) {
   // STATE DATA //
   const [display, setDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [sortString, setSortString] = useState('relevance');
 
   // EVENT HANDLERS //
   const handleClick = () => {
@@ -23,35 +23,27 @@ export default function RelevanceDropdown({
 
   // SORT HELPER FUNCTIONS //
   const handleNew = () => {
-    const sortByDate = (data) => data.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const onPage = sortByDate(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(sortByDate(reviews.slice(listIndex))));
+    fetcher.getReviews(feature.id, 'newest')
+      .then(({ data }) => setReviews(data.results))
+      .catch((err) => console.error(err));
     setShowDropdown(false);
-    setSortString('recency');
+    setSortString('newest');
   };
 
   const handleHelpful = () => {
-    const sortByHelp = (data) => data.sort((a, b) => (b.helpfulness) - (a.helpfulness));
-    const onPage = sortByHelp(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(sortByHelp(reviews.slice(listIndex))));
+    fetcher.getReviews(feature.id, 'helpful')
+      .then(({ data }) => setReviews(data.results))
+      .catch((err) => console.error(err));
     setShowDropdown(false);
     setSortString('helpful');
   };
 
   const handleRelevant = () => {
-    const sortByRelevancy = (data) => data.sort((a, b) => {
-      if (b.helpfulness > 20) {
-        return (b.helpfulness) - (a.helpfulness);
-      }
-      if (new Date(b.date) - new Date(a.date) === 0) {
-        return (b.helpfulness) - (a.helpfulness);
-      }
-      return new Date(b.date) - new Date(a.date);
-    });
-    const onPage = sortByRelevancy(reviews.slice(0, listIndex));
-    setReviews(onPage.concat(sortByRelevancy(reviews.slice(listIndex))));
+    fetcher.getReviews(feature.id, 'relevant')
+      .then(({ data }) => setReviews(data.results))
+      .catch((err) => console.error(err));
     setShowDropdown(false);
-    setSortString('relevance');
+    setSortString('relevant');
   };
 
   // INITIALIZATION //
@@ -61,7 +53,7 @@ export default function RelevanceDropdown({
       reviewRenderer(reviews);
     }
     document.addEventListener('click', handleClose);
-  }, [reviews, listLength]);
+  }, [reviews, listLength, sortString]);
 
   return (
     <div className="review-sort-dropdown-main">

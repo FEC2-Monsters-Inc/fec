@@ -6,8 +6,7 @@ import CompareModal from './CompareModal.jsx';
 import StarRating from '../../shared/StarRating/StarRating.jsx';
 import ImageCarousel from './ImageCarousel.jsx';
 import imgUnavailable from '../assets/imgUnavailable.png';
-
-import './styles/compareModal.css';
+import './styles/related.css';
 
 export default function RelatedProduct({
   feature, featureMeta, setFeatureProduct, relProd, index,
@@ -48,13 +47,12 @@ export default function RelatedProduct({
   };
 
   return (
-    <div id={`relatedProduct${index}`}>
+    <div id={`relatedProduct${index}`} className="rel-prod-wrapper">
       <div className="rel-item">
-        <div id="rel-img-wrapper" onMouseLeave={() => setShowImg(false)}>
-          <AiFillHeart className="star-modal" onClick={() => setShowModal(true)} title="star-modal-icon" />
+        <div className="rel-img-wrapper" onMouseLeave={() => setShowImg(false)}>
           {// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
-              id="rel-img"
+              className="rel-img"
               src={relStyle.photos[0].url || imgUnavailable}
               alt="Not Available"
               onMouseEnter={() => setShowImg(true)}
@@ -70,38 +68,31 @@ export default function RelatedProduct({
               />
             )}
         </div>
-        <div className="rel-category rel-text">{relProd.category}</div>
-        <div className="rel-name rel-text">{relProd.name}</div>
-        <div className="rel-slogan rel-text">{relProd.slogan}</div>
-        {relStyle.sale_price
-          && <div className="rel-sale-price rel-text">{`${relStyle.sale_price}`}</div>}
-        <div className="rel-orig-price rel-text">{`$${relStyle.original_price}`}</div>
-        <StarRating ratingPercentage={`${ratingPercentage}%`} />
+        <div className="rel-card-text">
+          <div className="rel-category rel-text">{relProd.category}</div>
+          <div className="rel-name rel-text">{relProd.name}</div>
+          <div className="rel-stars">
+            <StarRating ratingPercentage={`${ratingPercentage}%`} />
+          </div>
+          <p className="rel-orig-price rel-text">
+            {`$${relStyle.original_price}`}
+            {relStyle.sale_price
+              ? <span className="card-sale">{`${relStyle.sale_price}`}</span>
+              : null}
+          </p>
+          <button className="compare" onClick={() => setShowModal(true)} type="button">Compare</button>
+        </div>
       </div>
       {showModal
         && (
           <div className="overlay">
-            <div className="modal-container">
-              <table id="compare-thead">
-                <thead>
-                  <tr className="compare-tr">
-                    <th className="compare-th">{feature.name}</th>
-                    {// Empty th for style
-                      // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                      <th className="compare-th" />
-                    }
-                    <th className="compare-th">{relProd.name}</th>
-                  </tr>
-                </thead>
-              </table>
-              <CompareModal
-                setShowModal={setShowModal}
-                feature={feature}
-                relProd={relProd}
-                featureMeta={featureMeta}
-                relProdMeta={relProdMeta}
-              />
-            </div>
+            <CompareModal
+              setShowModal={setShowModal}
+              feature={feature}
+              relProd={relProd}
+              featureMeta={featureMeta}
+              relProdMeta={relProdMeta}
+            />
           </div>
         )}
     </div>

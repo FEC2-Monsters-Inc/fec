@@ -89,26 +89,31 @@ export default function Answer({
         <span className="qa answer-date">
           {format(parseISO(date), 'MMMM d, yyyy')}
         </span>
-        {' | Is this answer helpful? '}
-        {helpfulStatus ? (
-          <button
-            className="qa btn-link"
-            type="button"
-            tabIndex={0}
-            onKeyUp={markHelpfulAnswer}
-            onClick={markHelpfulAnswer}
-          >
-            Yes
-          </button>
-        ) : <span>Marked!</span>}
-        {' ('}
+        <span className="helpful-par">
+          | Is this answer helpful?
+        </span>
+        {helpfulStatus
+          ? (
+            <button
+              className="qa btn-link"
+              type="button"
+              tabIndex={0}
+              onKeyUp={markHelpfulAnswer}
+              onClick={markHelpfulAnswer}
+            >
+              Yes
+
+            </button>
+          )
+          : <span>Marked!</span>}
         <span
           className="qa helpfulness"
           data-testid="a-helpfulness"
         >
+          {' ('}
           {helpfulness}
+          {') | '}
         </span>
-        {') | '}
         {reportStatus ? (
           <button
             className="qa btn-link"

@@ -56,6 +56,8 @@ table {
 /* FONT INMPORT */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,700;1,700;1,800&display=swap');
+
 #app {
 	font-family: 'Open Sans', sans-serif;
 	margin: auto;
@@ -80,19 +82,24 @@ body {
   color: #DDE2C6;
   display: flex;
   font-family: 'Open Sans', sans-serif;
-  height: 80px;
+  height: 100px;
   justify-content: space-between;
   margin-bottom: 2em;
   padding: 0 2em;
+  position: sticky;
+  top: 0;
   z-index: 10;
 }
 
 .temp-logo {
-  color: #E60023;
-  font-size: 1.5em;
+  background-color: #E60023;
+  color: #FFF;
+  font-size: 3em;
+  font-family: 'Nunito Sans', sans-serif;
   font-style: italic;
-  font-weight: bold;
-  text-decoration: underline;
+  font-weight: 800;
+  padding: 5px 10px;
+
 }
 
 /*  ///// SEARCH COMPONENT ///// */
@@ -100,4 +107,42 @@ body {
   align-items: flex-end;
   display: flex;
   color: #E60023;
+}
+
+#footer {
+  align-items: center;
+  background-color: #E60023;
+  border-top: 2px solid #F7F4F3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  color: #FFF;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin-top: 3em;
+  padding: 3em;
+  height: 30vh;
+  max-height: 500px;
+  width: 100vw;
+}
+
+#footer a {
+  margin: 12px;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  color: #FFF;
+  text-decoration: underline;
+}
+
+#footer h1 {
+  color: #FFF;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+}
+
+#footer .useful-text {
+  border-bottom: 2px solid #D4D2D1;
+  font-size: 2em;
 }

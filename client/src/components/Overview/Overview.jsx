@@ -70,7 +70,7 @@ export default function Overview({
   return (
     // eslint-disable-next-line -- not meant to be interactive
     <div onClick={(e) => recordClick(e, 'Overview')}>
-      <div id="header">
+      <nav id="header">
         {/* <h1 className="temp-logo">Superior</h1> */}
         <img src={logo} className="logo" alt="site-logo" />
         <div id="header-right">
@@ -80,7 +80,7 @@ export default function Overview({
           />
           <Search />
         </div>
-      </div>
+      </nav>
       <div id="overview">
         <div className="left-main">
           <Gallery

@@ -33,7 +33,9 @@ export default function StyleThumbnails({ styles, toggleStyle }) {
               className="style-thumbnail"
               src={src}
               onClick={toggleStyle}
+              onKeyPress={toggleStyle}
               alt={`${thumb.name} style thumbnail.`}
+              tabIndex={0}
             />
           </div>
         );

@@ -23,7 +23,7 @@ export default function Ratings({
   return (
     // eslint-disable-next-line -- not meant to be interactive
     <div id="ratings-widget" onClick={(e) => recordClick(e, 'Ratings & Reviews')}>
-      <h1 id="review-top" className="review-header">Reviews</h1>
+      <h2 id="review-top" className="review-header">Reviews</h2>
       <div className="ratings-parent">
         <ReviewDashboard
           reviews={reviews}

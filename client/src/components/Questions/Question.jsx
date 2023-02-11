@@ -131,10 +131,10 @@ export default function Question({
           className={`qa accord${active ? ' active' : ''}`}
           onClick={expand}
         >
-          <div className="qa q-body">
+          <h3 className="qa q-body">
             {'Q: '}
             {formatBody()}
-          </div>
+          </h3>
           <MdExpandMore
             className={`qa expand-btn${active ? ' active' : ''}`}
           />

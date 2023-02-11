@@ -88,14 +88,6 @@ export default function ReviewDashboard({
     }
   };
 
-  // const starMapper = stars.map((e) => (
-  //   <div className="review-single-star-container" key={`star key-${Math.random()}`}>
-  //     {/* <div className="review-single-star-fill" style={{ width: `${parseInt((e * 31), 10)}px` }}> */}
-  //     <img className="review-single-star-outline" src={StarImg} alt="stars alt" />
-  //     {/* </div> */}
-  //   </div>
-  // ));
-
   const starAverager = (reviewData) => {
     let total = 0;
     reviewData.forEach((review) => {
@@ -105,6 +97,7 @@ export default function ReviewDashboard({
     total = (Math.round(total * 4) / 4).toFixed(2);
     return `${total * 20}%`;
   };
+
   // INITIALIZATION //
   useEffect(() => {
     if (reviews) {
@@ -146,7 +139,7 @@ export default function ReviewDashboard({
           />
         </div>
         <div className="review-dash-right">
-          <h1 className="prod-chars-title">Product Characteristics</h1>
+          <h3 className="prod-chars-title">Product Characteristics</h3>
           <CharacteristicTracker reviewMeta={reviewMeta} />
         </div>
       </div>

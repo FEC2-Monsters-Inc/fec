@@ -59,8 +59,8 @@ export default function OutfitProduct({
           }
         </div>
         <div className="outfit-card-text">
-          <div className="outfit-category rel-text">{outfitProd.category}</div>
-          <div className="outfit-name rel-text">{outfitProd.name}</div>
+          <h3 className="outfit-category rel-text">{outfitProd.category}</h3>
+          <h3 className="outfit-name rel-text">{outfitProd.name}</h3>
           <div className="rel-stars">
             <StarRating ratingPercentage={`${ratingPercentage}%`} />
           </div>

@@ -60,12 +60,13 @@ export default function RelevanceDropdown({
       {display
         ? (
           <div className="review-sort-title">
-            {`${reviews.length} reviews sorted by`}
+            <h3>
+              {`${reviews.length} reviews sorted by`}
+            </h3>
             <p
               onClick={handleClick}
               onKeyPress={handleClick}
               tabIndex="0"
-              role="button"
               className="review-close-dropdown"
             >
               {sortString}
@@ -81,7 +82,6 @@ export default function RelevanceDropdown({
                     onClick={() => handleNew()}
                     onKeyPress={() => handleNew()}
                     tabIndex="0"
-                    role="button"
                   >
                     recency
                   </li>
@@ -94,7 +94,6 @@ export default function RelevanceDropdown({
                     onClick={() => handleHelpful()}
                     onKeyPress={() => handleHelpful()}
                     tabIndex="0"
-                    role="button"
                   >
                     helpfulness
                   </li>
@@ -107,7 +106,6 @@ export default function RelevanceDropdown({
                     onClick={() => handleRelevant()}
                     onKeyPress={() => handleRelevant()}
                     tabIndex="0"
-                    role="button"
                   >
                     relevance
                   </li>

@@ -79,21 +79,25 @@ export default function Gallery({
         toggleThumbSelect={toggleThumbSelect}
       />
       <div className="hero-image-container">
-        <div
+        <button
           className={`scroll-hero-left ${!leftBtn ? 'btn-hidden' : ''}`}
           type="button"
           onClick={toggleHeroLeft}
         >
           <AiOutlineDoubleRight size="2em" />
-        </div>
+        </button>
         {heroImage.url
           ? (
+            /* eslint-disable */ // Reason: Image is meant to be interactive.
             <img
               className="hero-image"
               src={heroImage.url}
               onClick={() => setHeroModal(true)}
+              onKeyPress={() => setHeroModal(true)}
               alt="product hero"
+              tabIndex={0}
             />
+            /* eslint-enable */
           )
           : null}
         <button
@@ -102,15 +106,14 @@ export default function Gallery({
         >
           <AiOutlineExpand size="1.5em" onClick={() => setHeroModal(true)} />
         </button>
-        <div
-          className="hero-left"
+        <button
           onClick={toggleHeroRight}
           className={`scroll-hero-right ${!rightBtn ? 'btn-hidden' : ''}`}
           type="button"
         >
 
           <AiOutlineDoubleRight size="2em" />
-        </div>
+        </button>
       </div>
       <HeroModal
         heroModal={heroModal}

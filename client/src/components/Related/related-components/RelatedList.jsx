@@ -45,7 +45,6 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
           className="rel-scroll scrll-left"
           style={{ opacity: posIndex === 3 ? 0 : 1 }}
           onClick={scrollLeft}
-          title="related-left-arrow"
         />
       </div>
       <div className="related-carousel-inside" ref={ref}>
@@ -73,7 +72,6 @@ export default function RelatedList({ feature, relatedInfoList, setFeatureProduc
             (posIndex === endOfRelatedList - 1 || endOfRelatedList <= 0) ? 0 : 1,
           }}
           onClick={scrollRight}
-          title="related-right-arrow"
         />
       </div>
     </div>

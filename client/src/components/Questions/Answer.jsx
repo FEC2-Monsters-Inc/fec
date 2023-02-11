@@ -21,7 +21,7 @@ export default function Answer({
   const [modalPhoto, setModalPhoto] = useState('');
 
   const markHelpfulAnswer = (e) => {
-    if ((e.type === 'click' || e.key === 'Enter') && helpfulStatus) {
+    if ((e.type === 'click') && helpfulStatus) {
       fetcher
         .markHelpfulAnswer(id)
         .then(updateQuestions)
@@ -49,9 +49,9 @@ export default function Answer({
   return (
     <div className="qa answer">
       <div className="qa answer-body">
-        <div className="qa answer-text">
+        <p className="qa answer-text">
           {body}
-        </div>
+        </p>
         {/* TODO: expand photo on click */}
         <div className="qa photos">
           {photos.length > 0

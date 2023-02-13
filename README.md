@@ -65,7 +65,7 @@ A catalogue of items displayed in a carousel related to the selected product, as
 
 ![Related Items and Comparison Image](https://user-images.githubusercontent.com/116389520/218284010-eb224c46-556f-4b31-8bed-2bcac2a2e5e2.png)
 
-## QUESTIONS & ANSWERS
+## Questions & Answers
 ### Description
 A list of questions and answers about the selected product.
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useRef } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -42,25 +41,26 @@ export default function OutfitList({
   };
 
   // SET UP DRAG DROP FUNCTION
-  const handleOnDragEnd = (result) => {
-    // IF DROPPED OUTSIDE THE LIST
-    if (!result.destination) {
-      return;
-    }
+  // const handleOnDragEnd = (result) => {
+  //   // IF DROPPED OUTSIDE THE LIST
+  //   if (!result.destination) {
+  //     return;
+  //   }
 
-    const newList = [...outfitIdList];
+  //   const newList = [...outfitIdList];
 
-    [
-      newList[result.source.index],
-      newList[result.destination.index],
-    ] = [newList[result.destination.index], newList[result.source.index]];
+  //   [
+  //     newList[result.source.index],
+  //     newList[result.destination.index],
+  //   ] = [newList[result.destination.index], newList[result.source.index]];
 
-    setOutfitIdList(newList);
-  };
+  //   setOutfitIdList(newList);
+  // };
 
   return (
     <div className="outfit-carousel-outside">
-      <div
+      <button
+        type="button"
         className="scroll-btns-left"
         onClick={scrollLeft}
         style={{ backgroundColor: posIndex === 3 ? '#EEEEEE00' : null }}
@@ -71,7 +71,7 @@ export default function OutfitList({
           style={{ opacity: posIndex === 3 ? 0 : 1 }}
           onClick={scrollLeft}
         />
-      </div>
+      </button>
       <div className="outfit-carousel-inside" ref={ref}>
         {outfitIdList
           ? outfitIdList.map((outfitId, index) => (
@@ -85,13 +85,20 @@ export default function OutfitList({
             />
           ))
           : null}
-        <div className="add-card" onClick={addOutfit} onKeyPress={addOutfit} tabIndex={0}>
+        <button
+          type="button"
+          className="add-card"
+          onClick={addOutfit}
+          onKeyPress={addOutfit}
+          tabIndex={0}
+        >
           <AiOutlinePlus className="outfit-add" onClick={addOutfit} size="10em" />
-        </div>
+        </button>
       </div>
       {outfitIdList.length > 4
         ? (
-          <div
+          <button
+            type="button"
             className="scroll-btns-right"
             onClick={scrollRight}
             style={{ backgroundColor: (posIndex === endOfOutfitList - 1 || endOfOutfitList <= 0) ? '#EEEEEE00' : null }}
@@ -101,11 +108,11 @@ export default function OutfitList({
               size="3em"
               style={{
                 opacity:
-            (posIndex <= endOfOutfitList - 1 || endOfOutfitList <= 0) ? 0 : 1,
+                  (posIndex <= endOfOutfitList - 1 || endOfOutfitList <= 0) ? 0 : 1,
               }}
               onClick={scrollRight}
             />
-          </div>
+          </button>
         )
         : null}
 
